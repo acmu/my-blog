@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ESLint 和 Prettier 规范代码 | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="为什么要用 ESLint？它可以帮助开发者发现一些显而易见的错误，如：使用了未定义的变量等，还可以结合一些第三方的规则去检测你的代码是否规范，如：react 的 prop-types 、 hooks 等，还能一定程度上美化代码，如：字符串使用单引号还是双引号、一行代码末尾是否要加分号等。 为什么要用 Prettier？刚刚有说到，ESLint 只能一定程度上美化代码，而  Prettier 能完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESLint 和 Prettier 规范代码">
+<meta property="og:url" content="https://acmu.github.io/2020/08/02/project/lint/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="为什么要用 ESLint？它可以帮助开发者发现一些显而易见的错误，如：使用了未定义的变量等，还可以结合一些第三方的规则去检测你的代码是否规范，如：react 的 prop-types 、 hooks 等，还能一定程度上美化代码，如：字符串使用单引号还是双引号、一行代码末尾是否要加分号等。 为什么要用 Prettier？刚刚有说到，ESLint 只能一定程度上美化代码，而  Prettier 能完">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_13:01_rXggN1.png">
+<meta property="article:published_time" content="2020-08-02T11:26:20.000Z">
+<meta property="article:modified_time" content="2021-12-28T05:14:53.907Z">
+<meta property="article:author" content="MingYuan">
+<meta property="article:tag" content="工程化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_13:01_rXggN1.png">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-project/lint" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2020/08/02/project/lint/" class="article-date">
+  <time class="dt-published" datetime="2020-08-02T11:26:20.000Z" itemprop="datePublished">2020-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ESLint 和 Prettier 规范代码
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_13:01_rXggN1.png" alt="头图"></p>
+<h2 id="为什么要用-ESLint？"><a href="#为什么要用-ESLint？" class="headerlink" title="为什么要用 ESLint？"></a>为什么要用 ESLint？</h2><p>它可以帮助开发者发现一些显而易见的错误，如：使用了未定义的变量等，还可以结合一些第三方的规则去检测你的代码是否规范，如：react 的 prop-types 、 hooks 等，还能一定程度上美化代码，如：字符串使用单引号还是双引号、一行代码末尾是否要加分号等。</p>
+<h2 id="为什么要用-Prettier？"><a href="#为什么要用-Prettier？" class="headerlink" title="为什么要用 Prettier？"></a>为什么要用 Prettier？</h2><p>刚刚有说到，<a target="_blank" rel="noopener" href="https://eslint.org/">ESLint</a> 只能一定程度上美化代码，而  <a target="_blank" rel="noopener" href="https://prettier.io/">Prettier</a> 能完成美化代码的全部工作，如：一行超过 80 个字符就截断换行、更好看的三元运算符展示、给 JSX 加括号展示等，并且它不止于 JavaScript，还可以美化 CSS、Markdown 等多种语言。</p>
+<p>并且很多大的项目都已经使用上了，如 <a target="_blank" rel="noopener" href="https://github.com/facebook/react">React</a>、<a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/">AntD</a> 等等，尤其是对于团队大、开发人多的情况，这种代码的自动化审查工具，能让 Code Review 更友好，能让同事更关注你的实现的业务与代码逻辑本身，而非还换不换行、加不加逗号，这种小事，而且还能一定程度上实现团队内代码风格的统一。（这里为什么说“一定程度”，是因为有很多代码风格是工具检查不了的，比如有的人会给变量 const 有的会给 let、有的用 switch 有的是 if else 等等，所以想要规范这些，最好是团队内有个代码风格指南文档，明确指出：这样是好的，那样是不行的）</p>
+<h2 id="使用-ESLint-amp-Prettier"><a href="#使用-ESLint-amp-Prettier" class="headerlink" title="使用 ESLint &amp; Prettier"></a>使用 ESLint &amp; Prettier</h2><p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint prettier babel-eslint eslint-plugin-prettier eslint-config-prettier</span><br></pre></td></tr></table></figure>
+
+<p>如果你还使用 JSX 还需另外安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint-plugin-react-hooks eslint-plugin-react</span><br></pre></td></tr></table></figure>
+
+<p>eslint 和 prettier 只会在开发环境用到，<code>babel-eslint</code> 是 <code>eslint-plugin-prettier</code> 使用 Prettier 格式代码<code>eslint-config-prettier</code> 关闭 ESLint 与 Prettier 冲突的配置项 .prettierignore &amp; .eslintignore</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/dist</span><br><span class="line">/build</span><br><span class="line">/node_modules</span><br></pre></td></tr></table></figure>
+
+<p>.prettierrc.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">singleQuote</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">trailingComma</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">    <span class="attr">proseWrap</span>: <span class="string">&#x27;never&#x27;</span>,</span><br><span class="line">    <span class="attr">arrowParens</span>: <span class="string">&#x27;avoid&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>.eslintrc.js （不使用 JSX，只是 JS 文件）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const ERROR = &#x27;error&#x27;;</span></span><br><span class="line"><span class="keyword">const</span> WARN = <span class="string">&#x27;warn&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> OFF = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">extends</span>: [<span class="string">&#x27;eslint:recommended&#x27;</span>, <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>],</span><br><span class="line">    <span class="attr">parser</span>: <span class="string">&#x27;babel-eslint&#x27;</span>,</span><br><span class="line">    <span class="attr">plugins</span>: [<span class="string">&#x27;prettier&#x27;</span>],</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;prettier/prettier&#x27;</span>: WARN,</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: OFF,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>.eslintrc.js （使用 JSX）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ERROR = <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> WARN = <span class="string">&#x27;warn&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> OFF = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">extends</span>: [</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;plugin:react/recommended&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parser</span>: <span class="string">&#x27;babel-eslint&#x27;</span>,</span><br><span class="line">    <span class="attr">plugins</span>: [<span class="string">&#x27;react&#x27;</span>, <span class="string">&#x27;react-hooks&#x27;</span>, <span class="string">&#x27;prettier&#x27;</span>],</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;prettier/prettier&#x27;</span>: WARN,</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;react-hooks/rules-of-hooks&#x27;</span>: ERROR,</span><br><span class="line">        <span class="string">&#x27;react-hooks/exhaustive-deps&#x27;</span>: WARN,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>npm script 中加上这两句（代表格式所有的如下结尾的文件）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">&quot;prettier&quot;</span>: <span class="string">&quot;prettier --write &#x27;**/*.&#123;js,jsx,less,md&#125;&#x27;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="ckxpnnyi100059uon3fz043pq" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/my-blog/2021/12/27/weekly/01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          明远周刊（第 1 期）🤩
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2021/12/27/weekly/02/">明远周刊（第 2 期）🤩</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2021/12/27/weekly/01/">明远周刊（第 1 期）🤩</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2020/08/02/project/lint/">ESLint 和 Prettier 规范代码</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
