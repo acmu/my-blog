@@ -6,7 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "dev": "hexo server --port 9123"
+    "lint": "prettier --write '**/*.{js,jsx,less,md}'",
+    "dev": "hexo server --port 9123 --draft"
   },
   "hexo": {
     "version": "6.0.0"
@@ -22,5 +23,8 @@
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
     "hexo-theme-landscape": "^0.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   }
 }

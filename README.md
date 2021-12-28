@@ -7,3 +7,5 @@ MingYuan's Blog - 明远博客
 记录学习，前端知识
 
 默认分支是 source，部署分支在 gh-pages 上
+
+编写的文章都在 source 文件夹下
