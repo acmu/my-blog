@@ -1,0 +1,5 @@
+可使用：[微图](https://devtool.tech/tiny-image) 批量压缩
+
+webp 图片测试
+
+<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_17:17_KVrWqe.webp" alt="WX20211105-112938@2x" style="zoom:50%;" />

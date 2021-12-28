@@ -7,7 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "lint": "prettier --write '**/*.{js,jsx,less,md}'",
-    "dev": "hexo server --port 9123 --draft"
+    "dev": "hexo server --port 9123 "
   },
   "hexo": {
     "version": "6.0.0"
