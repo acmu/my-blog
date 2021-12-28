@@ -8,6 +8,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "up": "yarn lint && git add . && git commit -m '👆 cmd up~'",
+    "upp": "yarn up && git push",
     "dev": "hexo server --port 9123 --draft"
   },
   "hexo": {
