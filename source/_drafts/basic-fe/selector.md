@@ -1,3 +1,9 @@
+---
+title: 选择器
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 用了很长时间的 css 了，只知道 .a > 空格 等简单的选择器，遇到一点复杂的情况就写了一坨代码在那，这样不好
 
 上文档：[css 参考](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)

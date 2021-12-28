@@ -1,3 +1,9 @@
+---
+title: 草稿
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 [好看壁纸 pap.er](https://paper.meiyuan.in/)
 
 复制历史的工具：paste

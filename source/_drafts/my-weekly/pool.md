@@ -1,3 +1,9 @@
+---
+title: 草稿
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 [汇编语言入门教程](https://www.ruanyifeng.com/blog/2018/01/assembly-language-primer.html)
 
 快餐文分享： Defensive CSS https://ishadeed.com/article/defensive-css/

@@ -1,3 +1,9 @@
+---
+title: go
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 [官网](https://go.dev/)
 
 [学习文档](https://www.runoob.com/go/go-tutorial.html)

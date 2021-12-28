@@ -1,3 +1,9 @@
+---
+title: node js
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 [toc]
 
 child_process 模块 有 exec 方法，可以执行 shell 命令

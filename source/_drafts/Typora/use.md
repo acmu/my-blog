@@ -1,3 +1,9 @@
+---
+title: 草稿
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 ## 快捷键
 
 [中文博客的](https://www.jianshu.com/p/cf83d2887ea1)

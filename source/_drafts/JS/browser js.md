@@ -1,3 +1,9 @@
+---
+title: browser js
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 写一个函数，找出 js 的内置变量
 
 使用 `Object.defineProperty(object1, 'property1', { value: 42,writable: false });` 定义属性的描述符

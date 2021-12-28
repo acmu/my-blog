@@ -1,3 +1,9 @@
+---
+title: rust
+date: 2019-09-09 09:09:09
+tags: 草稿
+---
+
 [官网](https://www.rust-lang.org/learn/get-started)
 
 [学习教程](https://www.runoob.com/rust/rust-tutorial.html)
