@@ -4,6 +4,24 @@ date: 2009-09-09 09:09:09
 tags: 草稿
 ---
 
+
+
+gitee 图片同步 github（图片备份、容灾）：
+
+[参考](https://www.bahuangshanren.tech/github%E4%B8%8Egitee%E5%8F%8C%E5%90%91%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/)
+
+可以使用 github action + 定时任务 做，action 好nb呀，真的要学一学了
+
+
+
+可参考的博客主题：
+
+https://www.yuexunjiang.me/
+
+https://qianfanguojin.top/
+
+
+
 初步想法：使用 github 开源仓库，用 pages 部署（或 netlfy 啥的），用 GitHub 评论接入评论系统
 
 可参考：
