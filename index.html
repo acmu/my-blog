@@ -77,6 +77,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-online-judge/lt504" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/30/online-judge/lt504/" class="article-date">
+  <time class="dt-published" datetime="2021-12-30T12:07:11.000Z" itemprop="datePublished">2021-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/30/online-judge/lt504/">leetcode 504 七进制转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/base-7/">题目链接</a></p>
+<p>就是输入一个十进制数，转成七进制数，这个七进制，和我们的周特别相似，一周七天。如怎么把第 9 天转换成按周的天数呢？首先把 9 取余 7，得到 2，之后在把 9 除以 7，并向下取整，得到 1，之后再把 1 取余 7，得到 1，之后再把 1 除以 7，并向下取整，得到 0，这时循环终止，得到了结果，是 12，也就是第一周过后的第二天是第 9 天</p>
+<p>其实进制转换并不高大上，他在我们的生活中很常见，比如时间计算就是进制转换，其实任何时间点都是可以用时间戳来表示的，假设时间戳的基本单位是毫秒，那么先把时间戳取余 1000，就得到了毫秒，之后把时间戳除以 1000，再取余 60，就得到了秒，之后以此类推。这里你还可以发现，还可以使用不同的进制，比如毫秒是 1000 进制，秒就又是 60 进制了</p>
+<p>ts 代码</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToBase7</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isNegative = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        isNegative = <span class="literal">true</span>;</span><br><span class="line">        num = -num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> res: <span class="built_in">string</span>[] = [];</span><br><span class="line">    <span class="keyword">const</span> base = <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">while</span> (num !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> remainder = num % base;</span><br><span class="line">        res.push(remainder + <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">        num = <span class="built_in">Math</span>.floor(num / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (isNegative ? <span class="string">&#x27;-&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + res.reverse().join(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>py 代码（py 中没有三元表达式）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convertToBase7</span>(<span class="params">self, num: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">        isNegative = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> num &lt; <span class="number">0</span>:</span><br><span class="line">            isNegative = <span class="literal">True</span></span><br><span class="line">            num = -num</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        base = <span class="number">7</span></span><br><span class="line">        <span class="keyword">while</span> num != <span class="number">0</span>:</span><br><span class="line">            res += <span class="built_in">str</span>(num % base)</span><br><span class="line">            num = num // base</span><br><span class="line">        <span class="keyword">if</span> isNegative:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;-&#x27;</span>+res[::-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> res[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="ckxsh5c0m002xc5p416pkes2b" data-title="leetcode 504 七进制转换" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-browser/chrome-96" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2021/12/28/browser/chrome-96/" class="article-date">
@@ -111,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="ckxrbehhx002ra9on2fh9c3ba" data-title="Chrome 96 更新" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="ckxsh5c0l002wc5p41or5egph" data-title="Chrome 96 更新" class="article-share-link">分享</a>
       
       
       
@@ -191,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="ckxrbehi5002xa9onh1ohcve6" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="ckxsh5c0q0033c5p4ajd6es30" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
       
       
       
@@ -289,11 +337,160 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="ckxrbehi0002va9on1xv524p1" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="ckxsh5c0o0031c5p4hd689bph" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-TypeScript/pkg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2020/09/13/TypeScript/pkg/" class="article-date">
+  <time class="dt-published" datetime="2020-09-13T18:18:49.000Z" itemprop="datePublished">2020-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2020/09/13/TypeScript/pkg/">NPM 发布 TS 包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:33_V4AWDN.png"></p>
+<p>本文使用简单的 TypeScript（即 TS），讲解 NPM 包的发布流程，包括代码格式化、lint、单元测试等</p>
+<h2 id="为什么要用-TS"><a href="#为什么要用-TS" class="headerlink" title="为什么要用 TS"></a>为什么要用 TS</h2><ul>
+<li><p>  更健壮的代码以及更易维护。</p>
+</li>
+<li><p>  使用这个包的人，可以使用 ts 或 js。但如果你只用 js 写的话，当你的包变流行之后，ts 使用者就需要类型定义，这时再加的话，就耗时间、易出错还难更新。</p>
+</li>
+<li><p>  当你在代码文件中写了类型定义，使用者就不需要单独去下载 <code>@types/xxx</code> 类型定义了。</p>
+</li>
+<li><p>  强类型定义也算是一种文档的自我描述，使代码易读。</p>
+</li>
+<li><p>  即使使用者不用 ts，但一些编辑器也会根据类型定义给你更好的代码提示。</p>
+</li>
+</ul>
+<h2 id="开始项目"><a href="#开始项目" class="headerlink" title="开始项目"></a>开始项目</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 建目录</span></span><br><span class="line">mkdir my-awesome-greeter &amp;&amp; cd my-awesome-greeter</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 git</span></span><br><span class="line">git init</span><br><span class="line">echo &quot;# My Awesome Greeter&quot; &gt;&gt; README.md</span><br><span class="line">git add . &amp;&amp; git commit -m &quot;Initial commit&quot;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加 github 远程仓库，下面地址可以替换成你自己的远程仓库</span></span><br><span class="line">git remote add origin git@github.com:Acmu/zmy-greet.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化 npm 项目，把 name 改为你想要上传的包名，比如我的是 zmy-greet</span></span><br><span class="line">npm init -y</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加 gitignore</span></span><br><span class="line">echo &quot;node_modules&quot; &gt;&gt; .gitignore</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装 ts</span></span><br><span class="line">npm install --save-dev typescript</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为了使 ts 可以正常编译，需要添加配置文件</span></span><br><span class="line">touch tsconfig.json</span><br><span class="line"><span class="meta">#</span><span class="bash"> 内容如下</span></span><br><span class="line">```</span><br><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;target&quot;: &quot;es5&quot;, // 编译目标代码为 es5 的，为了兼容更多的浏览器</span><br><span class="line">    &quot;module&quot;: &quot;commonjs&quot;, // 使用 cjs 模块解析机制</span><br><span class="line">    &quot;declaration&quot;: true, // 当打包时，生成类型定义文件</span><br><span class="line">    &quot;outDir&quot;: &quot;./lib&quot;, // 打包的地址为 ./lib</span><br><span class="line">    &quot;strict&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;include&quot;: [&quot;src&quot;],</span><br><span class="line">  &quot;exclude&quot;: [&quot;node_modules&quot;, &quot;**/__tests__/*&quot;] // 不编译 node_modules 和 __tests__ 文件夹，因为他们只在开发时使用</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编写代码</span></span><br><span class="line">mkdir src &amp;&amp; touch src/index.ts</span><br></pre></td></tr></table></figure>
+
+<p>代码内容如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Greeter = <span class="function">(<span class="params">name: <span class="built_in">string</span></span>) =&gt;</span> <span class="string">`Hello <span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line">t;</span><br></pre></td></tr></table></figure>
+
+<p>添加 build 命令以及运行：</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_cArxJ1.png" alt="img"></p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_nyjAiS.png" alt="img"></p>
+<p>这时就能看到生成的 lib 文件夹以及 .d.ts 声明文件了。</p>
+<p>这时，应该把 lib 文件夹也忽略掉。</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_ipOthB.png" alt="img"></p>
+<p>lib 前的反斜线代表只忽略根路径下的 lib，如果其他子文件夹有 lib 是不会忽略的，而 node_modules 就是不管在哪里都会被忽略</p>
+<p>添加格式化和 lint</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev eslint <span class="meta">@typescript</span>-eslint/parser <span class="meta">@typescript</span>-eslint/eslint-plugin prettier eslint-plugin-prettier eslint-config-prettier</span><br></pre></td></tr></table></figure>
+
+<p>添加配置文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .eslintrc.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">env</span>: &#123;</span><br><span class="line">    <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">parser</span>: <span class="string">&#x27;@typescript-eslint/parser&#x27;</span>,</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;prettier&#x27;</span>, <span class="string">&#x27;@typescript-eslint&#x27;</span>],</span><br><span class="line">  <span class="attr">extends</span>: [</span><br><span class="line">    <span class="string">&#x27;eslint:recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:@typescript-eslint/recommended&#x27;</span>,</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;prettier/prettier&#x27;</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .prettierrc</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;printWidth&quot;</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="string">&quot;trailingComma&quot;</span>: <span class="string">&quot;all&quot;</span>,</span><br><span class="line">  <span class="string">&quot;singleQuote&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">&quot;proseWrap&quot;</span>: <span class="string">&quot;never&quot;</span>,</span><br><span class="line">  <span class="string">&quot;arrowParens&quot;</span>: <span class="string">&quot;avoid&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .prettierignore</span></span><br><span class="line">node_modules</span><br><span class="line">/lib</span><br><span class="line"></span><br><span class="line"><span class="comment">// .eslintignore</span></span><br><span class="line">node_modules</span><br><span class="line">/lib</span><br></pre></td></tr></table></figure>
+
+<p>再添加格式化命令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;format&quot;</span>: <span class="string">&quot;prettier --write &#x27;**/*.&#123;js,jsx,ts,tsx&#125;&#x27;&quot;</span>,</span><br><span class="line"><span class="string">&quot;lint&quot;</span>: <span class="string">&quot;eslint . --ext &#x27;.js,.jsx,.ts,.tsx&#x27;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时可以运行一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run lint</span><br><span class="line">npm run format</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_6WHReR.png" alt="img"></p>
+<p>当我们把包上传到 npm 仓库时，肯定只希望上传打包后的文件，而不是源代码，可以通过两种方式来实现，分别是编写 <code>.npmignore</code> 文件，和使用 <code>package.json</code> 中的 files 字段，后者更好一些，因为前者要写的东西可能会有很多。<code>package.json</code> 中的 files 可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;files&quot;</span>: [</span><br><span class="line">  <span class="string">&quot;lib/**/*&quot;</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<p>现在就只有 lib 文件夹下的才会上传到 npm 仓库啦，README.md 和 package.json 已经默认加入了。</p>
+<p>增加测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev jest @types/jest ts-jest</span><br></pre></td></tr></table></figure>
+
+<p>编写配置文件 <code>jest.config.js</code> 如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">roots</span>: [<span class="string">&#x27;&lt;rootDir&gt;/src&#x27;</span>],</span><br><span class="line">    <span class="attr">testMatch</span>: [</span><br><span class="line">        <span class="string">&#x27;**/__tests__/**/*.+(ts|tsx|js)&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;**/?(*.)+(spec|test).+(ts|tsx|js)&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">transform</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;^.+\\.(ts|tsx)$&#x27;</span>: <span class="string">&#x27;ts-jest&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>增加 test 命令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;test&quot;</span>: <span class="string">&quot;jest&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>增加测试文件 <code>src/__test__/Greeter.test.ts</code> 如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Greeter &#125; <span class="keyword">from</span> <span class="string">&#x27;../index&#x27;</span>;</span><br><span class="line"></span><br><span class="line">test(<span class="string">&#x27;My Greeter&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    expect(Greeter(<span class="string">&#x27;Carl&#x27;</span>)).toBe(<span class="string">&#x27;Hello Carl&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>执行 test 命令查看</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_j5QlA8.png" alt="img"></p>
+<p>这里可以下载 vscode jest 插件，进行测试用例的实时结果查看</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_GFmmkE.png" alt="img"></p>
+<p>使用 npm <a target="_blank" rel="noopener" href="https://docs.npmjs.com/misc/scripts">特殊命令</a>：</p>
+<p>对于一个优秀的包，我们应该将操作尽可能的自动化，接下来看几个特殊的命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>操作</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prepare</td>
+<td>npm run build</td>
+<td>在打包和发布之前运行，适合 build</td>
+</tr>
+<tr>
+<td>prepublishOnly</td>
+<td>npm test &amp;&amp; npm run lint</td>
+<td>在 prepare 之前，并且只有 npm publish 时才运行，这里应该执行测试和 lint，保证我们不会发布不好的代码</td>
+</tr>
+<tr>
+<td>preversion</td>
+<td>npm run lint</td>
+<td>在新建 tag 之前运行</td>
+</tr>
+<tr>
+<td>version</td>
+<td>npm run format &amp;&amp; git add -A src</td>
+<td>在改了 tag 之后，但 commit 之前</td>
+</tr>
+<tr>
+<td>postversion</td>
+<td>git push &amp;&amp; git push –tags</td>
+<td>在改了 tag 之后，commit 之后</td>
+</tr>
+</tbody></table>
+<p>最后如下，再添加上 main 和 types 字段</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_Ni3P1w.png" alt="img"></p>
+<p>登陆你的 npm 账号，执行 npm publish 命令，注意要使用 npm 默认源哦</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_yuuO9X.png" alt="img"></p>
+<p>这样就发布成功了，也执行了 prepare 和 prepublishOnly 命令，下面使用 npm version patch 升级个版本看一下：</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_W8oIL8.png" alt="img"></p>
+<p>也看到如预期执行了命令，最后再 npm publish 一下，就能更新版本了。</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_BhTAE6.png" alt="img"></p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:28_dE1WDJ.png" alt="img"></p>
+<p>最后使用包如下：</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_Vix3LL.png" alt="img"></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>学到了给 ts 写 lint 配置、jest 简单 ts 配置、npm 的特殊命令，是一个比较规范的包发布流程。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c">这篇文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Acmu/zmy-greet">对应仓库</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2020/09/13/TypeScript/pkg/" data-id="ckxsh5c0j002tc5p49u8vcxop" data-title="NPM 发布 TS 包" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li></ul>
 
     </footer>
   </div>
@@ -353,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="ckxrbehhz002ua9on1ozq0bm8" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="ckxsh5c0n002zc5p4cz7cfrgq" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
       
       
       
@@ -380,7 +577,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
     </div>
   </div>
 
@@ -390,7 +587,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a>
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a>
     </div>
   </div>
 
@@ -399,7 +596,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
     </div>
   </div>
 
@@ -410,6 +607,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/my-blog/2021/12/30/online-judge/lt504/">leetcode 504 七进制转换</a>
+          </li>
         
           <li>
             <a href="/my-blog/2021/12/28/browser/chrome-96/">Chrome 96 更新</a>
@@ -424,7 +625,7 @@
           </li>
         
           <li>
-            <a href="/my-blog/2020/08/02/project/lint/">ESLint 和 Prettier 规范代码</a>
+            <a href="/my-blog/2020/09/13/TypeScript/pkg/">NPM 发布 TS 包</a>
           </li>
         
       </ul>
