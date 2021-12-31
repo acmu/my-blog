@@ -7,8 +7,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "up": "yarn lint && git add . && git commit -m '👆 cmd up~'",
-    "upp": "yarn up && git push",
+    "cm": "yarn lint && git add . && git commit -m '👆 cmd up~'",
+    "cmp": "yarn cm && git push",
     "dev": "hexo server --port 9123 --draft"
   },
   "hexo": {

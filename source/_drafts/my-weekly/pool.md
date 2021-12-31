@@ -33,3 +33,7 @@ Go py js 等语言，编译的时候是类似的，都是先转成 token、再�
 [Rust Is The Future of JavaScript Infrastructure](https://leerob.io/blog/rust)
 
 Rust 是 c or c++ 的现代语言替代品，Rust 能帮助 js 构建速度很快的东西（10 到 20 倍速度），在社区中已经有实践了，虽然还在初步阶段，如 [swc](https://github.com/swc-project/swc) 等等
+
+推广图：
+
+<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_13:29_wccTaI.png" alt="WX20211230-132449@2x" style="zoom:50%;" />
