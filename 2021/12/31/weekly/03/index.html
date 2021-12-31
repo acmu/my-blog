@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>明远周刊（第 3 期）🤩 | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="2021-12-24 ~ 2021-12-30  文章面试官：给 LocalStorage 设置过期时间内容localStorage 有 setItem getItem removerItem clear 等 api，localStorage 中的键值对总是以字符串的形式存储，并且不能设置每一个键的过期时间。那如何设置过期时间呢？  定时器解法（这网页关了就不能正常运行了呀） 增加一个对象，记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="明远周刊（第 3 期）🤩">
+<meta property="og:url" content="https://acmu.github.io/2021/12/31/weekly/03/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="2021-12-24 ~ 2021-12-30  文章面试官：给 LocalStorage 设置过期时间内容localStorage 有 setItem getItem removerItem clear 等 api，localStorage 中的键值对总是以字符串的形式存储，并且不能设置每一个键的过期时间。那如何设置过期时间呢？  定时器解法（这网页关了就不能正常运行了呀） 增加一个对象，记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_20:35_YGnSrR.png">
+<meta property="og:image" content="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/29_10:48_E7bYMo.png">
+<meta property="article:published_time" content="2021-12-31T10:23:33.000Z">
+<meta property="article:modified_time" content="2021-12-31T02:24:05.010Z">
+<meta property="article:author" content="MingYuan">
+<meta property="article:tag" content="周刊">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_20:35_YGnSrR.png">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-weekly/03" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/31/weekly/03/" class="article-date">
+  <time class="dt-published" datetime="2021-12-31T10:23:33.000Z" itemprop="datePublished">2021-12-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      明远周刊（第 3 期）🤩
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>2021-12-24 ~ 2021-12-30</p>
+<p><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_20:35_YGnSrR.png"></p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="面试官：给-LocalStorage-设置过期时间"><a href="#面试官：给-LocalStorage-设置过期时间" class="headerlink" title="面试官：给 LocalStorage 设置过期时间"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5ZC0YGMTh6osL-3uaUV6zA">面试官：给 LocalStorage 设置过期时间</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p><code>localStorage</code> 有 <code>setItem</code> <code>getItem</code> <code>removerItem</code> <code>clear</code> 等 api，<code>localStorage</code> 中的键值对总是以字符串的形式存储，并且不能设置每一个键的过期时间。那如何设置过期时间呢？</p>
+<ol>
+<li>定时器解法（这网页关了就不能正常运行了呀）</li>
+<li>增加一个对象，记录 key 和过期时间，并封装 store api（这应该是大多数人的选择）</li>
+<li>过期时间写在 key 或 value 中，使用特殊符号分隔开，并且加上状态流转、回调函数等</li>
+</ol>
+<p>还可以直接用 <code>xijs</code> 这个库，封装了这个实现</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>封装一个自己的工具库，我也有过这种想法，都已经有人实现了</p>
+<p>状态流转、回调函数真的没想到，但这个用处不大吧，把时间写在 key 或 value 里还是不太认同，因为如果原数据有分割符，就会拆分出错了</p>
+<h3 id="剖析-npm、yarn-与-pnpm-依赖管理逻辑"><a href="#剖析-npm、yarn-与-pnpm-依赖管理逻辑" class="headerlink" title="剖析 npm、yarn 与 pnpm 依赖管理逻辑"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IYcAVVBZZCJ7x3OXNCz7-Q">剖析 npm、yarn 与 pnpm 依赖管理逻辑</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>npm2 使用正常逻辑安装依赖，问题：</p>
+<ol>
+<li>生成的依赖嵌套层级深</li>
+<li>同一个同版本包安装了多次</li>
+</ol>
+<p>npm3/yarn 将依赖扁平化，问题：</p>
+<ol>
+<li><code>node_modules</code>结构不直观</li>
+<li>源代码中能引用未写在 <code>package.json</code> 里的依赖（这里问题很大，你不能控制你使用此依赖的版本，比如这个依赖被其他依赖删除了，那你的代码就会报错，所以会造成你没有改这里的代码，他就报错了）</li>
+<li>提出来扁平化的包版本不唯一（所以需要 lock），并且不会根据 <code>package.json</code> 里依赖顺序的不同而不同（字典序在前面的会优先提取出来），因为 npm 对此进行了排序，所以跟你在 <code>package.json</code> 写的顺序没有关系（网上说有关系，所以我猜这应该是 npm 后期优化了吧）</li>
+</ol>
+<p>pnpm 优点：</p>
+<ol>
+<li><code>node_modules</code> 下只有你安装的包</li>
+<li>把所有的包都存在<code>node_modules/.pnpm</code> 中（这里是 npm 缓存所有包的硬链接），之后在 <code>node_modules</code> 其他包中软链接过去，节省了不同项目安装总是安装同一个包的硬盘空间</li>
+</ol>
+<p>可能的问题：既然是硬链接，有要该依赖调试的情况，那么就会影响到其他项目使用这个包了，这也有解决方案，使用<code>copy-on-write</code>的方式，改的是一个备份即可</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>语言简洁，并且图例清晰，我其实也知道这些，但肯定写出不这么清晰的文章</p>
+<p>软链接：就相当于 windows 的快捷方式，只是为了方便在当前位置使用而创建的，删除原文件，即使软链接存在，那么也没有用了，打开软链接就会报错；删除软链接，原文件不受任何影响</p>
+<p>普通的复制：会在硬盘上存两份同样的数据，所以会浪费存储空间（就像 JS 的深克隆）</p>
+<p>硬链接：多个硬链接指向同一块内存地址，只要不把所有的硬链接都删除，那么原文件就还在，只有所有的硬链接都被删除时，原文件才真的被删除（类似 JS 的引用，一处改了原文件，会影响到所有的引用，当没有人引用这个资源时，会被垃圾回收掉），优点是能节省存储空间</p>
+<h3 id="小林-coding-画图经验"><a href="#小林-coding-画图经验" class="headerlink" title="小林 coding 画图经验"></a><a target="_blank" rel="noopener" href="https://www.i4k.xyz/article/qq_34827674/109257892">小林 coding 画图经验</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>使用 <a target="_blank" rel="noopener" href="https://draw.io/">draw.io</a> 画图，可以存在 github 上，<a target="_blank" rel="noopener" href="https://github.com/jgraph/drawio">免费开源</a>，有很多图可以使用，如路由器、网络 icon 啥的，可以使用 style 的浅色背景，会更好看些，还可以增加元素的<em>Comic</em>属性，会变成手绘风格</p>
+<p>使用 <a target="_blank" rel="noopener" href="https://carbon.now.sh/">carbon</a> 展示代码</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>好工具很重要，多用，多实践</p>
+<p>每次让你选择的时候，可以点击 enter value，使用 acmu/draw-io/master 模式快速选择（github id/仓库名/分支名）</p>
+<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/29_10:48_E7bYMo.png" alt="" style="zoom: 50%;" />
+
+<p>画思维导图可以试下 <a target="_blank" rel="noopener" href="https://gitmind.cn/">gitmind</a>，还可以使用 <a target="_blank" rel="noopener" href="https://www.chuangkit.com/designtools/self/design">创客贴</a> 设计一些简单的贴图</p>
+<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>写需求时，了解清楚业务背景很重要，有时，这可以帮你降低代码复杂度，减少无用功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="ckxtrvrpv00369xon3m8m5xm4" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/my-blog/2021/12/30/online-judge/lt504/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">力扣 504 七进制转换</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2021/12/31/weekly/03/">明远周刊（第 3 期）🤩</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2021/12/30/online-judge/lt504/">力扣 504 七进制转换</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2021/12/28/browser/chrome-96/">Chrome 96 更新</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2021/12/27/weekly/02/">明远周刊（第 2 期）🤩</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2021/12/27/weekly/01/">明远周刊（第 1 期）🤩</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
