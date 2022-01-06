@@ -34,6 +34,16 @@ Go py js 等语言，编译的时候是类似的，都是先转成 token、再�
 
 Rust 是 c or c++ 的现代语言替代品，Rust 能帮助 js 构建速度很快的东西（10 到 20 倍速度），在社区中已经有实践了，虽然还在初步阶段，如 [swc](https://github.com/swc-project/swc) 等等
 
+### 2022-01-05 18:05:26
+
+突然疑问：canvas 是怎么实现的？
+
+大概是为了多平台兼容，使用了 skia 图形库
+
+[Android Skia 图形库](https://juejin.cn/post/6907456218621558792)
+
+[深入理解 Flutter 的图形图像绘制原理——图形库 skia 剖析](https://segmentfault.com/a/1190000038827450)
+
 推广图：
 
 <img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_13:29_wccTaI.png" alt="WX20211230-132449@2x" style="zoom:50%;" />

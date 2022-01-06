@@ -22,6 +22,8 @@ tags: 草稿
 4. 学习方向：
     1. GitHub action
     2. JS 基础（语言、v8、浏览器渲染）
+    3. web 安全 csp（Content Security Policy 内容安全策略）
+    4. 操作系统、语言基础、网络协议 等最基础能力的提升
 
 使用的工具：
 
