@@ -1,11 +1,7 @@
-# my-blog
+# Blog
 
-MingYuan's Blog - 明远博客
+[MingYuan's Blog - 明远博客](https://acmu.github.io/my-blog)
 
-[这里访问](https://acmu.github.io/my-blog)
+记录学习，不断进步
 
-记录学习，前端知识
-
-默认分支是 source，部署分支在 gh-pages 上
-
-编写的文章都在 source 文件夹下
+默认分支是 source，使用 GitHub action 部署，分支是 gh-pages，写的文章都在 source 目录下

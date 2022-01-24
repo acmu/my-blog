@@ -24,6 +24,19 @@ Js 怎么实现队列？
 
 只使用 push，前端的 dequeue 使用 offset 即可，[这里是代码](https://github.com/datastructures-js/queue)
 
+### 小知识
+
+isNaN vs Number.isNaN：
+
+```js
+isNaN('d');
+// true
+Number.isNaN('d');
+// false
+```
+
+isNaN 对于不是数值类型的值来说，会先强制转为数值类型，那么很容易造成不是 NaN 的值，但是转为数值之后就是 NaN 了，一般来讲这不是你期望看到的答案，所以推荐使用 Number.isNaN 替代 isNaN
+
 ### 资源
 
 [mdn 的 js 教程](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)

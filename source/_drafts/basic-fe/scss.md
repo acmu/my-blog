@@ -37,42 +37,36 @@ $myFontSize: 18px;
 
 这是带参数的，没有参数的不写括号即可
 
-```
+```scss
 @mixin rtl($property, $ltr-value, $rtl-value) {
-  #{$property}: $ltr-value;
+    #{$property}: $ltr-value;
 
-  [dir=rtl] & {
-    #{$property}: $rtl-value;
-  }
+    [dir='rtl'] & {
+        #{$property}: $rtl-value;
+    }
 }
 
 .sidebar {
-  @include rtl(float, left, right);
+    @include rtl(float, left, right);
 }
 ```
 
 转换后的 css
 
-```
+```css
 .sidebar {
-  float: left;
+    float: left;
 }
-[dir=rtl] .sidebar {
-  float: right;
+[dir='rtl'] .sidebar {
+    float: right;
 }
 ```
 
 还可以用 Sass 来写
 
-```
-@mixin rtl($property, $ltr-value, $rtl-value)
-  #{$property}: $ltr-value
-
-  [dir=rtl] &
-    #{$property}: $rtl-value
-
-.sidebar
-  @include rtl(float, left, right)
+```scss
+@mixin rtl($property, $ltr-value, $rtl-value) #{$property}: $ltr-value [dir=rtl]
+    & #{$property}: $rtl-value .sidebar @include rtl(float, left, right);
 ```
 
 其实就是用缩进代替大括号
