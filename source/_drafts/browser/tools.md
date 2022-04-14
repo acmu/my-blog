@@ -6,4 +6,4 @@ tags: 草稿
 
 浏览器预览展示的是 宽 乘 高
 
-<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_15:16_DEqwSo.png" alt="宽 乘 高" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:16_DEqwSo.png" alt="宽 乘 高" style="zoom:50%;" />

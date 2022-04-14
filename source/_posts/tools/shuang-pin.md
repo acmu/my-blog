@@ -4,7 +4,7 @@ date: 2022-01-06 21:17:31
 tags: 效率工具
 ---
 
-![](https://gitee.com/wen98y/upic/raw/master/uPic/2022-01/07_13:23_reB0Tj.png)
+![](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/07_13:23_reB0Tj.png)
 
 中文打字在我们的生活中已经是不可或缺的一部分了，那么输入法就显得越来越重要了
 
@@ -37,7 +37,7 @@ tags: 效率工具
 
 双拼有很多种，如：小鹤、自然码、搜狗、微软等等，他们的区别也只是映射表不同而已，我这里推荐小鹤双拼，双拼的使用很简单，就是韵母的映射而已
 
-![](https://gitee.com/wen98y/upic/raw/master/uPic/2022-01/06_18:35_omA4qq.png)
+![](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/06_18:35_omA4qq.png)
 
 只要记住这张映射表，即可使用双拼，比如我要打「双拼」这两个字，只要`ulpb`即可
 

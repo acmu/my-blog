@@ -4,6 +4,26 @@ date: 2009-09-09 09:09:09
 tags: 草稿
 ---
 
+
+
+
+
+配置用户名与邮箱
+
+```
+这是全局配置
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+
+这是局部配置
+git config user.name "Your Name"
+git config user.email "email@example.com"
+```
+
+
+
+
+
 ## 普通提交
 
 ```sh
@@ -13,6 +33,24 @@ git commit -m 'msg'
 
 git push
 ```
+
+
+
+```
+基于当前分支新建分支
+git branch 分支名
+
+切换分支
+git checkout 分支名
+
+基于当前分支新建分支并切换到新建的分支
+git checkout -b 分支名
+
+一般本地新建的分支不在远端上，需要推送到远端
+
+```
+
+
 
 ## 精致提交
 
@@ -41,3 +79,5 @@ rebase 更强 可以改好多东西
 ## 疑问
 
 冲突到底是怎么产生的？解决冲突时应该注意什么？
+
+revert 使用？

@@ -1,0 +1,169 @@
+---
+title: 写个浏览器插件吧
+date: 2022-02-11 11:33:29
+tags: 浏览器
+---
+
+![image-20220211114010280](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/11_11:40_BYHCz8.png)
+
+## 前言
+
+本文以实现一个简单的浏览器插件为例，带你入门插件开发。插件功能：一键复制标题以及链接，生成 Markdown 格式链接并给到剪切板。源代码在[my-extension](https://github.com/acmu/my-extension)仓库
+
+## 背景
+
+近期在写周刊，要复制文章标题以及链接，之后转换为 Markdown 格式粘贴到文档编辑器中。
+
+## 痛点
+
+每次都要重复「复制标题 ➡️ 复制链接 ➡️ 结合成 Markdown 」这些操作，文章一多就有些麻烦且枯燥。
+
+## 目标
+
+要是能一键复制为 Markdown 链接格式（包含标题以及对应链接），接着直接到文档编辑器中粘贴，那该有多美好。🤩
+
+刚好最近学了插件开发的内容，可以实现如上想法，正好借此机会实践一下（其实这里的插件应该叫扩展，也就是 extension ，但现在普遍都叫插件，故本文也使用此名称）。
+
+## 写插件
+
+我常看的文章都是来自掘金与微信公众号，通过分析`HTML`代码发现，文章标题都是在`h1`标签内的，所以只要获取到`h1`标签的`innerText`内容再加上`window.location.href`即可完成目标。
+
+首先新建目录`my-extension`，创建`manifest.json`文件：
+
+```json
+{
+    "name": "复制标题链接",
+    "description": "使用 Markdown 格式复制标题链接",
+    "version": "1.0",
+    "manifest_version": 3
+}
+```
+
+只需要一个简单的`manifest.json`文件，我们就已经编写了一个插件，这时在浏览器地址栏中输入`chrome://extensions`即可进入到插件管理页面，打开开发者模式并加载扩展：
+
+![image-20220204080203473](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/04_08:02_EKQkFX.png)
+
+加载完成后，可看到插件如下：
+
+![image-20220205221158858](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/05_22:11_GnbMaK.png)
+
+你可以理解为我们只是写了一个插件声明，但是这个插件什么都没有做，接下来我们给它添加功能，在`manifest.json`中增加`commands`字段、`permissions`字段和`background`字段，字段定义文档在[Manifest file format](https://developer.chrome.com/docs/extensions/mv3/manifest/)中查看：
+
+```json
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["activeTab", "scripting"],
+    "commands": {
+        "run-copy": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y",
+                "mac": "Command+Shift+Y"
+            },
+            "description": "执行复制标题链接"
+        }
+    }
+```
+
+`commands`字段可以监听到快捷键的触发，上述代表使用`Command+Shift+Y`快捷键就能触发`run-copy`事件，这时新增`background.js`文件，并使用`chrome.commands.onCommand.addListener`即可添加事件监听器，但这里还需要获取当前 tab 以及注入脚本的权限，所以还需要`permissions`字段，最终`background.js`文件代码如下：
+
+```js
+const copyTitleAndLink = async () => {
+    const fixedMessageId = '__fixed-message-id';
+    const tipStyle = `
+#__fixed-message-id {
+    position: fixed;
+    right: 32px;
+    top: 32px;
+    background-color: white;
+    z-index: 9999;
+
+    padding: 8px 16px;
+    min-width: 200px;
+    border-radius: 8px;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#__fixed-message-id.success {
+    border: 2px solid #2ecc71;
+}
+
+#__fixed-message-id.fail {
+    border: 2px solid #e74c3c;
+}
+`;
+    // 把提示信息插入到网页中
+    const tipMessage = isOk => {
+        const styleSheet = document.createElement('style');
+        styleSheet.innerText = tipStyle;
+        document.head.appendChild(styleSheet);
+
+        let div = document.querySelector(`#${fixedMessageId}`);
+        if (!div) {
+            div = document.createElement('div');
+            div.setAttribute('id', fixedMessageId);
+        }
+        if (isOk) {
+            div.innerText = '复制成功 🎉';
+            div.setAttribute('class', 'success');
+        } else {
+            div.innerText = '复制失败 😞';
+            div.setAttribute('class', 'fail');
+        }
+
+        document.body.append(div);
+
+        setTimeout(() => {
+            div.remove();
+        }, 2000);
+    };
+    try {
+        const h1Element = document.querySelector('h1');
+        const title = h1Element.innerText;
+        // 获取到需要的 Markdown 格式
+        const titleAndLink = `[${title}](${window.location.href})`;
+        // 执行剪切板操作
+        // 可参考 https://www.ruanyifeng.com/blog/2021/01/clipboard-api.html
+        await navigator.clipboard.writeText(titleAndLink);
+        tipMessage(true);
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+        tipMessage(false);
+    }
+};
+
+const runCopy = async () => {
+    // 找到当前活跃的浏览器 tab 标签
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    // 给活跃的 tab 标签执行 copyTitleAndLink 函数
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: copyTitleAndLink,
+    });
+};
+
+chrome.commands.onCommand.addListener(command => {
+    if (command === 'run-copy') {
+        // 在监听到 run-copy command 时执行 runCopy 函数
+        runCopy();
+    }
+});
+```
+
+以上代码先是监听了`run-copy`事件，之后找到当前活跃的 tab 页（也就是你正在浏览的 tab 页），接着执行了`copyTitleAndLink`函数，此函数的作用是在成功或者失败时在页面上给出提醒，如果按了快捷键后并没有效果，那么要到快捷键页面重新设置一下：
+
+![image-20220206001112017](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:11_Q7ylZw.png)
+
+在开发插件过程中，点击插件卡片上的`service worker`链接，即可打开`DevTools`调试`background.js`代码，如果产生错误，那么`Remove`按钮旁边有`Error`按钮，点击即可查看错误，直接打开活跃的 tab 页`DevTools`可调试注入进的 js 代码。
+
+最后我们找[一篇文章](https://juejin.cn/post/7056417977675022366)测试一下，发现可以成功复制内容。🎉
+
+![image-20220206003006212](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:30_Fh0Lob.png)
+
+## 总结
+
+本文简单介绍了`manifest.json`文件和一些插件 api，想了解更多内容可参考[开发文档](https://developer.chrome.com/docs/extensions/)，想要从零入门可参考[快速入门](https://developer.chrome.com/docs/extensions/mv3/getstarted/)。
+
+实现一些功能简单的插件还是很容易的，为了提升你使用浏览器的效率，大家快去实践起来吧。😜

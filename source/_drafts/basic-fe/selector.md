@@ -44,7 +44,7 @@ padding: 2px;
 
 前面必须要写标签名，如果不写，应该默认是 div
 
-<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_17:10_vIDtt9.png" alt="image-20211111112804508" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_17:10_vIDtt9.png" alt="image-20211111112804508" style="zoom:50%;" />
 
 你可以这样理解，这才是正确的顺序，而不是
 

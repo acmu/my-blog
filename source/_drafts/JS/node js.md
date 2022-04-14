@@ -72,7 +72,7 @@ EventEmitter 的 error 事件是特殊的事件，如果触发了这个，并且
 | info warn error | 不同样式而已 |
 | dir | 方便层级展示 |
 | time timeEnd | 方便计时 |
-| trace | 看调用栈（挺高级的，在 node 上可以看到 node 的内核调用，在浏览器就只能看到自己代码的调用）<br /><img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_17:37_wcTSEP.png" alt="image-20211130155209287" style="zoom:50%;" /> |
+| trace | 看调用栈（挺高级的，在 node 上可以看到 node 的内核调用，在浏览器就只能看到自己代码的调用）<br /><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_17:37_wcTSEP.png" alt="image-20211130155209287" style="zoom:50%;" /> |
 | assert | 两个参数，第一个是表达式，第二个是表达式为 false 时输出的信息 |
 
 ### time timeEnd 小测验

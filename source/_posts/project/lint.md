@@ -4,7 +4,7 @@ date: 2020-08-02 11:26:20
 tags: 工程化
 ---
 
-![头图](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_13:01_rXggN1.png)
+![头图](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_13:01_rXggN1.png)
 
 ## 为什么要用 ESLint？
 

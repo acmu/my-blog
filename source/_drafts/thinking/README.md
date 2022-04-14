@@ -14,7 +14,7 @@ tags: 草稿
 
 每一个需求过后，都要总结难点，学到了什么，以及量化的收益分析
 
-<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_17:31_ZnBJE5.png" alt="image-20211223153215346" style="zoom: 40%;" />
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_17:31_ZnBJE5.png" alt="image-20211223153215346" style="zoom: 40%;" />
 
 方法还是挺重要的，比如你看极客时间的高质量文章可能花 20 分钟就懂了 js 的继承，但是你如果自己去谷歌搜索，找到的文章质量参差不齐，可能一天都够呛能弄明白原理
 

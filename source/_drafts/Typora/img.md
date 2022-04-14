@@ -8,4 +8,4 @@ tags: 草稿
 
 webp 图片测试
 
-<img src="https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/28_17:17_KVrWqe.webp" alt="WX20211105-112938@2x" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_17:17_KVrWqe.webp" alt="WX20211105-112938@2x" style="zoom:50%;" />

@@ -4,7 +4,7 @@ date: 2020-09-13 18:18:49
 tags: TS
 ---
 
-![](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:33_V4AWDN.png)
+![](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:33_V4AWDN.png)
 
 本文使用简单的 TypeScript（即 TS），讲解 NPM 包的发布流程，包括代码格式化、lint、单元测试等
 
@@ -72,15 +72,15 @@ t;
 
 添加 build 命令以及运行：
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_cArxJ1.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_cArxJ1.png)
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_nyjAiS.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_nyjAiS.png)
 
 这时就能看到生成的 lib 文件夹以及 .d.ts 声明文件了。
 
 这时，应该把 lib 文件夹也忽略掉。
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_ipOthB.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:14_ipOthB.png)
 
 lib 前的反斜线代表只忽略根路径下的 lib，如果其他子文件夹有 lib 是不会忽略的，而 node_modules 就是不管在哪里都会被忽略
 
@@ -146,7 +146,7 @@ npm run lint
 npm run format
 ```
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_6WHReR.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_6WHReR.png)
 
 当我们把包上传到 npm 仓库时，肯定只希望上传打包后的文件，而不是源代码，可以通过两种方式来实现，分别是编写 `.npmignore` 文件，和使用 `package.json` 中的 files 字段，后者更好一些，因为前者要写的东西可能会有很多。`package.json` 中的 files 可以这样写：
 
@@ -197,11 +197,11 @@ test('My Greeter', () => {
 
 执行 test 命令查看
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_j5QlA8.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_j5QlA8.png)
 
 这里可以下载 vscode jest 插件，进行测试用例的实时结果查看
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_GFmmkE.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_GFmmkE.png)
 
 使用 npm [特殊命令](https://docs.npmjs.com/misc/scripts)：
 
@@ -217,25 +217,25 @@ test('My Greeter', () => {
 
 最后如下，再添加上 main 和 types 字段
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_Ni3P1w.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_Ni3P1w.png)
 
 登陆你的 npm 账号，执行 npm publish 命令，注意要使用 npm 默认源哦
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_yuuO9X.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_yuuO9X.png)
 
 这样就发布成功了，也执行了 prepare 和 prepublishOnly 命令，下面使用 npm version patch 升级个版本看一下：
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:27_W8oIL8.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:27_W8oIL8.png)
 
 也看到如预期执行了命令，最后再 npm publish 一下，就能更新版本了。
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_BhTAE6.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:14_BhTAE6.png)
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:28_dE1WDJ.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:28_dE1WDJ.png)
 
 最后使用包如下：
 
-![img](https://gitee.com/wen98y/upic/raw/master/uPic/2021-12/30_11:14_Vix3LL.png)
+![img](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/30_11:14_Vix3LL.png)
 
 ### 结语
 
