@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>浮点数与二进制 | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：  浮点数的误区，如：0.1 + 0.2 不等于 0.3 浮点数在计算机的存储方式，即 IEEE 754 标准介绍 特殊数字的由来，如 NaN、Number.MAX_SA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浮点数与二进制">
+<meta property="og:url" content="https://acmu.github.io/2022/03/01/operating-system/float/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="前言浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：  浮点数的误区，如：0.1 + 0.2 不等于 0.3 浮点数在计算机的存储方式，即 IEEE 754 标准介绍 特殊数字的由来，如 NaN、Number.MAX_SA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_gVVuXr.png">
+<meta property="article:published_time" content="2022-03-01T17:39:23.000Z">
+<meta property="article:modified_time" content="2022-04-14T02:20:06.173Z">
+<meta property="article:author" content="MingYuan">
+<meta property="article:tag" content="周刊">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-operating-system/float" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/01/operating-system/float/" class="article-date">
+  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      浮点数与二进制
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：</p>
+<ol>
+<li>浮点数的误区，如：0.1 + 0.2 不等于 0.3</li>
+<li>浮点数在计算机的存储方式，即 IEEE 754 标准介绍</li>
+<li>特殊数字的由来，如 NaN、Number.MAX_SAFE_INTEGER 等</li>
+<li>正确执行浮点数运算的方法</li>
+</ol>
+<h2 id="浮点数的误区"><a href="#浮点数的误区" class="headerlink" title="浮点数的误区"></a>浮点数的误区</h2><p>令人困惑的浮点数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">0.1</span> + <span class="number">0.2</span>);</span><br><span class="line"><span class="comment">// 0.30000000000000004</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.1 + 0.2 真的只等于 0.30000000000000004 吗？</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000004</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000003</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000002</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// true true true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// toFixed 函数</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">0.1</span>).<span class="title function_">toFixed</span>(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">2.55</span>).<span class="title function_">toFixed</span>(<span class="number">1</span>), (<span class="number">1.335</span>).<span class="title function_">toFixed</span>(<span class="number">2</span>));</span><br><span class="line"><span class="comment">// 2.5 1.33</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span> === <span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span>);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面我将为你解答这些奇怪现象背后的原因</p>
+<h2 id="IEEE-754-标准"><a href="#IEEE-754-标准" class="headerlink" title="IEEE 754 标准"></a>IEEE 754 标准</h2><p>现代计算机中，IEEE 754 标准（IEEE 电气电子工程师学会 Institute of Electrical and Electronics Engineers）是使用最广泛的浮点数标准（JavaScript、C、Java、Python 等等很多编程语言都使用了此标准）</p>
+<p>该标准以发布年份又区分 3 个版本，分别是 IEEE 754-1985、IEEE 754-2008、IEEE 754-2019，在 <a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-terms-and-definitions-number-value">ECMAScript 2021 标准</a> 中可以发现，JavaScript 使用的正是 IEEE 754-2019 标准中的双精度 64 位格式</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png" alt="image-20220301195257453"></p>
+<p>该标准定义了五种基本格式，其中最常用的便是单精度 32 位浮点数与双精度 64 位浮点数，下面主要讲解双精度浮点数（因为 JavaScript 中使用的是双精度浮点数，并且双精度浮点数与单精度浮点数也很类似）</p>
+<p>该标准定义：浮点数由三个字段组成：符号位（sign）、指数（exponent）和尾数（fraction）</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_gVVuXr.png" alt="image-20220301195235285"></p>
+<p><strong>符号位：</strong>占 1 位，0 代表正数，1 代表负数</p>
+<p><strong>指数：</strong>占 11 位，能表示 2048 个数，即 [0, 2047]，但实际场景下指数的值可以是正数也可以是负数，所以引入了一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exponent_bias">指数偏移基准值</a>（Exponent bias）：1023。举例来说：当指数的二进制值为 1025 时，代表指数的实际值为 2，因为 1023 + 2 = 1025，指数的二进制值为 1020 时，代表指数的实际值为 -3，因为 1023 - 3 = 1020。那么你会觉得指数实际值的范围是 [-1023, +1024]，但实际是 [-1022, +1023]，因为二进制全0、二进制全1，用于表示特殊值了</p>
+<p><strong>尾数：</strong>占 52 位，但可以表示 53 位，因为开头开头第一位的值总为 1，为了节约存储空间，所以省略掉了</p>
+<h3 id="浮点数转为二进制"><a href="#浮点数转为二进制" class="headerlink" title="浮点数转为二进制"></a>浮点数转为二进制</h3><p>以十进制 14.34375 为例，它是如何以二进制存储的？首先分别把整数部分与小数部分的二进制值计算出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">         1    4   .       3     4     3     7     5      </span><br><span class="line">      10^1 10^0   .   10^-1 10^-2 10^-3 10^-4 10^-5   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  1   1   1   0   .      0    1    0       1       1        </span><br><span class="line">2^3 2^2 2^1 2^0   .   2^-1 2^-2 2^-3    2^-4    2^-5  </span><br><span class="line"></span><br><span class="line">  8   2   4   0   .      0  0.25   0  0.0625  0.03125        </span><br></pre></td></tr></table></figure>
+
+<p>小数点后面的二进制是如何计算出的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.34375 * 2 为 0.6875   第 1 位记 0</span><br><span class="line">0.6875 * 2  为 1.375    第 2 位记 1</span><br><span class="line">0.375 * 2   为 0.75     第 3 位记 0</span><br><span class="line">0.75 * 2    为 1.5      第 4 位记 1</span><br><span class="line">0.5 * 2     为 1        第 5 位记 1</span><br><span class="line"></span><br><span class="line">最终没有小数位了，计算结束，结果为 01011</span><br></pre></td></tr></table></figure>
+
+<p>聪明的你肯定在这里发现了：有可能出现无限循环的情况呀，这个后面会讲</p>
+<h4 id="定点数与科学记数法"><a href="#定点数与科学记数法" class="headerlink" title="定点数与科学记数法"></a>定点数与科学记数法</h4><p>现在拿到的值 1110.01011 叫做<strong>定点数</strong>，即小数点是固定位置不能改变的，那么如何拿到浮点数呢？这就要讲下科学计数法了：</p>
+<p>给一个⼗进制数 1230000，可以表示为 1.23 x 10^6 或 12.3 x 10^5 等等，这种⽅式就称为科学记数法。该方法有一种格式叫做规格化，即⼩数点左边有且仅有⼀位非零数字，如 1.23 x 10^6 是规格化的，⽽ 12.3 x 10^5 和 0.123 x 10^7 就不是规格化的</p>
+<h4 id="定点数转浮点数"><a href="#定点数转浮点数" class="headerlink" title="定点数转浮点数"></a>定点数转浮点数</h4><p>1110.01011 可转换为规格化的科学计数法，即 1.11001011 x 2^3，<strong>这里的 3 就是指数，11001011 就是尾数</strong>，不对，尾数前面有个 1 为什么没存呀？</p>
+<p>因为这里使用了规格化的科学计数法，左边有且仅有⼀位非零数字，又因为使用的是二进制数据，第一位还必须是非零，那么就只有一种可能，第一位一定是 1，为了节省存储空间，所以不会存储这个值，这也就是上面说的：「尾数：占 52 位，但可以表示 53 位」</p>
+<h4 id="十进制浮点数-0-1-转换为二进制的值是多少？"><a href="#十进制浮点数-0-1-转换为二进制的值是多少？" class="headerlink" title="十进制浮点数 0.1 转换为二进制的值是多少？"></a>十进制浮点数 0.1 转换为二进制的值是多少？</h4><p>先转换为二进制定点数，整数部分就是0，算一下小数部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 * 2 === 0.2  记 0  </span><br><span class="line">0.2 * 2 === 0.4  记 0  </span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   这里开始无限循环了</span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   又继续无限循环</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>定点数为 0.0 0011 0011 0011 … 这里出现了无限循环，但浮点数位数是有限的，不可能存下那么多的值，所以无法用二进制精确表示 0.1，只能用近似值来表示，于是便造成了精度缺失的情况，其实这里你并不用惊讶，因为二进制不能正确表示 0.1 就和十进制不能表示 1/3 一样普通，对于这种情况，我们选择的是表示其近似值，就像十进制中，我们用 0.33 来代表 1/3 一样。</p>
+<p>转换为规格化的科学计数法为：1.1 0011 0011 0011 … * 2^-4</p>
+<p>指数应该为 1019</p>
+<p>符号位：0</p>
+<p>指数：01111111011</p>
+<p>尾数：1001100110011001100110011001100110011001100110011010</p>
+<p>也可以使用 <a target="_blank" rel="noopener" href="https://www.binaryconvert.com/convert_double.html">binaryconvert</a> 工具验证一下，结果是正确的</p>
+<h3 id="二进制转为浮点数"><a href="#二进制转为浮点数" class="headerlink" title="二进制转为浮点数"></a>二进制转为浮点数</h3><p>现在可以反向得出二进制转为浮点数的换算公式了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">十进制 = (-1)^符号位 x (1 + 尾数) x 2^(指数 - 1023)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下面这个二进制转换为十进制浮点数的值是多少？"><a href="#下面这个二进制转换为十进制浮点数的值是多少？" class="headerlink" title="下面这个二进制转换为十进制浮点数的值是多少？"></a>下面这个二进制转换为十进制浮点数的值是多少？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">符号位：0</span><br><span class="line"></span><br><span class="line">指数：10000000010</span><br><span class="line"></span><br><span class="line">尾数：0100110000000000000000000000000000000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>指数的值是 1026，因为 1023 + 3 = 1026，所以指数是 3</p>
+<p>可得规格化的科学计数法为 1.010011 * 2^3</p>
+<p>可得定点数是 1010.011</p>
+<p>可得十进制值为 10.375</p>
+<h3 id="0-1-toFixed-100"><a href="#0-1-toFixed-100" class="headerlink" title="(0.1).toFixed(100)"></a>(0.1).toFixed(100)</h3><p>至此，其实已经能解释这段代码了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">0.1</span>).<span class="title function_">toFixed</span>(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br></pre></td></tr></table></figure>
+
+<p>浮点数转成二进制，之后再用二进制转为浮点数，结果就是这个值（手算计算量很大，可使用后面介绍的 decimal.js 精确计算）</p>
+<p>虽然你定义的是 0.1 但实际上计算机在二进制存的值是 0.1000000000000000055511151231257827021181583404541015625，可通过 toFixed 方法获取到这个真实值</p>
+<h3 id="特殊数字的由来"><a href="#特殊数字的由来" class="headerlink" title="特殊数字的由来"></a>特殊数字的由来</h3><p>上面说过，指数的二进制全0、二进制全1，用于表示特殊值了，如下：</p>
+<h4 id="正负零"><a href="#正负零" class="headerlink" title="正负零"></a>正负零</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是0</p>
+<p>尾数：全是0</p>
+<h4 id="正负无穷"><a href="#正负无穷" class="headerlink" title="正负无穷"></a>正负无穷</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是1</p>
+<p>尾数：全是0</p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>符号位：0或1都可以，无所谓</p>
+<p>指数：全是1</p>
+<p>尾数：任何非零值</p>
+<p>（typeof NaN === ‘number’ 的原因找到了）</p>
+<h4 id="Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER"><a href="#Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER" class="headerlink" title="Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER"></a>Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER</h4><p>符号位：0 代表正数，1 代表负数</p>
+<p>指数：1023 + 52 = 1075 </p>
+<p>尾数：全是 1</p>
+<p>其实就是 53 个 1，即 2^53  - 1</p>
+<h4 id="Number-MAX-VALUE-Number-MIN-VALUE"><a href="#Number-MAX-VALUE-Number-MIN-VALUE" class="headerlink" title="Number.MAX_VALUE Number.MIN_VALUE"></a>Number.MAX_VALUE Number.MIN_VALUE</h4><p>其实上述的 [-1022, 1023] 只是简单化处理了，如果深究的话，会更复杂（与 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Subnormal_number">Subnormal number</a> 有关），但可以简单理解为能表示的范围是 [-1074, 971]，<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">标准中</a>也有定义，故：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>) * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">971</span>) === <span class="title class_">Number</span>.<span class="property">MAX_VALUE</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, -<span class="number">1074</span>) === <span class="title class_">Number</span>.<span class="property">MIN_VALUE</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="正确执行浮点数运算的方法"><a href="#正确执行浮点数运算的方法" class="headerlink" title="正确执行浮点数运算的方法"></a>正确执行浮点数运算的方法</h2><h3 id="浮点数奇怪的本质"><a href="#浮点数奇怪的本质" class="headerlink" title="浮点数奇怪的本质"></a>浮点数奇怪的本质</h3><p>个人认为，浮点数奇怪的本质是：不能存储完整准确的二进制表示，但这是合理的，因为有无限循环的情况，是存储不完的</p>
+<p>当遇到存储不完的的时候会怎样？会溢出，溢出分为上溢和下溢，这又是个复杂的问题，本文暂不讨论</p>
+<h3 id="如何正确执行浮点数运算"><a href="#如何正确执行浮点数运算" class="headerlink" title="如何正确执行浮点数运算"></a>如何正确执行浮点数运算</h3><p>所有的数据计算都是准确的，当出现无限循环时，明确给出精度定义，超出精度的值舍弃掉，按照人脑的十进制方法去计算</p>
+<p>缺点：自己实现起来费力并且也没必要，一般都要引入三方库，如 decimal.js</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文我介绍了浮点数的标准，即 IEEE 754 标准，还解释了一些特殊值以及常见误区的原因，最后简单分析了 decimal.js 的源码，希望能让你有所收获</p>
+<p>现在回顾最初的问题，你都知道答案了吗？</p>
+<p>这里使用到了浮点数的加法运算，在做加法前，首先要对齐指数，对齐指数时指数小的值会改为指数大的</p>
+<p>如下是 0.1 与 0.2 的二进制值</p>
+<table>
+<thead>
+<tr>
+<th>value</th>
+<th>s</th>
+<th>e</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.1</td>
+<td><strong>0</strong></td>
+<td><strong>01111111011</strong><br />1019 -&gt; -4</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+<tr>
+<td>0.2</td>
+<td><strong>0</strong></td>
+<td><strong>01111111100</strong><br />1020 -&gt; -3</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+</tbody></table>
+<p>指数对齐：把指数小的变为大的，即 0.1 的 e 由 -4 变为 -3</p>
+<p>1.1001100110011001100110011001100110011001100110011010 * 2^-4</p>
+<p>0.11001100110011001100110011001100110011001100110011010 * 2^-3</p>
+<p>指数对齐后就是二进制的加法，没有的位置补0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">0.2    1.10011001100110011001100110011001100110011001100110100</span><br><span class="line">0.1    0.11001100110011001100110011001100110011001100110011010</span><br><span class="line">ans   10.0110011001100110011001100110011001100110011001100111</span><br><span class="line"></span><br><span class="line">10.0110011001100110011001100110011001100110011001100111 * 2^-3</span><br><span class="line">1.00110011001100110011001100110011001100110011001100111 * 2^-2</span><br><span class="line"></span><br><span class="line">符号位：0</span><br><span class="line">指数：-2 即 1021 即 1111111101（二进制）</span><br><span class="line">尾数：00110011001100110011001100110011001100110011001100111</span><br><span class="line">尾数超长了，现在是 53 位，应该改为 52 位，丢弃的部分要使用舍入规则</span><br><span class="line">尾数：0011001100110011001100110011001100110011001100110100</span><br><span class="line"></span><br><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br><span class="line">0.010011001100110011001100110011001100110011001100110100 是定点数，那么计算值是</span><br><span class="line"></span><br><span class="line">Decimal.set(&#123; precision: 99 &#125;) // 替换到默认的 20 位精度，改为 99 位精度，因为这里计算的值太长了</span><br><span class="line">new Decimal(&#x27;0b0.010011001100110011001100110011001100110011001100110100&#x27;).equals((0.1+0.2).toFixed(100))</span><br><span class="line">// true</span><br><span class="line"></span><br><span class="line">最终，完美解释了 0.1 + 0.2 的值到底是怎么来的 🎉</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">双精度特殊值示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IEEE_754-1985">IEEE_754-1985 标准</a></p>
+<p>[IEEE 名称解释](<a target="_blank" rel="noopener" href="https://www.ieee.org/about/ieee-history.html#:~:text=Related">https://www.ieee.org/about/ieee-history.html#:~:text=Related</a> links-,Meaning of I-E-E-E,is the full legal name.)</p>
+<p><a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js  JavaScript 中的任意精度运算</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">HOW TO: Adding IEEE-754 Floating Point Numbers</a></p>
+<p>为什么 0.1 + 0.2 不等于 0.3 ？来自：图解系统-小林 coding-v1.0 pdf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="cl1ydjkn4002zarouecyjhyqe" data-title="浮点数与二进制" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/my-blog/2022/03/19/weekly/08/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          明远周刊：字符在计算机的存储形式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/my-blog/2022/03/01/weekly/07/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">明远周刊：从零实现栅格地图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
