@@ -281,7 +281,7 @@ t1.eat()
 
 输出如下：
 
-![image-2022041392336714 AM](/Users/yuan/Library/Application Support/typora-user-images/image-2022041392336714 AM.png)
+![image-2022041392336714 AM](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-04/14_12:33_MuaEQ9.png)
 
 可以正常使用继承的方法，这里我们使用了`new`操作符来完成`[[Prototype]]`属性的设置，其实还可以使用`Object.create`、`Object.setPrototypeOf`和`__proto__`来完成。
 

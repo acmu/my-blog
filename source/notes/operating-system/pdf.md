@@ -230,6 +230,10 @@ CPU 如何与设备的控制寄存器和数据缓冲器进行通信？
 
 
 
+todo
+
+[10.1 如何查看网络的性能指标？](https://xiaolincoding.com/os/9_linux_cmd/linux_network.html#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E6%9C%89%E5%93%AA%E4%BA%9B)
+
 
 
 ## 主动思考

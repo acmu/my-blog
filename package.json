@@ -9,7 +9,7 @@
     "deploy": "hexo deploy",
     "cm": "yarn lint && git add . && git commit -m '👆 cmd up~'",
     "cmp": "yarn cm && git push",
-    "dev": "hexo server --port 9123 "
+    "dev": "hexo server --port 9123 --draft"
   },
   "hexo": {
     "version": "6.0.0"
