@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="从零打造一个 Web 地图引擎坐标系国内地图都要使用火星坐标系（GCJ-02），它是由GPS坐标系（WGS-84）国际标准非线性加密而来（出于国内安全考虑）。 经纬度经纬度以度数表示，一般可直接以小数点表示，但亦可把度数的小数点分为角分（1角分等于六十分之一度）和角秒（一角秒等于六十分之一角分） 度分秒表示（度:分:秒）－49°30’00”-123d30m00s度分表示（度:分）－49°30.0’">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MingYuan&#39;s Blog">
+<meta property="og:url" content="https://acmu.github.io/notes/0now/backup.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="从零打造一个 Web 地图引擎坐标系国内地图都要使用火星坐标系（GCJ-02），它是由GPS坐标系（WGS-84）国际标准非线性加密而来（出于国内安全考虑）。 经纬度经纬度以度数表示，一般可直接以小数点表示，但亦可把度数的小数点分为角分（1角分等于六十分之一度）和角秒（一角秒等于六十分之一角分） 度分秒表示（度:分:秒）－49°30’00”-123d30m00s度分表示（度:分）－49°30.0’">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-15T02:32:43.302Z">
+<meta property="article:modified_time" content="2022-04-15T02:32:43.302Z">
+<meta property="article:author" content="MingYuan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/notes/0now/backup.html" class="article-date">
+  <time class="dt-published" datetime="2022-04-15T02:32:43.302Z" itemprop="datePublished">2022-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="从零打造一个-Web-地图引擎"><a href="#从零打造一个-Web-地图引擎" class="headerlink" title="从零打造一个 Web 地图引擎"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7054729902871805966">从零打造一个 Web 地图引擎</a></h3><h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h4><p>国内地图都要使用火星坐标系（GCJ-02），它是由GPS坐标系（WGS-84）国际标准非线性加密而来（出于国内安全考虑）。</p>
+<h4 id="经纬度"><a href="#经纬度" class="headerlink" title="经纬度"></a>经纬度</h4><p>经纬度以度数表示，一般可直接以小数点表示，但亦可把度数的小数点分为角分（1角分等于六十分之一度）和角秒（一角秒等于六十分之一角分）</p>
+<p>度分秒表示（度:分:秒）－49°30’00”-123d30m00s<br>度分表示（度:分）－49°30.0’-123d30.0m<br>度数表示－49.5000°-123.5000d（一般会有四位小数）</p>
+<p>（这里能用浮点数表示了，那地图上展示的是这种吗？）</p>
+<p>GPS等设备获取的都是地图坐标系，单位是度，方便在地图上定位，但不方便在平面上展示以及距离或位置等计算。</p>
+<p>经纬度是通过角度来区分的，经度竖着的半圆，在本初子午线那里为 0，左边为西经，右边为东经，各延伸至 180 度，每 15 度一个时区，一个时区之间相差 1 小时，纬度是横着的整个圆，以赤道分为北纬和南纬，各延伸至 90 度，</p>
+<p>所以正确的类似这样：41°24’12.2”N 2°10’26.5”E，那高德地图等是怎么转换成浮点数的呢？</p>
+<p>小数度数 (DD)：41.40338，2.17403</p>
+<p>度分秒 (DMS)：41°24’12.2”N 2°10’26.5”E </p>
+<p>度和十进制分 (DMM)：41 24.2028，2 10.4418</p>
+<p>分 和 秒 转换为小数，其实就是 <code>分*1/60 + 秒*1/3600</code> <a target="_blank" rel="noopener" href="http://www.minigps.net/fc.html">转换网址</a></p>
+<p>那 116 和 41 这种又是怎么来的呢？</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BB%8F%E7%BA%AC%E5%BA%A6/1113442">经纬度</a></p>
+<p>经度<br>经度分为360度，每15度1个时区，其中0度的叫本初子午线，是第一个进入新一天的地方，然后向西每过1个时区就相差1小时。例如是早上5点，那么向西一个时区就是早上4点，再过1个时区就是早上3点，依此类推，向东则相反，一直到本初子午线，也就是说本初子午线两侧刚好相差23个小时<br>从赤道向两级，纬度越来越高。赤道是划分南北两半球的分界线<br>经纬度1度=60分=3600秒，这个六十进制是古巴比伦人定制的，我们今天仍然在使用，只要关于角度和圆都是一样。<br>纬度<br>赤道的纬度为0°，将行星平分为南半球和北半球。<br>纬度是指某点与地球球心的连线和地球赤道面所成的线面角，其数值在0至90度之间。位于赤道以北的点的纬度叫北纬，记为N，位于赤道以南的点的纬度称南纬，记为S。<br>纬度数值在0至30度之间的地区称为低纬地区，纬度数值在30至60度之间的地区称为中纬地区，纬度数值在60至90度之间的地区称为高纬地区。<br>赤道、南回归线、北回归线、南极圈和北极圈是特殊的纬线。<br>纬度1秒的长度<br>地球的子午线总长度大约40008km。平均：<br>纬度1度 = 大约111km<br>纬度1分= 大约1.85km<br>纬度1秒= 大约30.8m</p>
+<h4 id="瓦片"><a href="#瓦片" class="headerlink" title="瓦片"></a>瓦片</h4><p>介绍瓦片规范，如谷歌XYZ规范：谷歌地图、高德地图、国家地理信息公共服务平台（天地图）等在使用，坐标原点在左上角，地图上展示的信息都是由瓦片构成的。</p>
+<p>瓦片原理：把地球投影成一个巨大的正方形世界二维平面图，然后按照四叉树分层切割。层级的范围是[0.18]，在18层时就已经有<code>2^18 * 2^18</code>个瓦片了，可通过高德的瓦片api获取对应的图片，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://webrd01.is.autonavi.com/appmaptile?x=109280&amp;y=53979&amp;z=17&amp;lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8</span><br></pre></td></tr></table></figure>
+
+<p>这是一个定义了 x、y、z 瓦片，x、y代表坐标，z代表层级</p>
+<h4 id="经纬度转web墨卡托"><a href="#经纬度转web墨卡托" class="headerlink" title="经纬度转web墨卡托"></a>经纬度转web墨卡托</h4><p>他们之间可以互换，网上有代码，如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 角度转弧度</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">angleToRad</span> = (<span class="params">angle</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> angle * (<span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">180</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 弧度转角度</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">radToAngle</span> = (<span class="params">rad</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> rad * (<span class="number">180</span> / <span class="title class_">Math</span>.<span class="property">PI</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 地球半径</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">EARTH_RAD</span> = <span class="number">6378137</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// WGS-84经纬度 转 Web墨卡托投影</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">lngLat2Mercator</span> = (<span class="params">lng, lat</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 经度先转弧度，然后因为 弧度 = 弧长 / 半径 ，得到弧长为 弧长 = 弧度 * 半径 </span></span><br><span class="line">    <span class="keyword">let</span> x = <span class="title function_">angleToRad</span>(lng) * <span class="variable constant_">EARTH_RAD</span>; </span><br><span class="line">    <span class="comment">// 纬度先转弧度</span></span><br><span class="line">    <span class="keyword">let</span> rad = <span class="title function_">angleToRad</span>(lat)</span><br><span class="line">    <span class="keyword">let</span> sin = <span class="title class_">Math</span>.<span class="title function_">sin</span>(rad)</span><br><span class="line">    <span class="keyword">let</span> y = <span class="variable constant_">EARTH_RAD</span> / <span class="number">2</span> * <span class="title class_">Math</span>.<span class="title function_">log</span>((<span class="number">1</span> + sin) / (<span class="number">1</span> - sin))</span><br><span class="line">    <span class="keyword">return</span> [x, y]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Web墨卡托投影 转 WGS-84经纬度</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">mercatorTolnglat</span> = (<span class="params">x, y</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> lng = <span class="title function_">radToAngle</span>(x) / <span class="variable constant_">EARTH_RAD</span></span><br><span class="line">    <span class="keyword">let</span> lat = <span class="title function_">radToAngle</span>((<span class="number">2</span> * <span class="title class_">Math</span>.<span class="title function_">atan</span>(<span class="title class_">Math</span>.<span class="title function_">exp</span>(y / <span class="variable constant_">EARTH_RAD</span>)) - (<span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">2</span>)))</span><br><span class="line">    <span class="keyword">return</span> [lng, lat]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="web墨卡托转瓦片坐标"><a href="#web墨卡托转瓦片坐标" class="headerlink" title="web墨卡托转瓦片坐标"></a>web墨卡托转瓦片坐标</h4><p>选取一个高德地图的经纬度点，是火星坐标系的经纬度，把经纬度转换为Web墨卡托投影坐标，</p>
+<p>为了简单，先直接把火星坐标当做WGS-84坐标，</p>
+<p>Web墨卡托投影，编号为EPSG:3857，单位是米</p>
+<p>Web墨卡托投影 再转换 瓦片坐标，这里涉及到分辨率的概念，需要知道一像素代表了多少米，一张瓦片的大小一般是256*256像素，我们知道地球的半径是 6378137米，那么可以算下地球的周长，我们又知道每一层需要多少个瓦片，也就能知道整张瓦片的大小</p>
+<p>坐标点偏移，WGS-84 是中心点为原点，而Web墨卡托是以左上角为原点，所以需要进行偏移。</p>
+<p>把经纬度坐标转换为Web墨卡托投影坐标</p>
+<p>首先你要有瓦片，瓦片就是一块一块的地图图片，之后你要了解经纬度以及映射</p>
+<p>经纬度还有两种标准</p>
+<p>这两种可以互换，首先要做到根据经纬度和 zoom 层级显示正确的一个瓦片</p>
+<p>之后作者又把 米 的定位和经纬度互换（这块有点没懂）</p>
+<p>之后把当前页全部填满瓦片</p>
+<h4 id="拖动与缩放"><a href="#拖动与缩放" class="headerlink" title="拖动与缩放"></a>拖动与缩放</h4><p>使用canvas动画库增加好看效果</p>
+<p><strong>思考</strong></p>
+<p>栅格地图和矢量地图</p>
+<p>栅格地图：不能展示出 hover 的效果，地图皮肤的切换也十分费力</p>
+<p>矢量地图：懒加载数据，前端自己渲染地图结果，自定义性高，可实现 hover、自定义皮肤等高级功能，滚轮 zoom 也更顺滑</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_41310868/article/details/105959659">高德谷歌腾讯天地图地图瓦片 url</a></p>
+<p><a target="_blank" rel="noopener" href="https://support.google.com/maps/answer/18539?hl=zh-Hans&co=GENIE.Platform=Desktop">查找坐标或按纬度和经度搜索</a></p>
+<p>设计方法（UI设计师可以看看）：<a target="_blank" rel="noopener" href="https://web360.org/website-color-schemes/">如何设计网站配色方案</a>、<a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/css/designing-shadows/">Designing Beautiful Shadows in CSS</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API/Tutorial">WebGL 教程 mdn</a></p>
+<p><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/511aa64f69530ed3061829351">入门 WebGL，看这一篇就够了</a></p>
+<p>对知识进行分类：核心、兴趣和盲区。</p>
+<p>多学原理，即那些好多年都不变的东西，如果你只是学知识，而且变化快，很可能有颠覆性变化。</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EMoXGCAJfMF1KbctRGXq0A">7个高频正则</a></p>
+<p>模板</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Zmy Doc<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>123<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>设计模式也挺重要的，这是一种思想</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/notes/0now/backup.html" data-id="cl1ztfbrz000jamoo85qobc3b" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

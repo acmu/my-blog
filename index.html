@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="明远博客 MingYuan&#39;s Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MingYuan&#39;s Blog">
+<meta property="og:url" content="https://acmu.github.io/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="明远博客 MingYuan&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="MingYuan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-weekly/08" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/19/weekly/08/" class="article-date">
+  <time class="dt-published" datetime="2022-03-19T21:21:53.000Z" itemprop="datePublished">2022-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本期看点</p>
+<ul>
+<li>浏览器 observer api</li>
+<li>LRU JS 实现</li>
+<li>字符在计算机的存储形式</li>
+<li>手写 Promise</li>
+<li>queueMicrotask 实现微任务</li>
+<li>前端依赖管理的痛点</li>
+<li>手写 parseInt</li>
+</ul>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="浏览器的-5-种-Observer，你用过几种？"><a href="#浏览器的-5-种-Observer，你用过几种？" class="headerlink" title="浏览器的 5 种 Observer，你用过几种？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-fLZe164aWAaPJ55iZ_m2w">浏览器的 5 种 Observer，你用过几种？</a></h3><p>网页处理用户交互，可添加 click、mousemove 等事件，但有些操作不是由用户直接触发的，那么就要使用 observer api 了。</p>
+<p>IntersectionObserver：</p>
+<p>监听元素和可视区域相交比例。使用场景：埋点数据采集（当前元素是否可见以及可见比例）、图片懒加载。</p>
+<p>MutationObserver：</p>
+<p>监听元素属性的修改、以及子节点的增删改。使用场景：防止用户使用 devTool 去水印。</p>
+<p>ResizeObserver：</p>
+<p>监听大小的改变，当 width、height 被修改时触发。</p>
+<p>PerformanceObserver：</p>
+<p>监听记录 performance 数据的行为，一旦记录了就会触发回调，可在回调里把这些数据进行上报。</p>
+<p>ReportingObserver：</p>
+<p>浏览器遇到过时 api 会打印警告，在一些情况下还会对网页进行干预，此 api 可监听这些动作。</p>
+<h3 id="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"><a href="#蚂蚁金服在线笔试：设计和实现一个LRU缓存机制" class="headerlink" title="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bNMaEXyyPli0OiZpio2kbg">蚂蚁金服在线笔试：设计和实现一个LRU缓存机制</a></h3><p>LRU 是 Least Recently Used 的缩写，是一种常用的页面置换算法，页面置换与CPU、内存、磁盘有关，你可以简单理解为这是一种缓存算法，但有容量限制。</p>
+<p>本文解决了力扣上的 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU缓存</a> 题目。Vue 中也使用了此算法，可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/E0yzNyDApc_XB7r_5ciX_g">LRU 缓存-keep-alive 实现原理</a></p>
+<h3 id="淦，为什么-“𠮷𠮷𠮷”-length-3"><a href="#淦，为什么-“𠮷𠮷𠮷”-length-3" class="headerlink" title="淦，为什么 “𠮷𠮷𠮷” .length !== 3"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7025400771982131236">淦，为什么 “𠮷𠮷𠮷” .length !== 3</a></h3><p>字符串的 length 属性不能完全正确的表示字符串长度，他的深层原因涉及字符编码，推荐看下文中作者关于编码的前两篇文章，这样看本文的时候能便于理解一些。简单讲就是 JavaScript 字符串使用 utf 16 编码，这种编码的产物只可能是2字节或4字节，JavaScript由于历史原因，认为2字节的 length 就是1，所以 ‘💩’ 的占了4个字节，那么他的length就是2，slice, split, substr 等等方法对于 length 的处理也存在同样的问题。为啥 ‘💩’ 就占4个字节了呢？再简单讲就是这个字符使用了Unicode对应表，可在<a target="_blank" rel="noopener" href="https://unicode-table.com/en/">unicode-table</a>中查询对应值，就是这个字符对应了一个数字，数字就可以用二进制表示，因为数字太大了，所以2个字节不够用，就得占4个字节啦。</p>
+<h3 id="深入分析-Promise-实现细节"><a href="#深入分析-Promise-实现细节" class="headerlink" title="深入分析 Promise 实现细节"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6945319439772434469">深入分析 Promise 实现细节</a></h3><p>手写 Promise 应该是现在面试炽手可热的题目了（想当年我也被这个挂过🤫），本文由浅入深介绍了如何手写 Promise，先实现同步版本的，再实现异步，最后在加上 then 以及其他处理，逐步练习，比较有成就感。</p>
+<h3 id="在-JavaScript-中通过-queueMicrotask-使用微任务"><a href="#在-JavaScript-中通过-queueMicrotask-使用微任务" class="headerlink" title="在 JavaScript 中通过 queueMicrotask() 使用微任务"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide">在 JavaScript 中通过 queueMicrotask() 使用微任务</a></h3><p>上篇手写 Promise 使用了 queueMicrotask，我居然都没听过这个函数😑。本文介绍了一些微任务的特性和 queueMicrotask 的示例，你可以理解为它就想 Promise.resolve().then 一样，就是添加一个微任务，但它比 Promise.resolve 要好得多。其中这3点很新奇：</p>
+<ol>
+<li>微任务自身可以产生微任务，并且事件循环会一直处理微任务队列，所以你递归增加微任务的话一定要谨慎，否则可能出现微任务一直执行不完的情况。</li>
+<li>如果可能的话，大多数开发者不应该过多使用微任务。</li>
+<li>使用微任务的典型场景：实在没有其他办法了、创建框架或库时需要使用微任务完成功能。</li>
+</ol>
+<p>（吐槽下，不知道是翻译的原因吗？读着有点难懂🥺）</p>
+<h3 id="关于依赖管理的真相-—-前端包管理器探究"><a href="#关于依赖管理的真相-—-前端包管理器探究" class="headerlink" title="关于依赖管理的真相 — 前端包管理器探究"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/t6RZAKb6mXTfXl7XbpZ_vw">关于依赖管理的真相 — 前端包管理器探究</a></h3><p>关于前端依赖管理，已经有很多不错的文章解释了，但这篇最近的文章给出了准确的分类，丰富了一些细节，如：</p>
+<ol>
+<li>不确定性：不用 lock 的话，你本地安装的 node_modules 和线上重新安装的是可能不同的，那么就会造成你本地开发没有问题，但是线上有问题的情况，你要在新增一个依赖后本地删除 node_modules，再重新安装才能解决，这明显是没必要的，</li>
+<li>当你安装了多个同版本的包在 node_modules 中时，会破坏单例模式以及引起 TS 的 types冲突（这点我真的没想到过）</li>
+<li>Yarn v2 Plug’n’Play 原理，以及劣势：脱离Node现存生态，兼容性不好</li>
+<li>pnpm 的硬链接与符号链接</li>
+<li>cnpm/tnpm 的解决方案（我原以为cnpm就是做了个国内存储呢😂，原理还干了其他的事情）</li>
+<li>Deno 的链接引包</li>
+</ol>
+<h3 id="被字节”装“到了，只要你能看”完“这题目，就算你过？"><a href="#被字节”装“到了，只要你能看”完“这题目，就算你过？" class="headerlink" title="被字节”装“到了，只要你能看”完“这题目，就算你过？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/W6Of2T_xE5Pf2_01FSsjxg">被字节”装“到了，只要你能看”完“这题目，就算你过？</a></h3><p>类似手写 parseInt，文中使用正则实现的，比较简洁（正则的时间复杂度咋算呀？🤔）。</p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><blockquote>
+<p>we will hold your hand and provide enough detail for you to feel comfortable and learn the topics properly.</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/">原文链接</a></p>
+</blockquote>
+<p>好的学习方式应该是有成就感的、开心的、舒服的、由浅入深逐步递进的。</p>
+<p><em>2022-02-27 ~ 2022-03-19（第 8 期）</em></p>
+<p>最近鸽的有点厉害😣，还是尽量每周一篇吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/19/weekly/08/" data-id="cl1ztfbsd001eamoo2ekv1r94" data-title="明远周刊：字符在计算机的存储形式" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-operating-system/float" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/01/operating-system/float/" class="article-date">
+  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：</p>
+<ol>
+<li>浮点数的误区，如：0.1 + 0.2 不等于 0.3</li>
+<li>浮点数在计算机的存储方式，即 IEEE 754 标准介绍</li>
+<li>特殊数字的由来，如 NaN、Number.MAX_SAFE_INTEGER 等</li>
+<li>正确执行浮点数运算的方法</li>
+</ol>
+<h2 id="浮点数的误区"><a href="#浮点数的误区" class="headerlink" title="浮点数的误区"></a>浮点数的误区</h2><p>令人困惑的浮点数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">0.1</span> + <span class="number">0.2</span>);</span><br><span class="line"><span class="comment">// 0.30000000000000004</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.1 + 0.2 真的只等于 0.30000000000000004 吗？</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000004</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000003</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000002</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// true true true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// toFixed 函数</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">0.1</span>).<span class="title function_">toFixed</span>(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">2.55</span>).<span class="title function_">toFixed</span>(<span class="number">1</span>), (<span class="number">1.335</span>).<span class="title function_">toFixed</span>(<span class="number">2</span>));</span><br><span class="line"><span class="comment">// 2.5 1.33</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span> === <span class="title class_">Number</span>.<span class="property">MAX_SAFE_INTEGER</span>);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面我将为你解答这些奇怪现象背后的原因</p>
+<h2 id="IEEE-754-标准"><a href="#IEEE-754-标准" class="headerlink" title="IEEE 754 标准"></a>IEEE 754 标准</h2><p>现代计算机中，IEEE 754 标准（IEEE 电气电子工程师学会 Institute of Electrical and Electronics Engineers）是使用最广泛的浮点数标准（JavaScript、C、Java、Python 等等很多编程语言都使用了此标准）</p>
+<p>该标准以发布年份又区分 3 个版本，分别是 IEEE 754-1985、IEEE 754-2008、IEEE 754-2019，在 <a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-terms-and-definitions-number-value">ECMAScript 2021 标准</a> 中可以发现，JavaScript 使用的正是 IEEE 754-2019 标准中的双精度 64 位格式</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png" alt="image-20220301195257453"></p>
+<p>该标准定义了五种基本格式，其中最常用的便是单精度 32 位浮点数与双精度 64 位浮点数，下面主要讲解双精度浮点数（因为 JavaScript 中使用的是双精度浮点数，并且双精度浮点数与单精度浮点数也很类似）</p>
+<p>该标准定义：浮点数由三个字段组成：符号位（sign）、指数（exponent）和尾数（fraction）</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_gVVuXr.png" alt="image-20220301195235285"></p>
+<p><strong>符号位：</strong>占 1 位，0 代表正数，1 代表负数</p>
+<p><strong>指数：</strong>占 11 位，能表示 2048 个数，即 [0, 2047]，但实际场景下指数的值可以是正数也可以是负数，所以引入了一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exponent_bias">指数偏移基准值</a>（Exponent bias）：1023。举例来说：当指数的二进制值为 1025 时，代表指数的实际值为 2，因为 1023 + 2 = 1025，指数的二进制值为 1020 时，代表指数的实际值为 -3，因为 1023 - 3 = 1020。那么你会觉得指数实际值的范围是 [-1023, +1024]，但实际是 [-1022, +1023]，因为二进制全0、二进制全1，用于表示特殊值了</p>
+<p><strong>尾数：</strong>占 52 位，但可以表示 53 位，因为开头开头第一位的值总为 1，为了节约存储空间，所以省略掉了</p>
+<h3 id="浮点数转为二进制"><a href="#浮点数转为二进制" class="headerlink" title="浮点数转为二进制"></a>浮点数转为二进制</h3><p>以十进制 14.34375 为例，它是如何以二进制存储的？首先分别把整数部分与小数部分的二进制值计算出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">         1    4   .       3     4     3     7     5      </span><br><span class="line">      10^1 10^0   .   10^-1 10^-2 10^-3 10^-4 10^-5   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  1   1   1   0   .      0    1    0       1       1        </span><br><span class="line">2^3 2^2 2^1 2^0   .   2^-1 2^-2 2^-3    2^-4    2^-5  </span><br><span class="line"></span><br><span class="line">  8   2   4   0   .      0  0.25   0  0.0625  0.03125        </span><br></pre></td></tr></table></figure>
+
+<p>小数点后面的二进制是如何计算出的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.34375 * 2 为 0.6875   第 1 位记 0</span><br><span class="line">0.6875 * 2  为 1.375    第 2 位记 1</span><br><span class="line">0.375 * 2   为 0.75     第 3 位记 0</span><br><span class="line">0.75 * 2    为 1.5      第 4 位记 1</span><br><span class="line">0.5 * 2     为 1        第 5 位记 1</span><br><span class="line"></span><br><span class="line">最终没有小数位了，计算结束，结果为 01011</span><br></pre></td></tr></table></figure>
+
+<p>聪明的你肯定在这里发现了：有可能出现无限循环的情况呀，这个后面会讲</p>
+<h4 id="定点数与科学记数法"><a href="#定点数与科学记数法" class="headerlink" title="定点数与科学记数法"></a>定点数与科学记数法</h4><p>现在拿到的值 1110.01011 叫做<strong>定点数</strong>，即小数点是固定位置不能改变的，那么如何拿到浮点数呢？这就要讲下科学计数法了：</p>
+<p>给一个⼗进制数 1230000，可以表示为 1.23 x 10^6 或 12.3 x 10^5 等等，这种⽅式就称为科学记数法。该方法有一种格式叫做规格化，即⼩数点左边有且仅有⼀位非零数字，如 1.23 x 10^6 是规格化的，⽽ 12.3 x 10^5 和 0.123 x 10^7 就不是规格化的</p>
+<h4 id="定点数转浮点数"><a href="#定点数转浮点数" class="headerlink" title="定点数转浮点数"></a>定点数转浮点数</h4><p>1110.01011 可转换为规格化的科学计数法，即 1.11001011 x 2^3，<strong>这里的 3 就是指数，11001011 就是尾数</strong>，不对，尾数前面有个 1 为什么没存呀？</p>
+<p>因为这里使用了规格化的科学计数法，左边有且仅有⼀位非零数字，又因为使用的是二进制数据，第一位还必须是非零，那么就只有一种可能，第一位一定是 1，为了节省存储空间，所以不会存储这个值，这也就是上面说的：「尾数：占 52 位，但可以表示 53 位」</p>
+<h4 id="十进制浮点数-0-1-转换为二进制的值是多少？"><a href="#十进制浮点数-0-1-转换为二进制的值是多少？" class="headerlink" title="十进制浮点数 0.1 转换为二进制的值是多少？"></a>十进制浮点数 0.1 转换为二进制的值是多少？</h4><p>先转换为二进制定点数，整数部分就是0，算一下小数部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 * 2 === 0.2  记 0  </span><br><span class="line">0.2 * 2 === 0.4  记 0  </span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   这里开始无限循环了</span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   又继续无限循环</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>定点数为 0.0 0011 0011 0011 … 这里出现了无限循环，但浮点数位数是有限的，不可能存下那么多的值，所以无法用二进制精确表示 0.1，只能用近似值来表示，于是便造成了精度缺失的情况，其实这里你并不用惊讶，因为二进制不能正确表示 0.1 就和十进制不能表示 1/3 一样普通，对于这种情况，我们选择的是表示其近似值，就像十进制中，我们用 0.33 来代表 1/3 一样。</p>
+<p>转换为规格化的科学计数法为：1.1 0011 0011 0011 … * 2^-4</p>
+<p>指数应该为 1019</p>
+<p>符号位：0</p>
+<p>指数：01111111011</p>
+<p>尾数：1001100110011001100110011001100110011001100110011010</p>
+<p>也可以使用 <a target="_blank" rel="noopener" href="https://www.binaryconvert.com/convert_double.html">binaryconvert</a> 工具验证一下，结果是正确的</p>
+<h3 id="二进制转为浮点数"><a href="#二进制转为浮点数" class="headerlink" title="二进制转为浮点数"></a>二进制转为浮点数</h3><p>现在可以反向得出二进制转为浮点数的换算公式了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">十进制 = (-1)^符号位 x (1 + 尾数) x 2^(指数 - 1023)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下面这个二进制转换为十进制浮点数的值是多少？"><a href="#下面这个二进制转换为十进制浮点数的值是多少？" class="headerlink" title="下面这个二进制转换为十进制浮点数的值是多少？"></a>下面这个二进制转换为十进制浮点数的值是多少？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">符号位：0</span><br><span class="line"></span><br><span class="line">指数：10000000010</span><br><span class="line"></span><br><span class="line">尾数：0100110000000000000000000000000000000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>指数的值是 1026，因为 1023 + 3 = 1026，所以指数是 3</p>
+<p>可得规格化的科学计数法为 1.010011 * 2^3</p>
+<p>可得定点数是 1010.011</p>
+<p>可得十进制值为 10.375</p>
+<h3 id="0-1-toFixed-100"><a href="#0-1-toFixed-100" class="headerlink" title="(0.1).toFixed(100)"></a>(0.1).toFixed(100)</h3><p>至此，其实已经能解释这段代码了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>((<span class="number">0.1</span>).<span class="title function_">toFixed</span>(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br></pre></td></tr></table></figure>
+
+<p>浮点数转成二进制，之后再用二进制转为浮点数，结果就是这个值（手算计算量很大，可使用后面介绍的 decimal.js 精确计算）</p>
+<p>虽然你定义的是 0.1 但实际上计算机在二进制存的值是 0.1000000000000000055511151231257827021181583404541015625，可通过 toFixed 方法获取到这个真实值</p>
+<h3 id="特殊数字的由来"><a href="#特殊数字的由来" class="headerlink" title="特殊数字的由来"></a>特殊数字的由来</h3><p>上面说过，指数的二进制全0、二进制全1，用于表示特殊值了，如下：</p>
+<h4 id="正负零"><a href="#正负零" class="headerlink" title="正负零"></a>正负零</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是0</p>
+<p>尾数：全是0</p>
+<h4 id="正负无穷"><a href="#正负无穷" class="headerlink" title="正负无穷"></a>正负无穷</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是1</p>
+<p>尾数：全是0</p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>符号位：0或1都可以，无所谓</p>
+<p>指数：全是1</p>
+<p>尾数：任何非零值</p>
+<p>（typeof NaN === ‘number’ 的原因找到了）</p>
+<h4 id="Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER"><a href="#Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER" class="headerlink" title="Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER"></a>Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER</h4><p>符号位：0 代表正数，1 代表负数</p>
+<p>指数：1023 + 52 = 1075 </p>
+<p>尾数：全是 1</p>
+<p>其实就是 53 个 1，即 2^53  - 1</p>
+<h4 id="Number-MAX-VALUE-Number-MIN-VALUE"><a href="#Number-MAX-VALUE-Number-MIN-VALUE" class="headerlink" title="Number.MAX_VALUE Number.MIN_VALUE"></a>Number.MAX_VALUE Number.MIN_VALUE</h4><p>其实上述的 [-1022, 1023] 只是简单化处理了，如果深究的话，会更复杂（与 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Subnormal_number">Subnormal number</a> 有关），但可以简单理解为能表示的范围是 [-1074, 971]，<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">标准中</a>也有定义，故：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>) * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">971</span>) === <span class="title class_">Number</span>.<span class="property">MAX_VALUE</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, -<span class="number">1074</span>) === <span class="title class_">Number</span>.<span class="property">MIN_VALUE</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="正确执行浮点数运算的方法"><a href="#正确执行浮点数运算的方法" class="headerlink" title="正确执行浮点数运算的方法"></a>正确执行浮点数运算的方法</h2><h3 id="浮点数奇怪的本质"><a href="#浮点数奇怪的本质" class="headerlink" title="浮点数奇怪的本质"></a>浮点数奇怪的本质</h3><p>个人认为，浮点数奇怪的本质是：不能存储完整准确的二进制表示，但这是合理的，因为有无限循环的情况，是存储不完的</p>
+<p>当遇到存储不完的的时候会怎样？会溢出，溢出分为上溢和下溢，这又是个复杂的问题，本文暂不讨论</p>
+<h3 id="如何正确执行浮点数运算"><a href="#如何正确执行浮点数运算" class="headerlink" title="如何正确执行浮点数运算"></a>如何正确执行浮点数运算</h3><p>所有的数据计算都是准确的，当出现无限循环时，明确给出精度定义，超出精度的值舍弃掉，按照人脑的十进制方法去计算</p>
+<p>缺点：自己实现起来费力并且也没必要，一般都要引入三方库，如 decimal.js</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文我介绍了浮点数的标准，即 IEEE 754 标准，还解释了一些特殊值以及常见误区的原因，最后简单分析了 decimal.js 的源码，希望能让你有所收获</p>
+<p>现在回顾最初的问题，你都知道答案了吗？</p>
+<p>这里使用到了浮点数的加法运算，在做加法前，首先要对齐指数，对齐指数时指数小的值会改为指数大的</p>
+<p>如下是 0.1 与 0.2 的二进制值</p>
+<table>
+<thead>
+<tr>
+<th>value</th>
+<th>s</th>
+<th>e</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.1</td>
+<td><strong>0</strong></td>
+<td><strong>01111111011</strong><br />1019 -&gt; -4</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+<tr>
+<td>0.2</td>
+<td><strong>0</strong></td>
+<td><strong>01111111100</strong><br />1020 -&gt; -3</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+</tbody></table>
+<p>指数对齐：把指数小的变为大的，即 0.1 的 e 由 -4 变为 -3</p>
+<p>1.1001100110011001100110011001100110011001100110011010 * 2^-4</p>
+<p>0.11001100110011001100110011001100110011001100110011010 * 2^-3</p>
+<p>指数对齐后就是二进制的加法，没有的位置补0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">0.2    1.10011001100110011001100110011001100110011001100110100</span><br><span class="line">0.1    0.11001100110011001100110011001100110011001100110011010</span><br><span class="line">ans   10.0110011001100110011001100110011001100110011001100111</span><br><span class="line"></span><br><span class="line">10.0110011001100110011001100110011001100110011001100111 * 2^-3</span><br><span class="line">1.00110011001100110011001100110011001100110011001100111 * 2^-2</span><br><span class="line"></span><br><span class="line">符号位：0</span><br><span class="line">指数：-2 即 1021 即 1111111101（二进制）</span><br><span class="line">尾数：00110011001100110011001100110011001100110011001100111</span><br><span class="line">尾数超长了，现在是 53 位，应该改为 52 位，丢弃的部分要使用舍入规则</span><br><span class="line">尾数：0011001100110011001100110011001100110011001100110100</span><br><span class="line"></span><br><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br><span class="line">0.010011001100110011001100110011001100110011001100110100 是定点数，那么计算值是</span><br><span class="line"></span><br><span class="line">Decimal.set(&#123; precision: 99 &#125;) // 替换到默认的 20 位精度，改为 99 位精度，因为这里计算的值太长了</span><br><span class="line">new Decimal(&#x27;0b0.010011001100110011001100110011001100110011001100110100&#x27;).equals((0.1+0.2).toFixed(100))</span><br><span class="line">// true</span><br><span class="line"></span><br><span class="line">最终，完美解释了 0.1 + 0.2 的值到底是怎么来的 🎉</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">双精度特殊值示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IEEE_754-1985">IEEE_754-1985 标准</a></p>
+<p>[IEEE 名称解释](<a target="_blank" rel="noopener" href="https://www.ieee.org/about/ieee-history.html#:~:text=Related">https://www.ieee.org/about/ieee-history.html#:~:text=Related</a> links-,Meaning of I-E-E-E,is the full legal name.)</p>
+<p><a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js  JavaScript 中的任意精度运算</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">HOW TO: Adding IEEE-754 Floating Point Numbers</a></p>
+<p>为什么 0.1 + 0.2 不等于 0.3 ？来自：图解系统-小林 coding-v1.0 pdf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="cl1ztfbry000gamoo8ybd9fpn" data-title="浮点数与二进制" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/07" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/01/weekly/07/" class="article-date">
+  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="看点"><a href="#看点" class="headerlink" title="看点"></a>看点</h2><ul>
+<li><p>地图的经纬度、瓦片、墨卡托投影介绍与简单实现。</p>
+</li>
+<li><p>普通人的网页配色。</p>
+</li>
+<li><p>一些学习方法：主动接近大佬、围绕工作学、常用 debug、言之有物，不要无病呻吟、多查官方标准。</p>
+</li>
+</ul>
+<h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><h3 id="从零打造一个-Web-地图引擎"><a href="#从零打造一个-Web-地图引擎" class="headerlink" title="从零打造一个 Web 地图引擎"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7054729902871805966">从零打造一个 Web 地图引擎</a></h3><p>本文从零实现了一个栅格地图，栅格地图是由一个个小方块图片组成的，这个小方块叫瓦片，瓦片有固定的编号规则，后端生成了所有的瓦片，前端想要展示地图只要找到对应的瓦片显示出来即可，经纬度通过 web 墨卡托投影后能计算出对应的瓦片编号，之后计算出屏幕要展示的瓦片，以及监听拖动和缩放即可。</p>
+<h3 id="普通人的网页配色方案"><a href="#普通人的网页配色方案" class="headerlink" title="普通人的网页配色方案"></a><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/03/coloring-scheme.html">普通人的网页配色方案</a></h3><p>没有 UI 设计，前端自己开发网页时，使用配色的建议。</p>
+<p><strong>思考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2008/07/color_theory.html">对于颜色的理解</a>，前端应该具备基本的美感，如：使用好看的颜色、合适的布局、边距使用 8 12 16 px 等等。</p>
+<p>可选的配色：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2010/09/12_colors_used_in_web_design.html">网页设计的 12 种颜色</a>、<a target="_blank" rel="noopener" href="https://materialui.co/flatuicolors">各种国外 ui 的颜色</a>、<a target="_blank" rel="noopener" href="https://mui.com/zh/customization/color/">material ui color</a>、<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.1/customize/color/">bootstrap ui Color</a>、<a target="_blank" rel="noopener" href="https://ant.design/docs/spec/colors-cn">Ant Design 色彩</a>、<a target="_blank" rel="noopener" href="https://semi.design/zh-CN/basic/tokens">设计变量 Semi Design Tokens</a>、<a target="_blank" rel="noopener" href="https://arco.design/docs/spec/style-guideline">arco 设计</a>，以及<a target="_blank" rel="noopener" href="https://getcssscan.com/css-box-shadow-examples">好看的阴影</a>。</p>
+<h3 id="vs-code-调试网页-JS-代码"><a href="#vs-code-调试网页-JS-代码" class="headerlink" title="vs code 调试网页 JS 代码"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTYzMDkzMg==&mid=2247485857&idx=1&sn=329edb0f980b3fdb8e1bb6efda631ba7&chksm=cf00c69af8774f8c8c73e8101aaef52bd8a27d7494aeece1927969ec9a8966b0c3e67d55cbfc&scene=178&cur_album_id=2150425279725469698#rd">vs code 调试网页 JS 代码</a></h3><p>配置<code>.vscode/launch.json</code>文件可在 vs code 中调试网页代码，并且还能查看性能分析。</p>
+<p><strong>思考</strong></p>
+<p>vs code 调试相比于浏览器调试的优势：一些写代码的惯性操作可以直接复用，如：代码搜索、折叠等操作，而不是在浏览器和编辑器之间频繁切换。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="聊聊我遇到的那些贵人"><a href="#聊聊我遇到的那些贵人" class="headerlink" title="聊聊我遇到的那些贵人"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aGk7VmGBM5S2tDNuDGr87w">聊聊我遇到的那些贵人</a></h3><p>主动接近各种大佬，展现出自己的潜力。肯知识付费，这样能获得高质量的知识，算是一种高回报投资了。</p>
+<h3 id="四句话总结我的学习观"><a href="#四句话总结我的学习观" class="headerlink" title="四句话总结我的学习观"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/whI_-E4b7iuVjVlZcfVnoQ">四句话总结我的学习观</a></h3><p>围绕工作学，才能使你对于这方面更加深入，而不是仅停留在 demo 级别。常用 debug。你学习了一些知识，如果没用到实践中的话，那就是没学会，如果不能给别人讲明白的话，那就是没学透彻。</p>
+<h3 id="写文章注意"><a href="#写文章注意" class="headerlink" title="写文章注意"></a><a target="_blank" rel="noopener" href="https://github.com/king-hcj/king-hcj.github.io#%E7%BB%8F%E9%AA%8C%E4%B8%8E%E6%80%9D%E8%80%83">写文章注意</a></h3><p>经验与思考简约，尽量不展示多余内容。</p>
+<p>有时一图抵千言，有时只会拖慢网页加载速度。</p>
+<p>言之有物，不做无痛之呻吟。</p>
+<p>杜绝难理解的长句子，如果不能将其拆分成几个简洁的短句，说明理解的并不清晰。</p>
+<h3 id="多查官方标准文档"><a href="#多查官方标准文档" class="headerlink" title="多查官方标准文档"></a>多查官方标准文档</h3><p>多看好的文档，可以节约你的时间，如 MDN、<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">ECMAScript 2021 标准</a>，最近分享了浮点数相关知识，看标准给了我很大帮助。</p>
+<p>还有 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/">whatwg html 规范</a>、<a target="_blank" rel="noopener" href="https://www.w3.org/Style/CSS/current-work.en.html">css 规范</a>（css规范比html难读一些），可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Kq0inC2lrjrvAaP-0ltQoQ">大漠：我认识的 W3C 规范</a>。</p>
+<p><em>2022-01-23 ~ 2022-02-27（第 7 期）</em></p>
+<p>好歌推荐：<a target="_blank" rel="noopener" href="https://i.y.qq.com/v8/playsong.html?songid=335344888#webchat_redirect">踏雪 等什么君(邓寓君)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/01/weekly/07/" data-id="cl1ztfbsc001bamoocptm5oy9" data-title="明远周刊：从零实现栅格地图" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-browser/extension" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/02/11/browser/extension/" class="article-date">
+  <time class="dt-published" datetime="2022-02-11T11:33:29.000Z" itemprop="datePublished">2022-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/11_11:40_BYHCz8.png" alt="image-20220211114010280"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文以实现一个简单的浏览器插件为例，带你入门插件开发。插件功能：一键复制标题以及链接，生成 Markdown 格式链接并给到剪切板。源代码在<a target="_blank" rel="noopener" href="https://github.com/acmu/my-extension">my-extension</a>仓库</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>近期在写周刊，要复制文章标题以及链接，之后转换为 Markdown 格式粘贴到文档编辑器中。</p>
+<h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><p>每次都要重复「复制标题 ➡️ 复制链接 ➡️ 结合成 Markdown 」这些操作，文章一多就有些麻烦且枯燥。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>要是能一键复制为 Markdown 链接格式（包含标题以及对应链接），接着直接到文档编辑器中粘贴，那该有多美好。🤩</p>
+<p>刚好最近学了插件开发的内容，可以实现如上想法，正好借此机会实践一下（其实这里的插件应该叫扩展，也就是 extension ，但现在普遍都叫插件，故本文也使用此名称）。</p>
+<h2 id="写插件"><a href="#写插件" class="headerlink" title="写插件"></a>写插件</h2><p>我常看的文章都是来自掘金与微信公众号，通过分析<code>HTML</code>代码发现，文章标题都是在<code>h1</code>标签内的，所以只要获取到<code>h1</code>标签的<code>innerText</code>内容再加上<code>window.location.href</code>即可完成目标。</p>
+<p>首先新建目录<code>my-extension</code>，创建<code>manifest.json</code>文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;复制标题链接&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;使用 Markdown 格式复制标题链接&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>只需要一个简单的<code>manifest.json</code>文件，我们就已经编写了一个插件，这时在浏览器地址栏中输入<code>chrome://extensions</code>即可进入到插件管理页面，打开开发者模式并加载扩展：</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/04_08:02_EKQkFX.png" alt="image-20220204080203473"></p>
+<p>加载完成后，可看到插件如下：</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/05_22:11_GnbMaK.png" alt="image-20220205221158858"></p>
+<p>你可以理解为我们只是写了一个插件声明，但是这个插件什么都没有做，接下来我们给它添加功能，在<code>manifest.json</code>中增加<code>commands</code>字段、<code>permissions</code>字段和<code>background</code>字段，字段定义文档在<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/manifest/">Manifest file format</a>中查看：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;service_worker&quot;</span><span class="punctuation">:</span> <span class="string">&quot;background.js&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;activeTab&quot;</span><span class="punctuation">,</span> <span class="string">&quot;scripting&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;commands&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;run-copy&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;suggested_key&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Ctrl+Shift+Y&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;mac&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command+Shift+Y&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;执行复制标题链接&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>commands</code>字段可以监听到快捷键的触发，上述代表使用<code>Command+Shift+Y</code>快捷键就能触发<code>run-copy</code>事件，这时新增<code>background.js</code>文件，并使用<code>chrome.commands.onCommand.addListener</code>即可添加事件监听器，但这里还需要获取当前 tab 以及注入脚本的权限，所以还需要<code>permissions</code>字段，最终<code>background.js</code>文件代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">copyTitleAndLink</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> fixedMessageId = <span class="string">&#x27;__fixed-message-id&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> tipStyle = <span class="string">`</span></span><br><span class="line"><span class="string">#__fixed-message-id &#123;</span></span><br><span class="line"><span class="string">    position: fixed;</span></span><br><span class="line"><span class="string">    right: 32px;</span></span><br><span class="line"><span class="string">    top: 32px;</span></span><br><span class="line"><span class="string">    background-color: white;</span></span><br><span class="line"><span class="string">    z-index: 9999;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    padding: 8px 16px;</span></span><br><span class="line"><span class="string">    min-width: 200px;</span></span><br><span class="line"><span class="string">    border-radius: 8px;</span></span><br><span class="line"><span class="string">    font-size: 12px;</span></span><br><span class="line"><span class="string">    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#__fixed-message-id.success &#123;</span></span><br><span class="line"><span class="string">    border: 2px solid #2ecc71;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#__fixed-message-id.fail &#123;</span></span><br><span class="line"><span class="string">    border: 2px solid #e74c3c;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">    <span class="comment">// 把提示信息插入到网页中</span></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">tipMessage</span> = isOk =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> styleSheet = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line">        styleSheet.<span class="property">innerText</span> = tipStyle;</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(styleSheet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`#<span class="subst">$&#123;fixedMessageId&#125;</span>`</span>);</span><br><span class="line">        <span class="keyword">if</span> (!div) &#123;</span><br><span class="line">            div = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">            div.<span class="title function_">setAttribute</span>(<span class="string">&#x27;id&#x27;</span>, fixedMessageId);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isOk) &#123;</span><br><span class="line">            div.<span class="property">innerText</span> = <span class="string">&#x27;复制成功 🎉&#x27;</span>;</span><br><span class="line">            div.<span class="title function_">setAttribute</span>(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            div.<span class="property">innerText</span> = <span class="string">&#x27;复制失败 😞&#x27;</span>;</span><br><span class="line">            div.<span class="title function_">setAttribute</span>(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;fail&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(div);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            div.<span class="title function_">remove</span>();</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> h1Element = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;h1&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> title = h1Element.<span class="property">innerText</span>;</span><br><span class="line">        <span class="comment">// 获取到需要的 Markdown 格式</span></span><br><span class="line">        <span class="keyword">const</span> titleAndLink = <span class="string">`[<span class="subst">$&#123;title&#125;</span>](<span class="subst">$&#123;<span class="variable language_">window</span>.location.href&#125;</span>)`</span>;</span><br><span class="line">        <span class="comment">// 执行剪切板操作</span></span><br><span class="line">        <span class="comment">// 可参考 https://www.ruanyifeng.com/blog/2021/01/clipboard-api.html</span></span><br><span class="line">        <span class="keyword">await</span> navigator.<span class="property">clipboard</span>.<span class="title function_">writeText</span>(titleAndLink);</span><br><span class="line">        <span class="title function_">tipMessage</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Failed to copy: &#x27;</span>, err);</span><br><span class="line">        <span class="title function_">tipMessage</span>(<span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">runCopy</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 找到当前活跃的浏览器 tab 标签</span></span><br><span class="line">    <span class="keyword">let</span> [tab] = <span class="keyword">await</span> chrome.<span class="property">tabs</span>.<span class="title function_">query</span>(&#123; <span class="attr">active</span>: <span class="literal">true</span>, <span class="attr">currentWindow</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给活跃的 tab 标签执行 copyTitleAndLink 函数</span></span><br><span class="line">    chrome.<span class="property">scripting</span>.<span class="title function_">executeScript</span>(&#123;</span><br><span class="line">        <span class="attr">target</span>: &#123; <span class="attr">tabId</span>: tab.<span class="property">id</span> &#125;,</span><br><span class="line">        <span class="attr">function</span>: copyTitleAndLink,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">commands</span>.<span class="property">onCommand</span>.<span class="title function_">addListener</span>(<span class="function"><span class="params">command</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (command === <span class="string">&#x27;run-copy&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 在监听到 run-copy command 时执行 runCopy 函数</span></span><br><span class="line">        <span class="title function_">runCopy</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码先是监听了<code>run-copy</code>事件，之后找到当前活跃的 tab 页（也就是你正在浏览的 tab 页），接着执行了<code>copyTitleAndLink</code>函数，此函数的作用是在成功或者失败时在页面上给出提醒，如果按了快捷键后并没有效果，那么要到快捷键页面重新设置一下：</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:11_Q7ylZw.png" alt="image-20220206001112017"></p>
+<p>在开发插件过程中，点击插件卡片上的<code>service worker</code>链接，即可打开<code>DevTools</code>调试<code>background.js</code>代码，如果产生错误，那么<code>Remove</code>按钮旁边有<code>Error</code>按钮，点击即可查看错误，直接打开活跃的 tab 页<code>DevTools</code>可调试注入进的 js 代码。</p>
+<p>最后我们找<a target="_blank" rel="noopener" href="https://juejin.cn/post/7056417977675022366">一篇文章</a>测试一下，发现可以成功复制内容。🎉</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:30_Fh0Lob.png" alt="image-20220206003006212"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单介绍了<code>manifest.json</code>文件和一些插件 api，想了解更多内容可参考<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/">开发文档</a>，想要从零入门可参考<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/getstarted/">快速入门</a>。</p>
+<p>实现一些功能简单的插件还是很容易的，为了提升你使用浏览器的效率，大家快去实践起来吧。😜</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/02/11/browser/extension/" data-id="cl1ztfbrt000aamooghjm79hw" data-title="写个浏览器插件吧" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/06" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/23/weekly/06/" class="article-date">
+  <time class="dt-published" datetime="2022-01-23T22:30:50.000Z" itemprop="datePublished">2022-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/23_23:01_9kOiW4.png"></p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ol>
+<li>css 动画、svg 动画实现线条 loading</li>
+<li>前端与后端各自的难点</li>
+<li>优化个人网站的图片流量</li>
+<li>Google 翻译会影响网页</li>
+<li>使用 cdn 开放 api 实现在控制台安装 npm 包</li>
+<li>一个简单的浏览器插件实践</li>
+<li>2 月 7 日，v3 将作为 vue 的默认版本</li>
+<li>使用 vdom json 生成真实 dom</li>
+</ol>
+<h2 id="阅读文章"><a href="#阅读文章" class="headerlink" title="阅读文章"></a>阅读文章</h2><h3 id="巧用-CSS-实现动态线条-Loading-动画"><a href="#巧用-CSS-实现动态线条-Loading-动画" class="headerlink" title="巧用 CSS 实现动态线条 Loading 动画"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-4bJEa06YGLStb37N868zQ">巧用 CSS 实现动态线条 Loading 动画</a></h3><p>使用 3 种方式实现 Chrome tab 的圆圈 loading 效果</p>
+<ol>
+<li>使用 css 圆角+<code>animation</code> +遮罩的原理实现</li>
+<li>使用 svg 的 <code>stroke-dasharray</code> <code>stroke-dashoffset</code> 和 <code>animation</code> 实现</li>
+<li>使用 CSS @property 实现</li>
+</ol>
+<p><strong>思考</strong></p>
+<p><code>conic-gradient</code> 是围绕着中心顺时针的渐变，其他的还有 <code>linear-gradient</code> 线性渐变、<code>radial-gradient</code>辐射状渐变</p>
+<h3 id="【Web-动画】SVG-线条动画入门"><a href="#【Web-动画】SVG-线条动画入门" class="headerlink" title="【Web 动画】SVG 线条动画入门"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coco1s/p/6225973.html">【Web 动画】SVG 线条动画入门</a></h3><p>web 动画一般分为三种：css3 动画、js 动画（canvas）、html 动画（svg），本文介绍 svg</p>
+<p>以一个弯曲的进度条为例，引出<code>stroke-dasharray</code> <code>stroke-dashoffset</code> 属性和<code>polyline</code> 形状（画出两个相同的图形，使用动画加遮罩实现进度条效果），能用简洁的代码，实现比较复杂的线条动画，体现了 svg 动画的强大之处</p>
+<p><strong>思考</strong></p>
+<p><code>stroke-dasharray</code>的值是数组，第一个值是线的长度，第二个值是空白的长度，第三个值是线的长度，第四个值是空白的长度，以此类推，如果值的个数不够，那么就会把前面的数组重复来一遍，通过<code>animation</code>改变<code>stroke-dasharray</code>的值，会有一个线条动画的效果</p>
+<h3 id="CSS-property，让不可能变可能"><a href="#CSS-property，让不可能变可能" class="headerlink" title="CSS @property，让不可能变可能"></a><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/109">CSS @property，让不可能变可能</a></h3><p>@property 允许开发者显示定义他们自己的 css 自定义属性，这些自定义属性通过<code>transition</code>可以实现渐变颜色的动画、线条位置的动画，但目前兼容性不是很好</p>
+<h3 id="前端比后端幸福多了！"><a href="#前端比后端幸福多了！" class="headerlink" title="前端比后端幸福多了！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/U_3PAu2kP2ObZe3zuyOtxA">前端比后端幸福多了！</a></h3><p>一篇小漫画，以前端和后端相互交流的视角讲解了各自的难点</p>
+<p>后端：需要学习编程语言、框架，Nginx、Redis、MySQL、Kafka，微服务、分布式、高并发、大流量，docker、k8s 等内容</p>
+<p>前端：需要学习计算机网络（http https websocket）、较为简单的数据结构和算法（后端接口数据转换为前端界面展示数据）、计算机程序设计（作用域、闭包、对象、原型）、操作系统（node、进程与线程、函数调用栈、事件循环）、编译原理（v8、抽象语法树、字节码、虚拟机、less babel 等编译）、图形学（可视化图像）</p>
+<p>如果只呆在高层的抽象上编程也能过得挺滋润，但抽象只能节省你的编程时间，不能节省你的学习时间</p>
+<p><strong>思考</strong></p>
+<p>前后端都有自己的难点，大多数人还是想互相了解的，我觉得前后端都挺难的，如果做不到十分了解，那么就不要妄下定论</p>
+<p>为什么要去学计算机基础，因为想看到一些本质的东西，很多东西是相似的，只不过是换了个名词而已（举个 🌰：文件系统中的硬链接其实和 JS 中的引用是类似的，都是为了节省存储空间），你如果不知道本质，那么就要学习不同的名词，并且不能建立起知识之间的联系，也容易忘记，但你知道了本质，就能举一反三。计算机基础 yyds，希望大家都能成为计算机科学家 🤓</p>
+<p>阮一峰老师<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/01/weekly-issue-193.html">本周的周刊</a>，开头也是讨论前后端的，好巧，引用一句：</p>
+<blockquote>
+<p>前端和后端的差异，不在于难度，或者说各有各的难，而是所要解决的问题不一样。</p>
+<p>前端的特征是混乱、嘈杂、易变，因为这些都是最终用户的特征，前端需要匹配用户。 如果你不适应混乱、嘈杂、易变的开发，你就很难适应前端。</p>
+<p>后端面对的是硬件、算法和数据结构，所以比较稳定。但是会涉及到计算机科学、语言设计、编译原理等高深的内容，想要搞懂这些东西，绝非易事。</p>
+</blockquote>
+<h3 id="省钱-90-！我是这样优化网站图片的"><a href="#省钱-90-！我是这样优化网站图片的" class="headerlink" title="省钱 90%！我是这样优化网站图片的"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bOx0acMR8FkWo82_e2sQ3w">省钱 90%！我是这样优化网站图片的</a></h3><p>写文章不可避免的会有图片，那么就会遇到图片存哪里的问题，作者使用腾讯云的文件服务上传图片，但近期流量费用增加，本文讲述了如何降低流量省钱</p>
+<ol>
+<li>使用 referrer 拒绝其他域名的请求</li>
+<li>使用 tinify.cn 的开发者账号压缩图片，支持 500 张</li>
+<li>转换为 webp 格式</li>
+<li>gzip 压缩（几乎没有收益，因为图片已经是压缩的格式了）</li>
+</ol>
+<p>gif 不好压缩，暂时不改，开启 cdn 能使图片访问速度快 10 倍</p>
+<p><strong>思考</strong></p>
+<p>我用的是 uPic+gitee，uPic 开启 80%压缩，gitee 在国内速度也不错，再加上 typora 可以配合 uPic 自动上传图片，但 gitee 的图片应该还得做个备份，预防 gitee 不能访问的状况，计划备份在 githb 上，使用 action 来做</p>
+<h3 id="你真的认为-Google-翻译不影响”前端”页面功能吗"><a href="#你真的认为-Google-翻译不影响”前端”页面功能吗" class="headerlink" title="你真的认为 Google 翻译不影响”前端”页面功能吗?"></a><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041067692">你真的认为 Google 翻译不影响”前端”页面功能吗?</a></h3><p>通过 textarea 计数功能不可用的 bug 引出 Google 翻译会影响网页的功能</p>
+<ol>
+<li>会影响元素的 dom 结构</li>
+<li>导致 vue 和 react 的双向绑定失效</li>
+</ol>
+<p>但伪元素的内容不会被翻译，也不受翻译影响</p>
+<h3 id="大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？"><a href="#大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？" class="headerlink" title="大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7023916328637431816">大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？</a></h3><p>浏览器可以通过添加 script 标签来引入额外的 js，那么 npm 包的 js 文件去哪里找呢？cdnjs 和 unpkg 提供了线上静态的 js 文件，只要引用他们的 js 即可</p>
+<p><strong>思考</strong></p>
+<p>文中使用了 referrer 头来解决直接请求 cdnjs 跨域的问题</p>
+<h3 id="7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制"><a href="#7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制" class="headerlink" title="7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制"></a><a target="_blank" rel="noopener" href="https://king-hcj.github.io/2021/10/17/browser-extension/">7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制</a></h3><p>应用：类似于现在的 pwa</p>
+<p>扩展：我们经常下载使用的</p>
+<p>插件：类似 flash pdf 等，能提供操作系统的一些功能，因为安全问题，已经废弃或内置了</p>
+<p>但现在扩展一般都叫插件了，简明扼要的说了写插件的重点：要有<code>manifest.json</code>，用来描述图标，popup 的资源、页面加载的资源，使用到了一些 api：<code>chrome.tabs.query</code> <code>chrome.tabs.sendMessage</code> <code>chrome.runtime.onMessage.addListener</code></p>
+<p><strong>思考</strong></p>
+<p>可以自己写点提升工作效率的插件</p>
+<h3 id="尤大深夜宣布：Vue-3-将成为新的默认版本！"><a href="#尤大深夜宣布：Vue-3-将成为新的默认版本！" class="headerlink" title="尤大深夜宣布：Vue 3 将成为新的默认版本！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f2Fel9El1Uq55kdnlFweog">尤大深夜宣布：Vue 3 将成为新的默认版本！</a></h3><p>vue 以及一系列工具链，将在 2022 年 2 月 7 日升级为 v3 兼容版本，v3 将作为 vue 的默认版本，如果你要使用 v2，请特殊指定</p>
+<h3 id="手写简易前端框架：vdom-渲染和-jsx-编译"><a href="#手写简易前端框架：vdom-渲染和-jsx-编译" class="headerlink" title="手写简易前端框架：vdom 渲染和 jsx 编译"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xwt5bd31IZChpEx79w5E5g">手写简易前端框架：vdom 渲染和 jsx 编译</a></h3><p>vdom 是对 dom 的一层抽象，使用 json 来描述，但一般不会人为写这个 json，而是通过更简单易懂的 jsx 或 template 使用 babel 编译而来</p>
+<p>本文实现了由 json 生成真实 dom 的代码：通过递归遍历 json，并使用 dom api 生成真实 dom</p>
+<p><strong>思考</strong></p>
+<p>babel 如何编译 jsx 的呢，这应该就会涉及到 ast 了</p>
+<h3 id="为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？"><a href="#为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？" class="headerlink" title="为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/sy_JdpuFWmrpXeKl5AvPRQ">为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？</a></h3><p>以「函数中大括号的位置格式」为例，查看了代码的 ast，以及编写的对应的 eslint rule（rule 分为 meta 和 create 两部分，create 中可以使用 eslint 对应的 api 实现获取 token，改变代码等操作）</p>
+<p><strong>思考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://astexplorer.net/">astexplorer</a> 网站可以查看多种语言的 ast</p>
+<p>babel 不能修复格式的根本原因是：babel 不是为了修复代码格式而设计的，没有提供对应 api</p>
+<h3 id="2021-开发者生态系统现状"><a href="#2021-开发者生态系统现状" class="headerlink" title="2021 开发者生态系统现状"></a><a target="_blank" rel="noopener" href="https://www.jetbrains.com/zh-cn/lp/devecosystem-2021/">2021 开发者生态系统现状</a></h3><p>JetBrains 进行的第五次年度开发者生态系统调查的综合结果。来自 183 个国家或地区的 31,743 名开发者</p>
+<p>重要发现：JavaScript 是最受欢迎的语言 😂</p>
+<p><strong>思考</strong></p>
+<p>热门语言需要学习：TypeScript 要增加实践，Python 要学习， Go、Rust 可以了解</p>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><p>公众号推荐：code 秘密花园、神光的编程秘籍</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/lVLxcwrDkEVCnf41u1zJ4A">字节前端 ByteFE 技术周报</a></p>
+<p><a target="_blank" rel="noopener" href="https://king-hcj.github.io/">独钓寒江雪 blog</a></p>
+<p><em>2022-01-14 ~ 2022-01-23（第 6 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/23/weekly/06/" data-id="cl1ztfbsb0017amooean70co1" data-title="明远周刊：css动画、svg动画实现线条 loading" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/05" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/16/weekly/05/" class="article-date">
+  <time class="dt-published" datetime="2022-01-16T00:27:29.000Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/16/weekly/05/">明远周刊：colors.js 与 faker.js 遭开源作者故意破坏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/16_00:12_fFiVsV.png" alt="WX20220116-001152@2x"></p>
+<h2 id="思考时刻"><a href="#思考时刻" class="headerlink" title="思考时刻"></a>思考时刻</h2><p>写文章时，把最精彩的部分写在前面，因为人的精力是有限的，需要先把最好的内容呈现出来，才能勾起继续看下去的欲望，就像抖音的视频一样，前几秒展示视频最精彩部分的点赞一般都会多些</p>
+<p>通过 effie 了解到 <a target="_blank" rel="noopener" href="https://github.com/lxgw/LxgwWenKai">LXGW WenKai / 霞鹜文楷</a> 这个中文字体，很漂亮，推荐 👍</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/12_13:49_cLoMD2.png" alt="LXGW WenKai / 霞鹜文楷"></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mwpdffpixBY&list=LL&index=102">【TED 演讲】想学会一个语言？就像玩电子游戏般地去说出来</a> （使用有趣的故事勾起继续看下去的欲望，演讲真的是一门学问）</p>
+<ol>
+<li>现在的英语是一种为了能得到结果的工具，在英语对话中，只有 4%是英语母语者与英语母语者对话的</li>
+<li>你在说英语时，不应该去评判自己的对错或好坏，而应该关注于是否能达成让对方理解你给他的结果</li>
+</ol>
+<p>现在的 AI 已经很厉害了，在翻译、语音识别、图像识别上已经有很多应用了，可以了解下简单的基本原理</p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ol>
+<li>colors.js 与 faker.js 遭开源作者故意破坏</li>
+<li>node util 模块好用的工具函数</li>
+<li>null 和 undefined 区别</li>
+</ol>
+<h2 id="阅读文章"><a href="#阅读文章" class="headerlink" title="阅读文章"></a>阅读文章</h2><h3 id="下载量和-Vue-一样大的开源软件被作者恶意破坏，数千款应用受到牵连"><a href="#下载量和-Vue-一样大的开源软件被作者恶意破坏，数千款应用受到牵连" class="headerlink" title="下载量和 Vue 一样大的开源软件被作者恶意破坏，数千款应用受到牵连"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TDh4BPeYTITjJIZ4KH-4Jw">下载量和 Vue 一样大的开源软件被作者恶意破坏，数千款应用受到牵连</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p>colors.js 与 faker.js 遭开源作者故意破坏，他认为：不会再“无偿工作”来支持那些商业巨头，要么选择项目分叉，要么以每年“六位数”的薪酬补偿开源开发人员。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/marak/Faker.js/">faker.js</a> 的 README 也改为“Aaron Swartz 到底经历了什么？”的字样。</p>
+<blockquote>
+<p>Swartz 是一位杰出的开发人员，他帮助建立了 Creative Commons、RSS 和 Reddit。他的贡献对几乎所有的 Web 开发人员都产生了深远的影响。2013 年，年仅 26 岁的 Swartz 在一场法律纠纷中自杀身亡。</p>
+<p>为了让所有人都能免费访问信息，这位黑客主义者从麻省理工学院的校园网络 JSTOR 数据库中下载到数百万篇期刊文章。据称，他采用的方法是反复轮换自己的 IP 与 MAC 地址以绕过校方和 JSTOR 设置的技术屏蔽方案。但此番举动也导致 Swartz 面对违反《计算机欺诈与滥用法》的指控，一旦罪名成立，他最高可能被判处 35 年监禁。</p>
+</blockquote>
+<p>开源作者的 GitHub 账号也被停止使用（GitHub 也有可能禁用你的账号，所以最好还是自己备份下吧）</p>
+<blockquote>
+<p>Marak 的此次过激行为发生在不久前影响巨大的 Log4j 漏洞事件之后。作为一套重量级开源库，Log4j 在不同企业及商业实体开发的各类 Java 应用程序当中都有广泛使用。而 Log4shell 漏洞的曝光引发越来越多 CVE，不少开源维护者不得不在休假期间无偿帮助修复这些免费项目。</p>
+</blockquote>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>对酬劳的抱怨可以理解，但故意破坏的行为确实过激（我一直以为，能写出这样库的开源作者都不会为钱发愁呢 😐）</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/11_13:22_0ge7B2.png" alt="下载量对比"></p>
+<h3 id="Node-js-内置的-util-模块究竟有多好用？"><a href="#Node-js-内置的-util-模块究竟有多好用？" class="headerlink" title="Node.js 内置的 util 模块究竟有多好用？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WRyN9d9G1apllyLddFXJWQ">Node.js 内置的 util 模块究竟有多好用？</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>JS 自带的类型判断令人头疼，<code>util/types</code> 可以帮你判断类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> types = <span class="built_in">require</span>(<span class="string">&#x27;util/types&#x27;</span>);</span><br><span class="line"></span><br><span class="line">types.<span class="title function_">isDate</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()); <span class="comment">// true</span></span><br><span class="line">types.<span class="title function_">isPromise</span>(<span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">() =&gt;</span> &#123;&#125;)); <span class="comment">// true</span></span><br><span class="line">types.<span class="title function_">isArrayBuffer</span>(<span class="keyword">new</span> <span class="title class_">ArrayBuffer</span>(<span class="number">16</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>深比较是否完全相等 <code>isDeepStrictEqual</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">&#x27;util&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> val1 = &#123; <span class="attr">name</span>: <span class="string">&#x27;shenfq&#x27;</span>, <span class="attr">x</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> val2 = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;shenfq&#x27;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;val1 === val2&#x27;</span>, val1 === val2); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isDeepStrictEqual&#x27;</span>, util.<span class="title function_">isDeepStrictEqual</span>(val1, val2)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>早期的 Node API 都是 Error First 风格的，现在大多是基于 promise 编程，那么如何将 Error First 风格的 API 转为 Promise API？</p>
+<p>使用 <code>promisify</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">&#x27;util&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> readFile = util.<span class="title function_">promisify</span>(fs.<span class="property">readFile</span>);</span><br><span class="line"><span class="title function_">readFile</span>(<span class="string">&#x27;./a.ts&#x27;</span>, &#123; <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">text</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(text))</span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(error));</span><br></pre></td></tr></table></figure>
+
+<p>顺便说一句：<code>callbackify</code> 可以将 Promise 风格转为 Error First 风格</p>
+<p>Node 10 版本引入了 <code>promises</code> 属性，使用起来更简便</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>).<span class="property">promises</span>;</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./a.ts&#x27;</span>, &#123; <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">text</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(text))</span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(error));</span><br></pre></td></tr></table></figure>
+
+<p><code>util.debug</code> 能实现类似 <code>debug</code> 包的效果，输出信息便于调试</p>
+<p><code>util.format</code> 可以格式化输出字符串</p>
+<p><code>util.inspect</code> 可以控制输出的对象</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>Error First 风格转换 Promise 风格很有用，方便了 async 模式开发（在知道 <code>promisify</code> 之前，我也想写一个自己的 <code>promisify</code> 来着，但后来感觉太难就放弃了 😂，可以了解下源码是如何实现的）</p>
+<p>能否把这个 util 弄到浏览器上呢？</p>
+<h3 id="深入探究：null-和-undefined-究竟有何区别？"><a href="#深入探究：null-和-undefined-究竟有何区别？" class="headerlink" title="深入探究：null 和 undefined 究竟有何区别？"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7051144396615450655">深入探究：null 和 undefined 究竟有何区别？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p><code>undefined</code>：这个变量未定义，<code>null</code>：变量定义了，但表示的值为空（一般表示对象的初始值，类似字符串的初始值为空字符串）</p>
+<p>之后演示了几种不同的展现形式，并解释其原因</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">// &#x27;object&#x27; 因为历史原因</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>; <span class="comment">// &#x27;undefined&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="literal">null</span>); <span class="comment">// &#x27;[object Null]&#x27;</span></span><br><span class="line"><span class="comment">// Object.prototype.toString() 是 Object 的原型方法</span></span><br><span class="line"><span class="comment">// 调用该方法，默认返回当前对象的内部属性 [[Class]]，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="literal">undefined</span>); <span class="comment">// &#x27;[object Undefined]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 并不是因为会隐式转换，而是因为ECMA 在 11.9.3 章节中表明了：</span></span><br><span class="line"><span class="comment">// If x is null and y is undefined, return true.</span></span><br><span class="line"><span class="comment">// If x is undefined and y is null, return true.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">undefined</span> + <span class="number">1</span>; <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">null</span> + <span class="number">1</span>; <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">undefined</span>); <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">null</span>); <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">a</span>: <span class="literal">undefined</span> &#125;); <span class="comment">// &#x27;&#123;&#125;&#x27;</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">b</span>: <span class="literal">null</span> &#125;); <span class="comment">// &#x27;&#123;b: null&#125;&#x27;</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">a</span>: <span class="literal">undefined</span>, <span class="attr">b</span>: <span class="literal">null</span> &#125;); <span class="comment">// &#x27;&#123;b: null&#125;&#x27;</span></span><br><span class="line"><span class="comment">// JSON 会将 undefined 对应的 key 删除，这是 JSON 自身的转换原则。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="literal">undefined</span> = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> n === <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">test</span>(); <span class="comment">// false</span></span><br><span class="line"><span class="title function_">test</span>(<span class="literal">undefined</span>); <span class="comment">// false</span></span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;test&#x27;</span>); <span class="comment">// ture</span></span><br><span class="line"><span class="keyword">let</span> <span class="literal">undefined</span> = <span class="string">&#x27;test&#x27;</span>; <span class="comment">// Uncaught SyntaxError: Identifier &#x27;undefined&#x27; has already been declared</span></span><br><span class="line"><span class="comment">// null 是关键字，而 undefined 是一个全局变量，可以使用局部变量覆盖，但一定不要这样做</span></span><br><span class="line"><span class="comment">// 如果你想要觉得真实的 undefined，可以使用 void 0 获取，因为 void 加任何表达式，都会返回 undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>到底使用 undefined 还是 null，大家都有自己的准则，但团队内尽量保持统一</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>局部 undefined 还可以重新赋值，这个真没想到，所以还是 void 0 保险一些</p>
+<h3 id="通过-Chrome-Devtools-的-Memory-工具证明-string-的内存分配方式"><a href="#通过-Chrome-Devtools-的-Memory-工具证明-string-的内存分配方式" class="headerlink" title="通过 Chrome Devtools 的 Memory 工具证明 string 的内存分配方式"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VucSMXz8tnNf_LyrXZLHsg">通过 Chrome Devtools 的 Memory 工具证明 string 的内存分配方式</a></h3><h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><p>给出一个简单且有效的示例，使用 Memory 中的 Allocation instrumentation on timeline 模式，通过不同时间申请 string 来校验 string 的内存分配方式。</p>
+<h4 id="思考-3"><a href="#思考-3" class="headerlink" title="思考"></a>思考</h4><p><code>&quot;guang&quot;@756367</code> at 后面表示的为内存地址</p>
+<p>虽然看见了内存地址位置，但怎么证明这块内存地址是 栈、堆 还是 常量池 呢？🤔</p>
+<p><em>2022-01-07 ~ 2022-01-13（第 5 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/16/weekly/05/" data-id="cl1ztfbsa0014amoofu8k4k18" data-title="明远周刊：colors.js 与 faker.js 遭开源作者故意破坏" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/10/weekly/04/" class="article-date">
+  <time class="dt-published" datetime="2022-01-10T21:05:28.000Z" itemprop="datePublished">2022-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/10/weekly/04/">明远周刊：为什么 0.1 + 0.2 不等于 0.3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/10_20:57_Gctmur.png" alt="标题图"></p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ul>
+<li>  二进制表示浮点数</li>
+<li>  web3（元宇宙、NFT）概念介绍</li>
+</ul>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="为什么-0-1-0-2-不等于-0-3-？"><a href="#为什么-0-1-0-2-不等于-0-3-？" class="headerlink" title="为什么 0.1 + 0.2 不等于 0.3 ？"></a>为什么 0.1 + 0.2 不等于 0.3 ？</h3><p>来自：图解系统-小林 coding-v1.0 pdf</p>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="为什么负数要用补码表示？"><a href="#为什么负数要用补码表示？" class="headerlink" title="为什么负数要用补码表示？"></a>为什么负数要用补码表示？</h5><p>整数类型在计算机中的存储：以 int 举例，4 个字节（32 位），最高位（1 位）0 代表正数，1 代表负数</p>
+<p>补码：把正数的⼆进制全部取反再加 1，⽐如 -1 的⼆进制是把数字 1 的⼆进制取反后再加 1</p>
+<p>为什么要引入补码这么麻烦的东西？</p>
+<p>如果不用，只是改变符号位，那么我们计算下 <code>-2+1</code> 这个过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-2</span><br><span class="line">10000000000000000000000000000010</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">00000000000000000000000000000001</span><br><span class="line"></span><br><span class="line">-2 + 1 （答案变成了-3）</span><br><span class="line">10000000000000000000000000000011</span><br></pre></td></tr></table></figure>
+
+<p>直接相加这明显答案是不对的，必须要增加额外操作才能使结果正确，而在计算机中，加减法操作是很常用的，为了性能考虑，所以使用了补码，补码直接相加，结果是正确的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-2（补码）</span><br><span class="line">11111111111111111111111111111110</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">00000000000000000000000000000001</span><br><span class="line"></span><br><span class="line">-1（补码）</span><br><span class="line">11111111111111111111111111111111</span><br></pre></td></tr></table></figure>
+
+<p>并且<code>-1 + -2</code>也是成立的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br><span class="line">11111111111111111111111111111111</span><br><span class="line"></span><br><span class="line">-2</span><br><span class="line">11111111111111111111111111111110</span><br><span class="line"></span><br><span class="line">-3</span><br><span class="line">11111111111111111111111111111101</span><br></pre></td></tr></table></figure>
+
+<p>所以这就是使用补码的原因</p>
+<h5 id="十进制小数与二进制的转换"><a href="#十进制小数与二进制的转换" class="headerlink" title="十进制小数与二进制的转换"></a>十进制小数与二进制的转换</h5><p>如 <code>8.625</code> 怎么转换成二进制？</p>
+<p>首先 8 就正常转换 <code>1000</code>，接着，小数是这样处理的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0.625 x 2 === 1.25  记1</span><br><span class="line">0.25 x 2 === 0.5    记0</span><br><span class="line">0.5 x 2 === 1       记1</span><br><span class="line">0                   循环终止</span><br></pre></td></tr></table></figure>
+
+<p>所以结果为<code>1000.101</code> 但并不是所有小数都可以表示的，比如<code>0.1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 x 2 === 0.2  记0</span><br><span class="line">0.2 x 2 === 0.4  记0</span><br><span class="line">0.4 x 2 === 0.8  记0</span><br><span class="line">0.8 x 2 === 1.6  记1</span><br><span class="line">0.6 x 2 === 1.2  记1</span><br><span class="line">0.2 x 2 === 0.4  记0 这里开始无限循环了</span><br><span class="line">0.4 x 2 === 0.8  记0</span><br><span class="line">0.8 x 2 === 1.6  记1</span><br><span class="line">0.6 x 2 === 1.2  记1</span><br><span class="line">0.2 x 2 === 0.4  记0 这里开始无限循环了</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>你可以发现 <code>0.2 x 2 === 0.4</code> 出现了 3 次，即从这里开始了无限循环，<strong>由于计算机的资源是有限的，所以无法用二进制精确表示 0.1，只能用近似值来表示，就是在有限的精度情况下，最大化接近 0.1 的二进制数，于是便造成了精度缺失的情况</strong>（这种情况其实对于我们并不陌生，二进制无法精确表示<code>0.1</code> 就像十进制无法精确表示<code>1/3</code>一样）</p>
+<p>那二进制如何转十进制小数呢，以 10.625 为例，如图：</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/31_10:16_qGoaH1.png" alt="浮点转换"></p>
+<h5 id="计算机是怎么存小数的？"><a href="#计算机是怎么存小数的？" class="headerlink" title="计算机是怎么存小数的？"></a>计算机是怎么存小数的？</h5><p><code>8.625</code> 对应 <code>1000.101</code> 是定点数，代表小数点是死的，不能移动，如果你移动了小数点的位置，那么他的值就变了，然而在计算机中是采用浮点数存储的，代表小数点是可以浮动变化位置的，例如<code>1000.101</code>可表示为<code>1.000101 x 2^3</code>，因为把小数点向左移了 3 位，而且这是二进制，所以只要乘上 2 的 3 次方即可回到原始值，类似科学计数法</p>
+<p>科学计数法：</p>
+<p>⽐如有个很⼤的⼗进制数 <code>1230000</code>，我们可以也可以表示成 <code>1.23 x 10^6</code>，这种⽅式就称为科学记数法。</p>
+<p>该⽅法在⼩数点左边只有⼀个数字，⽽且把这种整数部分没有前导 0 的数字称为规格化，⽐如 <code>1.0 x 10^(-9)</code> 是规格化的科学记数法，⽽ <code>0.1 x 10^(-9)</code> 和 <code>10.0 x 10^(-9)</code> 就不是了。</p>
+<p>那这里要把二进制都存成规格化的科学计数法，也就是<code>1.000101 x 2^3</code> ，这时可以发现<code>1.000101</code> 中的第一个 1 总是不变的，因为不可能以 0 开头，以 0 开头就不是规格化的了，<code>2^3</code>中的 2 也总是不变的，因为总是二进制，所以这两个值可以不用存储，重要的是如下的数据：</p>
+<ul>
+<li>  <strong>尾数</strong> 也就是 <code>1.000101 x 2^3</code> 中的<code>000101</code></li>
+<li>  <strong>指数</strong> 也就是 <code>1.000101 x 2^3</code> 中的<code>3</code></li>
+</ul>
+<p>现在绝⼤多数计算机使⽤的浮点数，是采用 IEEE 754 制定的国际标准：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">符号位 + 指数位 + 尾数</span><br></pre></td></tr></table></figure>
+
+<p>指数位的⻓度越⻓，数值就越⼤</p>
+<p>尾数位的⻓度越⻓，数值就越精度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">单精度浮点数 float 32位</span><br><span class="line">符号位（1） + 指数位（8） + 尾数（23）</span><br><span class="line"></span><br><span class="line">双精度浮点数 double 64位</span><br><span class="line">符号位（1） + 指数位（11） + 尾数（52）</span><br></pre></td></tr></table></figure>
+
+<p>因为指数位没有符合位，那么又需要表示负数，所以引入的偏移量，<code>float</code> 的偏移量是 127，那么如下即可表示 <code>8.26</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1000.101 转为浮点</span><br><span class="line">1.000101 x 2^3</span><br><span class="line">存到 float 中，二进制为：</span><br><span class="line">0（符号位） + 10000010（指数：127+3 也就是130的二进制） + 00010100000000000000000（尾数：直接把尾数写到这里，共23位）</span><br></pre></td></tr></table></figure>
+
+<p>可使用<a target="_blank" rel="noopener" href="http://www.binaryconvert.com/index.html">binaryconvert</a>验证一下，是一致的</p>
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/31_10:16_xRKsHL.png" alt="进制展示" style="zoom:50%;" />
+
+<p>MAX_VALUE 的计算也和这里有关：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 能精确表示的整数范围上限,S为1个0，E为11个0，S为52个1</span><br><span class="line">Math.pow(2, 53) - 1 === Number.MAX_SAFE_INTEGER    // true</span><br><span class="line">// 能精确表示的整数范围下限,S为1个1，E为11个0，S为52个1</span><br><span class="line">-(Math.pow(2, 53) - 1) === Number.MIN_SAFE_INTEGER    // true</span><br><span class="line">// 能表示的最大数字，S为1个0，E为971，S为52个1</span><br><span class="line">(Math.pow(2, 53) - 1) * Math.pow(2, 971) === Number.MAX_VALUE    // true</span><br><span class="line">// 能表示的最接近于0的正数，S为1个0，E为-1074，S为0</span><br><span class="line">Math.pow(2, -1074) === Number.MIN_VALUE // true</span><br></pre></td></tr></table></figure>
+
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>如何进制转换？<a href="https://acmu.github.io/my-blog/2021/12/30/online-judge/lt504/">七进制转换</a></p>
+<p>为什么需要数据类型？因为要在内存中存数据，你是什么样的类型，决定了你要开辟多少内存空间</p>
+<p>自己可以写个国内版的 binaryconvert，这是<a target="_blank" rel="noopener" href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">另一个选择</a>：更方便操作，打钩即可改变二进制的值</p>
+<p>parseInt 是否会受限于数字溢出？是的，太大就变成 Infinity 了</p>
+<p>float 指数范围是 <code>-126 ~ +127</code> 为什么只有 254 个，2^8 不是 256 吗？少的数哪里去了（存了 NaN 和 Infinity？）</p>
+<p>cpu 如何使用二进制进行加减乘除法的？</p>
+<p>为什么我把 a 赋值了 0.3，JS 能正确的存 0.3 呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Number.MAX_VALUE</span><br><span class="line">1.7976931348623157e+308</span><br><span class="line">Number.MIN_VALUE</span><br><span class="line">5e-324</span><br><span class="line">Number.EPSILON</span><br><span class="line">2.220446049250313e-16</span><br><span class="line"></span><br><span class="line">这些是如何计算的？</span><br></pre></td></tr></table></figure>
+
+<p>可深入了解：<a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">每个计算机科学家都应该了解的关于浮点运算的知识</a>、<a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js </a> JS 的任意精度运算，可以看看源码</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
+<h3 id="聊聊-Web3-0-是什么，为什么元宇宙这么火？"><a href="#聊聊-Web3-0-是什么，为什么元宇宙这么火？" class="headerlink" title="聊聊 Web3.0 是什么，为什么元宇宙这么火？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0ha-mikdjWVovKycZnI5EQ">聊聊 Web3.0 是什么，为什么元宇宙这么火？</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>web3 是一种思想上的创新。web1 是被动消费，一些公司宣传吸引眼球的内容，消费者来观看，如 UC 浏览器，web2 是主动参与贡献，但由平台中心管控，平台可以控制你的内容是否能被其他人观看，如抖音、YouTube，web3 是完全由用户掌控，去中心化，它可以是一个不区分地域和疆界，而是以兴趣、语言、职业、主题进行聚集和管理的王国。要实现 web3 可分为以下三点：</p>
+<ol>
+<li>引入去中心化机制</li>
+<li>凸显劳动价值，你的动作能给你带来报酬</li>
+<li>虚拟资产的认可</li>
+</ol>
+<p>元宇宙：建立在 web3 的基础上，模拟仿真世界，可以赚取现实收益</p>
+<p>为什么要搞元宇宙？传统互联网增长乏力，人口增长速度有限，要建造出更多新颖的东西吸引用户</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>我认为去中心化，完全不受管控，也并不绝对是好事</p>
+<p>最开始，还以为 web3 是技术上的创新，没想到实际是更注重思想上的创新</p>
+<p>可以多了解一下新技术，如 NFT</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/NFT/56358612">NFT 百度视频解释</a>：全称为 Non-Fungible Token，指非同质化代币，是用于表示数字资产（视频、音频、摄影）的唯一加密货币令牌，可以买卖。优势：可溯源、永续收益、可互动（基于原作二次创新）</p>
+<h3 id="最近大火的-NFT-数字藏品是什么？"><a href="#最近大火的-NFT-数字藏品是什么？" class="headerlink" title="最近大火的 NFT 数字藏品是什么？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7sOOCrNU2FcypaHN2phMYA">最近大火的 NFT 数字藏品是什么？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>什么是元宇宙？元宇宙的英文名称叫 Metaverse，区别于当前真实的宇宙 Universe，Universe 是由原子组成的物理宇宙，Metaverse 是比特组成的数字宇宙，当前我们在物理宇宙中从事生活、生产，这里有我们的资产、人际关系等等。未来在元宇宙中也会如此，我们会在这一数字宇宙中从事生产、创作、教育等等，拥有我们全新的人际关系，和千变万化的数字资产。</p>
+<p>元宇宙应该是数字世界的现实化，而不是现实世界的数字化</p>
+<p>区块链一定是数字世界现实化的核心支撑：</p>
+<ul>
+<li><p>  区块链通过技术实现数字资产的私有制，这一点将极大的激励用户从事价值创造</p>
+</li>
+<li><p>区块链可以实现价值（资产）流转趋向于零边际成本，推动元宇宙资产自由流动</p>
+<ul>
+<li><p>信息互联网最伟大的价值在于通过 TCP/IP 协议实现了信息流转趋向零边际成本，如此才有了我们当前繁荣信息互联网的生态。</p>
+<p>  区块链将作为一种新的协议，一种面向资产的协议，将实现价值（资产）流转趋向于零边际成本</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>非同质化通证技术最大的特点是高效低成本。说到低成本，大家可能会有一个认知，那就是区块链因其冗余存储和多方共识，其实是一个成本并不低的交易系统，其实，大家看到的只是一个非常简单的技术成本，区块链的技术成本相比我们现在社会的交易成本是小巫见大巫的。</p>
+<p>就像在信息互联网诞生之前，我们的通信成本是很高的，每分钟电话费都是很昂贵的，但到了信息互联网下，我们的信息交流成本无限趋近于零，基于区块链的价值互联网也是如此，我们会把资产的交易成本优化到一个非常非常低的水平。</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>了解元宇宙、区块链的好文</p>
+<p>TCP/IP 协议实现信息流转零成本，区块链实现价值（资产）流转零成本</p>
+<p>「现在找到了合规的资产，我们终于找对了，开始在合规的方向下探索中国特色的价值互联网」满满的求生欲 😂</p>
+<p><em>2021-12-31 ~ 2022-01-06（第 4 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/10/weekly/04/" data-id="cl1ztfbs60010amoobsig51j3" data-title="明远周刊：为什么 0.1 + 0.2 不等于 0.3" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-tools/shuang-pin" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/06/tools/shuang-pin/" class="article-date">
+  <time class="dt-published" datetime="2022-01-06T21:17:31.000Z" itemprop="datePublished">2022-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/06/tools/shuang-pin/">小鹤双拼推荐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/07_13:23_reB0Tj.png"></p>
+<p>中文打字在我们的生活中已经是不可或缺的一部分了，那么输入法就显得越来越重要了</p>
+<h2 id="输入法介绍"><a href="#输入法介绍" class="headerlink" title="输入法介绍"></a>输入法介绍</h2><p>现在的中文输入法分为三种：</p>
+<ol>
+<li>全拼输入法（就是拼音打字，学习起来简单，但错误率高）</li>
+<li>双拼输入法（使用两个字母即可打出一个中文）</li>
+<li>五笔输入法（记忆难度高）</li>
+</ol>
+<h2 id="双拼输入法"><a href="#双拼输入法" class="headerlink" title="双拼输入法"></a>双拼输入法</h2><p>本文给大家推荐双拼输入法，我已经使用了近一年了。绝大多数人使用的都是全拼输入法，比如「推荐」这两个字使用全拼是<code>tuijian</code>，但如果使用双拼，就只要打 4 个字即可，是<code>tvjm</code> 一个中文只需要两个字母，这也是「双拼」名称的来历</p>
+<p>双拼的优势：</p>
+<ol>
+<li>打字少，更快，更精确，删除也更快，比如全拼的话 <code>jian</code> 打错了，打成了<code>juan</code>，那么你需要删除 三个字母，之后再重新打，如果是双拼的话，只要删除一个字母即可，因为他一个字母<code>m</code>就代表了<code>ian</code>，而且你在打<code>ian</code>三个连续字符时，相比于一个<code>m</code>会更容易出错</li>
+<li>相比于五笔，更容易上手，只要你会全拼，熟悉一段时间便能基本上手双拼</li>
+<li>保护键盘（打字少了，键盘的损耗就降下来了 😂，如果你的键盘很贵的话，那将是一笔不小的开销）</li>
+</ol>
+<p>双拼的劣势：</p>
+<ol>
+<li>英文搜索不支持双拼，比如在微信中用英文搜索，你只能输入 <code>jian</code> 来搜索，不能使用<code>jm</code> 搜索</li>
+<li>一些常用单词，会多打字，比如我经常输入「浏览器」，以前我用全拼时，只要写<code>llq</code>即可，因为现在的输入法会记录你经常打的字，但是你用了双拼之后就必须要打全了，得是<code>lqljqi</code> 会多打一些字母</li>
+</ol>
+<p>但这些劣势并不能掩盖他的优势</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>双拼有很多种，如：小鹤、自然码、搜狗、微软等等，他们的区别也只是映射表不同而已，我这里推荐小鹤双拼，双拼的使用很简单，就是韵母的映射而已</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/06_18:35_omA4qq.png"></p>
+<p>只要记住这张映射表，即可使用双拼，比如我要打「双拼」这两个字，只要<code>ulpb</code>即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  u l        p b</span><br><span class="line">  | |        | |</span><br><span class="line"> sh uang     p in</span><br><span class="line">声母 韵母   声母 韵母</span><br></pre></td></tr></table></figure>
+
+<p>中文拼音一般都是由<code>声母 + 韵母</code>组成的，双拼的第一个字母代表声母如 <code>u</code> 和<code>p</code>，第二个字母代表韵母，如<code>l</code>和<code>b</code></p>
+<p>其实双拼使用有很多文章写的很好了，我这里只是简单介绍，主要还是把双拼这个概念分享给你，推荐使用，绝对是写文档的好帮手，能让你的打字速跟上思维速度</p>
+<p>推荐使用<a target="_blank" rel="noopener" href="https://api.ihint.me/shuang/">这个工具</a>进行双拼练习，这是<a target="_blank" rel="noopener" href="https://www.flypy.com/">官方网站</a>，<a target="_blank" rel="noopener" href="https://help.flypy.com/#/up">教程文档</a>还有记忆口诀：</p>
+<blockquote>
+<p>快　迎 两　王 软 草 走 特　约 秋 云 为 见 面</p>
+<p>夏　娃 怂　恿 书 痴 追 更 待 滨 鸟 分 撇 航</p>
+</blockquote>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ol>
+<li>其实这个思想就像是代码开发中的 snippet</li>
+<li>为什么我使用了那么多年的全拼，都没有想到可以使用双拼的这种方法来提升打字效率呢</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/06/tools/shuang-pin/" data-id="cl1ztfbs1000namooaq5jbtx2" data-title="小鹤双拼推荐" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/03" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/31/weekly/03/" class="article-date">
+  <time class="dt-published" datetime="2021-12-31T10:23:33.000Z" itemprop="datePublished">2021-12-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/31/weekly/03/">明远周刊（第 3 期）🤩</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>2021-12-24 ~ 2021-12-30</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_20:35_YGnSrR.png"></p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="面试官：给-LocalStorage-设置过期时间"><a href="#面试官：给-LocalStorage-设置过期时间" class="headerlink" title="面试官：给 LocalStorage 设置过期时间"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5ZC0YGMTh6osL-3uaUV6zA">面试官：给 LocalStorage 设置过期时间</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p><code>localStorage</code> 有 <code>setItem</code> <code>getItem</code> <code>removerItem</code> <code>clear</code> 等 api，<code>localStorage</code> 中的键值对总是以字符串的形式存储，并且不能设置每一个键的过期时间。那如何设置过期时间呢？</p>
+<ol>
+<li>定时器解法（这网页关了就不能正常运行了呀）</li>
+<li>增加一个对象，记录 key 和过期时间，并封装 store api（这应该是大多数人的选择）</li>
+<li>过期时间写在 key 或 value 中，使用特殊符号分隔开，并且加上状态流转、回调函数等</li>
+</ol>
+<p>还可以直接用 <code>xijs</code> 这个库，封装了这个实现</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>封装一个自己的工具库，我也有过这种想法，都已经有人实现了</p>
+<p>状态流转、回调函数真的没想到，但这个用处不大吧，把时间写在 key 或 value 里还是不太认同，因为如果原数据有分割符，就会拆分出错了</p>
+<h3 id="剖析-npm、yarn-与-pnpm-依赖管理逻辑"><a href="#剖析-npm、yarn-与-pnpm-依赖管理逻辑" class="headerlink" title="剖析 npm、yarn 与 pnpm 依赖管理逻辑"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IYcAVVBZZCJ7x3OXNCz7-Q">剖析 npm、yarn 与 pnpm 依赖管理逻辑</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>npm2 使用正常逻辑安装依赖，问题：</p>
+<ol>
+<li>生成的依赖嵌套层级深</li>
+<li>同一个同版本包安装了多次</li>
+</ol>
+<p>npm3/yarn 将依赖扁平化，问题：</p>
+<ol>
+<li><code>node_modules</code>结构不直观</li>
+<li>源代码中能引用未写在 <code>package.json</code> 里的依赖（这里问题很大，你不能控制你使用此依赖的版本，比如这个依赖被其他依赖删除了，那你的代码就会报错，所以会造成你没有改这里的代码，他就报错了）</li>
+<li>提出来扁平化的包版本不唯一（所以需要 lock），并且不会根据 <code>package.json</code> 里依赖顺序的不同而不同（字典序在前面的会优先提取出来），因为 npm 对此进行了排序，所以跟你在 <code>package.json</code> 写的顺序没有关系（网上说有关系，所以我猜这应该是 npm 后期优化了吧）</li>
+</ol>
+<p>pnpm 优点：</p>
+<ol>
+<li><code>node_modules</code> 下只有你安装的包</li>
+<li>把所有的包都存在<code>node_modules/.pnpm</code> 中（这里是 npm 缓存所有包的硬链接），之后在 <code>node_modules</code> 其他包中软链接过去，节省了不同项目安装总是安装同一个包的硬盘空间</li>
+</ol>
+<p>可能的问题：既然是硬链接，有要该依赖调试的情况，那么就会影响到其他项目使用这个包了，这也有解决方案，使用<code>copy-on-write</code>的方式，改的是一个备份即可</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>语言简洁，并且图例清晰，我其实也知道这些，但肯定写出不这么清晰的文章</p>
+<p>软链接：就相当于 windows 的快捷方式，只是为了方便在当前位置使用而创建的，删除原文件，即使软链接存在，那么也没有用了，打开软链接就会报错；删除软链接，原文件不受任何影响</p>
+<p>普通的复制：会在硬盘上存两份同样的数据，所以会浪费存储空间（就像 JS 的深克隆）</p>
+<p>硬链接：多个硬链接指向同一块内存地址，只要不把所有的硬链接都删除，那么原文件就还在，只有所有的硬链接都被删除时，原文件才真的被删除（类似 JS 的引用，一处改了原文件，会影响到所有的引用，当没有人引用这个资源时，会被垃圾回收掉），优点是能节省存储空间</p>
+<h3 id="小林-coding-画图经验"><a href="#小林-coding-画图经验" class="headerlink" title="小林 coding 画图经验"></a><a target="_blank" rel="noopener" href="https://www.i4k.xyz/article/qq_34827674/109257892">小林 coding 画图经验</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>使用 <a target="_blank" rel="noopener" href="https://draw.io/">draw.io</a> 画图，可以存在 github 上，<a target="_blank" rel="noopener" href="https://github.com/jgraph/drawio">免费开源</a>，有很多图可以使用，如路由器、网络 icon 啥的，可以使用 style 的浅色背景，会更好看些，还可以增加元素的<em>Comic</em>属性，会变成手绘风格</p>
+<p>使用 <a target="_blank" rel="noopener" href="https://carbon.now.sh/">carbon</a> 展示代码</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>好工具很重要，多用，多实践</p>
+<p>每次让你选择的时候，可以点击 enter value，使用 acmu/draw-io/master 模式快速选择（github id/仓库名/分支名）</p>
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/29_10:48_E7bYMo.png" alt="" style="zoom: 50%;" />
+
+<p>画思维导图可以试下 <a target="_blank" rel="noopener" href="https://gitmind.cn/">gitmind</a>，还可以使用 <a target="_blank" rel="noopener" href="https://www.chuangkit.com/designtools/self/design">创客贴</a> 设计一些简单的贴图</p>
+<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>写需求时，了解清楚业务背景很重要，有时，这可以帮你降低代码复杂度，减少无用功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="cl1ztfbs5000xamoofss8978x" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-online-judge/lt504" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/30/online-judge/lt504/" class="article-date">
+  <time class="dt-published" datetime="2021-12-30T12:07:11.000Z" itemprop="datePublished">2021-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/30/online-judge/lt504/">力扣 504 七进制转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/base-7/">题目链接</a></p>
+<p>就是输入一个十进制数，转成七进制数，这个七进制，和我们的周特别相似，一周七天。如怎么把第 9 天转换成按周的天数呢？首先把 9 取余 7，得到 2，之后在把 9 除以 7，并向下取整，得到 1，之后再把 1 取余 7，得到 1，之后再把 1 除以 7，并向下取整，得到 0，这时循环终止，得到了结果，是 12，也就是第一周过后的第二天是第 9 天</p>
+<p>其实进制转换并不高大上，他在我们的生活中很常见，比如时间计算就是进制转换，其实任何时间点都是可以用时间戳来表示的，假设时间戳的基本单位是毫秒，那么先把时间戳取余 1000，就得到了毫秒，之后把时间戳除以 1000，再取余 60，就得到了秒，之后以此类推。这里你还可以发现，还可以使用不同的进制，比如毫秒是 1000 进制，秒就又是 60 进制了</p>
+<p>ts 代码</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">convertToBase7</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (num === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isNegative = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        isNegative = <span class="literal">true</span>;</span><br><span class="line">        num = -num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="attr">res</span>: <span class="built_in">string</span>[] = [];</span><br><span class="line">    <span class="keyword">const</span> base = <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">while</span> (num !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> remainder = num % base;</span><br><span class="line">        res.<span class="title function_">push</span>(remainder + <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">        num = <span class="title class_">Math</span>.<span class="title function_">floor</span>(num / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (isNegative ? <span class="string">&#x27;-&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + res.<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>py 代码（py 中没有三元表达式）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">convertToBase7</span>(<span class="params">self, num: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        isNegative = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> num &lt; <span class="number">0</span>:</span><br><span class="line">            isNegative = <span class="literal">True</span></span><br><span class="line">            num = -num</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        base = <span class="number">7</span></span><br><span class="line">        <span class="keyword">while</span> num != <span class="number">0</span>:</span><br><span class="line">            res += <span class="built_in">str</span>(num % base)</span><br><span class="line">            num = num // base</span><br><span class="line">        <span class="keyword">if</span> isNegative:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;-&#x27;</span>+res[::-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> res[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="cl1ztfbrw000eamoo0sg48w6l" data-title="力扣 504 七进制转换" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/my-blog/page/2/">2</a><a class="extend next" rel="next" href="/my-blog/page/2/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

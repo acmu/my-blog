@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>图解操作系统 | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="cpu 是如何执行的计算机基本结构为 5 个部分，分别是中央处理器（CPU）、内存、输⼊设备、输出设备、总线。 CPU 包含：寄存器、控制单元、逻辑运算单元 如有 4g 内存，但 cpu 想要一次操作所有地址，那就需要 32 位，因为 2^32&#x3D;4g 1 GHz 的 CPU，指的是时钟频率是 1 G，代表着 1 秒 会产⽣ 1G 次数的脉冲信号 存储金字塔寄存器、 cpu cache、内存、ssd">
+<meta property="og:type" content="website">
+<meta property="og:title" content="图解操作系统">
+<meta property="og:url" content="https://acmu.github.io/notes/operating-system/pdf.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="cpu 是如何执行的计算机基本结构为 5 个部分，分别是中央处理器（CPU）、内存、输⼊设备、输出设备、总线。 CPU 包含：寄存器、控制单元、逻辑运算单元 如有 4g 内存，但 cpu 想要一次操作所有地址，那就需要 32 位，因为 2^32&#x3D;4g 1 GHz 的 CPU，指的是时钟频率是 1 G，代表着 1 秒 会产⽣ 1G 次数的脉冲信号 存储金字塔寄存器、 cpu cache、内存、ssd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2010-08-02T11:26:20.000Z">
+<meta property="article:modified_time" content="2022-04-15T02:32:43.302Z">
+<meta property="article:author" content="MingYuan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/notes/operating-system/pdf.html" class="article-date">
+  <time class="dt-published" datetime="2010-08-02T11:26:20.000Z" itemprop="datePublished">2010-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      图解操作系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="cpu-是如何执行的"><a href="#cpu-是如何执行的" class="headerlink" title="cpu 是如何执行的"></a>cpu 是如何执行的</h2><p>计算机基本结构为 5 个部分，分别是中央处理器（CPU）、内存、输⼊设备、输出设备、总线。</p>
+<p>CPU 包含：寄存器、控制单元、逻辑运算单元</p>
+<p>如有 4g 内存，但 cpu 想要一次操作所有地址，那就需要 32 位，因为 2^32=4g</p>
+<p>1 GHz 的 CPU，指的是时钟频率是 1 G，代表着 1 秒 会产⽣ 1G 次数的脉冲信号</p>
+<h2 id="存储金字塔"><a href="#存储金字塔" class="headerlink" title="存储金字塔"></a>存储金字塔</h2><p>寄存器、 cpu cache、内存、ssd/hdd 硬盘</p>
+<h2 id="进程、线程基础知识"><a href="#进程、线程基础知识" class="headerlink" title="进程、线程基础知识"></a>进程、线程基础知识</h2><p>来自 第四章 4.1</p>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>cpu 按理说只能执行一个东西，但我们现在使用的电脑都能同时执行多个应用，是因为有进程，每个应用有不同的进程，cpu 会先执行一下这个，再执行一下那个，只不过是切换的速度非常快，导致我们不能发现，所以造成了可以同时执行多个应用的错觉</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>进程切换耗费资源太大了，所以需要一个更小粒度的东西，这个就是线程，首先他不需要切换内存，因为多个线程共享同一个进程的内存空间</p>
+<h3 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h3><p>每一个进程都想占用 cpu 更长的时间，所以出现了进程调度问题</p>
+<p>有很多的调度算法，使用银行排队的例子，很生动形象</p>
+<h3 id="进程之间通信的方式"><a href="#进程之间通信的方式" class="headerlink" title="进程之间通信的方式"></a>进程之间通信的方式</h3><p>进程有独立的用户地址空间，如果进程之间想要通信，那就只能通过内核</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line"></span><br><span class="line">进程间通信--&gt;管道</span><br><span class="line">进程间通信--&gt;消息队列</span><br><span class="line">进程间通信--&gt;共享内存</span><br><span class="line">进程间通信--&gt;信号量</span><br><span class="line">进程间通信--&gt;信号</span><br><span class="line">进程间通信--&gt;socket</span><br></pre></td></tr></table></figure>
+
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>平常在 shell 中写的竖线就是管道，他可以在两个进程之间传递消息。管道分为匿名管道和命名管道，他们都是在内核中的缓存。</p>
+<p>缺点：管道的通信方式是效率低的，不适合进程间频繁地交换数据</p>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>消息队列是保存在内核中的消息链表。消息队列的生命周期是跟随内核的，而管道的生命周期是跟随进程的。</p>
+<p>缺点：通信不及时、附件大小有问题；存在用户态与内核态之间数据拷贝的开销</p>
+<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><p>现代操作系统使用的都是虚拟内存技术，两个进程之间可以拿出同一块内存地址，当做虚拟内存，之后获取的就是同样的数据了</p>
+<h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4><p>有了共享内存之后，会发生两个进程改同一块内存地址的问题，所以要使得共享的资源受到保护机制。</p>
+<p>信号量是一个计数器，有 p 和 v 操作，他们一定要是成对出现的（像是一种锁一样）在某种信号量下不能操作数据，所以达到了保护机制</p>
+<h4 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h4><p>通过 <code>kill -l</code> 命令即可查看系统的信号，比如 ctrl + c （中断任务执行）就是一个信号</p>
+<h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><p>socket（套接字）不仅能实现同一个电脑的进程通信，还能实现不同电脑的通信（如 tcp udp）</p>
+<h2 id="多线程同步"><a href="#多线程同步" class="headerlink" title="多线程同步"></a>多线程同步</h2><p>多个线程操作同一变量时，肯定会产生冲突，所以不能这样，操作变量的地方我们称为临界区，所以只能让一个进程操作临界区，实现这一目的有两种方法：锁、信号量</p>
+<p>锁有：等待锁、非等待锁（加锁和解锁都是成对的）</p>
+<p>等待锁：当一个资源上锁之后，它就会一直在这里等待，直到这个资源被解锁为止（因为 cpu 是通过时间片机制实现并发的，所以资源是能被解锁的），也叫自旋锁</p>
+<p>非等待锁：当一个资源上锁之后，把下个资源加入队列，之后把 cpu 的使用权让出去，通过队列的一些操作，让已经完成的出队</p>
+<p>信号量：p 操作、v 操作（p v 都是成对的）</p>
+<p>这个更强大一些，不仅能实现互斥，还能实现同步操作。</p>
+<p>「哲学家就餐」问题对于互斥访问有限的竞争问题（如 I/O 设备）一类的建模过程十分有用</p>
+<p>这里的 p v 操作，以及状态，搞的我有点懵，文章中是这样解释的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">信号量</span><br><span class="line">信号量是操作系统提供的⼀种协调共享资源访问的⽅法。</span><br><span class="line">通常信号量表示资源的数量，对应的变量是⼀个整型（ sem ）变量。（semaphore）</span><br><span class="line">另外，还有两个原⼦操作的系统调⽤函数来控制信号量的，分别是：</span><br><span class="line">P 操作：将 sem 减 1 ，相减后，如果 sem &lt; 0 ，则进程/线程进⼊阻塞等待，否则继续，表明 P</span><br><span class="line">操作可能会阻塞；</span><br><span class="line">V 操作：将 sem 加 1 ，相加后，如果 sem &lt;= 0 ，唤醒⼀个等待中的进程/线程，表明 V 操作不</span><br><span class="line">会阻塞；</span><br><span class="line">P 操作是⽤在进⼊临界区之前，V 操作是⽤在离开临界区之后，这两个操作是必须成对出现的。</span><br></pre></td></tr></table></figure>
+
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>当多个线程操作多个共享数据时，就有可能发生死锁，死锁的四个条件：</p>
+<ol>
+<li>互斥条件</li>
+<li>持有并等待条件</li>
+<li>不可剥夺条件</li>
+<li>环路等待条件</li>
+</ol>
+<p>一般通过资源有序分配法来破坏环路等待条件。</p>
+<p>锁一般又分为：互斥锁、自旋锁（忙等待锁）、读写锁、悲观锁、乐观锁</p>
+<blockquote>
+<p>乐观锁虽然去除了加锁解锁的操作，但是⼀旦发⽣冲突，重试的成本⾮常⾼，所以只有在冲突概率⾮常 低，且加锁成本⾮常⾼的场景时，才考虑使⽤乐观锁。</p>
+</blockquote>
+<h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><h3 id="先来先服务算法"><a href="#先来先服务算法" class="headerlink" title="先来先服务算法"></a>先来先服务算法</h3><p>有利于长作业，适用于 cpu 繁忙型作业的系统，不利于短作业，不适用于 I/O 繁忙型的系统</p>
+<h3 id="最短作业优先调度算法"><a href="#最短作业优先调度算法" class="headerlink" title="最短作业优先调度算法"></a>最短作业优先调度算法</h3><p>优先选择运行时间最短的作业来进行，有助于提高系统吞吐量，不利于长作业</p>
+<h3 id="高响应比优先调度算法"><a href="#高响应比优先调度算法" class="headerlink" title="高响应比优先调度算法"></a>高响应比优先调度算法</h3><p>权衡了短作业和长作业，每次进程调度时，先计算响应比优先级，优先级高的就先服务</p>
+<p>$$<br>响应比优先级 = \frac{等待时间+要求服务时间}{要求服务时间}<br>$$</p>
+<h3 id="时间片轮转调度算法"><a href="#时间片轮转调度算法" class="headerlink" title="时间片轮转调度算法"></a>时间片轮转调度算法</h3><p>使用最广泛的算法（也公平），但时间的设置值得考究，太短或太长都不好，一般 20ms~50ms 较为合适</p>
+<h3 id="最高优先级调度算法"><a href="#最高优先级调度算法" class="headerlink" title="最高优先级调度算法"></a>最高优先级调度算法</h3><p>上面时间片算法每个都是公平的，但实际情况不想这样，需要有一个优先级，所以就是这算法了，优先级有静态优先级和动态优先级之分，静态的就是进程刚创建就被赋予了的，定死的，而动态优先级是随着等待的时间而变化的</p>
+<p>缺点：可能导致低优先的任务永远不会执行</p>
+<h3 id="多级反馈队列调度算法"><a href="#多级反馈队列调度算法" class="headerlink" title="多级反馈队列调度算法"></a>多级反馈队列调度算法</h3><p>多个队列分不同优先级执行，优先级由高到低，时间片由小到大，一定是先执行完优先级高的队列，之后再去执行优先级低的队列，是上面两个算法的综合</p>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><p>当页表不在内存中时，那么就需要去磁盘中取这个页表，之后放到内存中，那如果内存满了，应该怎么办呢？就需要页面置换算法了，需要把暂时没用的东西换到磁盘里，之后把当前这个页表再放到内存中的操作，但是该怎么换呢？就要看这里的算法了，目标是尽量减少页面换入换出的次数</p>
+<h3 id="最佳页面置换算法"><a href="#最佳页面置换算法" class="headerlink" title="最佳页面置换算法"></a>最佳页面置换算法</h3><p>置换在未来最长时间不访问的页面，因为实际情况下我们不知道未来是什么样的，所以此算法仅用来对比你的算法是否足够优秀</p>
+<h3 id="先进先出置换算法"><a href="#先进先出置换算法" class="headerlink" title="先进先出置换算法"></a>先进先出置换算法</h3><p>每次置换时，把驻留时间最长的给替换掉</p>
+<h3 id="最近最久未使用置换算法"><a href="#最近最久未使用置换算法" class="headerlink" title="最近最久未使用置换算法"></a>最近最久未使用置换算法</h3><p>LRU 算法，找出最长时间没有使用的页面，把它置换了，因为过去很长时间没有被使用了，那么大概可以预测：未来较长一段时间内也不会被使用。但是实际中 LRU 耗费的资源实在太大了，所以较少被使用。</p>
+<h3 id="时钟页面置换算法"><a href="#时钟页面置换算法" class="headerlink" title="时钟页面置换算法"></a>时钟页面置换算法</h3><p>做成一个环形链表，像是时钟一样，当发生缺页中断时就旋转时钟，并且改变标志位</p>
+<h3 id="最不常用算法"><a href="#最不常用算法" class="headerlink" title="最不常用算法"></a>最不常用算法</h3><p>LFU 算法，每次访问到页表时计数器加一，当发生缺页中断时，置换计数器最小的那个页面，缺点：没有考虑时间的问题，可能有个很久之前的页面访问非常频繁，导致计数器值很大，但现在访问的页面也会非常频繁，但总是置换不了以前的那个，这种情况的解法也是有的，比如定期把时间太久的计数器除 2</p>
+<h2 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h2><p>加快寻道（访问磁盘数据）的速度</p>
+<h3 id="先来先服务"><a href="#先来先服务" class="headerlink" title="先来先服务"></a>先来先服务</h3><p>按照顺序，来一个执行一个（这种算法一般先是要保证正确性，之后再是提高性能），缺点：总共算下来，会导致磁道移动过长</p>
+<h3 id="最短寻道时间优先算法"><a href="#最短寻道时间优先算法" class="headerlink" title="最短寻道时间优先算法"></a>最短寻道时间优先算法</h3><p>选择离当前磁道最近的位置，缺点：可能会产生饥饿现象，离的远的，一直不服务。</p>
+<h3 id="扫描算法"><a href="#扫描算法" class="headerlink" title="扫描算法"></a>扫描算法</h3><p>也叫电梯算法，先会只朝着一个方向走，走到头之后再往反方向走，就像电梯一样，性能较好不会产生饥饿现象，但中间部分的响应率高，会产生差异现象</p>
+<h3 id="循环扫描算法"><a href="#循环扫描算法" class="headerlink" title="循环扫描算法"></a>循环扫描算法</h3><p>只按照一个方向扫描，对于各个磁道响应均匀</p>
+<h3 id="look-和-c-look"><a href="#look-和-c-look" class="headerlink" title="look 和 c-look"></a>look 和 c-look</h3><p>Scan 的升级算法是 look，他可以不移动到磁盘的终点或起点，它只是移动到最远点</p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h2 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h2><p>CPU 与内存通过设备控制器控制设备，设备控制器有自己的芯片和寄存器，他的寄存器分为 3 种：数据寄存器、命令寄存器、状态寄存器</p>
+<p>输入输出设备可分为两大类：块设备和字符设备，块设备</p>
+<p>CPU 如何与设备的控制寄存器和数据缓冲器进行通信？</p>
+<ol>
+<li>端口 io：寄存器被分配一个端口，通过特殊汇编指令操作</li>
+<li>内存映射 io：将寄存器映射到内存控件设备控制器的数据如何发送给 CPU？轮询（比较傻瓜）、中断设备驱动程序中，有中断处理函数</li>
+</ol>
+<h2 id="什么是一致性哈希？"><a href="#什么是一致性哈希？" class="headerlink" title="什么是一致性哈希？"></a>什么是一致性哈希？</h2><p>大多数网站背后是多台服务器（也叫节点），他们组成集群对外服务，那么多节点如何分配客户端的请求？</p>
+<p>这其实是「负载均衡」问题，解决负载均衡的算法很多，不同算法对应解决不同问题。我们可以想个最简单的，就是引入一个负载均衡层，这一层负责轮流转发请求，比如有3个节点并且3个请求过来，那么就每个节点一个请求，还可以优化下，比如有性能好的节点那么就给他的权重高一些，能处理的请求就多一些，这个就叫加权轮询算法，此算法是无法对应分布式系统的，因为分布式系统每个节点存储的数据是不同的，他根据key-value把数据存储到不同节点上，这会造成某一个请求只能在当前节点上而不能在其他节点上的情况，那如何做分布式系统的负载均衡呢？</p>
+<p>你可能想到了哈希，把数据的key按照hash(key)之后再取余节点的个数，就能一一对应请求与节点，但是别忘了扩容与缩容的情况，假设扩容了，那么hash(key)就与之前的节点对应不上了，就需要节点之间的数据迁移，这个迁移量最坏情况下可能是全部数据都要迁移，这是不可接收的，所以就出现了一致性哈希算法，首先还是hash(key)，但取模发生了变化，要取模固定值<code>2^32</code>，你可以把0到<code>2^32</code>看出一个环，叫哈希环，这时可以把节点映射到环上，再把key也映射到环上，这时key的数据就应该存储在顺时针的第一个节点上，这样如果出现了扩容，那么最多也就改变两个节点而已，而且还可以增加虚拟节点使分布更加均匀。</p>
+<p>todo</p>
+<p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/os/9_linux_cmd/linux_network.html#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E6%9C%89%E5%93%AA%E4%BA%9B">10.1 如何查看网络的性能指标？</a></p>
+<h2 id="主动思考"><a href="#主动思考" class="headerlink" title="主动思考"></a>主动思考</h2><p>尝试着实现一下这种情况：（好像挺难的）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">考虑这样一种情况：一个列表里所有元素都是0，线程&quot;set&quot;从后向前把所有元素改成1，而线程&quot;print&quot;负责从前往后读取列表并打印。</span><br><span class="line">那么，可能线程&quot;set&quot;开始改的时候，线程&quot;print&quot;便来打印列表了，输出就成了一半0一半1，这就是数据的不同步。为了避免这种情况，引入了锁的概念。</span><br><span class="line">https://www.runoob.com/python3/python3-multithreading.html</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/notes/operating-system/pdf.html" data-id="cl1ztfbsp002gamoo5xp35muu" data-title="图解操作系统" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

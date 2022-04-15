@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>明远周刊：css动画、svg动画实现线条 loading | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="精彩看点 css 动画、svg 动画实现线条 loading 前端与后端各自的难点 优化个人网站的图片流量 Google 翻译会影响网页 使用 cdn 开放 api 实现在控制台安装 npm 包 一个简单的浏览器插件实践 2 月 7 日，v3 将作为 vue 的默认版本 使用 vdom json 生成真实 dom  阅读文章巧用 CSS 实现动态线条 Loading 动画使用 3 种方式实现 C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="明远周刊：css动画、svg动画实现线条 loading">
+<meta property="og:url" content="https://acmu.github.io/2022/01/23/weekly/06/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="精彩看点 css 动画、svg 动画实现线条 loading 前端与后端各自的难点 优化个人网站的图片流量 Google 翻译会影响网页 使用 cdn 开放 api 实现在控制台安装 npm 包 一个简单的浏览器插件实践 2 月 7 日，v3 将作为 vue 的默认版本 使用 vdom json 生成真实 dom  阅读文章巧用 CSS 实现动态线条 Loading 动画使用 3 种方式实现 C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/23_23:01_9kOiW4.png">
+<meta property="article:published_time" content="2022-01-23T22:30:50.000Z">
+<meta property="article:modified_time" content="2022-04-15T02:32:43.298Z">
+<meta property="article:author" content="MingYuan">
+<meta property="article:tag" content="周刊">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/23_23:01_9kOiW4.png">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-weekly/06" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/23/weekly/06/" class="article-date">
+  <time class="dt-published" datetime="2022-01-23T22:30:50.000Z" itemprop="datePublished">2022-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      明远周刊：css动画、svg动画实现线条 loading
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/23_23:01_9kOiW4.png"></p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ol>
+<li>css 动画、svg 动画实现线条 loading</li>
+<li>前端与后端各自的难点</li>
+<li>优化个人网站的图片流量</li>
+<li>Google 翻译会影响网页</li>
+<li>使用 cdn 开放 api 实现在控制台安装 npm 包</li>
+<li>一个简单的浏览器插件实践</li>
+<li>2 月 7 日，v3 将作为 vue 的默认版本</li>
+<li>使用 vdom json 生成真实 dom</li>
+</ol>
+<h2 id="阅读文章"><a href="#阅读文章" class="headerlink" title="阅读文章"></a>阅读文章</h2><h3 id="巧用-CSS-实现动态线条-Loading-动画"><a href="#巧用-CSS-实现动态线条-Loading-动画" class="headerlink" title="巧用 CSS 实现动态线条 Loading 动画"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-4bJEa06YGLStb37N868zQ">巧用 CSS 实现动态线条 Loading 动画</a></h3><p>使用 3 种方式实现 Chrome tab 的圆圈 loading 效果</p>
+<ol>
+<li>使用 css 圆角+<code>animation</code> +遮罩的原理实现</li>
+<li>使用 svg 的 <code>stroke-dasharray</code> <code>stroke-dashoffset</code> 和 <code>animation</code> 实现</li>
+<li>使用 CSS @property 实现</li>
+</ol>
+<p><strong>思考</strong></p>
+<p><code>conic-gradient</code> 是围绕着中心顺时针的渐变，其他的还有 <code>linear-gradient</code> 线性渐变、<code>radial-gradient</code>辐射状渐变</p>
+<h3 id="【Web-动画】SVG-线条动画入门"><a href="#【Web-动画】SVG-线条动画入门" class="headerlink" title="【Web 动画】SVG 线条动画入门"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coco1s/p/6225973.html">【Web 动画】SVG 线条动画入门</a></h3><p>web 动画一般分为三种：css3 动画、js 动画（canvas）、html 动画（svg），本文介绍 svg</p>
+<p>以一个弯曲的进度条为例，引出<code>stroke-dasharray</code> <code>stroke-dashoffset</code> 属性和<code>polyline</code> 形状（画出两个相同的图形，使用动画加遮罩实现进度条效果），能用简洁的代码，实现比较复杂的线条动画，体现了 svg 动画的强大之处</p>
+<p><strong>思考</strong></p>
+<p><code>stroke-dasharray</code>的值是数组，第一个值是线的长度，第二个值是空白的长度，第三个值是线的长度，第四个值是空白的长度，以此类推，如果值的个数不够，那么就会把前面的数组重复来一遍，通过<code>animation</code>改变<code>stroke-dasharray</code>的值，会有一个线条动画的效果</p>
+<h3 id="CSS-property，让不可能变可能"><a href="#CSS-property，让不可能变可能" class="headerlink" title="CSS @property，让不可能变可能"></a><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/109">CSS @property，让不可能变可能</a></h3><p>@property 允许开发者显示定义他们自己的 css 自定义属性，这些自定义属性通过<code>transition</code>可以实现渐变颜色的动画、线条位置的动画，但目前兼容性不是很好</p>
+<h3 id="前端比后端幸福多了！"><a href="#前端比后端幸福多了！" class="headerlink" title="前端比后端幸福多了！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/U_3PAu2kP2ObZe3zuyOtxA">前端比后端幸福多了！</a></h3><p>一篇小漫画，以前端和后端相互交流的视角讲解了各自的难点</p>
+<p>后端：需要学习编程语言、框架，Nginx、Redis、MySQL、Kafka，微服务、分布式、高并发、大流量，docker、k8s 等内容</p>
+<p>前端：需要学习计算机网络（http https websocket）、较为简单的数据结构和算法（后端接口数据转换为前端界面展示数据）、计算机程序设计（作用域、闭包、对象、原型）、操作系统（node、进程与线程、函数调用栈、事件循环）、编译原理（v8、抽象语法树、字节码、虚拟机、less babel 等编译）、图形学（可视化图像）</p>
+<p>如果只呆在高层的抽象上编程也能过得挺滋润，但抽象只能节省你的编程时间，不能节省你的学习时间</p>
+<p><strong>思考</strong></p>
+<p>前后端都有自己的难点，大多数人还是想互相了解的，我觉得前后端都挺难的，如果做不到十分了解，那么就不要妄下定论</p>
+<p>为什么要去学计算机基础，因为想看到一些本质的东西，很多东西是相似的，只不过是换了个名词而已（举个 🌰：文件系统中的硬链接其实和 JS 中的引用是类似的，都是为了节省存储空间），你如果不知道本质，那么就要学习不同的名词，并且不能建立起知识之间的联系，也容易忘记，但你知道了本质，就能举一反三。计算机基础 yyds，希望大家都能成为计算机科学家 🤓</p>
+<p>阮一峰老师<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/01/weekly-issue-193.html">本周的周刊</a>，开头也是讨论前后端的，好巧，引用一句：</p>
+<blockquote>
+<p>前端和后端的差异，不在于难度，或者说各有各的难，而是所要解决的问题不一样。</p>
+<p>前端的特征是混乱、嘈杂、易变，因为这些都是最终用户的特征，前端需要匹配用户。 如果你不适应混乱、嘈杂、易变的开发，你就很难适应前端。</p>
+<p>后端面对的是硬件、算法和数据结构，所以比较稳定。但是会涉及到计算机科学、语言设计、编译原理等高深的内容，想要搞懂这些东西，绝非易事。</p>
+</blockquote>
+<h3 id="省钱-90-！我是这样优化网站图片的"><a href="#省钱-90-！我是这样优化网站图片的" class="headerlink" title="省钱 90%！我是这样优化网站图片的"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bOx0acMR8FkWo82_e2sQ3w">省钱 90%！我是这样优化网站图片的</a></h3><p>写文章不可避免的会有图片，那么就会遇到图片存哪里的问题，作者使用腾讯云的文件服务上传图片，但近期流量费用增加，本文讲述了如何降低流量省钱</p>
+<ol>
+<li>使用 referrer 拒绝其他域名的请求</li>
+<li>使用 tinify.cn 的开发者账号压缩图片，支持 500 张</li>
+<li>转换为 webp 格式</li>
+<li>gzip 压缩（几乎没有收益，因为图片已经是压缩的格式了）</li>
+</ol>
+<p>gif 不好压缩，暂时不改，开启 cdn 能使图片访问速度快 10 倍</p>
+<p><strong>思考</strong></p>
+<p>我用的是 uPic+gitee，uPic 开启 80%压缩，gitee 在国内速度也不错，再加上 typora 可以配合 uPic 自动上传图片，但 gitee 的图片应该还得做个备份，预防 gitee 不能访问的状况，计划备份在 githb 上，使用 action 来做</p>
+<h3 id="你真的认为-Google-翻译不影响”前端”页面功能吗"><a href="#你真的认为-Google-翻译不影响”前端”页面功能吗" class="headerlink" title="你真的认为 Google 翻译不影响”前端”页面功能吗?"></a><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041067692">你真的认为 Google 翻译不影响”前端”页面功能吗?</a></h3><p>通过 textarea 计数功能不可用的 bug 引出 Google 翻译会影响网页的功能</p>
+<ol>
+<li>会影响元素的 dom 结构</li>
+<li>导致 vue 和 react 的双向绑定失效</li>
+</ol>
+<p>但伪元素的内容不会被翻译，也不受翻译影响</p>
+<h3 id="大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？"><a href="#大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？" class="headerlink" title="大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7023916328637431816">大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？</a></h3><p>浏览器可以通过添加 script 标签来引入额外的 js，那么 npm 包的 js 文件去哪里找呢？cdnjs 和 unpkg 提供了线上静态的 js 文件，只要引用他们的 js 即可</p>
+<p><strong>思考</strong></p>
+<p>文中使用了 referrer 头来解决直接请求 cdnjs 跨域的问题</p>
+<h3 id="7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制"><a href="#7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制" class="headerlink" title="7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制"></a><a target="_blank" rel="noopener" href="https://king-hcj.github.io/2021/10/17/browser-extension/">7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制</a></h3><p>应用：类似于现在的 pwa</p>
+<p>扩展：我们经常下载使用的</p>
+<p>插件：类似 flash pdf 等，能提供操作系统的一些功能，因为安全问题，已经废弃或内置了</p>
+<p>但现在扩展一般都叫插件了，简明扼要的说了写插件的重点：要有<code>manifest.json</code>，用来描述图标，popup 的资源、页面加载的资源，使用到了一些 api：<code>chrome.tabs.query</code> <code>chrome.tabs.sendMessage</code> <code>chrome.runtime.onMessage.addListener</code></p>
+<p><strong>思考</strong></p>
+<p>可以自己写点提升工作效率的插件</p>
+<h3 id="尤大深夜宣布：Vue-3-将成为新的默认版本！"><a href="#尤大深夜宣布：Vue-3-将成为新的默认版本！" class="headerlink" title="尤大深夜宣布：Vue 3 将成为新的默认版本！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f2Fel9El1Uq55kdnlFweog">尤大深夜宣布：Vue 3 将成为新的默认版本！</a></h3><p>vue 以及一系列工具链，将在 2022 年 2 月 7 日升级为 v3 兼容版本，v3 将作为 vue 的默认版本，如果你要使用 v2，请特殊指定</p>
+<h3 id="手写简易前端框架：vdom-渲染和-jsx-编译"><a href="#手写简易前端框架：vdom-渲染和-jsx-编译" class="headerlink" title="手写简易前端框架：vdom 渲染和 jsx 编译"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xwt5bd31IZChpEx79w5E5g">手写简易前端框架：vdom 渲染和 jsx 编译</a></h3><p>vdom 是对 dom 的一层抽象，使用 json 来描述，但一般不会人为写这个 json，而是通过更简单易懂的 jsx 或 template 使用 babel 编译而来</p>
+<p>本文实现了由 json 生成真实 dom 的代码：通过递归遍历 json，并使用 dom api 生成真实 dom</p>
+<p><strong>思考</strong></p>
+<p>babel 如何编译 jsx 的呢，这应该就会涉及到 ast 了</p>
+<h3 id="为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？"><a href="#为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？" class="headerlink" title="为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/sy_JdpuFWmrpXeKl5AvPRQ">为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？</a></h3><p>以「函数中大括号的位置格式」为例，查看了代码的 ast，以及编写的对应的 eslint rule（rule 分为 meta 和 create 两部分，create 中可以使用 eslint 对应的 api 实现获取 token，改变代码等操作）</p>
+<p><strong>思考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://astexplorer.net/">astexplorer</a> 网站可以查看多种语言的 ast</p>
+<p>babel 不能修复格式的根本原因是：babel 不是为了修复代码格式而设计的，没有提供对应 api</p>
+<h3 id="2021-开发者生态系统现状"><a href="#2021-开发者生态系统现状" class="headerlink" title="2021 开发者生态系统现状"></a><a target="_blank" rel="noopener" href="https://www.jetbrains.com/zh-cn/lp/devecosystem-2021/">2021 开发者生态系统现状</a></h3><p>JetBrains 进行的第五次年度开发者生态系统调查的综合结果。来自 183 个国家或地区的 31,743 名开发者</p>
+<p>重要发现：JavaScript 是最受欢迎的语言 😂</p>
+<p><strong>思考</strong></p>
+<p>热门语言需要学习：TypeScript 要增加实践，Python 要学习， Go、Rust 可以了解</p>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><p>公众号推荐：code 秘密花园、神光的编程秘籍</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/lVLxcwrDkEVCnf41u1zJ4A">字节前端 ByteFE 技术周报</a></p>
+<p><a target="_blank" rel="noopener" href="https://king-hcj.github.io/">独钓寒江雪 blog</a></p>
+<p><em>2022-01-14 ~ 2022-01-23（第 6 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/23/weekly/06/" data-id="cl1ztfbsb0017amooean70co1" data-title="明远周刊：css动画、svg动画实现线条 loading" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/my-blog/2022/02/11/browser/extension/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          写个浏览器插件吧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/my-blog/2022/01/16/weekly/05/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">明远周刊：colors.js 与 faker.js 遭开源作者故意破坏</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

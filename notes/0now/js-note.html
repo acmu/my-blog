@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="JS 基础知识Map 类型 vs ObjectMap 的 key 可以很丰富，可以是 number object 等 数字字符串正则String.prototype.replace()语法： 12345replace(regexp, newSubstr)replace(regexp, replaceFunction)replace(substr, newSubstr)replace(substr,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MingYuan&#39;s Blog">
+<meta property="og:url" content="https://acmu.github.io/notes/0now/js-note.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="JS 基础知识Map 类型 vs ObjectMap 的 key 可以很丰富，可以是 number object 等 数字字符串正则String.prototype.replace()语法： 12345replace(regexp, newSubstr)replace(regexp, replaceFunction)replace(substr, newSubstr)replace(substr,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-15T02:32:43.302Z">
+<meta property="article:modified_time" content="2022-04-15T02:32:43.302Z">
+<meta property="article:author" content="MingYuan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/notes/0now/js-note.html" class="article-date">
+  <time class="dt-published" datetime="2022-04-15T02:32:43.302Z" itemprop="datePublished">2022-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JS-基础知识"><a href="#JS-基础知识" class="headerlink" title="JS 基础知识"></a>JS 基础知识</h1><h2 id="Map-类型-vs-Object"><a href="#Map-类型-vs-Object" class="headerlink" title="Map 类型 vs Object"></a>Map 类型 vs Object</h2><p>Map 的 key 可以很丰富，可以是 number object 等</p>
+<h2 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h2><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h3><h3 id="String-prototype-replace"><a href="#String-prototype-replace" class="headerlink" title="String.prototype.replace()"></a><code>String.prototype.replace()</code></h3><p><strong>语法：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">replace</span>(regexp, newSubstr)</span><br><span class="line"><span class="title function_">replace</span>(regexp, replaceFunction)</span><br><span class="line"></span><br><span class="line"><span class="title function_">replace</span>(substr, newSubstr)</span><br><span class="line"><span class="title function_">replace</span>(substr, replaceFunciton)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数：</strong></p>
+<p><code>regexp</code></p>
+<p>一个正则，如果原字符串匹配到了，就用第二个参数替换</p>
+<p><code>substr</code></p>
+<p>一个字符串，如果原字符串匹配到了第一个，就用第二个参数替换</p>
+<p><code>newSubstr</code></p>
+<p>能替换的值，支持特殊字符</p>
+<p><code>replaceFunction</code></p>
+<p>在替换时，可执行这个函数，支持特殊字符</p>
+<p>返回值：</p>
+<p>不修改原值，返回替换后的值</p>
+<p><strong>特殊字符：</strong></p>
+<p><code>$$</code></p>
+<p>插入<code>$</code></p>
+<p><code>$&amp;</code></p>
+<p>插入匹配了的子串</p>
+<p>`$``</p>
+<p>插入匹配子串的前面部分</p>
+<p><code>$&#39;</code></p>
+<p>插入匹配子串的后面部分</p>
+<p><code>$n</code></p>
+<p>n是数字，范围[1, 100]，匹配第几组</p>
+<p><code>$&lt;Name&gt;</code></p>
+<p>和 n 类似，只不过这里是组名</p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/683079">正则表达式 命名捕获组</a></p>
+<p><strong>使用函数的特殊字符</strong></p>
+<p>match</p>
+<p>匹配的子串</p>
+<p>p1, p2, p3…</p>
+<p>数字捕获组，有多少个，这里就有多少个参数</p>
+<p>offset</p>
+<p>子串起始下标</p>
+<p>string</p>
+<p>原始字符串</p>
+<p>groups</p>
+<p>如果有命名组，那么这里会存放对应的key，value</p>
+<p>示例🌰</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;zmy_123_234&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接替换，找到第一个匹配的就替换</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">replace</span>(<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;nb&#x27;</span>));</span><br><span class="line"><span class="comment">// 使用全局替换</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">replace</span>(<span class="regexp">/2/g</span>, <span class="string">&#x27;nb&#x27;</span>));</span><br><span class="line"><span class="comment">// 正则 使用 $&amp; 特殊字符</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">replace</span>(<span class="regexp">/2/g</span>, <span class="string">&#x27;$&amp;nb&#x27;</span>));</span><br><span class="line"><span class="comment">// 字符串 使用 $&amp; 特殊字符</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str.<span class="title function_">replace</span>(<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;$&amp;nb&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义正则命名捕获组</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="regexp">/release-(?&lt;major&gt;\d*)-(?&lt;minor&gt;\d*)-(?&lt;version&gt;\d*)/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 替换</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;release-11-2-10&#x27;</span>.<span class="title function_">replace</span>(a, <span class="string">&#x27;$&lt;major&gt;,$2,$&lt;version&gt;&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果有命名捕获组，那么 groups 就不是 undefined</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">replacer</span>(<span class="params">match, p1, p2, p3, offset, string, groups</span>) &#123;</span><br><span class="line">  <span class="comment">// groups: &#123;zmy: &#x27;#$*%&#x27;&#125;</span></span><br><span class="line">  <span class="comment">// match: &quot;abc12345#$*%&quot;</span></span><br><span class="line">  <span class="comment">// offset: 0</span></span><br><span class="line">  <span class="comment">// p1: &quot;abc&quot;</span></span><br><span class="line">  <span class="comment">// p2: &quot;12345&quot;</span></span><br><span class="line">  <span class="comment">// p3: &quot;#$*%&quot;</span></span><br><span class="line">  <span class="comment">// string: &quot;abc12345#$*%&quot;</span></span><br><span class="line">  <span class="keyword">return</span> [p1, p2, p3].<span class="title function_">join</span>(<span class="string">&#x27; - &#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newString = <span class="string">&#x27;abc12345#$*%&#x27;</span>.<span class="title function_">replace</span>(<span class="regexp">/([^\d]*)(\d*)(?&lt;zmy&gt;[^\w]*)/</span>, replacer);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newString); <span class="comment">// abc - 12345 - #$*%</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>反向引用是什么？</p>
+<p><code>replaceAll</code> 就等于 普通正则加了一个 g 描述符。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">mdn链接</a></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="Array-prototype-reverse"><a href="#Array-prototype-reverse" class="headerlink" title="Array.prototype.reverse()"></a><code>Array.prototype.reverse()</code></h3><p>使用原地算法反转数组，会改变原数组</p>
+<h3 id="join"><a href="#join" class="headerlink" title="join"></a>join</h3><p>直接调用 join，没有参数，是逗号</p>
+<p>如果数组中的值是<code>undefined</code> <code>null</code> 或 <code>[]</code>，会被当成空字符串</p>
+<p>sort</p>
+<p>split</p>
+<p>splice</p>
+<h2 id="类的原理"><a href="#类的原理" class="headerlink" title="类的原理"></a>类的原理</h2><p>继承、面向对象</p>
+<p>js 中的类</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/notes/0now/js-note.html" data-id="cl1ztfbs3000samooc675fn89" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
