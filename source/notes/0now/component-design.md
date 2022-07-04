@@ -24,3 +24,25 @@ ref 还要等到 dom 渲染完成后，被 js 引用了，才能调用，这也�
 而且他挂着引用，应该同时也不会释放内存，导致不能被垃圾回收掉
 
 对 还有的让你传一下 default-expand-all default value，也 tmd 很 zz
+
+
+
+
+
+
+
+```
+<el-tree
+  :data="data"
+  show-checkbox
+  node-key="id"
+  :default-expanded-keys="[2, 3]"
+  :default-checked-keys="[5]"
+  :props="defaultProps">
+</el-tree>
+
+```
+
+组件还要加上 default-checked-keys，无法理解，直接用 value 不就得了，这就是 value 没有完全受控的弊端
+
+https://element.eleme.io/#/zh-CN/component/tree
