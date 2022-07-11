@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>defineProperty 详细解读 | MingYuan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="对象在 JS 中很重要，如 Number Function 等等都是以对象为基础扩展的，defineProperty 作为定义对象属性的 api，同样不可小觑。本文会详细解读 Object.defineProperty()，带你看透对象的本质。  定义defineProperty 是 Object 的静态方法，可以在对象上新增一个属性，或者更改对象上已有的属性： 123456789101112co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="defineProperty 详细解读">
+<meta property="og:url" content="https://acmu.github.io/2022/07/10/defineProperty/index.html">
+<meta property="og:site_name" content="MingYuan&#39;s Blog">
+<meta property="og:description" content="对象在 JS 中很重要，如 Number Function 等等都是以对象为基础扩展的，defineProperty 作为定义对象属性的 api，同样不可小觑。本文会详细解读 Object.defineProperty()，带你看透对象的本质。  定义defineProperty 是 Object 的静态方法，可以在对象上新增一个属性，或者更改对象上已有的属性： 123456789101112co">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_21:12_gQBBo9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_20:28_pyNAWY.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_20:31_8IXXKP.png">
+<meta property="article:published_time" content="2022-07-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-11T13:33:44.308Z">
+<meta property="article:author" content="MingYuan">
+<meta property="article:tag" content="周刊">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_21:12_gQBBo9.png">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="MingYuan's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">MingYuan&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/my-blog/" id="subtitle">明远博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/my-blog/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://acmu.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-defineProperty" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/07/10/defineProperty/" class="article-date">
+  <time class="dt-published" datetime="2022-07-10T00:00:00.000Z" itemprop="datePublished">2022-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      defineProperty 详细解读
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>对象在 JS 中很重要，如 Number Function 等等都是以对象为基础扩展的，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">defineProperty</a> 作为定义对象属性的 api，同样不可小觑。本文会详细解读 Object.defineProperty()，带你看透对象的本质。</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_21:12_gQBBo9.png" alt="image-2022071191209134 PM"></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>defineProperty 是 Object 的静态方法，可以在对象上新增一个属性，或者更改对象上已有的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&#x27;foo&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">42</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">obj.foo = <span class="number">77</span>;</span><br><span class="line"><span class="comment">// 严格模式下会报错</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj.foo);</span><br><span class="line"><span class="comment">// 非严格模式下输出 42</span></span><br></pre></td></tr></table></figure>
+
+<p>对象 obj 定义了一个属性 foo，这个属性不能更改，否则会报错（我们现在写的代码几乎都是在严格模式下的，所以本文不考虑非严格模式下的情况）</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(obj, prop, descriptor)</span><br></pre></td></tr></table></figure>
+
+<p>obj：你要定义的对象</p>
+<p>prop：你要定义的属性，可以是 symbol 类型</p>
+<p>descriptor：对于属性的描述</p>
+<p>这里最重要的就是 descriptor 了</p>
+<h2 id="descriptor-解读"><a href="#descriptor-解读" class="headerlink" title="descriptor 解读"></a>descriptor 解读</h2><p>我们正常的创建、修改、删除和枚举属性是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增属性（定义对象时直接赋值，或者在定义对象后动态赋值）</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line">obj.b = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改属性</span></span><br><span class="line">obj.a = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除属性</span></span><br><span class="line"><span class="keyword">delete</span> obj.a;</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 枚举属性（四种方式：Object.keys、for in 操作、Object.assign、扩展操作符）</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj));</span><br></pre></td></tr></table></figure>
+
+<p>但你可能不希望属性被修改与删除，那就需要 defineProperty 出场了</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_20:28_pyNAWY.png" alt="image-2022071182854317 PM"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&#x27;e&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="string">&#x27;zmy&#x27;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看属性，虽然控制台输出能看到 e，但 e 是浅色的</span></span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// 枚举属性 没有 e</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj));</span><br><span class="line"><span class="comment">// 修改属性，报错</span></span><br><span class="line">obj.e = <span class="string">&#x27;mq&#x27;</span>;</span><br><span class="line"><span class="comment">// 删除属性，报错</span></span><br><span class="line"><span class="keyword">delete</span> obj.e</span><br></pre></td></tr></table></figure>
+
+<p>这里，在 obj 上新定义了 e 属性，但它不能修改，不能删除也不能枚举。下面我们看看为什么会这样。</p>
+<h3 id="数据属性和访问器属性"><a href="#数据属性和访问器属性" class="headerlink" title="数据属性和访问器属性"></a>数据属性和访问器属性</h3><p>在继续之前你需要知道：根据描述符的种类把属性分为两种，数据（data）属性和访问器（accessor）属性。</p>
+<p>数据属性描述符：</p>
+<ol>
+<li><p>value：属性的值，默认 undefined</p>
+</li>
+<li><p>writable：属性是否可改变，默认 false</p>
+</li>
+</ol>
+<p>访问器属性：</p>
+<ol>
+<li><p>get：函数，返回值是属性的值，可用this</p>
+</li>
+<li><p>set：函数，有一个参数，赋值时被调用，可用this</p>
+</li>
+</ol>
+<p>还有两个描述符，是数据属性和访问器属性都有的：</p>
+<ol>
+<li>configurable：如果是false，那么：这个属性不能在数据属性和访问器属性之间切换了、属性不能被删除、其他的属性描述符不能被更改了（但当writable描述符是true时，属性的值可以改，writable描述符也可以改为false），默认false</li>
+<li>enumerable：是否可枚举（四种方式：Object.keys、for in 操作、Object.assign、扩展操作符），默认false</li>
+</ol>
+<p>描述符只能是 value 和 writable 组合或 get 和 set 组合，不能混用（会报错）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;b&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;c&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Uncaught TypeError: Invalid property descriptor. Cannot both specify accessors and a value or writable attribute,</span></span><br></pre></td></tr></table></figure>
+
+<p>但属性可以在数据属性和访问器属性之间来回切换：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(zmy.a);</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(zmy.a);</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(zmy, <span class="string">&#x27;a&#x27;</span>))</span><br><span class="line"><span class="comment">// &#123;set: undefined, enumerable: false, configurable: true, get: ƒ&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">3</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(zmy.a);</span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>如上 a 属性从数据属性变为访问器属性又变为数据属性，这里注意：我在新增a属性时，configurable设置为true（因为如果是默认的false值，就不能在数据属性和访问器属性之间互相切换了），但第二次修改 a 属性时，并没有特殊设置configurable 的值，它依旧是 true，因为使用了新建时已有的 configurable 的值</p>
+<h3 id="定义-descriptor-时的注意点"><a href="#定义-descriptor-时的注意点" class="headerlink" title="定义 descriptor 时的注意点"></a>定义 descriptor 时的注意点</h3><p>定义 descriptor 时最好是给出所有配置，因为这些配置项也可以是继承而来，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.writable = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> descriptor = &#123; <span class="attr">value</span>: <span class="number">8</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;a&#x27;</span>, &#123; <span class="attr">value</span>: <span class="number">8</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(zmy.a);</span><br><span class="line"><span class="comment">// 8</span></span><br><span class="line">zmy.a = <span class="number">7</span></span><br><span class="line"><span class="built_in">console</span>.log(zmy.a);</span><br><span class="line"><span class="comment">// 7</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor);</span><br></pre></td></tr></table></figure>
+
+<p>这里由于 defineProperty 的 descriptor 中并没有显示指出 writable，所以它应该是默认值 false 的，故下面的 <code>zmy.a = 7</code> 应该报错，但事实却没有，因为我们在第一行改了<code>Object</code>的原型，导致所有对象都可以找到<code>writable</code>这个属性，所以在defineProperty时就被使用了，这里的 <code>writable</code> 实际为 <code>true</code> 而不是默认值 <code>false</code>（把第一行修改<code>Object</code>原型代码注释，就会正常报错）</p>
+<p>当然解决这个问题还有其他方法：</p>
+<ol>
+<li>如果你的环境下<code>Object.freeze</code>可用，那么就 freeze 住<code>Object</code>实例的原型</li>
+<li>descriptor对象使用<code>Object.create(null)</code>获得，因为这样获得的对象不继承于Object</li>
+</ol>
+<h3 id="configurable-为-false-的注意点"><a href="#configurable-为-false-的注意点" class="headerlink" title="configurable 为 false 的注意点"></a>configurable 为 false 的注意点</h3><p>configurable 为 false 的时候代表不可配置的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">zmy.q = <span class="number">6</span></span><br><span class="line"><span class="comment">// Uncaught TypeError: Cannot assign to read only property &#x27;q&#x27; of object</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//  Uncaught TypeError: Cannot redefine property: q</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，改值和改描述符都报错，但有个特殊情况：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以更改值</span></span><br><span class="line">zmy.q = <span class="number">6</span>;</span><br><span class="line"><span class="built_in">console</span>.log(zmy.q);</span><br><span class="line"><span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以正常的把 writable 由 true 变为 false</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 但是把 writable 由 false 变为 true 是会报错的</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Uncaught TypeError: Cannot redefine property: q</span></span><br></pre></td></tr></table></figure>
+
+<p>当 configurable 为 false，但是 writable 为 true 时，可以改变属性的 value，可以把 writable 由 true 变为 false，但是把 writable 由 false 变为 true 是会报错的。</p>
+<p>如果定义的值和原值一样，不会报错：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 没有报错，但是如果改成 5 以外的其他值，是都会报错的</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性值为-undefined"><a href="#属性值为-undefined" class="headerlink" title="属性值为 undefined"></a>属性值为 undefined</h3><p>把属性值变成 undefined 可以删除值 （configurable 等如果是 undefined 就代表是 false）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zmy = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">val</span>)</span> &#123;</span><br><span class="line">    a = val;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">zmy.q = <span class="number">23</span></span><br><span class="line"><span class="comment">// 可以正常赋值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(zmy, <span class="string">&#x27;q&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">set</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">zmy.q = <span class="number">45</span></span><br><span class="line"><span class="comment">// 报错，因为没有 set</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="enumerable-举例"><a href="#enumerable-举例" class="headerlink" title="enumerable 举例"></a>enumerable 举例</h3><ol>
+<li>Object.assign 和 扩展操作符：只有enumerable为true时可见，包括 symbol 类型</li>
+<li>for in 操作  和 Object.key：只有enumerable为true时可见，不包括 symbol 类型</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">&#x27;b&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">&#x27;c&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">3</span></span><br><span class="line">&#125;); <span class="comment">// enumerable 默认为 false</span></span><br><span class="line">o.d = <span class="number">4</span>; <span class="comment">// enumerable 默认为 true</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="built_in">Symbol</span>.for(<span class="string">&#x27;e&#x27;</span>), &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="built_in">Symbol</span>.for(<span class="string">&#x27;f&#x27;</span>), &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">6</span>,</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">in</span> o) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// logs &#x27;a&#x27; and &#x27;d&#x27; (in undefined order)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(o); <span class="comment">// [&#x27;a&#x27;, &#x27;d&#x27;]</span></span><br><span class="line"></span><br><span class="line">o.propertyIsEnumerable(<span class="string">&#x27;a&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">o.propertyIsEnumerable(<span class="string">&#x27;b&#x27;</span>); <span class="comment">// false</span></span><br><span class="line">o.propertyIsEnumerable(<span class="string">&#x27;c&#x27;</span>); <span class="comment">// false</span></span><br><span class="line">o.propertyIsEnumerable(<span class="string">&#x27;d&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">o.propertyIsEnumerable(<span class="built_in">Symbol</span>.for(<span class="string">&#x27;e&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line">o.propertyIsEnumerable(<span class="built_in">Symbol</span>.for(<span class="string">&#x27;f&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = &#123; ...o &#125;</span><br><span class="line"><span class="comment">// 或者使用 assign，和 扩展操作符一样的</span></span><br><span class="line"><span class="comment">// const p = &#123;&#125;</span></span><br><span class="line"><span class="comment">// Object.assign(p, o)</span></span><br><span class="line">p.a <span class="comment">// 1</span></span><br><span class="line">p.b <span class="comment">// undefined</span></span><br><span class="line">p.c <span class="comment">// undefined</span></span><br><span class="line">p.d <span class="comment">// 4</span></span><br><span class="line">p[<span class="built_in">Symbol</span>.for(<span class="string">&#x27;e&#x27;</span>)] <span class="comment">// 5</span></span><br><span class="line">p[<span class="built_in">Symbol</span>.for(<span class="string">&#x27;f&#x27;</span>)] <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文讲解了defineProperty的定义与语法，并对descriptor的配置进行了代码实践。</p>
+<p>我认为 defineProperty 是对象中非常重要的 api，你懂了这个再看其他的api仿佛打通了任督二脉，也就不会那么难了</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/11_20:31_8IXXKP.png" alt="image-2022071183144923 PM"></p>
+<p>如：</p>
+<ol>
+<li><code>Object.defineProperties()</code>就是同时定义多个属性</li>
+<li><code>Object.getOwnPropertyDescriptor()</code>就是获取到对象属性的描述符<code>Object.getOwnPropertyDescriptors()</code>也同理啦</li>
+<li><code>Object.getOwnPropertyNames()</code>就是获取到所有的属性，包括<code>enumerable</code>为false的属性也能获取到，但不能获取到symbol类型的属性，那我想要获取到所有symbol类型的属性（包括<code>enumerable</code>为false的）该怎么办呢？用<code>Object.getOwnPropertySymbols()</code>即可</li>
+<li><code>Object.prototype.propertyIsEnumerable()</code>就不用我说了吧</li>
+</ol>
+<p>还有很多，剩下的你可以自己去探索一下啦</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/07/10/defineProperty/" data-id="cl5gschhr000u9kojhpeq3xvt" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">在 Mac 中像 Windows 一样切换应用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2022/07/10/defineProperty/">defineProperty 详细解读</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/">在 Mac 中像 Windows 一样切换应用</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/07/03/weekly/09/">明远周刊：如何学习一门新技术</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 MingYuan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
