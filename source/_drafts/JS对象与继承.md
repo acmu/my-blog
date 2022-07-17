@@ -1,13 +1,401 @@
 ---
-title: 快手面试官：实现个继承吧，我：？！😵‍💫
+title: JavaScript的对象与继承
 date: 2022-04-14 11:48:06
 tags: 周刊
 ---
 
 
 
+7.28 晚上分享
 
-> 这是我上次找工作被问到的题目，回答的不怎么好，本文深入总结下。
+
+
+setPrototypeof 为什么不推荐使用？给个例子把，自己写下
+
+
+
+分享较少但重要的知识，要更有趣一些，更吸引人一些
+
+
+
+继承代码由 babel 转换的
+
+```js
+class Foo {
+  a() {
+    console.log('foo');
+  }
+}
+
+class Bar extends Foo {
+  a() {
+    console.log('bar');
+  }
+}
+
+const bar = new Bar();
+bar.a();
+
+```
+
+编译后代码
+
+```js
+"use strict";
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+  return (
+    (_typeof =
+      "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+        ? function (obj) {
+            return typeof obj;
+          }
+        : function (obj) {
+            return obj &&
+              "function" == typeof Symbol &&
+              obj.constructor === Symbol &&
+              obj !== Symbol.prototype
+              ? "symbol"
+              : typeof obj;
+          }),
+    _typeof(obj)
+  );
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: { value: subClass, writable: true, configurable: true }
+  });
+  Object.defineProperty(subClass, "prototype", { writable: false });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf
+    ? Object.setPrototypeOf.bind()
+    : function _setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+      };
+  return _setPrototypeOf(o, p);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+      result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError(
+      "Derived constructors may only return object or undefined"
+    );
+  }
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
+  }
+  return self;
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(
+      Reflect.construct(Boolean, [], function () {})
+    );
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf
+    ? Object.getPrototypeOf.bind()
+    : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
+  return _getPrototypeOf(o);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", { writable: false });
+  return Constructor;
+}
+
+var Foo = /*#__PURE__*/ (function () {
+  function Foo() {
+    _classCallCheck(this, Foo);
+  }
+
+  _createClass(Foo, [
+    {
+      key: "a",
+      value: function a() {
+        console.log("foo");
+      }
+    }
+  ]);
+
+  return Foo;
+})();
+
+var Bar = /*#__PURE__*/ (function (_Foo) {
+  _inherits(Bar, _Foo);
+
+  var _super = _createSuper(Bar);
+
+  function Bar() {
+    _classCallCheck(this, Bar);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(Bar, [
+    {
+      key: "a",
+      value: function a() {
+        console.log("bar");
+      }
+    }
+  ]);
+
+  return Bar;
+})(Foo);
+
+var bar = new Bar();
+bar.a();
+
+```
+
+步骤解析（忽略函数定义）：
+
+1.  **执行 Foo 的 iife，执行 _createClass 函数**
+2. 分别定义原型属性和静态属性，进入 _defineProperties 函数
+3. 计算 descriptor 的值（enumerable、configurable等），给Foo.prototype赋值属性
+4. 把 Foo.prototype 的 wrtiable 设置为 false
+5. 最终 Foo 设置完成
+6.  **执行 Bar 的 iife，执行_inherits函数**
+7. 定义 subClass.prototype 为Object.create(superClass.prototype) 并且加上 constructor 属性
+8. 把 Bar.prototype 的 wrtiable 设置为 false
+9. **调用 _setPrototypeOf**
+10. 根据环境的不同 设置原型链（直接Object.setPrototypeOf，或 使用`o.__proto__` 属性）  Bar 的原型 指向 Foo
+11. 获取 _super 调用 _createSuper
+    1. 调用 _isNativeReflectConstruct
+       1. 判断是否有原生的 Reflect Proxy
+    2. hasNativeReflectConstruct 为 true
+    3. 返回了一个函数，用于赋值给 super
+12. 使用 _createClass 创建 Bar 的属性
+13. new Bar
+    1. 会进入到 Bar 函数的定义中执行 _classCallCheck （一种检测）
+    2. 执行到 _super.apply 中
+       1. 调用 _getPrototypeOf 获取 Bar 的 原型 Foo
+       2. result = Reflect.construct
+          1. 又到了 Foo 的构造函数中
+
+
+
+为什么控制台输出的有些是浅色的？
+
+![image-20220714114140252 AM](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/14_11:41_C14gSO.png)
+
+
+
+以问题为导向，文章通过解决问题来完成
+
+
+
+用代码本身的功能去探索代码的实现
+
+
+
+上传文件时，会用到 File 对象吧，File 也是继承与 Blob 的
+
+
+
+1. `'Mozilla'.substring(1, 3)` 如我们可以调用字符串的方法，但是你要知道字符串原始类型是不能添加方法的
+
+```js
+const a = 'foo'
+a.bar = 'bar'
+console.log(a.bar)
+// undefined
+```
+
+但是我们却能调用方法，这个方法是哪里来的呢？
+
+是用 String 包装的，变成了对象类型
+
+```js
+const a = new String('foo')
+a.bar = 'bar'
+console.log(a.bar)
+// bar
+console.log(typeof a)
+// object
+```
+
+那 string 对象类型就能调用 substring 方法了吗？我们可以使用 `Object.getOwnPropertyNames` 查看所有属性（包括非枚举的）
+
+```js
+const a = new String('foo');
+a.bar = 'bar';
+console.log(Object.getOwnPropertyNames(a));
+// ['0', '1', '2', 'length', 'bar']
+```
+
+也仍然没有 substring 方法（其实它是在下面讲的原型链上）
+
+```js
+const a = new String('foo');
+a.bar = 'bar';
+console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(a)));
+// (50) ['length', 'constructor', 'anchor', 'at', 'big', 'blink', 'bold', ... ]
+```
+
+
+
+
+
+就算是用了es6的 class 你也应该理解 es5 中实现继承的方式（因为这是他的实现原理），如：
+
+```js
+class Person {
+  constructor() {
+    // 添加到 this 的所有内容都会存在于不同的实例上
+    this.locate = () => console.log('instance');
+  }
+
+  // 在类块中定义的所有内容都会定义在类的原型上]
+  locate() {
+    console.log('prototype');
+  }
+}
+
+let p = new Person();
+p.locate();
+Person.prototype.locate();
+```
+
+类方法等同于对象属性，因此可以使用字符串、符号或计算的值作为键（计算的值都行），也支持 set 和 get （这不就是对象嘛）
+
+
+
+注意 类定义中之所以没有显式支持添加数据成员，是因为在共享目标(原型和类)上添 加可变(可修改)数据成员是一种反模式。一般来说，对象实例应该独自拥有通过 this 引用的数据。
+
+反模式（anti-pattern）指的则是在实践中明显出现，但低效或有待优化的设计模式，是用来解决问题的带有共同性的不良方法。
+
+
+
+类定义语法支持在原型和类本身上定义生成器方法
+
+
+
+派生类的方法可以通过 super 关键字引用它们的原型。这个关键字只能在派生类中使用，而且仅 限于类构造函数、实例方法和静态方法内部。
+
+不要在调用super()之前引用this，否则会抛出ReferenceError
+
+super(); // 相当于super.constructor()
+
+
+
+调用 super()会调用父类构造函数，并将返回的实例赋值给 this。
+
+
+
+如果没有定义类构造函数，在实例化派生类时会调用 super()，而且会传入所有传给派生类的参数。
+
+
+
+new.target 可实现抽象基类
+
+
+
+有些内置类型的方法会返回新实例。默认情况下，返回实例的类型与原始实例的类型是一致的:
+
+```js
+class SuperArray extends Array {}
+let a1 = new SuperArray(1, 2, 3, 4, 5);
+let a2 = a1.filter(x => !!(x % 2));
+console.log(a1); // [1, 2, 3, 4, 5]
+console.log(a2); // [1, 3, 5]
+console.log(a1 instanceof SuperArray); // true
+console.log(a2 instanceof SuperArray); // true
+
+```
+
+
+
+如果想覆盖这个默认行为，则可以覆盖 Symbol.species 访问器，这个访问器决定在创建返回的 实例时使用的类:
+
+```js
+class SuperArray extends Array {
+  static get [Symbol.species]() {
+    return Array;
+  }
+}
+let a1 = new SuperArray(1, 2, 3, 4, 5);
+let a2 = a1.filter(x => !!(x % 2));
+console.log(a1); // [1, 2, 3, 4, 5]
+console.log(a2); // [1, 3, 5]
+console.log(a1 instanceof SuperArray); // true
+console.log(a2 instanceof SuperArray); // false
+
+```
+
+
+
+
+
+
+
+把不同类的行为集中到一个类是一种常见的 JavaScript 模式。虽然 ES6 没有显式支持多类继承，但 通过现有特性可以轻松地模拟这种行为。
+
+
+
+注意 很多JavaScript框架(特别是React)已经抛弃混入模式，转向了组合模式(把方法 提取到独立的类和辅助对象中，然后把它们组合起来，但不使用继承)。这反映了那个众 所周知的软件设计原则:“组合胜过继承(composition over inheritance)。”这个设计原则被 很多人遵循，在代码设计中能提供极大的灵活性。
 
 
 
@@ -25,15 +413,9 @@ babel ts 类编译后的代码
 
 Object.prototype.toString 要这样调用，但 Object.keys 直接这样调用
 
-
-
-查看mdn api 的时候
+查看 mdn api 的时候
 
 ![image-20220708120039363 PM](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/08_12:00_KIzd2h.png)
-
-
-
-
 
 
 
@@ -49,17 +431,9 @@ new 做了什么？
 
 
 
-
-
 类的作用：你在控制台输出一个对象，为什么这样展示呢？
 
 ![image-2022070683156867 PM](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/06_20:31_tTPhgR.png)
-
-
-
-
-
-
 
 
 
@@ -356,13 +730,9 @@ t1.eat()
 
 
 
-
-
-
-
-
-
 JavaScript高级程序设计（第4版）-第8章 对象、类与面向对象编程
+
+
 
 阅读笔记：
 
@@ -583,9 +953,6 @@ console.log(p2.list);
 
 
 
-
-
 横向的找一些优秀的作者、优秀的文章，自己理解总结就行
-
 
 

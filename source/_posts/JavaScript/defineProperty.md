@@ -247,6 +247,8 @@ Object.defineProperty(zmy, 'q', {
 
 当 configurable 为 false，但是 writable 为 true 时，可以改变属性的 value，可以把 writable 由 true 变为 false，但是把 writable 由 false 变为 true 是会报错的。
 
+（为啥要搞这么麻烦的事呢，我猜一个原因是`Object.getOwnPropertyDescriptors([])` ，这里 length 属性 configurable就是false，但 writable 为 true，又因为我们是能手动改数组的长度的，所以很符合这种情况）
+
 如果定义的值和原值一样，不会报错：
 
 ```js

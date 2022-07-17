@@ -1,10 +1,8 @@
 ---
-title: JS异步编程
-date: 2022-05-03 22:57:58
+title: JavaScript 异步与 Promise
+date: 2022-07-17 22:52:20
 tags: JavaScript
 ---
-
-
 
 ## 异步是什么？
 
