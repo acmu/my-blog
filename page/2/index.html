@@ -77,6 +77,358 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekly/06" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/23/weekly/06/" class="article-date">
+  <time class="dt-published" datetime="2022-01-23T22:30:50.000Z" itemprop="datePublished">2022-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/23/weekly/06/">明远周刊：css动画、svg动画实现线条 loading</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/23_23:01_9kOiW4.png"></p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ol>
+<li>css 动画、svg 动画实现线条 loading</li>
+<li>前端与后端各自的难点</li>
+<li>优化个人网站的图片流量</li>
+<li>Google 翻译会影响网页</li>
+<li>使用 cdn 开放 api 实现在控制台安装 npm 包</li>
+<li>一个简单的浏览器插件实践</li>
+<li>2 月 7 日，v3 将作为 vue 的默认版本</li>
+<li>使用 vdom json 生成真实 dom</li>
+</ol>
+<h2 id="阅读文章"><a href="#阅读文章" class="headerlink" title="阅读文章"></a>阅读文章</h2><h3 id="巧用-CSS-实现动态线条-Loading-动画"><a href="#巧用-CSS-实现动态线条-Loading-动画" class="headerlink" title="巧用 CSS 实现动态线条 Loading 动画"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-4bJEa06YGLStb37N868zQ">巧用 CSS 实现动态线条 Loading 动画</a></h3><p>使用 3 种方式实现 Chrome tab 的圆圈 loading 效果</p>
+<ol>
+<li>使用 css 圆角+<code>animation</code> +遮罩的原理实现</li>
+<li>使用 svg 的 <code>stroke-dasharray</code> <code>stroke-dashoffset</code> 和 <code>animation</code> 实现</li>
+<li>使用 CSS @property 实现</li>
+</ol>
+<p><strong>思考</strong></p>
+<p><code>conic-gradient</code> 是围绕着中心顺时针的渐变，其他的还有 <code>linear-gradient</code> 线性渐变、<code>radial-gradient</code>辐射状渐变</p>
+<h3 id="【Web-动画】SVG-线条动画入门"><a href="#【Web-动画】SVG-线条动画入门" class="headerlink" title="【Web 动画】SVG 线条动画入门"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coco1s/p/6225973.html">【Web 动画】SVG 线条动画入门</a></h3><p>web 动画一般分为三种：css3 动画、js 动画（canvas）、html 动画（svg），本文介绍 svg</p>
+<p>以一个弯曲的进度条为例，引出<code>stroke-dasharray</code> <code>stroke-dashoffset</code> 属性和<code>polyline</code> 形状（画出两个相同的图形，使用动画加遮罩实现进度条效果），能用简洁的代码，实现比较复杂的线条动画，体现了 svg 动画的强大之处</p>
+<p><strong>思考</strong></p>
+<p><code>stroke-dasharray</code>的值是数组，第一个值是线的长度，第二个值是空白的长度，第三个值是线的长度，第四个值是空白的长度，以此类推，如果值的个数不够，那么就会把前面的数组重复来一遍，通过<code>animation</code>改变<code>stroke-dasharray</code>的值，会有一个线条动画的效果</p>
+<h3 id="CSS-property，让不可能变可能"><a href="#CSS-property，让不可能变可能" class="headerlink" title="CSS @property，让不可能变可能"></a><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/109">CSS @property，让不可能变可能</a></h3><p>@property 允许开发者显示定义他们自己的 css 自定义属性，这些自定义属性通过<code>transition</code>可以实现渐变颜色的动画、线条位置的动画，但目前兼容性不是很好</p>
+<h3 id="前端比后端幸福多了！"><a href="#前端比后端幸福多了！" class="headerlink" title="前端比后端幸福多了！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/U_3PAu2kP2ObZe3zuyOtxA">前端比后端幸福多了！</a></h3><p>一篇小漫画，以前端和后端相互交流的视角讲解了各自的难点</p>
+<p>后端：需要学习编程语言、框架，Nginx、Redis、MySQL、Kafka，微服务、分布式、高并发、大流量，docker、k8s 等内容</p>
+<p>前端：需要学习计算机网络（http https websocket）、较为简单的数据结构和算法（后端接口数据转换为前端界面展示数据）、计算机程序设计（作用域、闭包、对象、原型）、操作系统（node、进程与线程、函数调用栈、事件循环）、编译原理（v8、抽象语法树、字节码、虚拟机、less babel 等编译）、图形学（可视化图像）</p>
+<p>如果只呆在高层的抽象上编程也能过得挺滋润，但抽象只能节省你的编程时间，不能节省你的学习时间</p>
+<p><strong>思考</strong></p>
+<p>前后端都有自己的难点，大多数人还是想互相了解的，我觉得前后端都挺难的，如果做不到十分了解，那么就不要妄下定论</p>
+<p>为什么要去学计算机基础，因为想看到一些本质的东西，很多东西是相似的，只不过是换了个名词而已（举个 🌰：文件系统中的硬链接其实和 JS 中的引用是类似的，都是为了节省存储空间），你如果不知道本质，那么就要学习不同的名词，并且不能建立起知识之间的联系，也容易忘记，但你知道了本质，就能举一反三。计算机基础 yyds，希望大家都能成为计算机科学家 🤓</p>
+<p>阮一峰老师<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/01/weekly-issue-193.html">本周的周刊</a>，开头也是讨论前后端的，好巧，引用一句：</p>
+<blockquote>
+<p>前端和后端的差异，不在于难度，或者说各有各的难，而是所要解决的问题不一样。</p>
+<p>前端的特征是混乱、嘈杂、易变，因为这些都是最终用户的特征，前端需要匹配用户。 如果你不适应混乱、嘈杂、易变的开发，你就很难适应前端。</p>
+<p>后端面对的是硬件、算法和数据结构，所以比较稳定。但是会涉及到计算机科学、语言设计、编译原理等高深的内容，想要搞懂这些东西，绝非易事。</p>
+</blockquote>
+<h3 id="省钱-90-！我是这样优化网站图片的"><a href="#省钱-90-！我是这样优化网站图片的" class="headerlink" title="省钱 90%！我是这样优化网站图片的"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bOx0acMR8FkWo82_e2sQ3w">省钱 90%！我是这样优化网站图片的</a></h3><p>写文章不可避免的会有图片，那么就会遇到图片存哪里的问题，作者使用腾讯云的文件服务上传图片，但近期流量费用增加，本文讲述了如何降低流量省钱</p>
+<ol>
+<li>使用 referrer 拒绝其他域名的请求</li>
+<li>使用 tinify.cn 的开发者账号压缩图片，支持 500 张</li>
+<li>转换为 webp 格式</li>
+<li>gzip 压缩（几乎没有收益，因为图片已经是压缩的格式了）</li>
+</ol>
+<p>gif 不好压缩，暂时不改，开启 cdn 能使图片访问速度快 10 倍</p>
+<p><strong>思考</strong></p>
+<p>我用的是 uPic+gitee，uPic 开启 80%压缩，gitee 在国内速度也不错，再加上 typora 可以配合 uPic 自动上传图片，但 gitee 的图片应该还得做个备份，预防 gitee 不能访问的状况，计划备份在 githb 上，使用 action 来做</p>
+<h3 id="你真的认为-Google-翻译不影响”前端”页面功能吗"><a href="#你真的认为-Google-翻译不影响”前端”页面功能吗" class="headerlink" title="你真的认为 Google 翻译不影响”前端”页面功能吗?"></a><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041067692">你真的认为 Google 翻译不影响”前端”页面功能吗?</a></h3><p>通过 textarea 计数功能不可用的 bug 引出 Google 翻译会影响网页的功能</p>
+<ol>
+<li>会影响元素的 dom 结构</li>
+<li>导致 vue 和 react 的双向绑定失效</li>
+</ol>
+<p>但伪元素的内容不会被翻译，也不受翻译影响</p>
+<h3 id="大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？"><a href="#大道至简，繁在人心：在浏览器控制台安装-npm-包是什么操作？" class="headerlink" title="大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7023916328637431816">大道至简，繁在人心：在浏览器控制台安装 npm 包是什么操作？</a></h3><p>浏览器可以通过添加 script 标签来引入额外的 js，那么 npm 包的 js 文件去哪里找呢？cdnjs 和 unpkg 提供了线上静态的 js 文件，只要引用他们的 js 即可</p>
+<p><strong>思考</strong></p>
+<p>文中使用了 referrer 头来解决直接请求 cdnjs 跨域的问题</p>
+<h3 id="7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制"><a href="#7-分钟学会写一个浏览器插件——突破某-SDN-未登录禁止复制的限制" class="headerlink" title="7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制"></a><a target="_blank" rel="noopener" href="https://king-hcj.github.io/2021/10/17/browser-extension/">7 分钟学会写一个浏览器插件——突破某 SDN 未登录禁止复制的限制</a></h3><p>应用：类似于现在的 pwa</p>
+<p>扩展：我们经常下载使用的</p>
+<p>插件：类似 flash pdf 等，能提供操作系统的一些功能，因为安全问题，已经废弃或内置了</p>
+<p>但现在扩展一般都叫插件了，简明扼要的说了写插件的重点：要有<code>manifest.json</code>，用来描述图标，popup 的资源、页面加载的资源，使用到了一些 api：<code>chrome.tabs.query</code> <code>chrome.tabs.sendMessage</code> <code>chrome.runtime.onMessage.addListener</code></p>
+<p><strong>思考</strong></p>
+<p>可以自己写点提升工作效率的插件</p>
+<h3 id="尤大深夜宣布：Vue-3-将成为新的默认版本！"><a href="#尤大深夜宣布：Vue-3-将成为新的默认版本！" class="headerlink" title="尤大深夜宣布：Vue 3 将成为新的默认版本！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f2Fel9El1Uq55kdnlFweog">尤大深夜宣布：Vue 3 将成为新的默认版本！</a></h3><p>vue 以及一系列工具链，将在 2022 年 2 月 7 日升级为 v3 兼容版本，v3 将作为 vue 的默认版本，如果你要使用 v2，请特殊指定</p>
+<h3 id="手写简易前端框架：vdom-渲染和-jsx-编译"><a href="#手写简易前端框架：vdom-渲染和-jsx-编译" class="headerlink" title="手写简易前端框架：vdom 渲染和 jsx 编译"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xwt5bd31IZChpEx79w5E5g">手写简易前端框架：vdom 渲染和 jsx 编译</a></h3><p>vdom 是对 dom 的一层抽象，使用 json 来描述，但一般不会人为写这个 json，而是通过更简单易懂的 jsx 或 template 使用 babel 编译而来</p>
+<p>本文实现了由 json 生成真实 dom 的代码：通过递归遍历 json，并使用 dom api 生成真实 dom</p>
+<p><strong>思考</strong></p>
+<p>babel 如何编译 jsx 的呢，这应该就会涉及到 ast 了</p>
+<h3 id="为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？"><a href="#为什么-Eslint-可以检查和修复格式问题，而-Babel-不可以？" class="headerlink" title="为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/sy_JdpuFWmrpXeKl5AvPRQ">为什么 Eslint 可以检查和修复格式问题，而 Babel 不可以？</a></h3><p>以「函数中大括号的位置格式」为例，查看了代码的 ast，以及编写的对应的 eslint rule（rule 分为 meta 和 create 两部分，create 中可以使用 eslint 对应的 api 实现获取 token，改变代码等操作）</p>
+<p><strong>思考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://astexplorer.net/">astexplorer</a> 网站可以查看多种语言的 ast</p>
+<p>babel 不能修复格式的根本原因是：babel 不是为了修复代码格式而设计的，没有提供对应 api</p>
+<h3 id="2021-开发者生态系统现状"><a href="#2021-开发者生态系统现状" class="headerlink" title="2021 开发者生态系统现状"></a><a target="_blank" rel="noopener" href="https://www.jetbrains.com/zh-cn/lp/devecosystem-2021/">2021 开发者生态系统现状</a></h3><p>JetBrains 进行的第五次年度开发者生态系统调查的综合结果。来自 183 个国家或地区的 31,743 名开发者</p>
+<p>重要发现：JavaScript 是最受欢迎的语言 😂</p>
+<p><strong>思考</strong></p>
+<p>热门语言需要学习：TypeScript 要增加实践，Python 要学习， Go、Rust 可以了解</p>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><p>公众号推荐：code 秘密花园、神光的编程秘籍</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/lVLxcwrDkEVCnf41u1zJ4A">字节前端 ByteFE 技术周报</a></p>
+<p><a target="_blank" rel="noopener" href="https://king-hcj.github.io/">独钓寒江雪 blog</a></p>
+<p><em>2022-01-14 ~ 2022-01-23（第 6 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/23/weekly/06/" data-id="cl5pg3mnx002bbpor5t0224o5" data-title="明远周刊：css动画、svg动画实现线条 loading" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/05" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/16/weekly/05/" class="article-date">
+  <time class="dt-published" datetime="2022-01-16T00:27:29.000Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/16/weekly/05/">明远周刊：colors.js 与 faker.js 遭开源作者故意破坏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/16_00:12_fFiVsV.png" alt="WX20220116-001152@2x"></p>
+<h2 id="思考时刻"><a href="#思考时刻" class="headerlink" title="思考时刻"></a>思考时刻</h2><p>写文章时，把最精彩的部分写在前面，因为人的精力是有限的，需要先把最好的内容呈现出来，才能勾起继续看下去的欲望，就像抖音的视频一样，前几秒展示视频最精彩部分的点赞一般都会多些</p>
+<p>通过 effie 了解到 <a target="_blank" rel="noopener" href="https://github.com/lxgw/LxgwWenKai">LXGW WenKai / 霞鹜文楷</a> 这个中文字体，很漂亮，推荐 👍</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/12_13:49_cLoMD2.png" alt="LXGW WenKai / 霞鹜文楷"></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mwpdffpixBY&list=LL&index=102">【TED 演讲】想学会一个语言？就像玩电子游戏般地去说出来</a> （使用有趣的故事勾起继续看下去的欲望，演讲真的是一门学问）</p>
+<ol>
+<li>现在的英语是一种为了能得到结果的工具，在英语对话中，只有 4%是英语母语者与英语母语者对话的</li>
+<li>你在说英语时，不应该去评判自己的对错或好坏，而应该关注于是否能达成让对方理解你给他的结果</li>
+</ol>
+<p>现在的 AI 已经很厉害了，在翻译、语音识别、图像识别上已经有很多应用了，可以了解下简单的基本原理</p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ol>
+<li>colors.js 与 faker.js 遭开源作者故意破坏</li>
+<li>node util 模块好用的工具函数</li>
+<li>null 和 undefined 区别</li>
+</ol>
+<h2 id="阅读文章"><a href="#阅读文章" class="headerlink" title="阅读文章"></a>阅读文章</h2><h3 id="下载量和-Vue-一样大的开源软件被作者恶意破坏，数千款应用受到牵连"><a href="#下载量和-Vue-一样大的开源软件被作者恶意破坏，数千款应用受到牵连" class="headerlink" title="下载量和 Vue 一样大的开源软件被作者恶意破坏，数千款应用受到牵连"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TDh4BPeYTITjJIZ4KH-4Jw">下载量和 Vue 一样大的开源软件被作者恶意破坏，数千款应用受到牵连</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p>colors.js 与 faker.js 遭开源作者故意破坏，他认为：不会再“无偿工作”来支持那些商业巨头，要么选择项目分叉，要么以每年“六位数”的薪酬补偿开源开发人员。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/marak/Faker.js/">faker.js</a> 的 README 也改为“Aaron Swartz 到底经历了什么？”的字样。</p>
+<blockquote>
+<p>Swartz 是一位杰出的开发人员，他帮助建立了 Creative Commons、RSS 和 Reddit。他的贡献对几乎所有的 Web 开发人员都产生了深远的影响。2013 年，年仅 26 岁的 Swartz 在一场法律纠纷中自杀身亡。</p>
+<p>为了让所有人都能免费访问信息，这位黑客主义者从麻省理工学院的校园网络 JSTOR 数据库中下载到数百万篇期刊文章。据称，他采用的方法是反复轮换自己的 IP 与 MAC 地址以绕过校方和 JSTOR 设置的技术屏蔽方案。但此番举动也导致 Swartz 面对违反《计算机欺诈与滥用法》的指控，一旦罪名成立，他最高可能被判处 35 年监禁。</p>
+</blockquote>
+<p>开源作者的 GitHub 账号也被停止使用（GitHub 也有可能禁用你的账号，所以最好还是自己备份下吧）</p>
+<blockquote>
+<p>Marak 的此次过激行为发生在不久前影响巨大的 Log4j 漏洞事件之后。作为一套重量级开源库，Log4j 在不同企业及商业实体开发的各类 Java 应用程序当中都有广泛使用。而 Log4shell 漏洞的曝光引发越来越多 CVE，不少开源维护者不得不在休假期间无偿帮助修复这些免费项目。</p>
+</blockquote>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>对酬劳的抱怨可以理解，但故意破坏的行为确实过激（我一直以为，能写出这样库的开源作者都不会为钱发愁呢 😐）</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/11_13:22_0ge7B2.png" alt="下载量对比"></p>
+<h3 id="Node-js-内置的-util-模块究竟有多好用？"><a href="#Node-js-内置的-util-模块究竟有多好用？" class="headerlink" title="Node.js 内置的 util 模块究竟有多好用？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WRyN9d9G1apllyLddFXJWQ">Node.js 内置的 util 模块究竟有多好用？</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>JS 自带的类型判断令人头疼，<code>util/types</code> 可以帮你判断类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> types = <span class="built_in">require</span>(<span class="string">&#x27;util/types&#x27;</span>);</span><br><span class="line"></span><br><span class="line">types.isDate(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// true</span></span><br><span class="line">types.isPromise(<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">() =&gt;</span> &#123;&#125;)); <span class="comment">// true</span></span><br><span class="line">types.isArrayBuffer(<span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">16</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>深比较是否完全相等 <code>isDeepStrictEqual</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">&#x27;util&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> val1 = &#123; <span class="attr">name</span>: <span class="string">&#x27;shenfq&#x27;</span>, <span class="attr">x</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> val2 = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;shenfq&#x27;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;val1 === val2&#x27;</span>, val1 === val2); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;isDeepStrictEqual&#x27;</span>, util.isDeepStrictEqual(val1, val2)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>早期的 Node API 都是 Error First 风格的，现在大多是基于 promise 编程，那么如何将 Error First 风格的 API 转为 Promise API？</p>
+<p>使用 <code>promisify</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">&#x27;util&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> readFile = util.promisify(fs.readFile);</span><br><span class="line">readFile(<span class="string">&#x27;./a.ts&#x27;</span>, &#123; <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">text</span> =&gt;</span> <span class="built_in">console</span>.log(text))</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.error(error));</span><br></pre></td></tr></table></figure>
+
+<p>顺便说一句：<code>callbackify</code> 可以将 Promise 风格转为 Error First 风格</p>
+<p>Node 10 版本引入了 <code>promises</code> 属性，使用起来更简便</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>).promises;</span><br><span class="line">fs.readFile(<span class="string">&#x27;./a.ts&#x27;</span>, &#123; <span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span> &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">text</span> =&gt;</span> <span class="built_in">console</span>.log(text))</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.error(error));</span><br></pre></td></tr></table></figure>
+
+<p><code>util.debug</code> 能实现类似 <code>debug</code> 包的效果，输出信息便于调试</p>
+<p><code>util.format</code> 可以格式化输出字符串</p>
+<p><code>util.inspect</code> 可以控制输出的对象</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>Error First 风格转换 Promise 风格很有用，方便了 async 模式开发（在知道 <code>promisify</code> 之前，我也想写一个自己的 <code>promisify</code> 来着，但后来感觉太难就放弃了 😂，可以了解下源码是如何实现的）</p>
+<p>能否把这个 util 弄到浏览器上呢？</p>
+<h3 id="深入探究：null-和-undefined-究竟有何区别？"><a href="#深入探究：null-和-undefined-究竟有何区别？" class="headerlink" title="深入探究：null 和 undefined 究竟有何区别？"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7051144396615450655">深入探究：null 和 undefined 究竟有何区别？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p><code>undefined</code>：这个变量未定义，<code>null</code>：变量定义了，但表示的值为空（一般表示对象的初始值，类似字符串的初始值为空字符串）</p>
+<p>之后演示了几种不同的展现形式，并解释其原因</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">// &#x27;object&#x27; 因为历史原因</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>; <span class="comment">// &#x27;undefined&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>); <span class="comment">// &#x27;[object Null]&#x27;</span></span><br><span class="line"><span class="comment">// Object.prototype.toString() 是 Object 的原型方法</span></span><br><span class="line"><span class="comment">// 调用该方法，默认返回当前对象的内部属性 [[Class]]，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>); <span class="comment">// &#x27;[object Undefined]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 并不是因为会隐式转换，而是因为ECMA 在 11.9.3 章节中表明了：</span></span><br><span class="line"><span class="comment">// If x is null and y is undefined, return true.</span></span><br><span class="line"><span class="comment">// If x is undefined and y is null, return true.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">undefined</span> + <span class="number">1</span>; <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">null</span> + <span class="number">1</span>; <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>); <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>); <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">JSON</span>.stringify(&#123; <span class="attr">a</span>: <span class="literal">undefined</span> &#125;); <span class="comment">// &#x27;&#123;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(&#123; <span class="attr">b</span>: <span class="literal">null</span> &#125;); <span class="comment">// &#x27;&#123;b: null&#125;&#x27;</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(&#123; <span class="attr">a</span>: <span class="literal">undefined</span>, <span class="attr">b</span>: <span class="literal">null</span> &#125;); <span class="comment">// &#x27;&#123;b: null&#125;&#x27;</span></span><br><span class="line"><span class="comment">// JSON 会将 undefined 对应的 key 删除，这是 JSON 自身的转换原则。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="literal">undefined</span> = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> n === <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line">test(); <span class="comment">// false</span></span><br><span class="line">test(<span class="literal">undefined</span>); <span class="comment">// false</span></span><br><span class="line">test(<span class="string">&#x27;test&#x27;</span>); <span class="comment">// ture</span></span><br><span class="line"><span class="keyword">let</span> <span class="literal">undefined</span> = <span class="string">&#x27;test&#x27;</span>; <span class="comment">// Uncaught SyntaxError: Identifier &#x27;undefined&#x27; has already been declared</span></span><br><span class="line"><span class="comment">// null 是关键字，而 undefined 是一个全局变量，可以使用局部变量覆盖，但一定不要这样做</span></span><br><span class="line"><span class="comment">// 如果你想要觉得真实的 undefined，可以使用 void 0 获取，因为 void 加任何表达式，都会返回 undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>到底使用 undefined 还是 null，大家都有自己的准则，但团队内尽量保持统一</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>局部 undefined 还可以重新赋值，这个真没想到，所以还是 void 0 保险一些</p>
+<h3 id="通过-Chrome-Devtools-的-Memory-工具证明-string-的内存分配方式"><a href="#通过-Chrome-Devtools-的-Memory-工具证明-string-的内存分配方式" class="headerlink" title="通过 Chrome Devtools 的 Memory 工具证明 string 的内存分配方式"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VucSMXz8tnNf_LyrXZLHsg">通过 Chrome Devtools 的 Memory 工具证明 string 的内存分配方式</a></h3><h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><p>给出一个简单且有效的示例，使用 Memory 中的 Allocation instrumentation on timeline 模式，通过不同时间申请 string 来校验 string 的内存分配方式。</p>
+<h4 id="思考-3"><a href="#思考-3" class="headerlink" title="思考"></a>思考</h4><p><code>&quot;guang&quot;@756367</code> at 后面表示的为内存地址</p>
+<p>虽然看见了内存地址位置，但怎么证明这块内存地址是 栈、堆 还是 常量池 呢？🤔</p>
+<p><em>2022-01-07 ~ 2022-01-13（第 5 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/16/weekly/05/" data-id="cl5pg3mnv0027bpor24oscxwz" data-title="明远周刊：colors.js 与 faker.js 遭开源作者故意破坏" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/01/10/weekly/04/" class="article-date">
+  <time class="dt-published" datetime="2022-01-10T21:05:28.000Z" itemprop="datePublished">2022-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/01/10/weekly/04/">明远周刊：为什么 0.1 + 0.2 不等于 0.3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-01/10_20:57_Gctmur.png" alt="标题图"></p>
+<h2 id="精彩看点"><a href="#精彩看点" class="headerlink" title="精彩看点"></a>精彩看点</h2><ul>
+<li>  二进制表示浮点数</li>
+<li>  web3（元宇宙、NFT）概念介绍</li>
+</ul>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="为什么-0-1-0-2-不等于-0-3-？"><a href="#为什么-0-1-0-2-不等于-0-3-？" class="headerlink" title="为什么 0.1 + 0.2 不等于 0.3 ？"></a>为什么 0.1 + 0.2 不等于 0.3 ？</h3><p>来自：图解系统-小林 coding-v1.0 pdf</p>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="为什么负数要用补码表示？"><a href="#为什么负数要用补码表示？" class="headerlink" title="为什么负数要用补码表示？"></a>为什么负数要用补码表示？</h5><p>整数类型在计算机中的存储：以 int 举例，4 个字节（32 位），最高位（1 位）0 代表正数，1 代表负数</p>
+<p>补码：把正数的⼆进制全部取反再加 1，⽐如 -1 的⼆进制是把数字 1 的⼆进制取反后再加 1</p>
+<p>为什么要引入补码这么麻烦的东西？</p>
+<p>如果不用，只是改变符号位，那么我们计算下 <code>-2+1</code> 这个过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-2</span><br><span class="line">10000000000000000000000000000010</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">00000000000000000000000000000001</span><br><span class="line"></span><br><span class="line">-2 + 1 （答案变成了-3）</span><br><span class="line">10000000000000000000000000000011</span><br></pre></td></tr></table></figure>
+
+<p>直接相加这明显答案是不对的，必须要增加额外操作才能使结果正确，而在计算机中，加减法操作是很常用的，为了性能考虑，所以使用了补码，补码直接相加，结果是正确的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-2（补码）</span><br><span class="line">11111111111111111111111111111110</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">00000000000000000000000000000001</span><br><span class="line"></span><br><span class="line">-1（补码）</span><br><span class="line">11111111111111111111111111111111</span><br></pre></td></tr></table></figure>
+
+<p>并且<code>-1 + -2</code>也是成立的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br><span class="line">11111111111111111111111111111111</span><br><span class="line"></span><br><span class="line">-2</span><br><span class="line">11111111111111111111111111111110</span><br><span class="line"></span><br><span class="line">-3</span><br><span class="line">11111111111111111111111111111101</span><br></pre></td></tr></table></figure>
+
+<p>所以这就是使用补码的原因</p>
+<h5 id="十进制小数与二进制的转换"><a href="#十进制小数与二进制的转换" class="headerlink" title="十进制小数与二进制的转换"></a>十进制小数与二进制的转换</h5><p>如 <code>8.625</code> 怎么转换成二进制？</p>
+<p>首先 8 就正常转换 <code>1000</code>，接着，小数是这样处理的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0.625 x 2 === 1.25  记1</span><br><span class="line">0.25 x 2 === 0.5    记0</span><br><span class="line">0.5 x 2 === 1       记1</span><br><span class="line">0                   循环终止</span><br></pre></td></tr></table></figure>
+
+<p>所以结果为<code>1000.101</code> 但并不是所有小数都可以表示的，比如<code>0.1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 x 2 === 0.2  记0</span><br><span class="line">0.2 x 2 === 0.4  记0</span><br><span class="line">0.4 x 2 === 0.8  记0</span><br><span class="line">0.8 x 2 === 1.6  记1</span><br><span class="line">0.6 x 2 === 1.2  记1</span><br><span class="line">0.2 x 2 === 0.4  记0 这里开始无限循环了</span><br><span class="line">0.4 x 2 === 0.8  记0</span><br><span class="line">0.8 x 2 === 1.6  记1</span><br><span class="line">0.6 x 2 === 1.2  记1</span><br><span class="line">0.2 x 2 === 0.4  记0 这里开始无限循环了</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>你可以发现 <code>0.2 x 2 === 0.4</code> 出现了 3 次，即从这里开始了无限循环，<strong>由于计算机的资源是有限的，所以无法用二进制精确表示 0.1，只能用近似值来表示，就是在有限的精度情况下，最大化接近 0.1 的二进制数，于是便造成了精度缺失的情况</strong>（这种情况其实对于我们并不陌生，二进制无法精确表示<code>0.1</code> 就像十进制无法精确表示<code>1/3</code>一样）</p>
+<p>那二进制如何转十进制小数呢，以 10.625 为例，如图：</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/31_10:16_qGoaH1.png" alt="浮点转换"></p>
+<h5 id="计算机是怎么存小数的？"><a href="#计算机是怎么存小数的？" class="headerlink" title="计算机是怎么存小数的？"></a>计算机是怎么存小数的？</h5><p><code>8.625</code> 对应 <code>1000.101</code> 是定点数，代表小数点是死的，不能移动，如果你移动了小数点的位置，那么他的值就变了，然而在计算机中是采用浮点数存储的，代表小数点是可以浮动变化位置的，例如<code>1000.101</code>可表示为<code>1.000101 x 2^3</code>，因为把小数点向左移了 3 位，而且这是二进制，所以只要乘上 2 的 3 次方即可回到原始值，类似科学计数法</p>
+<p>科学计数法：</p>
+<p>⽐如有个很⼤的⼗进制数 <code>1230000</code>，我们可以也可以表示成 <code>1.23 x 10^6</code>，这种⽅式就称为科学记数法。</p>
+<p>该⽅法在⼩数点左边只有⼀个数字，⽽且把这种整数部分没有前导 0 的数字称为规格化，⽐如 <code>1.0 x 10^(-9)</code> 是规格化的科学记数法，⽽ <code>0.1 x 10^(-9)</code> 和 <code>10.0 x 10^(-9)</code> 就不是了。</p>
+<p>那这里要把二进制都存成规格化的科学计数法，也就是<code>1.000101 x 2^3</code> ，这时可以发现<code>1.000101</code> 中的第一个 1 总是不变的，因为不可能以 0 开头，以 0 开头就不是规格化的了，<code>2^3</code>中的 2 也总是不变的，因为总是二进制，所以这两个值可以不用存储，重要的是如下的数据：</p>
+<ul>
+<li>  <strong>尾数</strong> 也就是 <code>1.000101 x 2^3</code> 中的<code>000101</code></li>
+<li>  <strong>指数</strong> 也就是 <code>1.000101 x 2^3</code> 中的<code>3</code></li>
+</ul>
+<p>现在绝⼤多数计算机使⽤的浮点数，是采用 IEEE 754 制定的国际标准：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">符号位 + 指数位 + 尾数</span><br></pre></td></tr></table></figure>
+
+<p>指数位的⻓度越⻓，数值就越⼤</p>
+<p>尾数位的⻓度越⻓，数值就越精度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">单精度浮点数 float 32位</span><br><span class="line">符号位（1） + 指数位（8） + 尾数（23）</span><br><span class="line"></span><br><span class="line">双精度浮点数 double 64位</span><br><span class="line">符号位（1） + 指数位（11） + 尾数（52）</span><br></pre></td></tr></table></figure>
+
+<p>因为指数位没有符合位，那么又需要表示负数，所以引入的偏移量，<code>float</code> 的偏移量是 127，那么如下即可表示 <code>8.26</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1000.101 转为浮点</span><br><span class="line">1.000101 x 2^3</span><br><span class="line">存到 float 中，二进制为：</span><br><span class="line">0（符号位） + 10000010（指数：127+3 也就是130的二进制） + 00010100000000000000000（尾数：直接把尾数写到这里，共23位）</span><br></pre></td></tr></table></figure>
+
+<p>可使用<a target="_blank" rel="noopener" href="http://www.binaryconvert.com/index.html">binaryconvert</a>验证一下，是一致的</p>
+<img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/31_10:16_xRKsHL.png" alt="进制展示" style="zoom:50%;" />
+
+<p>MAX_VALUE 的计算也和这里有关：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 能精确表示的整数范围上限,S为1个0，E为11个0，S为52个1</span><br><span class="line">Math.pow(2, 53) - 1 === Number.MAX_SAFE_INTEGER    // true</span><br><span class="line">// 能精确表示的整数范围下限,S为1个1，E为11个0，S为52个1</span><br><span class="line">-(Math.pow(2, 53) - 1) === Number.MIN_SAFE_INTEGER    // true</span><br><span class="line">// 能表示的最大数字，S为1个0，E为971，S为52个1</span><br><span class="line">(Math.pow(2, 53) - 1) * Math.pow(2, 971) === Number.MAX_VALUE    // true</span><br><span class="line">// 能表示的最接近于0的正数，S为1个0，E为-1074，S为0</span><br><span class="line">Math.pow(2, -1074) === Number.MIN_VALUE // true</span><br></pre></td></tr></table></figure>
+
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>如何进制转换？<a href="https://acmu.github.io/my-blog/2021/12/30/online-judge/lt504/">七进制转换</a></p>
+<p>为什么需要数据类型？因为要在内存中存数据，你是什么样的类型，决定了你要开辟多少内存空间</p>
+<p>自己可以写个国内版的 binaryconvert，这是<a target="_blank" rel="noopener" href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">另一个选择</a>：更方便操作，打钩即可改变二进制的值</p>
+<p>parseInt 是否会受限于数字溢出？是的，太大就变成 Infinity 了</p>
+<p>float 指数范围是 <code>-126 ~ +127</code> 为什么只有 254 个，2^8 不是 256 吗？少的数哪里去了（存了 NaN 和 Infinity？）</p>
+<p>cpu 如何使用二进制进行加减乘除法的？</p>
+<p>为什么我把 a 赋值了 0.3，JS 能正确的存 0.3 呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Number.MAX_VALUE</span><br><span class="line">1.7976931348623157e+308</span><br><span class="line">Number.MIN_VALUE</span><br><span class="line">5e-324</span><br><span class="line">Number.EPSILON</span><br><span class="line">2.220446049250313e-16</span><br><span class="line"></span><br><span class="line">这些是如何计算的？</span><br></pre></td></tr></table></figure>
+
+<p>可深入了解：<a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">每个计算机科学家都应该了解的关于浮点运算的知识</a>、<a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js </a> JS 的任意精度运算，可以看看源码</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
+<h3 id="聊聊-Web3-0-是什么，为什么元宇宙这么火？"><a href="#聊聊-Web3-0-是什么，为什么元宇宙这么火？" class="headerlink" title="聊聊 Web3.0 是什么，为什么元宇宙这么火？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0ha-mikdjWVovKycZnI5EQ">聊聊 Web3.0 是什么，为什么元宇宙这么火？</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>web3 是一种思想上的创新。web1 是被动消费，一些公司宣传吸引眼球的内容，消费者来观看，如 UC 浏览器，web2 是主动参与贡献，但由平台中心管控，平台可以控制你的内容是否能被其他人观看，如抖音、YouTube，web3 是完全由用户掌控，去中心化，它可以是一个不区分地域和疆界，而是以兴趣、语言、职业、主题进行聚集和管理的王国。要实现 web3 可分为以下三点：</p>
+<ol>
+<li>引入去中心化机制</li>
+<li>凸显劳动价值，你的动作能给你带来报酬</li>
+<li>虚拟资产的认可</li>
+</ol>
+<p>元宇宙：建立在 web3 的基础上，模拟仿真世界，可以赚取现实收益</p>
+<p>为什么要搞元宇宙？传统互联网增长乏力，人口增长速度有限，要建造出更多新颖的东西吸引用户</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>我认为去中心化，完全不受管控，也并不绝对是好事</p>
+<p>最开始，还以为 web3 是技术上的创新，没想到实际是更注重思想上的创新</p>
+<p>可以多了解一下新技术，如 NFT</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/NFT/56358612">NFT 百度视频解释</a>：全称为 Non-Fungible Token，指非同质化代币，是用于表示数字资产（视频、音频、摄影）的唯一加密货币令牌，可以买卖。优势：可溯源、永续收益、可互动（基于原作二次创新）</p>
+<h3 id="最近大火的-NFT-数字藏品是什么？"><a href="#最近大火的-NFT-数字藏品是什么？" class="headerlink" title="最近大火的 NFT 数字藏品是什么？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7sOOCrNU2FcypaHN2phMYA">最近大火的 NFT 数字藏品是什么？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>什么是元宇宙？元宇宙的英文名称叫 Metaverse，区别于当前真实的宇宙 Universe，Universe 是由原子组成的物理宇宙，Metaverse 是比特组成的数字宇宙，当前我们在物理宇宙中从事生活、生产，这里有我们的资产、人际关系等等。未来在元宇宙中也会如此，我们会在这一数字宇宙中从事生产、创作、教育等等，拥有我们全新的人际关系，和千变万化的数字资产。</p>
+<p>元宇宙应该是数字世界的现实化，而不是现实世界的数字化</p>
+<p>区块链一定是数字世界现实化的核心支撑：</p>
+<ul>
+<li><p>  区块链通过技术实现数字资产的私有制，这一点将极大的激励用户从事价值创造</p>
+</li>
+<li><p>区块链可以实现价值（资产）流转趋向于零边际成本，推动元宇宙资产自由流动</p>
+<ul>
+<li><p>信息互联网最伟大的价值在于通过 TCP/IP 协议实现了信息流转趋向零边际成本，如此才有了我们当前繁荣信息互联网的生态。</p>
+<p>  区块链将作为一种新的协议，一种面向资产的协议，将实现价值（资产）流转趋向于零边际成本</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>非同质化通证技术最大的特点是高效低成本。说到低成本，大家可能会有一个认知，那就是区块链因其冗余存储和多方共识，其实是一个成本并不低的交易系统，其实，大家看到的只是一个非常简单的技术成本，区块链的技术成本相比我们现在社会的交易成本是小巫见大巫的。</p>
+<p>就像在信息互联网诞生之前，我们的通信成本是很高的，每分钟电话费都是很昂贵的，但到了信息互联网下，我们的信息交流成本无限趋近于零，基于区块链的价值互联网也是如此，我们会把资产的交易成本优化到一个非常非常低的水平。</p>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>了解元宇宙、区块链的好文</p>
+<p>TCP/IP 协议实现信息流转零成本，区块链实现价值（资产）流转零成本</p>
+<p>「现在找到了合规的资产，我们终于找对了，开始在合规的方向下探索中国特色的价值互联网」满满的求生欲 😂</p>
+<p><em>2021-12-31 ~ 2022-01-06（第 4 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/01/10/weekly/04/" data-id="cl5pg3mnu0024bpor6iij3qff" data-title="明远周刊：为什么 0.1 + 0.2 不等于 0.3" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-tools/shuang-pin" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2022/01/06/tools/shuang-pin/" class="article-date">
@@ -140,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/01/06/tools/shuang-pin/" data-id="cl5gschi2001h9koj0qxh7ive" data-title="小鹤双拼推荐" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/01/06/tools/shuang-pin/" data-id="cl5pg3mnn001nbpor8mgsdi9k" data-title="小鹤双拼推荐" class="article-share-link">分享</a>
       
       
       
@@ -220,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="cl5gschi7001t9kojb7difqwr" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="cl5pg3mnt0020bpordz4fe3hb" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
       
       
       
@@ -268,7 +620,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="cl5gschhw00179koja0em8kk6" data-title="力扣 504 七进制转换" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="cl5pg3mni001ebporf1ik0dy7" data-title="力扣 504 七进制转换" class="article-share-link">分享</a>
       
       
       
@@ -316,7 +668,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="cl5gschhu00119kojgnkl63cm" data-title="Chrome 96 更新" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="cl5pg3mnf0017bporghnx28go" data-title="Chrome 96 更新" class="article-share-link">分享</a>
       
       
       
@@ -396,7 +748,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="cl5gschi6001q9kojcen2dyyq" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="cl5pg3mns001xbporh7g18m1k" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
       
       
       
@@ -494,7 +846,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="cl5gschi4001m9koj3cd7b6rn" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="cl5pg3mnq001tbpor9upyhqip" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
       
       
       
@@ -643,7 +995,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2020/09/13/TypeScript/pkg/" data-id="cl5gschht000y9koj2gfkf5r1" data-title="NPM 发布 TS 包" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2020/09/13/TypeScript/pkg/" data-id="cl5pg3mne0014bpor69yl47va" data-title="NPM 发布 TS 包" class="article-share-link">分享</a>
       
       
       
@@ -657,75 +1009,11 @@
 
 
   
-    <article id="post-project/lint" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2020/08/02/project/lint/" class="article-date">
-  <time class="dt-published" datetime="2020-08-02T11:26:20.000Z" itemprop="datePublished">2020-08-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2020/08/02/project/lint/">ESLint 和 Prettier 规范代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_13:01_rXggN1.png" alt="头图"></p>
-<h2 id="为什么要用-ESLint？"><a href="#为什么要用-ESLint？" class="headerlink" title="为什么要用 ESLint？"></a>为什么要用 ESLint？</h2><p>它可以帮助开发者发现一些显而易见的错误，如：使用了未定义的变量等，还可以结合一些第三方的规则去检测你的代码是否规范，如：react 的 prop-types 、 hooks 等，还能一定程度上美化代码，如：字符串使用单引号还是双引号、一行代码末尾是否要加分号等。</p>
-<h2 id="为什么要用-Prettier？"><a href="#为什么要用-Prettier？" class="headerlink" title="为什么要用 Prettier？"></a>为什么要用 Prettier？</h2><p>刚刚有说到，<a target="_blank" rel="noopener" href="https://eslint.org/">ESLint</a> 只能一定程度上美化代码，而  <a target="_blank" rel="noopener" href="https://prettier.io/">Prettier</a> 能完成美化代码的全部工作，如：一行超过 80 个字符就截断换行、更好看的三元运算符展示、给 JSX 加括号展示等，并且它不止于 JavaScript，还可以美化 CSS、Markdown 等多种语言。</p>
-<p>并且很多大的项目都已经使用上了，如 <a target="_blank" rel="noopener" href="https://github.com/facebook/react">React</a>、<a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/">AntD</a> 等等，尤其是对于团队大、开发人多的情况，这种代码的自动化审查工具，能让 Code Review 更友好，能让同事更关注你的实现的业务与代码逻辑本身，而非还换不换行、加不加逗号，这种小事，而且还能一定程度上实现团队内代码风格的统一。（这里为什么说“一定程度”，是因为有很多代码风格是工具检查不了的，比如有的人会给变量 const 有的会给 let、有的用 switch 有的是 if else 等等，所以想要规范这些，最好是团队内有个代码风格指南文档，明确指出：这样是好的，那样是不行的）</p>
-<h2 id="使用-ESLint-amp-Prettier"><a href="#使用-ESLint-amp-Prettier" class="headerlink" title="使用 ESLint &amp; Prettier"></a>使用 ESLint &amp; Prettier</h2><p>安装：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint prettier babel-eslint eslint-plugin-prettier eslint-config-prettier</span><br></pre></td></tr></table></figure>
-
-<p>如果你还使用 JSX 还需另外安装：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint-plugin-react-hooks eslint-plugin-react</span><br></pre></td></tr></table></figure>
-
-<p>eslint 和 prettier 只会在开发环境用到，<code>babel-eslint</code> 是 <code>eslint-plugin-prettier</code> 使用 Prettier 格式代码<code>eslint-config-prettier</code> 关闭 ESLint 与 Prettier 冲突的配置项 .prettierignore &amp; .eslintignore</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/dist</span><br><span class="line">/build</span><br><span class="line">/node_modules</span><br></pre></td></tr></table></figure>
-
-<p>.prettierrc.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">singleQuote</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">trailingComma</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">    <span class="attr">proseWrap</span>: <span class="string">&#x27;never&#x27;</span>,</span><br><span class="line">    <span class="attr">arrowParens</span>: <span class="string">&#x27;avoid&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>.eslintrc.js （不使用 JSX，只是 JS 文件）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const ERROR = &#x27;error&#x27;;</span></span><br><span class="line"><span class="keyword">const</span> WARN = <span class="string">&#x27;warn&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> OFF = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">extends</span>: [<span class="string">&#x27;eslint:recommended&#x27;</span>, <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>],</span><br><span class="line">    <span class="attr">parser</span>: <span class="string">&#x27;babel-eslint&#x27;</span>,</span><br><span class="line">    <span class="attr">plugins</span>: [<span class="string">&#x27;prettier&#x27;</span>],</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;prettier/prettier&#x27;</span>: WARN,</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: OFF,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>.eslintrc.js （使用 JSX）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ERROR = <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> WARN = <span class="string">&#x27;warn&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> OFF = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">extends</span>: [</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;plugin:react/recommended&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parser</span>: <span class="string">&#x27;babel-eslint&#x27;</span>,</span><br><span class="line">    <span class="attr">plugins</span>: [<span class="string">&#x27;react&#x27;</span>, <span class="string">&#x27;react-hooks&#x27;</span>, <span class="string">&#x27;prettier&#x27;</span>],</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;prettier/prettier&#x27;</span>: WARN,</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: OFF,</span><br><span class="line">        <span class="string">&#x27;react-hooks/rules-of-hooks&#x27;</span>: ERROR,</span><br><span class="line">        <span class="string">&#x27;react-hooks/exhaustive-deps&#x27;</span>: WARN,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>npm script 中加上这两句（代表格式所有的如下结尾的文件）：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">&quot;prettier&quot;</span>: <span class="string">&quot;prettier --write &#x27;**/*.&#123;js,jsx,less,md&#125;&#x27;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="cl5gschhz001d9kojbuqahh4b" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/my-blog/">&laquo; 上一页</a><a class="page-number" href="/my-blog/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/my-blog/">&laquo; 上一页</a><a class="page-number" href="/my-blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/my-blog/page/3/">3</a><a class="extend next" rel="next" href="/my-blog/page/3/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -739,7 +1027,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
     </div>
   </div>
 
@@ -749,7 +1037,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15px;">浏览器</a>
+      <a href="/my-blog/tags/JavaScript/" style="font-size: 16.67px;">JavaScript</a> <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 13.33px;">浏览器</a>
     </div>
   </div>
 
@@ -771,23 +1059,23 @@
       <ul>
         
           <li>
-            <a href="/my-blog/2022/07/10/defineProperty/">defineProperty 详细解读</a>
+            <a href="/my-blog/2022/07/17/JavaScript/js-promise/">JavaScript 异步与 Promise</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/07/17/JavaScript/js-regexp/">JavaScript 正则理解</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/07/17/JavaScript/symbol/">JavaScript Symbol 解读</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/07/10/JavaScript/defineProperty/">defineProperty 详细解读</a>
           </li>
         
           <li>
             <a href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/">在 Mac 中像 Windows 一样切换应用</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/03/weekly/09/">明远周刊：如何学习一门新技术</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
           </li>
         
       </ul>
