@@ -77,6 +77,151 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaScript/JavaScript 对象解读" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" class="article-date">
+  <time class="dt-published" datetime="2022-08-03T22:57:58.000Z" itemprop="datePublished">2022-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>对象一直都是 JavaScript 里重要的概念，如函数、正则等全部都是对象，本文将带大家深入的了解对象相关知识。</p>
+<h2 id="数据属性、访问器属性"><a href="#数据属性、访问器属性" class="headerlink" title="数据属性、访问器属性"></a>数据属性、访问器属性</h2><p>对象是 JavaScript 中的一种数据类型，对象由属性和属性值组成（通常也叫 key 和 value），属性的数据类型只能是字符串或 Symbol，每个属性都有 4 个描述符，根据描述符的不同，属性又分为两种类型，数据属性和访问器属性。</p>
+<p>数据属性的属性描述符：</p>
+<ol>
+<li>[[Configurable]]：属性是否可以通过 delete 删除，是否可以修改它的描述符，以及是否可以在数据属性与访问器属性之间切换。</li>
+<li>[[Enumerable]]：是否 for in 循环、Object.keys() 可访问。</li>
+<li>[[Value]]：属性值</li>
+<li>[[Writable]]：是否可以修改 [[Value]]</li>
+</ol>
+<p>访问器属性的属性描述符：</p>
+<ol>
+<li>[[Configurable]]：同上</li>
+<li>[[Enumerable]]：同上</li>
+<li>[[Get]]：函数，在读取属性时调用</li>
+<li>[[Set]]：函数，在写入属性时调用</li>
+</ol>
+<blockquote>
+<p>疑问：[[Get]] 这种双中括号代表什么？</p>
+<p>答：[[Get]] 这种双中括号的表示一般在<a target="_blank" rel="noopener" href="https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-topropertydescriptor">规范文档</a>中，代表是引擎的内部属性，除非语法上支持，否则 JS 代码是不能访问引擎的内部属性的。类似的还有<code>Date.prototype[@@toPrimitive]</code> 这种 @@ 表示的，代表 Symbol.toPrimitive。</p>
+</blockquote>
+<p>如果你用过 vue 2，肯定 console.log 过 vue 的响应式变量，它就是通过访问器属性实现的。访问器属性的属性值在控制台出现后有 3 个点，点击 3 个点会调用[[Get]]函数。</p>
+<p>下面我们实现一个访问器属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">set</span>: <span class="literal">undefined</span>,</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;call&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">123</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/31_16:15_GxBhSe.png" alt="image-2022073141522184 PM"></p>
+<p>点击 3 个点之后会调用 get 函数，并获得返回值</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/31_16:16_noD8TB.png" alt="image-2022073141636960 PM"></p>
+<p>从下面输出的 call 可以看出调用了 get 函数</p>
+<p><code>Object.defineProperty</code> 可以给对象的属性配置描述符，它同时包含了新建和修改的功能，如果对象没有此属性就会新建，如果对象以及有了属性，那么再定义就会修改。</p>
+<p>其实我们平常用字面量创建的属性都是数据属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下两种表示，是一样的</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj2, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可用 getOwnPropertyDescriptor 获取到属性的描述符</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(obj, <span class="string">&#x27;a&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用的-api，也只是属性"><a href="#调用的-api，也只是属性" class="headerlink" title="调用的 api，也只是属性"></a>调用的 api，也只是属性</h2><p>在编写代码的过程中，免不了要调用数组、字符串等等的 api，他们不是什么神奇的东西，也只是普通属性而已。以常用的<code>Array.prototype.map()</code>api 为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(arr, <span class="string">&#x27;map&#x27;</span>));</span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>咦，你在骗我呀，我获取到的怎么是 undefined 呢？别急，因为 getOwnPropertyDescriptor 只能获取到当前对象的属性，但 map 属性是在当前对象的原型上的（因为是 Array.prototype 上的属性），所以应该去原型上获取：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(<span class="built_in">Object</span>.getPrototypeOf(arr), <span class="string">&#x27;map&#x27;</span>));</span><br><span class="line"><span class="comment">// &#123;writable: true, enumerable: false, configurable: true, value: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到 map api 是数据属性，并且不可枚举，但是可配置，我们可以试一下把它配置成可枚举的，这样 for in 或 Object.keys 就能访问到了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>.getPrototypeOf(arr), <span class="string">&#x27;map&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> arr) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// map</span></span><br></pre></td></tr></table></figure>
+
+<p>但 length 属性是不可配置的，即 configurable 为 false。</p>
+<p>所以我们可以通过 JS 的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">内置对象</a>拿到所有规定的全局变量，之后再寻找内置对象的原型并输出他的属性，就可以通过代码获取到 JS 所有的 api。</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h3><p>使用字面量直接定义属性和方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ming&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">    <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.introduce();</span><br></pre></td></tr></table></figure>
+
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>当你要定义多个对象的时候，直接复制多个还是有些麻烦，所以可以写一个工厂函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        name,</span><br><span class="line">        age,</span><br><span class="line">        <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = createPerson(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p2 = createPerson(<span class="string">&#x27;foo&#x27;</span>, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">p2.introduce();</span><br></pre></td></tr></table></figure>
+
+<p>此模式的问题是无法使用 instanceof 等判断对象的类型</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数就是一个普通函数，只不过一般约定构造函数的首字母是大写的，以及它只会和 new 搭配使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.introduce = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p1.introduce();</span><br></pre></td></tr></table></figure>
+
+<p>它模仿了 Java 的写法，这里和 createPerson 的区别是：</p>
+<ol>
+<li>没有 return。</li>
+<li>属性和方法直接赋值给了 this。</li>
+<li>没有显式地创建对象。</li>
+</ol>
+<p>如果想要继续深入继承部分的内容，那么这里就要深入理解下：</p>
+<ol>
+<li><p>这应该是个很明显的约定，构造函数是不应该 return 的，如果 return 了那不就回到了工厂模式嘛</p>
+</li>
+<li><p>this 是很微妙的存在，如果没有 this 会怎样？</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ming&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">    <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 如果没有 this，这里只能使用 person</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + person.name);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> animal = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 这里不能复用，只能是一个新的函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + animal.name);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>没有显式地创建对象，那对象哪里来的？是 new “惹的祸”，new 干了什么？想要知道这个，你就得先了解原型链</p>
+</li>
+</ol>
+<h4 id="原型链机制"><a href="#原型链机制" class="headerlink" title="原型链机制"></a><strong>原型链机制</strong></h4><p>如下代码输出什么？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">__proto__</span>: &#123;</span><br><span class="line">        <span class="attr">x</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj.x);</span><br></pre></td></tr></table></figure>
+
+<p>输出是 1，没有在对象 obj 上定义 x 属性，但为什么能获取到呢？因为<strong>对象在获取属性时，如果当前的对象没有，那么就会向当前对象的原型对象去寻找，如果原型对象还没有就继续向上寻找，直到没有原型对象为止。</strong>这就是原型链机制，根据原型为链条寻找属性的机制。代码中的 <code>__proto__</code> 属性就是这里说的原型。</p>
+<h4 id="proto-vs-Prototype-vs-prototype"><a href="#proto-vs-Prototype-vs-prototype" class="headerlink" title="__proto__ vs [[Prototype]] vs prototype"></a><code>__proto__</code> vs <code>[[Prototype]]</code> vs <code>prototype</code></h4><p>你肯定见过这三兄弟，他们都和原型有关，他们的区别一定要搞清楚：</p>
+<ol>
+<li> <code>__proto__</code> 属性：每个对象都有此属性，代表原型，是非标准的历史遗留属性，虽然可用，但现在并不推荐使用。</li>
+<li> <code>[[Prototype]]</code> 内部属性：每个对象都有此属性，代表原型，是 ES 规范中的描述，<strong>和 <code>__proto__</code> 属性完全一样</strong>，更推荐现代语法使用，但内部属性是不能直接在 JavaScript 语言层面访问的，还好语言标准提供了 Object.getPrototypeOf() 和 Object.setPrototypeOf() 获取和设置原型。</li>
+<li> <code>prototype</code> 属性：每个函数都有 <code>prototype</code>属性，他只有在此函数作为构造函数时才有意义。不要忘记：函数也是对象，所以可以在对象上添加任意属性， <code>prototype</code> 属性就只是函数上的一个普通属性而已，只不过此属性在继承时有特殊的约定含义。</li>
+</ol>
+<p>可通过控制台看到如下代码原型链图示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> bar = &#123;</span><br><span class="line">    <span class="attr">y</span>: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(foo, bar);</span><br><span class="line"><span class="built_in">console</span>.log(bar, foo);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-08/03_16:40_t7FwLF.png" alt="image-2022080344043135 PM"></p>
+<p>把 foo 的原型指向了 bar，控制台中发现 foo 的原型多了一层。（注意：这里使用了 setPrototypeOf，仅用于演示，如果你看过 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf">setPrototypeOf 的 mdn</a> 就能发现，它的性能并不好，推荐使用 Object.create() 代替）</p>
+<h4 id="实现-new"><a href="#实现-new" class="headerlink" title="实现 new"></a>实现 new</h4><p>知道了原型链机制，那么现在就可以分析 new 干了什么</p>
+<ol>
+<li>创建一个新对象 foo</li>
+<li>将新对象 foo 的 [[Prototype]] 内部属性赋值为构造函数的 prototype 属性</li>
+<li>使用新对象 foo 的上下文执行构造函数（即构造函数中的 this 会指向新对象，并为这个新对象添加属性）</li>
+<li>如果构造函数返回非空对象，则返回构造函数返回的对象；否则，返回新对象 foo</li>
+</ol>
+<p>构造函数的 prototype 属性就特殊在这里，新对象 foo 的原型会指向构造函数的 prototype 属性。prototype 属性值是一个对象，对象中有一个 constructor 属性，属性值是构造函数，这个 constructor 属性到底有什么用呢？🧐</p>
+<p>我在看了半天 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor#browser_compatibility">mdn</a> 后得出结论：它没什么用 😅。它有一个比较常见的用法是用于判断对象的类型，但它很容易被赋值或删除，相比于 instanceof 和 Symbol.toStringTag 来说并不可靠，其实这两个也并非绝对可靠。（这里说的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toStringTag">Symbol.toStringTag</a> 指 Object.prototype.toString()）</p>
+<p>知道了原理，我们实现一个自己的 new：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fun, ...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> foo = <span class="built_in">Object</span>.create(fun.prototype);</span><br><span class="line">    <span class="keyword">const</span> res = fun.apply(foo, args);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> &amp;&amp; res !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> foo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.introduce = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p1.introduce();</span><br><span class="line"><span class="built_in">console</span>.log(p1);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fun, ...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> foo = <span class="built_in">Object</span>.create(fun.prototype);</span><br><span class="line">    <span class="keyword">const</span> res = fun.apply(foo, args);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> &amp;&amp; res !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> foo;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p2 = myNew(Person, <span class="string">&#x27;ming2&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p2.introduce();</span><br><span class="line"><span class="built_in">console</span>.log(p2);</span><br></pre></td></tr></table></figure>
+
+<p>new 的实现很重要，一定要理解好。</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>构造函数模式创建对象的问题是函数难以复用，使用原型模式创建对象就可以解决这个问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.introduce = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming3&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p1.introduce === p3.introduce);</span><br></pre></td></tr></table></figure>
+
+<p>这样的代码你是不是在哪里见过？（Vue 2 的插件就是这样加上的）</p>
+<p>当然我们写的对象字面量、数组字面量实例都是用这种方法创建出来的，不信你可以试试如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.test = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;&#125; 字面量就相当于 new Object()</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;.test);</span><br><span class="line"><span class="comment">// test</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.testFn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;nb&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">5</span>].testFn();</span><br><span class="line"><span class="comment">// nb</span></span><br><span class="line"><span class="comment">// [1, 5]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" data-id="cl6deihk5000rakozh9j81izx" data-title="JavaScript 对象解读" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-JavaScript/js-promise" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2022/07/17/JavaScript/js-promise/" class="article-date">
@@ -132,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="cl5pg3mnb000ubpord1vsfz4n" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="cl6deihk8000yakozgwrl9zr9" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
       
       
       
@@ -388,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="cl5pg3mnc000ybpor0y454zba" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="cl6deihk90011akoz3holddux" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
       
       
       
@@ -502,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="cl5pg3mnd0011bpor863h53g2" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="cl6deihka0014akozb8qc58yl" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
       
       
       
@@ -629,11 +774,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="cl5pg3mna000rbpor6azeeuox" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="cl6deihk6000uakoz407r02e6" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>
@@ -676,7 +821,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" data-id="cl5pg3mnp001qbporbgdp2dhs" data-title="在 Mac 中像 Windows 一样切换应用" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" data-id="cl6deihkn001takoz8hg5c11e" data-title="在 Mac 中像 Windows 一样切换应用" class="article-share-link">分享</a>
       
       
       
@@ -792,7 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/03/weekly/09/" data-id="cl5pg3mo1002kbporh35lchqu" data-title="明远周刊：如何学习一门新技术" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/03/weekly/09/" data-id="cl6deihl0002nakoza47v833v" data-title="明远周刊：如何学习一门新技术" class="article-share-link">分享</a>
       
       
       
@@ -881,7 +1026,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/19/weekly/08/" data-id="cl5pg3mnz002hbpor07q777ay" data-title="明远周刊：字符在计算机的存储形式" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/03/19/weekly/08/" data-id="cl6deihkz002kakoz6y0v0v70" data-title="明远周刊：字符在计算机的存储形式" class="article-share-link">分享</a>
       
       
       
@@ -1039,7 +1184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="cl5pg3mnl001gbporefxqgr8w" data-title="浮点数与二进制" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="cl6deihkj001jakoz05vthl5l" data-title="浮点数与二进制" class="article-share-link">分享</a>
       
       
       
@@ -1105,78 +1250,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/01/weekly/07/" data-id="cl5pg3mny002ebpor9q2h7edh" data-title="明远周刊：从零实现栅格地图" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/03/01/weekly/07/" data-id="cl6deihkx002hakozb8mx2z5m" data-title="明远周刊：从零实现栅格地图" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-browser/extension" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/02/11/browser/extension/" class="article-date">
-  <time class="dt-published" datetime="2022-02-11T11:33:29.000Z" itemprop="datePublished">2022-02-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/02/11/browser/extension/">写个浏览器插件吧</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/11_11:40_BYHCz8.png" alt="image-20220211114010280"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文以实现一个简单的浏览器插件为例，带你入门插件开发。插件功能：一键复制标题以及链接，生成 Markdown 格式链接并给到剪切板。源代码在<a target="_blank" rel="noopener" href="https://github.com/acmu/my-extension">my-extension</a>仓库</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>近期在写周刊，要复制文章标题以及链接，之后转换为 Markdown 格式粘贴到文档编辑器中。</p>
-<h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><p>每次都要重复「复制标题 ➡️ 复制链接 ➡️ 结合成 Markdown 」这些操作，文章一多就有些麻烦且枯燥。</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>要是能一键复制为 Markdown 链接格式（包含标题以及对应链接），接着直接到文档编辑器中粘贴，那该有多美好。🤩</p>
-<p>刚好最近学了插件开发的内容，可以实现如上想法，正好借此机会实践一下（其实这里的插件应该叫扩展，也就是 extension ，但现在普遍都叫插件，故本文也使用此名称）。</p>
-<h2 id="写插件"><a href="#写插件" class="headerlink" title="写插件"></a>写插件</h2><p>我常看的文章都是来自掘金与微信公众号，通过分析<code>HTML</code>代码发现，文章标题都是在<code>h1</code>标签内的，所以只要获取到<code>h1</code>标签的<code>innerText</code>内容再加上<code>window.location.href</code>即可完成目标。</p>
-<p>首先新建目录<code>my-extension</code>，创建<code>manifest.json</code>文件：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;复制标题链接&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;使用 Markdown 格式复制标题链接&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;manifest_version&quot;</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只需要一个简单的<code>manifest.json</code>文件，我们就已经编写了一个插件，这时在浏览器地址栏中输入<code>chrome://extensions</code>即可进入到插件管理页面，打开开发者模式并加载扩展：</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/04_08:02_EKQkFX.png" alt="image-20220204080203473"></p>
-<p>加载完成后，可看到插件如下：</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/05_22:11_GnbMaK.png" alt="image-20220205221158858"></p>
-<p>你可以理解为我们只是写了一个插件声明，但是这个插件什么都没有做，接下来我们给它添加功能，在<code>manifest.json</code>中增加<code>commands</code>字段、<code>permissions</code>字段和<code>background</code>字段，字段定义文档在<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/manifest/">Manifest file format</a>中查看：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;background&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;service_worker&quot;</span>: <span class="string">&quot;background.js&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;permissions&quot;</span>: [<span class="string">&quot;activeTab&quot;</span>, <span class="string">&quot;scripting&quot;</span>],</span><br><span class="line"><span class="string">&quot;commands&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;run-copy&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;suggested_key&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;default&quot;</span>: <span class="string">&quot;Ctrl+Shift+Y&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;mac&quot;</span>: <span class="string">&quot;Command+Shift+Y&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;执行复制标题链接&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>commands</code>字段可以监听到快捷键的触发，上述代表使用<code>Command+Shift+Y</code>快捷键就能触发<code>run-copy</code>事件，这时新增<code>background.js</code>文件，并使用<code>chrome.commands.onCommand.addListener</code>即可添加事件监听器，但这里还需要获取当前 tab 以及注入脚本的权限，所以还需要<code>permissions</code>字段，最终<code>background.js</code>文件代码如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> copyTitleAndLink = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> fixedMessageId = <span class="string">&#x27;__fixed-message-id&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> tipStyle = <span class="string">`</span></span><br><span class="line"><span class="string">#__fixed-message-id &#123;</span></span><br><span class="line"><span class="string">    position: fixed;</span></span><br><span class="line"><span class="string">    right: 32px;</span></span><br><span class="line"><span class="string">    top: 32px;</span></span><br><span class="line"><span class="string">    background-color: white;</span></span><br><span class="line"><span class="string">    z-index: 9999;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    padding: 8px 16px;</span></span><br><span class="line"><span class="string">    min-width: 200px;</span></span><br><span class="line"><span class="string">    border-radius: 8px;</span></span><br><span class="line"><span class="string">    font-size: 12px;</span></span><br><span class="line"><span class="string">    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#__fixed-message-id.success &#123;</span></span><br><span class="line"><span class="string">    border: 2px solid #2ecc71;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#__fixed-message-id.fail &#123;</span></span><br><span class="line"><span class="string">    border: 2px solid #e74c3c;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">    <span class="comment">// 把提示信息插入到网页中</span></span><br><span class="line">    <span class="keyword">const</span> tipMessage = <span class="function"><span class="params">isOk</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> styleSheet = <span class="built_in">document</span>.createElement(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line">        styleSheet.innerText = tipStyle;</span><br><span class="line">        <span class="built_in">document</span>.head.appendChild(styleSheet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> div = <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;fixedMessageId&#125;</span>`</span>);</span><br><span class="line">        <span class="keyword">if</span> (!div) &#123;</span><br><span class="line">            div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">            div.setAttribute(<span class="string">&#x27;id&#x27;</span>, fixedMessageId);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isOk) &#123;</span><br><span class="line">            div.innerText = <span class="string">&#x27;复制成功 🎉&#x27;</span>;</span><br><span class="line">            div.setAttribute(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            div.innerText = <span class="string">&#x27;复制失败 😞&#x27;</span>;</span><br><span class="line">            div.setAttribute(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;fail&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.body.append(div);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            div.remove();</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> h1Element = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;h1&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> title = h1Element.innerText;</span><br><span class="line">        <span class="comment">// 获取到需要的 Markdown 格式</span></span><br><span class="line">        <span class="keyword">const</span> titleAndLink = <span class="string">`[<span class="subst">$&#123;title&#125;</span>](<span class="subst">$&#123;<span class="built_in">window</span>.location.href&#125;</span>)`</span>;</span><br><span class="line">        <span class="comment">// 执行剪切板操作</span></span><br><span class="line">        <span class="comment">// 可参考 https://www.ruanyifeng.com/blog/2021/01/clipboard-api.html</span></span><br><span class="line">        <span class="keyword">await</span> navigator.clipboard.writeText(titleAndLink);</span><br><span class="line">        tipMessage(<span class="literal">true</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">&#x27;Failed to copy: &#x27;</span>, err);</span><br><span class="line">        tipMessage(<span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> runCopy = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="comment">// 找到当前活跃的浏览器 tab 标签</span></span><br><span class="line">    <span class="keyword">let</span> [tab] = <span class="keyword">await</span> chrome.tabs.query(&#123; <span class="attr">active</span>: <span class="literal">true</span>, <span class="attr">currentWindow</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给活跃的 tab 标签执行 copyTitleAndLink 函数</span></span><br><span class="line">    chrome.scripting.executeScript(&#123;</span><br><span class="line">        <span class="attr">target</span>: &#123; <span class="attr">tabId</span>: tab.id &#125;,</span><br><span class="line">        <span class="attr">function</span>: copyTitleAndLink,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">chrome.commands.onCommand.addListener(<span class="function"><span class="params">command</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (command === <span class="string">&#x27;run-copy&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 在监听到 run-copy command 时执行 runCopy 函数</span></span><br><span class="line">        runCopy();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>以上代码先是监听了<code>run-copy</code>事件，之后找到当前活跃的 tab 页（也就是你正在浏览的 tab 页），接着执行了<code>copyTitleAndLink</code>函数，此函数的作用是在成功或者失败时在页面上给出提醒，如果按了快捷键后并没有效果，那么要到快捷键页面重新设置一下：</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:11_Q7ylZw.png" alt="image-20220206001112017"></p>
-<p>在开发插件过程中，点击插件卡片上的<code>service worker</code>链接，即可打开<code>DevTools</code>调试<code>background.js</code>代码，如果产生错误，那么<code>Remove</code>按钮旁边有<code>Error</code>按钮，点击即可查看错误，直接打开活跃的 tab 页<code>DevTools</code>可调试注入进的 js 代码。</p>
-<p>最后我们找<a target="_blank" rel="noopener" href="https://juejin.cn/post/7056417977675022366">一篇文章</a>测试一下，发现可以成功复制内容。🎉</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-02/06_00:30_Fh0Lob.png" alt="image-20220206003006212"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文简单介绍了<code>manifest.json</code>文件和一些插件 api，想了解更多内容可参考<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/">开发文档</a>，想要从零入门可参考<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/getstarted/">快速入门</a>。</p>
-<p>实现一些功能简单的插件还是很容易的，为了提升你使用浏览器的效率，大家快去实践起来吧。😜</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/02/11/browser/extension/" data-id="cl5pg3mnh001bbpor9t0b97et" data-title="写个浏览器插件吧" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
 
     </footer>
   </div>
@@ -1223,7 +1301,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
     </div>
   </div>
 
@@ -1234,6 +1312,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
+          </li>
         
           <li>
             <a href="/my-blog/2022/07/17/JavaScript/js-promise/">JavaScript 异步与 Promise</a>
@@ -1249,10 +1331,6 @@
         
           <li>
             <a href="/my-blog/2022/07/10/JavaScript/defineProperty/">defineProperty 详细解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/">在 Mac 中像 Windows 一样切换应用</a>
           </li>
         
       </ul>
