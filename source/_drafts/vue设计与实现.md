@@ -43,7 +43,7 @@ setTimeout(() => {
 
 这实现了最简单的响应式数据，更改 obj.text 对应的 html 内容页会改变
 
-（这里为什么用 Set 结构？因为监听器中不应该有两个相同的，如果这样就重复调用了）
+（这里为什么用 Set 结构？因为监听器中不应该有两个相同的函数，如果on了两次同一个的函数，那么触发的时候就应该只触发一次）
 
 #### 更完善的响应式
 
@@ -332,13 +332,221 @@ effect(function effectFn() {
 });
 ```
 
+effect 函数中存在三元表达式，根据 obj.ok 的值会执行不同的分支
+
+分支切换可能产生遗留的副作用函数，ok 为 true
+
+```js
+data
+	ok
+  	effectFn
+  text
+  	effectFn
+```
+
+ok 为 false
+
+```js
+data
+	ok
+  	effectFn
+```
+
+这时就不应该在追踪 text 了，但我们现在的实现还是在追踪，这是遗留的副作用函数，它会导致不必要的更新
+
+```js
+effect(function effectFn() {
+  console.log('effect run');
+  document.body.innerText = obj.ok ? obj.text : 'not';
+});
+
+// 执行 setter
+setTimeout(() => {
+  obj.ok = false;
+  obj.text = '243234'
+}, 1000);
+```
+
+obj.ok 为 false 后，obj.text 的更新就不应该执行 effectFn，但我们当前的实现不能满足
+
+解决：每次副作用函数执行时，先把副作用函数从与之关联的依赖集合中删除。当副作用函数执行完毕后，会重新建立连接，因为副作用函数的执行就调用了 getter。
+
+与副作用函数关联的依赖集合怎么求？
+
+给 effectFn 函数增加 deps 属性，保存副作用函数相关联的依赖集合
+
+```js
+function effect(fn) {
+  const effectFn = () => {
+    // 注意
+    activeEffect = effectFn;
+    fn();
+  };
+  // 新增
+  effectFn.deps = [];
+  effectFn();
+}
 
 
-要写这里了
+function track(target, key) {
+  if (!activeEffect) return target[key];
 
+  let depsMap = bucket.get(target);
+  if (!depsMap) {
+    bucket.set(target, (depsMap = new Map()));
+  }
+  let deps = depsMap.get(key);
+  if (!deps) {
+    depsMap.set(key, (deps = new Set()));
+  }
+  deps.add(activeEffect);
+  // 新增
+  activeEffect.deps.push(deps);
+}
+```
 
+之后可根据effectFn.deps删除掉联系
 
-50 page
+```js
+function effect(fn) {
+  const effectFn = () => {
+    // 新增
+    cleanup(effectFn);
+    activeEffect = effectFn;
+    fn();
+  };
+  effectFn.deps = [];
+  effectFn();
+}
+
+function cleanup(effectFn) {
+  for (let i = 0; i < effectFn.deps.length; i++) {
+    const deps = effectFn.deps[i];
+    deps.delete(effectFn);
+  }
+  effectFn.deps.length = 0;
+}
+```
+
+但现在如果你执行，会发现产生了无限循环，原因是 trigger 函数中的`effects.forEach(fn => fn())`，可以简短的代码表示根因，如下：
+
+```js
+const set = new Set([1]);
+
+set.forEach(() => {
+  set.delete(1);
+  set.add(1);
+  console.log('遍历中');
+});
+```
+
+Set 的 forEach 对应新加入的项目会一直遍历
+
+解决：新复制一个set，使用新set遍历
+
+```js
+const set = new Set([1]);
+// 新增
+const newSet = new Set(set)
+newSet.forEach(() => {
+  set.delete(1);
+  set.add(1);
+  console.log('遍历中');
+});
+```
+
+那么，可以这样改trigger代码
+
+```js
+function trigger(target, key) {
+  const depsMap = bucket.get(target);
+  if (!depsMap) return;
+  const effects = depsMap.get(key);
+  // 新增
+  const effectsToRun = new Set(effects);
+  effectsToRun.forEach(fn => fn());
+}
+```
+
+#### 嵌套的 effect 与 effect 栈
+
+effect 可以嵌套，如下：
+
+```js
+effect(function effectFn1() {
+  effect(function effectFn2() {
+    // ...
+  })
+})
+```
+
+测下嵌套的效果：
+
+```js
+const data = { foo: true, bar: true };
+// const obj = new Proxy(data, { 代理代码 })
+let temp1, temp2;
+
+effect(function effectFn1() {
+  console.log('effectFn1 run');
+  effect(function effectFn2() {
+    console.log('effectFn2 run');
+    temp2 = obj.bar;
+  });
+  temp1 = obj.foo;
+});
+
+setTimeout(() => {
+  obj.foo = false;
+}, 1000);
+
+// 输出
+// effectFn1 run
+// effectFn2 run
+// effectFn2 run （1 秒后）
+```
+
+这是错误的，期望的联系如下：
+
+```
+data
+	bar
+		effectFn2
+	foo
+		effectFn1
+```
+
+那么更改了 foo，应该执行 effectFn1，但是当前实现却执行了 effectFn2。
+
+问题出在 activeEffect，他只是一个变量，当执行到effectFn2时，会覆盖effectFn1，当effectFn2执行完成后，再回到effectFn1执行时，activeEffect却不能还原回来，不能模拟函数调用栈，那么更改如下：
+
+```js
+let activeEffect;
+// 新增
+const effectStack = [];
+
+function effect(fn) {
+  const effectFn = () => {
+    cleanup(effectFn);
+    activeEffect = effectFn;
+    // 新增
+    effectStack.push(effectFn);
+    fn();
+    // 新增
+    effectStack.pop();
+    activeEffect = effectStack[effectStack.length - 1];
+  };
+  effectFn.deps = [];
+  effectFn();
+}
+
+// 最后输出
+// effectFn1 run
+// effectFn2 run
+// （1 秒后）
+// effectFn1 run
+// effectFn2 run
+```
 
 
 
@@ -347,12 +555,164 @@ effect(function effectFn() {
 ```js
 const bucket = new WeakMap();
 let activeEffect;
+// 新增
+const effectStack = [];
+
 function effect(fn) {
-  activeEffect = fn;
-  fn();
+  const effectFn = () => {
+    cleanup(effectFn);
+    activeEffect = effectFn;
+    // 新增
+    effectStack.push(effectFn);
+    fn();
+    // 新增
+    effectStack.pop();
+    activeEffect = effectStack[effectStack.length - 1];
+  };
+  effectFn.deps = [];
+  effectFn();
 }
 
-const data = { ok: true, text: 'hello world' };
+function cleanup(effectFn) {
+  for (let i = 0; i < effectFn.deps.length; i++) {
+    const deps = effectFn.deps[i];
+    deps.delete(effectFn);
+  }
+  effectFn.deps.length = 0;
+}
+
+const data = { foo: true, bar: true };
+// const obj = new Proxy(data, { 代理代码 })
+let temp1, temp2;
+
+// 代理操作
+const obj = new Proxy(data, {
+  get(target, key) {
+    track(target, key);
+    return target[key];
+  },
+  set(target, key, newVal) {
+    target[key] = newVal;
+    trigger(target, key);
+  },
+});
+
+function track(target, key) {
+  if (!activeEffect) return target[key];
+
+  let depsMap = bucket.get(target);
+  if (!depsMap) {
+    bucket.set(target, (depsMap = new Map()));
+  }
+  let deps = depsMap.get(key);
+  if (!deps) {
+    depsMap.set(key, (deps = new Set()));
+  }
+  deps.add(activeEffect);
+  // 新增
+  activeEffect.deps.push(deps);
+}
+
+function trigger(target, key) {
+  const depsMap = bucket.get(target);
+  if (!depsMap) return;
+  const effects = depsMap.get(key);
+  // 新增
+  const effectsToRun = new Set(effects);
+  effectsToRun.forEach(fn => fn());
+}
+
+// --- END
+
+effect(function effectFn1() {
+  console.log('effectFn1 run');
+  effect(function effectFn2() {
+    console.log('effectFn2 run');
+    temp2 = obj.bar;
+  });
+  temp1 = obj.foo;
+});
+
+setTimeout(() => {
+  obj.foo = false;
+}, 1000);
+
+// 最后输出
+// effectFn1 run
+// effectFn2 run
+// （1 秒后）
+// effectFn1 run
+// effectFn2 run 
+```
+
+#### 避免无限递归循环
+
+如下代码会报错：`Uncaught RangeError: Maximum call stack size exceeded`
+
+```js
+const data = { foo: true, bar: true };
+// const obj = new Proxy(data, { 代理代码 })
+
+effect(function effectFn1() {
+  obj.foo++;
+});
+```
+
+`obj.foo++` 相当于 `obj.foo  = obj.foo + 1`，既读取 foo 又设置 foo
+
+解决：（不太懂。。。）
+
+```js
+function trigger(target, key) {
+  const depsMap = bucket.get(target);
+  if (!depsMap) return;
+  const effects = depsMap.get(key);
+  const effectsToRun = new Set();
+  effects &&
+    effects.forEach(effectFn => {
+      // 新增
+      if (effectFn !== activeEffect) {
+        effectsToRun.add(effectFn);
+      }
+    });
+  effectsToRun.forEach(effectFn => effectFn());
+}
+```
+
+
+
+全部代码：
+
+```js
+const bucket = new WeakMap();
+let activeEffect;
+// 新增
+const effectStack = [];
+
+function effect(fn) {
+  const effectFn = () => {
+    cleanup(effectFn);
+    activeEffect = effectFn;
+    // 新增
+    effectStack.push(effectFn);
+    fn();
+    // 新增
+    effectStack.pop();
+    activeEffect = effectStack[effectStack.length - 1];
+  };
+  effectFn.deps = [];
+  effectFn();
+}
+
+function cleanup(effectFn) {
+  for (let i = 0; i < effectFn.deps.length; i++) {
+    const deps = effectFn.deps[i];
+    deps.delete(effectFn);
+  }
+  effectFn.deps.length = 0;
+}
+
+const data = { foo: true, bar: true };
 // const obj = new Proxy(data, { 代理代码 })
 
 // 代理操作
@@ -379,43 +739,38 @@ function track(target, key) {
     depsMap.set(key, (deps = new Set()));
   }
   deps.add(activeEffect);
+  // 新增
+  activeEffect.deps.push(deps);
 }
 
 function trigger(target, key) {
   const depsMap = bucket.get(target);
   if (!depsMap) return;
   const effects = depsMap.get(key);
-  effects && effects.forEach(fn => fn());
+  const effectsToRun = new Set();
+  effects &&
+    effects.forEach(effectFn => {
+      // 新增
+      if (effectFn !== activeEffect) {
+        effectsToRun.add(effectFn);
+      }
+    });
+  effectsToRun.forEach(effectFn => effectFn());
 }
 
 // --- END
 
-effect(function effectFn() {
-  console.log('effect run');
-  document.body.innerText = obj.ok ? obj.text : 'not';
+effect(function effectFn1() {
+  obj.foo++;
 });
-
-// 执行 setter
-setTimeout(() => {
-  obj.ok = false;
-  obj.text = '243234'
-}, 1000);
 
 ```
 
 
 
-
-
-#### 嵌套的 effect 与 effect 栈
-
-
-
-#### 避免无限递归循环
-
-
-
 #### 调度执行
+
+
 
 
 
