@@ -1,12 +1,196 @@
 ---
-title: JavaScript的对象与继承
+title: JavaScript 的对象与继承
 date: 2022-04-14 11:48:06
 tags: 周刊
 ---
 
 
 
+
+
+https://km.sankuai.com/page/1279986814#id-4.2.2%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1
+
+
+
+彩梅有分享过 对象与继承相关的内容，不知道大家还有没有印象
+
+本文算是这部分的深入
+
+
+
+分为几块
+
+
+
 7.28 晚上分享
+
+对象在 JavaScript 中扮演着重要的角色，如：函数、正则等等都是继承 Object 的
+
+这也就是 为啥  Array 不是一个单独的类型
+
+
+
+
+
+不知道大家记不记得 彩梅上次讲过其中的  对象部分，很是难懂
+
+
+
+
+
+
+
+
+
+
+
+## 几种继承方法
+
+### 原型链继承
+
+```js
+function SuperType() {
+  this.property = true;
+}
+SuperType.prototype.getSuperValue = function() {
+  return this.property;
+};
+function SubType() {
+  this.subproperty = false;
+}
+// 继承SuperType
+SubType.prototype = new SuperType();
+SubType.prototype.getSubValue = function() {
+  return this.subproperty;
+};
+let instance = new SubType();
+console.log(instance.getSuperValue()); // true
+
+```
+
+
+
+默认情况下，所有引用类型都继承自 Object，这也是通过原型链实 现的。
+
+这也是为什么自定义类型能够继承包括 toString()、valueOf()在内的所有默 认方法的原因。
+
+原型与实例的关系  instanceof 或 isPrototypeOf
+
+子类要在继承之后在添加他自己的方法
+
+```js
+// 继承SuperType
+SubType.prototype = new SuperType();
+// 新方法
+SubType.prototype.getSubValue = function () {
+  return this.subproperty;
+};
+// 覆盖已有的方法
+SubType.prototype.getSuperValue = function () {
+  return false;
+};
+```
+
+
+
+### 原型链的问题
+
+问题1：原型中包含引用值
+
+```js
+function SuperType() {
+      this.colors = ["red", "blue", "green"];
+    }
+    function SubType() {}
+// 继承SuperType
+SubType.prototype = new SuperType();
+let instance1 = new SubType(); instance1.colors.push("black"); console.log(instance1.colors); // "red,blue,green,black"
+let instance2 = new SubType(); console.log(instance2.colors); // "red,blue,green,black"
+
+```
+
+修改了 color 会影响所有的子类实例
+
+问题2：子类型在实例化时不能给父类型的构造函数传参
+
+鉴于这两个问题，原型链基本不会被单独使用。
+
+### 盗用构造函数
+
+constructor stealing
+
+也称作“对象伪装”或“经典继承”
+
+
+
+instanceof 是用 constrc 判断的吗？？？为什么要特殊设置 constructor 呢？
+
+
+
+## 组合继承
+
+组合继承的问题，会调用2次父构造函数，生成两份数据，冗余占用内存
+
+
+
+
+
+最好的继承方式
+
+```js
+function SuperType(name) {
+  this.name = name;
+  this.colors = ['r', 'b', 'g'];
+}
+
+SuperType.prototype.sayName = function() {
+  console.log(this.name);
+};
+
+function SubType(name, age) {
+  SuperType.call(this, name);
+
+  this.age = age;
+}
+
+// SubType.prototype = new SuperType();
+
+// function create(o) {
+//   function F() {}
+//   F.prototype = o;
+//   return new F();
+// }
+
+function inheritPrototype(subType, superType) {
+  let prototype = Object.create(superType.prototype);
+  console.log('prototype', prototype)
+//   debugger
+  //   let prototype = create(superType.prototype);
+  prototype.constructor = subType;
+  subType.prototype = prototype;
+}
+
+inheritPrototype(SubType, SuperType);
+
+// SubType.prototype.constructor = SubType;
+
+SubType.prototype.sayAge = function() {
+  console.log(this.age);
+};
+
+const a = new SubType('zmy', 25);
+
+console.log('a', a);
+
+```
+
+
+
+先搞清楚 new  之后是 Obj create 之后 才能看这个
+
+
+
+
 
 
 
@@ -954,5 +1138,4 @@ console.log(p2.list);
 
 
 横向的找一些优秀的作者、优秀的文章，自己理解总结就行
-
 

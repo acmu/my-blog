@@ -1,7 +1,7 @@
 ---
 title: defineProperty 详细解读
 date: 2022-07-10
-tags: 周刊
+tags: JavaScript
 ---
 
 

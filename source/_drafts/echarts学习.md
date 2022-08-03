@@ -88,3 +88,70 @@ echarts 实现x轴分组
 
 
 
+
+
+
+
+
+
+### 2个折线
+
+```js
+option = {
+  legend: {
+    data: ['班次一', '班次二']
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: '班次一',
+      data: [150, 230, 224, 218, 135, 147, 260],
+      type: 'line'
+    },
+    {
+      name: '班次二',
+      data: [50, 30, 24, 18, 35, 0, 0],
+      type: 'line'
+    }
+  ]
+};
+
+```
+
+怎么带有legend？
+
+https://echarts.apache.org/examples/zh/editor.html?c=line-stack
+
+这个更丰富，带有 legend 和 tooltip
+
+
+
+柱状图初探
+
+https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQCGAHhAM70A0x6L7ACsAjQwtQqhIkwATxDUGbABaMAJsADu9HrAC-xHd3TMAgqzbjtMuQwDGjURWClpXbSvuNCAbXoBZGFyw9AAqAK7UgfQA6tQqkcGKoZEAYuSRAMr2GaHQ9AC6-oaw0qbsFpJW8kEAbozY4VroBsRstBDU5rBe2hKSsNCMALZV9AAsAHQATIDOPrCAHHqAlHaufRiyIwBGjKTLfdSDIMpsZUQr6ABmwDahnfSt5B2Nfc0rbGCMNgDWDIw7ku5v3gAjJMAAycWCgsGwQEAVihAA4oQB2KGAwGogDMIIKkmeJF6kgGwwYExmsEA7YqAedDfiRXu8vkEfkVJHsDowjp0CX0Llcbnd2hxtE1mSR_p4uhjRuCAGxI8EATihMOl4JRMrlsHh0ryIvQlQYm222jx6C56CJIyRU1mVJp6DpnwYuV1sFZh2OZpIPOuCjaDyFuhdYu8kvVCqVKtgatgsvBWp1Af1QUNj2FxAKOgA3EA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
