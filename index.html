@@ -77,6 +77,522 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekly/10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/11/10/weekly/10/" class="article-date">
+  <time class="dt-published" datetime="2022-11-10T23:12:20.000Z" itemprop="datePublished">2022-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/11/10/weekly/10/">明远视角：前端脚手架开发入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>👀 本期看点：</p>
+<ul>
+<li>  前端脚手架开发入门</li>
+<li>  Puppeteer 原理分析</li>
+<li>  pnpm 对比 npm 与 yarn</li>
+<li>  JS 实现私有属性</li>
+<li>  npm 并行执行脚本</li>
+<li>  glob 语法介绍</li>
+<li>  循环依赖时，CJS 与 ESM 的区别</li>
+</ul>
+<h2 id="📃-文章"><a href="#📃-文章" class="headerlink" title="📃 文章"></a>📃 文章</h2><p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/oFo43lbfdueVcdaOlJQ_tg">前端脚手架开发入门</a></p>
+<p>我们常常陷于业务开发，拿起脚手架就开干，但脚手架到底做了什么，你了解吗？本文介绍了一些工具，如：commander、chalk、inquirer、ora 等，以及 package.json 中的一些重要字段，最后通过实例 demo 来展示如何开发脚手架，是一篇入门好文。</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9YKQcxtsneW2LzaddKim9Q">手写 Puppeteer：远程控制 Chromium</a></p>
+<p>Puppeteer 相信大家都听过，它可以用 JS 自动化控制浏览器，本文讲述了其原理，基于 Chrome DevTools Protocol，它是 chrome devtools 和 chromium 通信的协议。</p>
+<p>（直接下载 puppeteer 包很耗时，因为会同时下载 chromium，你可以下载 puppeteer-core 包，之后配置 <code>executablePath</code> 字段，类似<code>executablePath: &#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;,</code>，这样就可以控制你电脑的 Chrome 了，会节省很多时间）</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bLthdXlmu8wtC3ScAaZ3Kg">pnpm 是凭什么对 npm 和 yarn 降维打击的</a></p>
+<p>npm v2 是 嵌套 node_modules， 问题：</p>
+<ol>
+<li>重复的包安装了多次</li>
+<li>windows 下路径名最长 200 多个字符，大于他会出错</li>
+</ol>
+<p>yarn 出来了（npm v3 也紧跟），解决方案：铺平 node_modules，但有新的问题：幽灵包（没有安装包，但是可以用）、同一个包的不同版本还是会重复安装。最后 pnpm 出来了，使用链接解决，比较完美。</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SusZu6rdVijZ-6seg9oa0Q">私有属性的 6 种实现方式，你用过几种？</a></p>
+<p>私有属性在 Java 的实现及其简单，但在 JS 中的实现可谓是眼花缭乱。本文总结了 6 种实现方式，并且分析了利弊。</p>
+<ol>
+<li>下划线命名</li>
+<li>下划线加 Proxy 限制</li>
+<li>基于 Symbol 特性</li>
+<li>使用 WeakMap</li>
+<li>ES 最新草案 #prop</li>
+<li>TS 的 private</li>
+</ol>
+<p>👉 <a target="_blank" rel="noopener" href="https://juejin.cn/post/7111118506657218590">npm-run-all 并行执行脚本</a></p>
+<p>有些 npm 脚本没有必要串行，比如<code>build:umd</code> 和 <code>build:esm</code>，它们没有依赖关系，所以可并行执行。本文介绍可以通过<code>npm-run-all</code>包来帮助开发者并行执行脚本。</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4LvZlT6ZT-OV0699XREfLg"><code>**/*.js</code> 是啥语法？谁能解析？</a></p>
+<p><code>.gitignore</code> 里、<code>webpack</code> 配置里等这种配置<code>**/*.js</code>、<code>dist/**/package.json</code>，叫做 glob 语法，它来源于 linux，允许使用者通过 “通配符” 来匹配目录和文件。因为其 “实用、好用”，所以渐渐出圈，因此，即便我们使用的是 <code>windows</code>，在前端项目里也有工具库可以轻松的解析这种语法。</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JSlJn_LzbkAOy6LNyY5_jQ">抖音二面：为什么模块循环依赖不会死循环？CommonJS 和 ES Module 的处理有什么不同？</a></p>
+<p>本文给出多个循环依赖的实例，并且包含 CJS 和 ESM 的对比，由浅入深的分析了现象与本质。</p>
+<h2 id="🤔-想法"><a href="#🤔-想法" class="headerlink" title="🤔 想法"></a>🤔 想法</h2><ol>
+<li><p>我们在项目初期都会思考几个问题：客户是谁？解决什么问题？使用什么技术方案？带来什么价值？这几个问题思考下来，项目要不要做、怎么做，基本就清晰了。来自：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MMCO_vU_XE783XvxFTvfDQ">大淘宝技术人金句</a>。</p>
+<ol>
+<li>不要过于看重技术，它一定要基于场景，并且能解决问题，才能发挥作用。</li>
+</ol>
+</li>
+<li><p>近期裁员很多，周围有的同事也已离开，所以需要多多提升自己了。</p>
+<ol>
+<li>疫情这几年裁员已经比较平常了，我越来越意识到：不要认为是自己能力不行所以被裁，只不过就是公司的业务调整罢了，真的代表不了什么，更多是运气的成分吧。</li>
+</ol>
+</li>
+<li><p>周刊改名为视角了，因为发现不可能每周更新，又叫周刊就有些奇怪 😂。更新速度会放慢，因为高质量的文章比较少，而且文章相关联的知识也要去学习。</p>
+</li>
+</ol>
+<p><em>2022-11-10（第 10 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/11/10/weekly/10/" data-id="clac0ez3w002meqop4fj424s0" data-title="明远视角：前端脚手架开发入门" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript/使用 npm link 调试包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/" class="article-date">
+  <time class="dt-published" datetime="2022-11-09T23:12:20.000Z" itemprop="datePublished">2022-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/">使用 npm link 调试包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文讨论的是 npm v6 版本。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>我要调试的包是 mc-charts，主工程是 tms-c3，即我要都 tms-c3 中使用 npm link 调试 mc-charts 包。</p>
+<p>共两步：</p>
+<ol>
+<li>在 mc-charts 包执行 npm link。</li>
+<li>在 tms-c3 中执行 npm link mc-charts（注意：这里一定是包名，即 package.json 中的 name 字段，而不是文件目录名）。</li>
+</ol>
+<p>以下实际演示一遍：</p>
+<p>第一步：进入 mc-charts 包目录下（路径是/Users/yuan/repo/mc-charts），他的 package.json 的 name 字段是 mc-charts，这时我在此包下执行 npm link：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib/node_modules/mc-charts -&gt; /Users/yuan/repo/mc-charts</span><br></pre></td></tr></table></figure>
+
+<p>输出内容表示在 /usr/local/lib/node_modules 目录下新建了一个软链接，指向了 mc-charts 包的目录</p>
+<p>第二步：在主工程是 tms-c3 （路径是/Users/yuan/repo/tms-c3）中执行 npm link mc-charts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/Users/yuan/repo/tms-c3/node_modules/mc-charts</span><br><span class="line">-&gt; /usr/local/lib/node_modules/mc-charts</span><br><span class="line">-&gt; /Users/yuan/repo/mc-charts</span><br></pre></td></tr></table></figure>
+
+<p>为了方便展示，进行了换行。这里表示在主工程 tms-c3 的 node_modules 下新建了一个软链接，他指向了 /usr/local/lib/node_modules/mc-charts，但此时 /usr/local/lib/node_modules/mc-charts 又指向了 /Users/yuan/repo/mc-charts，所以就能达到调试的目的。</p>
+<h2 id="简化版本"><a href="#简化版本" class="headerlink" title="简化版本"></a>简化版本</h2><p>还有简化版本：npm link pkgFloder（包的路径地址）</p>
+<p>tms-c3 目录下执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link ../mc-charts/</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib/node_modules/mc-charts -&gt; /Users/yuan/repo/mc-charts</span><br><span class="line"></span><br><span class="line">/Users/yuan/repo/tms-c3/node_modules/mc-charts</span><br><span class="line">-&gt; /usr/local/lib/node_modules/mc-charts</span><br><span class="line">-&gt; /Users/yuan/repo/mc-charts</span><br></pre></td></tr></table></figure>
+
+<p>这时你项目的 node_modules 中就已经有了 mc-charts 包了，首先在 package.json 里的 dependencies 加上 mc-charts 包，版本随便写就行，最后在代码中 import 即可使用了。如果你有 watch 文件变更的需求，npm link 也是支持的。</p>
+<h2 id="删除-link"><a href="#删除-link" class="headerlink" title="删除 link"></a>删除 link</h2><p>如果要取消 link，直接删除 <code>/Users/yuan/repo/tms-c3/node_modules/mc-charts</code> 和 <code>/usr/local/lib/node_modules/mc-charts</code> 这两个文件即可，或者可以使用 npm unlink 命令（网络上说 unlink 命令可行，但我并没有在 npm 官方文档找到此命令）</p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/electricg/68f1d42e29a322b5f3bc34748bac1f8e">npm unlink 命令参考</a>：</p>
+<p>Link scoped pakcages:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/projects/node-redis    # go into the scoped package directory</span><br><span class="line">npm link                    # creates global link</span><br><span class="line">cd ~/projects/node-bloggy   # go into some other package directory</span><br><span class="line">npm link @myorg/redis       # link-install the scoped package</span><br></pre></td></tr></table></figure>
+
+<p>Unlink scoped packages:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/projects/node-bloggy  # go into some other package directory</span><br><span class="line">npm unlink @myorg/redis    # unlink-uninstall the scoped package</span><br><span class="line">npm install @myorg/redis   # re-install the scoped package</span><br><span class="line">cd ~/projects/node-redis   # go into the scoped package directory</span><br><span class="line">npm unlink                 # deletes global link</span><br></pre></td></tr></table></figure>
+
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>如果你了解软链接与硬链接，那么可以轻松的猜到：link 命令就是创建的软链接而已，我们可以自己使用 shell 的 ln 命令实现。</p>
+<p>为什么只是创建了软链接就能调试包了呢？这还要看 node 的查包逻辑了，你 import 了 mc-charts 包，它会先去 node_modules 中找，找到的刚好是软链接，所以就能调试了。</p>
+<p>参考：</p>
+<p>npm link 命令 v6 版本<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v6/commands/npm-link">使用文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/" data-id="clac0ez33000xeqop417yd8mo" data-title="使用 npm link 调试包" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript/JavaScript 的对象与继承" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/" class="article-date">
+  <time class="dt-published" datetime="2022-11-05T09:19:02.000Z" itemprop="datePublished">2022-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/">JavaScript 的对象与继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文来自一次组内分享。</p>
+<p>对象和继承一直都是 JavaScript 里重要的概念，JavaScript 也是一门被误解的语言，尤其是在继承方面，本文就带大家更深入的了解对象与继承的相关知识。</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>对象是 JavaScript 中的一种数据类型（为什么 Array RegExp 等等，不是数据类型呢？），对象由属性和属性值组成，属性的类型只能是字符串或 Symbol，属性又分为两种类型，数据属性 和 访问器属性，每个属性都有 4 个描述符</p>
+<p>数据属性 和 访问器属性 共同的描述符：</p>
+<ol>
+<li>[[Configurable]]：属性是否可以通过 delete 删除，是否可以修改它的描述符，以及是否可以在数据属性与访问器属性之间切换</li>
+<li>[[Enumerable]]：是否 for in 循环、Object.keys() 可访问</li>
+</ol>
+<p>不同的描述符：</p>
+<p>数据属性：</p>
+<ol>
+<li>[[Value]]：属性值</li>
+<li>[[Writable]]：是否可以修改 [[Value]]</li>
+</ol>
+<p>访问器属性：</p>
+<ol>
+<li>[[Get]]：获取函数，在读取属性时调用</li>
+<li>[[Set]]：设置函数，在写入属性时调用</li>
+</ol>
+<p>[[xxx]] 这种双中括号代表什么？类似的还有 @@toPrimitive 又代表什么？</p>
+<ol>
+<li>[[xxx]] 这种双中括号的表示一般在规范文档中，代表是引擎的内部属性</li>
+<li>@@toPrimitive 这种类似表示，代表的是 Symbol.hasInstance</li>
+</ol>
+<p>可使用 Object.defineProperty() 与 Object.getOwnPropertyDescriptor() 设置与获取属性的描述符，默认我们直接对象定义的，都是 true 是数据属性：</p>
+<p>以下两种表示是一样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj2, <span class="string">&#x27;a&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(obj, <span class="string">&#x27;a&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>还可以用这样简写的方式定义访问器属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="keyword">get</span> <span class="title">a</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这种控制台显示 … 的就是计算属性，点击之后会调用 getter</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/05_09:10_5GpVXc.png" alt="image-2022110591023096 AM"></p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h3><p>使用字面量直接定义属性和方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;ming&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">  <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.introduce()</span><br></pre></td></tr></table></figure>
+
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>当你要定义多个对象的时候，直接复制多个还是有些麻烦，所以可以写一个工厂函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name,</span><br><span class="line">    age,</span><br><span class="line">    <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = createPerson(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p2 = createPerson(<span class="string">&#x27;foo&#x27;</span>, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">p2.introduce();</span><br></pre></td></tr></table></figure>
+
+<p>此模式的问题是无法使用 instanceof 等判断对象的类型</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数就是一个普通函数，只不过一般约定构造函数的首字母是大写的，以及它只会和 new 搭配使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p1.introduce();</span><br></pre></td></tr></table></figure>
+
+<p>它模仿了 Java 的写法，这里和 createPerson 的区别是：</p>
+<ol>
+<li>没有 return。</li>
+<li>属性和方法直接赋值给了 this。</li>
+<li>没有显式地创建对象。</li>
+</ol>
+<p>如果想要继续深入继承部分的内容，那么这里就要深入理解下：</p>
+<ol>
+<li><p>这应该是个很明显的约定，构造函数是不应该 return 的，如果 return 了那不就回到了工厂模式嘛</p>
+</li>
+<li><p>this 是很微妙的存在，如果没有 this 会怎样？</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;ming&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">  <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 如果没有 this，这里只能使用 person</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + person.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> animal = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">  <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这里不能复用，只能是一个新的函数</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + animal.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>没有显式地创建对象，那对象哪里来的？是 new “惹的祸”，new 干了什么？想要知道这个，你就得先了解原型链</p>
+<h3 id="原型链机制"><a href="#原型链机制" class="headerlink" title="原型链机制"></a><strong>原型链机制</strong></h3><p>如下代码的输出是什么？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">__proto__</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">1</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj.x);</span><br></pre></td></tr></table></figure>
+
+<p>解释：没有在对象上定义 x 属性，但为什么能获取到呢？因为<strong>对象在获取属性时，如果当前的对象没有，那么就会向当前对象的原型对象去寻找，如果还没有就继续向原型对象寻找，直到没有原型对象为止。</strong>这就是原型链，根据原型为链条寻找属性的机制。代码中的 <strong>proto</strong> 属性就是这里说的原型</p>
+<h4 id="proto-vs-Prototype-vs-prototype"><a href="#proto-vs-Prototype-vs-prototype" class="headerlink" title="proto vs [[Prototype]] vs prototype"></a><strong>proto</strong> vs [[Prototype]] vs prototype</h4><ol>
+<li><strong>proto</strong> 属性：每个对象都有此属性，代表原型，是非标准的历史遗留属性，现在并不推荐使用</li>
+<li>[[Prototype]] 内部属性：每个对象都有此属性，代表原型，是ES规范中的描述，和 <strong>proto</strong> 属性 功能完全一样，更推荐现代语法使用，但内部属性是不能直接在 JavaScript 语言层面访问的，还好语言标准提供了 Object.getPrototypeOf() 和 Object.setPrototypeOf() 获取和设置原型</li>
+<li>prototype 属性：每个函数都有 prototype 属性，他只有在此函数作为构造函数时才有意义，下文会讲</li>
+</ol>
+<h4 id="原型链图示"><a href="#原型链图示" class="headerlink" title="原型链图示"></a>原型链图示</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">z</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="attr">__proto__</span>: &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">1</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = &#123; <span class="attr">y</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj, obj2);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/05_09:13_7fWFTR.png" alt="image-2022110591310248 AM"></p>
+<p>可以看到如上代码设置了原型对象的对象，会比普通对象中间多一层</p>
+<h3 id="new-干了什么"><a href="#new-干了什么" class="headerlink" title="new 干了什么"></a>new 干了什么</h3><p>知道了原型链机制，那么现在就可以分析 new 干了什么</p>
+<ol>
+<li>创建一个新对象 foo</li>
+<li>将新对象 foo 的 [[Prototype]] 内部属性赋值为构造函数的 prototype 属性</li>
+<li>使用新对象 foo 的上下文执行构造函数（即构造函数中的this会指向新对象，并为这个新对象添加属性）</li>
+<li>如果构造函数返回非空对象，则返回构造函数返回的对象；否则，返回新对象  foo</li>
+</ol>
+<p><strong>这里很重要，下面还会继续用</strong>，要理解好。构造函数的 prototype 属性，这是什么呢？没事，我们可以先暂时略过这条，后面再看</p>
+<p>知道了原理，可以先忽略第2条，实现一个自己的 new，其实很简单：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里为了保持简单，省略了构造函数有返回值的情况，因为这种情况也并不常见</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fun, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> foo = &#123;&#125;;</span><br><span class="line">  fun.apply(foo, args);</span><br><span class="line">  <span class="keyword">return</span> foo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p1.introduce();</span><br><span class="line"><span class="built_in">console</span>.log(p1)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里为了保持简单，省略了构造函数有返回值的情况，因为这种情况也并不常见</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fun, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> foo = &#123;&#125;;</span><br><span class="line">  fun.apply(foo, args);</span><br><span class="line">  <span class="keyword">return</span> foo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = myNew(Person, <span class="string">&#x27;ming2&#x27;</span>, <span class="number">25</span>)</span><br><span class="line">p2.introduce()</span><br><span class="line"><span class="built_in">console</span>.log(p2)</span><br></pre></td></tr></table></figure>
+
+<p>（此时的 myNew 并不完整，后文还会再补充）</p>
+<p>接下来说回构造函数创建对象，其实此模式也存在问题：其定义的方法会在每个实例都创建一遍，不能复用（联想到大鹏分享的，冗余占用了内存呀）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming3&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每个实例都有一个自己的 introduce 函数</span></span><br><span class="line"><span class="built_in">console</span>.log(p1.introduce === p3.introduce);</span><br></pre></td></tr></table></figure>
+
+<p>那聪明的你就想到了，我们不用每次都新生成一个函数呀，可以用同一个函数的引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">introduce</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.introduce = introduce;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming3&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p1.introduce === p3.introduce);</span><br></pre></td></tr></table></figure>
+
+<p>这的确是个好办完，但唯一的缺点就是 introduce 占用了全局的命名空间，但解决这个问题也简单，只要把 introduce 等等众多方法放到 一个对象 myFuncs 中就行了，但是 myFuncs 也占用了一个全局的命名空间呀，那就不把 myFuncs 放在全局命名空间中了，那放在那里好呢？此时你想到函数也是对象呀，那么可以在函数上面添加属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.introduce = Person.myFuncs.introduce;</span><br><span class="line">&#125;</span><br><span class="line">Person.myFuncs = &#123;</span><br><span class="line">  <span class="function"><span class="title">introduce</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming3&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p1.introduce === p3.introduce);</span><br></pre></td></tr></table></figure>
+
+
+<p>但每次都这样写有些麻烦，还能不能更简略些？可以的，语言层面已经帮你实现了</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>不用你写函数的 myFuncs 属性了，语言规定，每个函数都有一个 prototype 属性（对就是上文说道的），他就是我们的 myFuncs 属性，只是换了个名字而已，还带有两个特殊逻辑：</p>
+<ol>
+<li><p>prototype 属性值是一个对象，对象中有一个 constructor 属性，属性值是构造函数<br>这个 constructor 属性到底有什么用呢？🧐</p>
+<p>我在看了半天 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor#browser_compatibility">mdn</a> 后得出结论：它没什么用 😅。</p>
+<p>它有一个比较常见的用法是用于判断对象的类型，但它很容易被赋值或删除，相比于 instanceof 和 Symbol.toStringTag 来说并不可靠，其实这两个也并非绝对可靠。</p>
+<p>这里说的 Symbol.toStringTag 是什么？</p>
+</li>
+<li><p>这里就是上文说的暂时忽略的第2条：在执行 new 的时候，会『把新对象 foo 的 [[Prototype]] 内部属性赋值为构造函数的 prototype 属性』，这样由于原型机制，我们也不用多余执行 this.introduce = Person.myFuncs.introduce 这段代码了，但是要记得把 Person.prototype.introduce 赋值</p>
+</li>
+</ol>
+<p>故可以得出如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"><span class="keyword">const</span> p3 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming3&#x27;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p1.introduce === p3.introduce);</span><br></pre></td></tr></table></figure>
+
+<p>这样的代码你是不是在哪里见过？</p>
+<p>如 Vue 2 的插件模式。你也可以自己写个好玩的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.test = <span class="string">&#x27;haha&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样每个对象的原型上都有了 test 属性</p>
+<p>这里发现，上文的 myNew 实现并不完整，应补充 [[Prototype]] 内部属性赋值的内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person(<span class="string">&#x27;ming&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p1.introduce();</span><br><span class="line"><span class="built_in">console</span>.log(p1);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fun, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> foo = &#123;&#125;;</span><br><span class="line">  <span class="built_in">Object</span>.setPrototypeOf(foo, fun.prototype);</span><br><span class="line">  fun.apply(foo, args);</span><br><span class="line">  <span class="keyword">return</span> foo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = myNew(Person, <span class="string">&#x27;ming2&#x27;</span>, <span class="number">25</span>);</span><br><span class="line">p2.introduce();</span><br><span class="line"><span class="built_in">console</span>.log(p2);</span><br></pre></td></tr></table></figure>
+
+<p>这里与上文相比，还有个改动就是 introduce 等方法不是实例属性了，而是原型属性（即多个实例会用相同的原型），实例属性与原型属性有什么区别？</p>
+<p>注意：如果你看过 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf">setPrototypeOf 的 mdn</a> 就能发现，它的性能并不好，推荐使用 Object.create() 代替，这个下文会讲</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>java 中可以用简单的关键字就实现继承了，但 JavaScript 中并不简单，因为我们要用原型链机制去模拟继承。</p>
+<p>在 JavaScript 的历史长河中，模拟继承的实现也有很多种方式，下面我们分别看下。</p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>通过上面的原型指向（[[Prototype]] 内部属性赋值）已经有些许的继承味道了，所以可以得出如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;animal&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;name is &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;dog&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype = <span class="keyword">new</span> Animal();</span><br><span class="line">Dog.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27; eat&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> Dog();</span><br><span class="line">dog.eat();</span><br><span class="line">dog.sayName();</span><br></pre></td></tr></table></figure>
+
+<p><strong>把子类构造函数的 prototype 赋值为父类的实例。</strong>你能说出 sayName 的调用是如何执行的吗？</p>
+<p>优点：实例 与 原型的关系可用 instanceof、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isPrototypeOf">isPrototypeOf()</a> 判断（文档中为什么是 Object.prototype.isPrototypeOf() 呢？这个和 Object.defineProperty() 有什么区别呢）</p>
+<p>原型链的问题：</p>
+<ol>
+<li><p>子类型在实例化时不能给父类型的构造函数传参</p>
+</li>
+<li><p>父类的实例中包含引用值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Dog.prototype = <span class="keyword">new</span> Animal();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog1 = <span class="keyword">new</span> Dog();</span><br><span class="line"><span class="keyword">const</span> dog2 = <span class="keyword">new</span> Dog();</span><br><span class="line"></span><br><span class="line">dog1.colors.push(<span class="string">&#x27;black&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dog1.colors);</span><br><span class="line"><span class="built_in">console</span>.log(dog2.colors);</span><br></pre></td></tr></table></figure>
+
+<p>因为多个 Dog 的实例的原型都是同一个，也就是 Dog.prototype 即 一个Animal的实例，那么如果Animal的实例有引用类型，就会导致多个 Dog 的实例的原型使用同一个引用类型</p>
+</li>
+</ol>
+<h3 id="盗用构造函数"><a href="#盗用构造函数" class="headerlink" title="盗用构造函数"></a>盗用构造函数</h3><p>相比于原型链，此方法多了一步：在子类构造函数中调用父类构造函数（把父类构造函数那过来给子类的构造函数中使用了，所以叫 盗用构造函数 嘛）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Animal.call(<span class="built_in">this</span>); <span class="comment">// 重点：新增代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 重点：删除了 Dog.prototype 的赋值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog1 = <span class="keyword">new</span> Dog();</span><br><span class="line"><span class="keyword">const</span> dog2 = <span class="keyword">new</span> Dog();</span><br><span class="line"></span><br><span class="line">dog1.colors.push(<span class="string">&#x27;black&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dog1.colors);</span><br><span class="line"><span class="built_in">console</span>.log(dog2.colors);</span><br></pre></td></tr></table></figure>
+
+<p>相比于原型链：</p>
+<ol>
+<li>可以传递参数</li>
+<li>引用类型在每个子类的实例上都有，解决了使用多个子类的实例使用共同的引用类型问题</li>
+</ol>
+<p>盗用构造函数的问题：</p>
+<ol>
+<li>dog1 instanceof Animal 为 false</li>
+<li>定义函数只能在子类的构造函数中，又回到了上文的函数不能复用的问题</li>
+</ol>
+<p>其实这个更像是借助构造函数实现了对象的组合</p>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><p>原型链 + 盗用构造函数 的组合</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;name is &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  Animal.call(<span class="built_in">this</span>, name); <span class="comment">// 重点：用于继承 Animal 构造函数中的属性（方法最好不要写在构造函数中，否则会难以复用）</span></span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype = <span class="keyword">new</span> Animal(); <span class="comment">// 重点：这里用于继承 Animal.prototype 中的方法</span></span><br><span class="line">Dog.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27; eat&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog1 = <span class="keyword">new</span> Dog(<span class="string">&#x27;foo&#x27;</span>, <span class="number">3</span>);</span><br><span class="line">dog1.colors.push(<span class="string">&#x27;black&#x27;</span>);</span><br><span class="line">dog1.eat();</span><br><span class="line">dog1.sayName();</span><br><span class="line"><span class="built_in">console</span>.log(dog1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dog2 = <span class="keyword">new</span> Dog(<span class="string">&#x27;bar&#x27;</span>, <span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dog2);</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ol>
+<li>方法一般定义在 构造函数.prototype 上，这里是在每个实例指向的原型，可以在多个实例中复用</li>
+<li>属性一般定义在构造函数的 this 赋值上，这里会在每个实例中都存在</li>
+<li>静态属性和静态方法其实就是构造函数的属性而已</li>
+</ol>
+<p>组合继承弥补了原型链和盗用构造函数的不足，<strong>是 JavaScript 中使用最多的继承模式</strong>。而且组合继承也保留了 instanceof 操作符和 isPrototypeOf()方法 识别对象的能力</p>
+<p>组合继承虽然很强大，但仍存在问题的：</p>
+<ol>
+<li>子类实例的原型中冗余存储了一份数据，也就是由于父类构造函数被调用 2 次所造成的</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/05_09:16_Wg751S.png" alt="image-2022110591651230 AM"></p>
+<p>如果想要完美的解决这个问题，就得先了解下其他内容</p>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><p>这和上面的 3 种继承方式关系不大，学习这个时，可以先忘掉刚学内容</p>
+<p>Douglas Crockford 曾写过一篇文章，介绍了一种不涉及严格意义上构造函数的继承方法。</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/05_09:17_mn2XAH.png" alt="image-2022110591711716 AM"></p>
+<p>JSON、JSLint 创造者，JavaScript语言精粹 作者</p>
+<p>他的出发点是即使不自定义类型也可以通过原型实现对象之间的信息共享。最终给出了一个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Nicholas&#x27;</span>,</span><br><span class="line">  <span class="attr">friends</span>: [<span class="string">&#x27;Shelby&#x27;</span>, <span class="string">&#x27;Court&#x27;</span>, <span class="string">&#x27;Van&#x27;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> anotherPerson = object(person);</span><br><span class="line">anotherPerson.name = <span class="string">&#x27;Greg&#x27;</span>;</span><br><span class="line">anotherPerson.friends.push(<span class="string">&#x27;Rob&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> yetAnotherPerson = object(person);</span><br><span class="line">yetAnotherPerson.name = <span class="string">&#x27;Linda&#x27;</span>;</span><br><span class="line">yetAnotherPerson.friends.push(<span class="string">&#x27;Barbie&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.friends); <span class="comment">// &quot;Shelby,Court,Van,Rob,Barbie&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(anotherPerson)</span><br><span class="line"><span class="built_in">console</span>.log(yetAnotherPerson)</span><br></pre></td></tr></table></figure>
+
+<p>原型式继承适用于这种情况：你有一个对象，想在它的基础上再创建一个新对象。你需要把这个对象先传给 object()，然后再对返回的对象进行适当修改。</p>
+<p>本质上，object()是对传入的对象执行了一次浅复制 （和扩展运算符类型，只不过他是在原型上，以及你可以在新对象中覆盖原型）</p>
+<p>我的理解：创建一个对象，并把原型设置为参数，之后返回对象</p>
+<p>Object.create() 就是这玩意，只不过多了个参数</p>
+<p>原型式继承非常适合不需要单独创建构造函数，但仍然需要在对象间共享信息的场合。但要记住，属性中包含的引用值始终会在相关对象间共享，跟使用原型模式是一样的。</p>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><p>原型式继承 + 对象属性赋值 + 工厂模式（就是在原型式继承的基础上，用工厂函数包起来，之后可以自定义一些属性）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> clone = object(original);</span><br><span class="line">  clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Hi&#x27;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> clone;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Nicholas&#x27;</span>,</span><br><span class="line">  <span class="attr">friends</span>: [<span class="string">&#x27;Shelby&#x27;</span>, <span class="string">&#x27;Court&#x27;</span>, <span class="string">&#x27;Van&#x27;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> anotherPerson = createAnother(person);</span><br><span class="line">anotherPerson.sayHi();</span><br></pre></td></tr></table></figure>
+
+<p>寄生式继承同样适合主要关注对象，而不在乎类型和构造函数的场景。</p>
+<h3 id="寄生式组合继承"><a href="#寄生式组合继承" class="headerlink" title="寄生式组合继承"></a>寄生式组合继承</h3><p>寄生式继承 + 组合继承</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">subType, superType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prototype = object(superType.prototype);</span><br><span class="line">  prototype.constructor = subType;</span><br><span class="line">  subType.prototype = prototype;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  SuperType.call(<span class="built_in">this</span>, name);</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里没有 new 了，所以不会再冗余生成一遍属性，而且还能把方法继承下来</span></span><br><span class="line">inheritPrototype(SubType, SuperType);</span><br><span class="line"></span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.age);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> SubType(<span class="string">&#x27;foo&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br></pre></td></tr></table></figure>
+
+<p>寄生式组合继承可以算是引用类型继承的最佳模式。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然我们整天在写 JavaScript 代码，但有些很基础的东西却了解的不够深入，遇到些疑难杂症就束手无策了，所以应该练好基本功。</p>
+<p>虽然现在都用 class 和 extend 关键字来实现类与继承了，但其底层原理就是用本文的内容实现的，你可以把它们认为是高级的语法糖。对于他们的使用也有启发意义，比如类里可以定义 getter 和 setter、私有属性为什么那么难实现？</p>
+<p>还可以自己用代码找出 String 的 api </p>
+<p>对于看文档时，api之间的联系也能更清晰，如 File api 他是继承自 Blob 的，这样查阅 api 更有联系，容易记住</p>
+<p>学习了这些内容，在回看这段简单的代码是如何执行的？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;Mozilla&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">1</span>, <span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/" data-id="clac0ez2v000ieqopepx98r5b" data-title="JavaScript 的对象与继承" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaScript/可选链操作符" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/" class="article-date">
+  <time class="dt-published" datetime="2022-11-04T22:52:49.000Z" itemprop="datePublished">2022-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/">可选链运算符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>可选链运算符（optional chaining operator）即<code>?.</code>运算符。它可以获取对象的属性或调用方法，如果对象是 undefined 或 null，那么会返回 undefined，而不是直接抛错。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> adventurer = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span>,</span><br><span class="line">    <span class="attr">cat</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;Dinah&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dogName = adventurer.dog?.name;</span><br><span class="line"><span class="built_in">console</span>.log(dogName);</span><br><span class="line"><span class="comment">// expected output: undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(adventurer.someNonExistentMethod?.());</span><br><span class="line"><span class="comment">// expected output: undefined</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.val?.prop</span><br><span class="line">obj.val?.[expr]</span><br><span class="line">obj.func?.(args)</span><br></pre></td></tr></table></figure>
+
+<p>注意这里方法和属性变量的使用。</p>
+<p>简单来说：<code>?.</code>运算符很像<code>.</code>运算符，除了它不会报错。如果 <code>?.</code>运算符前面的内容是 undefined 或 null，那么后面接的属性的获取或方法的调用，不会抛错，并且返回 undefined。</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><p>在之前，如果你想要探索对象是否存在属性，要这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nestedProp = obj.first &amp;&amp; obj.first.second;</span><br></pre></td></tr></table></figure>
+
+<p>这在 JS 中是惯用模式，但他有一下问题：</p>
+<ol>
+<li>当嵌套层级很深时，代码冗余，过于啰嗦。</li>
+<li>当<code>obj.first</code>的值是 Falsy 的时候，比如<code>0</code>，那么<code>nestedProp</code>的值就会变成<code>0</code>，而不是期望的 <code>obj.first.second</code> 的值或者<code>undefined</code></li>
+</ol>
+<p>但如果你使用<code>?.</code>运算符，那就很奈斯：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nestedProp = obj.first?.second;</span><br></pre></td></tr></table></figure>
+
+<p>这样就解决了以上两个问题。</p>
+<blockquote>
+<p>当然，你可能见过另一种解决方案，就是 <a target="_blank" rel="noopener" href="https://lodash.com/docs/4.17.15#get">lodash 的 get 方法</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_.get(obj, <span class="string">&#x27;first.second&#x27;</span>, <span class="literal">undefined</span>);</span><br></pre></td></tr></table></figure>
+
+<p>说实话，我更喜欢这个，因为它更强大，可惜的是，这并不是语言标准 😭</p>
+</blockquote>
+<p>更准确来说，<code>?.</code>运算符其实是下面的语法糖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> temp = obj.first;</span><br><span class="line"><span class="keyword">const</span> nestedProp =</span><br><span class="line">    temp === <span class="literal">null</span> || temp === <span class="literal">undefined</span> ? <span class="literal">undefined</span> : temp.second;</span><br></pre></td></tr></table></figure>
+
+<p><code>?.</code>运算符不可以用在没有声明的根对象上（如果用了会报错），但是可以用在已经声明的根对象的没有定义的属性上。</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/04_20:00_jOkYeL.png" alt="image-2022110480049953 PM"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b?.a;</span><br><span class="line"><span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = &#123;&#125;;</span><br><span class="line">c.d?.e;</span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>b 是未定义的对象，会报错，c 是定义了的，不会报错。</p>
+<h3 id="执行方法"><a href="#执行方法" class="headerlink" title="执行方法"></a>执行方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = someInterface.customMethod?.();</span><br></pre></td></tr></table></figure>
+
+<p>常见于一些 api 可能未实现的情况。这里的调用会返回 undefined，而不是报错。</p>
+<p>注意：如果<code>customMethod</code>是已经存在的属性，但不是方法，那即使这样写了也是会报错的。</p>
+<h3 id="用于表达式"><a href="#用于表达式" class="headerlink" title="用于表达式"></a>用于表达式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nestedProp = obj?.[<span class="string">&#x27;prop&#x27;</span> + <span class="string">&#x27;Name&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>常用于数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMagicIndex</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr?.[<span class="number">42</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printMagicIndex([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]); <span class="comment">// undefined</span></span><br><span class="line">printMagicIndex(); <span class="comment">// undefined; if not using ?., this would throw</span></span><br></pre></td></tr></table></figure>
+
+<p><code>?.</code>运算符是不能在赋值左侧使用的，但<code>.</code>运算符是可以的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object = &#123;&#125;;</span><br><span class="line">object?.property = <span class="number">1</span>; <span class="comment">// SyntaxError: Invalid left-hand side in assignmen</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="短路操作"><a href="#短路操作" class="headerlink" title="短路操作"></a>短路操作</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> potentiallyNullObj = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> prop = potentiallyNullObj?.[x++];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 0 as x was not incremented</span></span><br></pre></td></tr></table></figure>
+
+<p>如果<code>?.</code>前面的内容是 nullish，那么就不会执行后面的表达式，后续的属性访问也同样不会执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> potentiallyNullObj = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> prop = potentiallyNullObj?.a.b;</span><br><span class="line"><span class="comment">// This does not throw, because evaluation has already stopped at</span></span><br><span class="line"><span class="comment">// the first optional chain</span></span><br></pre></td></tr></table></figure>
+
+<p>其实就是下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> potentiallyNullObj = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> prop =</span><br><span class="line">    potentiallyNullObj === <span class="literal">null</span> || potentiallyNullObj === <span class="literal">undefined</span></span><br><span class="line">        ? <span class="literal">undefined</span></span><br><span class="line">        : potentiallyNullObj.a.b;</span><br></pre></td></tr></table></figure>
+
+<p>但你如果用括号提升优先级，那么是有可能报错的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> potentiallyNullObj = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">const</span> prop = (potentiallyNullObj?.a).b;</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="用于可选的回调函数"><a href="#用于可选的回调函数" class="headerlink" title="用于可选的回调函数"></a>用于可选的回调函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Code written without optional chaining</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">onContent, onError</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do something with the data</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="comment">// Testing if onError really exists</span></span><br><span class="line">        <span class="keyword">if</span> (onError) &#123;</span><br><span class="line">            onError(err.message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为这里 onError 可能没有传值，所以要判断下，但如果用可选链，就比较简单：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using optional chaining with function calls</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">onContent, onError</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do something with the data</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        onError?.(err.message); <span class="comment">// No exception if onError is undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="连续可选链"><a href="#连续可选链" class="headerlink" title="连续可选链"></a>连续可选链</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> customerCity = customer.details?.address?.city;</span><br></pre></td></tr></table></figure>
+
+<h3 id="与空值合并运算符结合使用"><a href="#与空值合并运算符结合使用" class="headerlink" title="与空值合并运算符结合使用"></a>与空值合并运算符结合使用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printCustomerCity</span>(<span class="params">customer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> customerCity = customer?.city ?? <span class="string">&#x27;Unknown city&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(customerCity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printCustomerCity(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Nathan&#x27;</span>,</span><br><span class="line">    <span class="attr">city</span>: <span class="string">&#x27;Paris&#x27;</span>,</span><br><span class="line">&#125;); <span class="comment">// &quot;Paris&quot;</span></span><br><span class="line">printCustomerCity(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Carl&#x27;</span>,</span><br><span class="line">    <span class="attr">details</span>: &#123; <span class="attr">age</span>: <span class="number">82</span> &#125;,</span><br><span class="line">&#125;); <span class="comment">// &quot;Unknown city&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="空值合并运算符"><a href="#空值合并运算符" class="headerlink" title="空值合并运算符"></a>空值合并运算符</h2><p>空值合并运算符 即<code>??</code>，它的作用是如果<code>??</code>左边是 nullish，那么返回右边，否则返回左边，它和<code>||</code>运算符很相似，<code>||</code>运算符左边是 Falsy 的话返回右边，否则返回左边。</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">Optional chaining (?.)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Nullish">nullish</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">Falsy</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing">Nullish coalescing operator (??)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/" data-id="clac0ez350011eqopg3u974hx" data-title="可选链运算符" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-JavaScript/JavaScript 对象解读" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" class="article-date">
@@ -208,7 +724,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" data-id="cl6dk1e26000r9kp18i30251j" data-title="JavaScript 对象解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" data-id="clac0ez2u000geqop38hz72zq" data-title="JavaScript 对象解读" class="article-share-link">分享</a>
       
       
       
@@ -277,7 +793,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="cl6dk1e29000y9kp14zah0utk" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="clac0ez2y000oeqopgk3u3tgf" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
       
       
       
@@ -533,7 +1049,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="cl6dk1e2b00119kp1g3jhaei8" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="clac0ez30000qeqophu987lnq" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
       
       
       
@@ -647,7 +1163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="cl6dk1e2c00149kp1cfu4egjj" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="clac0ez32000ueqopgdxaghuy" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
       
       
       
@@ -774,7 +1290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="cl6dk1e28000u9kp1c8qt8vlz" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="clac0ez2x000meqop9ngbdqer" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
       
       
       
@@ -821,436 +1337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" data-id="cl6dk1e2q001u9kp1fkpn2t03" data-title="在 Mac 中像 Windows 一样切换应用" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-weekly/09" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/07/03/weekly/09/" class="article-date">
-  <time class="dt-published" datetime="2022-07-03T21:12:15.000Z" itemprop="datePublished">2022-07-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/07/03/weekly/09/">明远周刊：如何学习一门新技术</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>👀 本期看点：</p>
-<ul>
-<li>如何学习一门新技术</li>
-<li>6个学习习惯和方法</li>
-<li>链表题目</li>
-<li>对象方法添加异常</li>
-<li>Prefetch、Preload</li>
-</ul>
-<h2 id="📃-文章"><a href="#📃-文章" class="headerlink" title="📃 文章"></a>📃 文章</h2><p>👉 <a target="_blank" rel="noopener" href="https://www.bmpi.dev/dev/how-to-learn-tech/">如何学习一门技术</a> </p>
-<p>作者以其自身学习 WebRTC 这个新技术为例，讲述了一些学习的方法。</p>
-<ol>
-<li>是否要学习这门技术？<ol>
-<li>从知识体系出发：学习顶层的技术需要掌握一定的底层技术，如果这个底层技术被很多高层技术依赖，那么就值得学习</li>
-<li>从应用前景出发：有市场需求，能赚钱</li>
-</ol>
-</li>
-<li>怎么学？<ol>
-<li><strong>善用搜索，找到对的资料和对的人</strong>。学习本身不是一件复杂的事情，因为它不是做研究（探索未知的东西），只是站在巨人的肩膀上把已经被解决的问题学习一遍。这里的难点在于资料千千万，很容易找到错误的资料，让学习变得很复杂</li>
-<li>主动搜索：多用Google英文搜索，对比选择下要看的资料；多用谷歌图片搜索，图的层次上更容易了解整体架构；多去逛GitHub、YouTube、Twitter等获取开源项目、教学视频、大佬的演讲与动态等；</li>
-<li>技术标准：不必看细节，要更高层次的理解技术特性</li>
-<li>了解技术历史</li>
-<li>做好笔记：搜索而来的资料和自己的总结如果不做整理与记录的话，时间久了就全忘了，最好整理到 <a target="_blank" rel="noopener" href="https://www.bmpi.dev/self/okr-gtd-note-logseq/">Logseq</a> 等这种多个笔记之间有连接关系的软件中，这种链接符合大脑的思考，更方便记忆</li>
-<li>制定学习计划：规划时间消化学习资料</li>
-<li>讲给别人听（写文章也算是一种），这样能使你的知识梳理更全面，还方便你后续整合成文章</li>
-<li>可以在讨论区、社区、issue等寻求帮助</li>
-<li>心里建设：勇敢承认自己不懂，不懂就去学与问，可怕的是不懂却隐藏，会使问题变得更复杂</li>
-</ol>
-</li>
-<li>怎么用？<ol>
-<li>学以致用是学习的最终目的，只有真正去用这个技术，才能真正掌握它，否则花费时间去学习，不用的话很快就忘了</li>
-<li>从一些现有的开源项目中改造，做一个自己的应用（或者从零开始实现应用，但这往往都比较难）</li>
-</ol>
-</li>
-</ol>
-<p>（文章质量很高，作者应该很厉害，可以关注）</p>
-<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fGYFE3k_P9CiHDJyZUM5IQ">新拾取的 6 个习惯和方法</a></p>
-<ol>
-<li>教给别人是最好的学习方式：可以清空大脑（把资料从大脑转移到文章中），更多的产出文章（好看的简历）</li>
-<li>看的文章多了，自然也有自己的思考，「不要在输入不足的时候强行领悟」（我自己有时想写东西，但有写不出来，可能就是输入不够）</li>
-<li>多解除新技术，多折腾，并愿意为此多花时间，如：别 React 18 出来了，还在用 React 16</li>
-<li>早起工作，要专注（别看无用的消息），先做困难的事情</li>
-<li>思考某些工作是否有十倍效率的解法</li>
-<li>多做本质解，不做或少做现象解（看透本质能举一反三，不要去花很多时间学习三）</li>
-</ol>
-<p>👉 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/2/18/17/">双指针技巧秒杀七道链表题目</a></p>
-<p>通俗讲解几道链表力扣题目，在学习完链表理论知识后，可到这里实践一下，刷题顺序推荐：</p>
-<ol>
-<li>合并两个有序链表</li>
-<li>链表的中间节点</li>
-<li>删除链表的倒数第n个节点</li>
-<li>环形链表 和 环形链表2</li>
-<li>相交链表</li>
-</ol>
-<p>（你可能觉得有些题目很简单，比如「合并两个有序链表」，这不就是把两个链表都遍历一遍，之后存到数组里，再对数组排个序，之后通过排序的数组在生成新的链表就完事了嘛，为啥要像本文一样搞的这么复杂？因为你的方法时间复杂度、空间复杂度更高，排序需要O(nlogn)时间复杂度，存数组又需要O(m+n)空间复杂度，m和n分别代表两个链表的长度，但如果用本文解法的话，就会高明很多，时间复杂度就只是遍历一遍，是O(m+n)，空间复杂度就是两个指针的空间，即O(1)，所以面试官想看到的是这样的回答，而且一般真实场景下，你已经使用了链表数据结构，是没有必要再用数组数据结构存储一遍重复数据的）</p>
-<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hehUH9HL6unaLWq3LzQxNg">如何优雅地给对象的所有方法添加异常处理</a></p>
-<p>在每个方法中都使用 try catch 来捕获异常未免有些重复与麻烦，本文通过代理模式的思考方式使用 proxy api 给函数统一添加异常处理，还考虑了异步函数的情况（我也写过很多重复的 try catch，为啥就没想到统一处理下呢😥）</p>
-<p>👉 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6893681741240909832">使用 Preload&amp;Prefetch 优化前端页面的资源加载</a></p>
-<p>对于前端页面来说，静态资源的加载对页面性能起着至关重要的作用。本文将介绍浏览器提供的两个资源指令 preload/prefetch，它们能够辅助浏览器优化资源加载的顺序和时机，提升页面性能。</p>
-<p>它们都写在link标签上，head标签里，prefetch可以用低优先级预先加载静态资源，列表页能跳转到详情页，详情页有几个固定图片，那么你可以在列表页写上图片的prefetch，那么浏览器在空闲时就能加载这些图片，用户如果跳到了详情页后就能直接使用prefetch的缓存，直接展示图片，而不用再去等待请求时间。</p>
-<p>preload，有as属性（有多种类型可选），通过标签显式声明一个高优先级资源，强制浏览器提前请求资源，同时不阻塞文档正常onload。</p>
-<p>（这些叫做 Resource Hints，还有<a target="_blank" rel="noopener" href="https://juejin.cn/post/6915204591730556935">preconnect 和 dns-prefetch</a>）</p>
-<p>👉 <a target="_blank" rel="noopener" href="https://ainyi.com/51">关于 Vue 不能 watch 数组 和 对象变化的解决方案</a></p>
-<p>展示了vue什么时候不能监听数组与对象的变化，以及解决方案</p>
-<p>（写的简洁清晰，很不错的博客）</p>
-<h2 id="🤔-想法"><a href="#🤔-想法" class="headerlink" title="🤔 想法"></a>🤔 想法</h2><ol>
-<li>「我们应该做一个积极行动的悲观主义者，对未来低期望，但只要是值得的，就坚定去做。」来自：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/03/weekly-issue-200.html">科技爱好者周刊（第 200 期）：低期望，多尝试</a><ol>
-<li>我在写文章的时候，总高期望的以为自己能获得多少阅读量，多少点赞，如果没有达到预期的话，就会有些失望。其实不应该这样，这是有价值并且值得的事情，坚持去做就可以了，并且降低期望。</li>
-</ol>
-</li>
-<li>要和理想中的自己比较，不要和别人比较</li>
-<li>微信读书 记笔记的方式很好，划线原文加上感想，最好还能总结出文章来</li>
-<li>学习东西要记笔记，最好把内容记忆背诵下来，熟练使用旧知识，才能思考出新知识。</li>
-<li>一个高效学习方法：教给别人（和别人交流、写文章、做分享）</li>
-<li>学习更适应时机的内容：比如你最近的工作内容是做性能优化，但你最近在提升自己的操作系统相关知识，那你就可以先暂停这部分的提示，转向性能优化方面的学习，这样也能在团队内做出一些成绩，并且能应用在复杂的实际项目中</li>
-</ol>
-<p><em>2022-03-19 ~ 2022-07-03（第 9 期）</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/03/weekly/09/" data-id="cl6dk1e34002n9kp1aspw8wui" data-title="明远周刊：如何学习一门新技术" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-weekly/08" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/03/19/weekly/08/" class="article-date">
-  <time class="dt-published" datetime="2022-03-19T21:21:53.000Z" itemprop="datePublished">2022-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>本期看点</p>
-<ul>
-<li>浏览器 observer api</li>
-<li>LRU JS 实现</li>
-<li>字符在计算机的存储形式</li>
-<li>手写 Promise</li>
-<li>queueMicrotask 实现微任务</li>
-<li>前端依赖管理的痛点</li>
-<li>手写 parseInt</li>
-</ul>
-<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="浏览器的-5-种-Observer，你用过几种？"><a href="#浏览器的-5-种-Observer，你用过几种？" class="headerlink" title="浏览器的 5 种 Observer，你用过几种？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-fLZe164aWAaPJ55iZ_m2w">浏览器的 5 种 Observer，你用过几种？</a></h3><p>网页处理用户交互，可添加 click、mousemove 等事件，但有些操作不是由用户直接触发的，那么就要使用 observer api 了。</p>
-<p>IntersectionObserver：</p>
-<p>监听元素和可视区域相交比例。使用场景：埋点数据采集（当前元素是否可见以及可见比例）、图片懒加载。</p>
-<p>MutationObserver：</p>
-<p>监听元素属性的修改、以及子节点的增删改。使用场景：防止用户使用 devTool 去水印。</p>
-<p>ResizeObserver：</p>
-<p>监听大小的改变，当 width、height 被修改时触发。</p>
-<p>PerformanceObserver：</p>
-<p>监听记录 performance 数据的行为，一旦记录了就会触发回调，可在回调里把这些数据进行上报。</p>
-<p>ReportingObserver：</p>
-<p>浏览器遇到过时 api 会打印警告，在一些情况下还会对网页进行干预，此 api 可监听这些动作。</p>
-<h3 id="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"><a href="#蚂蚁金服在线笔试：设计和实现一个LRU缓存机制" class="headerlink" title="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bNMaEXyyPli0OiZpio2kbg">蚂蚁金服在线笔试：设计和实现一个LRU缓存机制</a></h3><p>LRU 是 Least Recently Used 的缩写，是一种常用的页面置换算法，页面置换与CPU、内存、磁盘有关，你可以简单理解为这是一种缓存算法，但有容量限制。</p>
-<p>本文解决了力扣上的 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU缓存</a> 题目。Vue 中也使用了此算法，可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/E0yzNyDApc_XB7r_5ciX_g">LRU 缓存-keep-alive 实现原理</a></p>
-<h3 id="淦，为什么-“𠮷𠮷𠮷”-length-3"><a href="#淦，为什么-“𠮷𠮷𠮷”-length-3" class="headerlink" title="淦，为什么 “𠮷𠮷𠮷” .length !== 3"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7025400771982131236">淦，为什么 “𠮷𠮷𠮷” .length !== 3</a></h3><p>字符串的 length 属性不能完全正确的表示字符串长度，他的深层原因涉及字符编码，推荐看下文中作者关于编码的前两篇文章，这样看本文的时候能便于理解一些。简单讲就是 JavaScript 字符串使用 utf 16 编码，这种编码的产物只可能是2字节或4字节，JavaScript由于历史原因，认为2字节的 length 就是1，所以 ‘💩’ 的占了4个字节，那么他的length就是2，slice, split, substr 等等方法对于 length 的处理也存在同样的问题。为啥 ‘💩’ 就占4个字节了呢？再简单讲就是这个字符使用了Unicode对应表，可在<a target="_blank" rel="noopener" href="https://unicode-table.com/en/">unicode-table</a>中查询对应值，就是这个字符对应了一个数字，数字就可以用二进制表示，因为数字太大了，所以2个字节不够用，就得占4个字节啦。</p>
-<h3 id="深入分析-Promise-实现细节"><a href="#深入分析-Promise-实现细节" class="headerlink" title="深入分析 Promise 实现细节"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6945319439772434469">深入分析 Promise 实现细节</a></h3><p>手写 Promise 应该是现在面试炽手可热的题目了（想当年我也被这个挂过🤫），本文由浅入深介绍了如何手写 Promise，先实现同步版本的，再实现异步，最后在加上 then 以及其他处理，逐步练习，比较有成就感。</p>
-<h3 id="在-JavaScript-中通过-queueMicrotask-使用微任务"><a href="#在-JavaScript-中通过-queueMicrotask-使用微任务" class="headerlink" title="在 JavaScript 中通过 queueMicrotask() 使用微任务"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide">在 JavaScript 中通过 queueMicrotask() 使用微任务</a></h3><p>上篇手写 Promise 使用了 queueMicrotask，我居然都没听过这个函数😑。本文介绍了一些微任务的特性和 queueMicrotask 的示例，你可以理解为它就想 Promise.resolve().then 一样，就是添加一个微任务，但它比 Promise.resolve 要好得多。其中这3点很新奇：</p>
-<ol>
-<li>微任务自身可以产生微任务，并且事件循环会一直处理微任务队列，所以你递归增加微任务的话一定要谨慎，否则可能出现微任务一直执行不完的情况。</li>
-<li>如果可能的话，大多数开发者不应该过多使用微任务。</li>
-<li>使用微任务的典型场景：实在没有其他办法了、创建框架或库时需要使用微任务完成功能。</li>
-</ol>
-<p>（吐槽下，不知道是翻译的原因吗？读着有点难懂🥺）</p>
-<h3 id="关于依赖管理的真相-—-前端包管理器探究"><a href="#关于依赖管理的真相-—-前端包管理器探究" class="headerlink" title="关于依赖管理的真相 — 前端包管理器探究"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/t6RZAKb6mXTfXl7XbpZ_vw">关于依赖管理的真相 — 前端包管理器探究</a></h3><p>关于前端依赖管理，已经有很多不错的文章解释了，但这篇最近的文章给出了准确的分类，丰富了一些细节，如：</p>
-<ol>
-<li>不确定性：不用 lock 的话，你本地安装的 node_modules 和线上重新安装的是可能不同的，那么就会造成你本地开发没有问题，但是线上有问题的情况，你要在新增一个依赖后本地删除 node_modules，再重新安装才能解决，这明显是没必要的，</li>
-<li>当你安装了多个同版本的包在 node_modules 中时，会破坏单例模式以及引起 TS 的 types冲突（这点我真的没想到过）</li>
-<li>Yarn v2 Plug’n’Play 原理，以及劣势：脱离Node现存生态，兼容性不好</li>
-<li>pnpm 的硬链接与符号链接</li>
-<li>cnpm/tnpm 的解决方案（我原以为cnpm就是做了个国内存储呢😂，原理还干了其他的事情）</li>
-<li>Deno 的链接引包</li>
-</ol>
-<h3 id="被字节”装“到了，只要你能看”完“这题目，就算你过？"><a href="#被字节”装“到了，只要你能看”完“这题目，就算你过？" class="headerlink" title="被字节”装“到了，只要你能看”完“这题目，就算你过？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/W6Of2T_xE5Pf2_01FSsjxg">被字节”装“到了，只要你能看”完“这题目，就算你过？</a></h3><p>类似手写 parseInt，文中使用正则实现的，比较简洁（正则的时间复杂度咋算呀？🤔）。</p>
-<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><blockquote>
-<p>we will hold your hand and provide enough detail for you to feel comfortable and learn the topics properly.</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/">原文链接</a></p>
-</blockquote>
-<p>好的学习方式应该是有成就感的、开心的、舒服的、由浅入深逐步递进的。</p>
-<p><em>2022-02-27 ~ 2022-03-19（第 8 期）</em></p>
-<p>最近鸽的有点厉害😣，还是尽量每周一篇吧。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/19/weekly/08/" data-id="cl6dk1e32002k9kp18ndg1pi7" data-title="明远周刊：字符在计算机的存储形式" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-operating-system/float" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/03/01/operating-system/float/" class="article-date">
-  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：</p>
-<ol>
-<li>浮点数的误区，如：0.1 + 0.2 不等于 0.3</li>
-<li>浮点数在计算机的存储方式，即 IEEE 754 标准介绍</li>
-<li>特殊数字的由来，如 NaN、Number.MAX_SAFE_INTEGER 等</li>
-<li>正确执行浮点数运算的方法</li>
-</ol>
-<h2 id="浮点数的误区"><a href="#浮点数的误区" class="headerlink" title="浮点数的误区"></a>浮点数的误区</h2><p>令人困惑的浮点数：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>);</span><br><span class="line"><span class="comment">// 0.30000000000000004</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.1 + 0.2 真的只等于 0.30000000000000004 吗？</span></span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000004</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000003</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000002</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// true true true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// toFixed 函数</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log((<span class="number">0.1</span>).toFixed(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log((<span class="number">2.55</span>).toFixed(<span class="number">1</span>), (<span class="number">1.335</span>).toFixed(<span class="number">2</span>));</span><br><span class="line"><span class="comment">// 2.5 1.33</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span> === <span class="built_in">Number</span>.MAX_SAFE_INTEGER);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>下面我将为你解答这些奇怪现象背后的原因</p>
-<h2 id="IEEE-754-标准"><a href="#IEEE-754-标准" class="headerlink" title="IEEE 754 标准"></a>IEEE 754 标准</h2><p>现代计算机中，IEEE 754 标准（IEEE 电气电子工程师学会 Institute of Electrical and Electronics Engineers）是使用最广泛的浮点数标准（JavaScript、C、Java、Python 等等很多编程语言都使用了此标准）</p>
-<p>该标准以发布年份又区分 3 个版本，分别是 IEEE 754-1985、IEEE 754-2008、IEEE 754-2019，在 <a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-terms-and-definitions-number-value">ECMAScript 2021 标准</a> 中可以发现，JavaScript 使用的正是 IEEE 754-2019 标准中的双精度 64 位格式</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png" alt="image-20220301195257453"></p>
-<p>该标准定义了五种基本格式，其中最常用的便是单精度 32 位浮点数与双精度 64 位浮点数，下面主要讲解双精度浮点数（因为 JavaScript 中使用的是双精度浮点数，并且双精度浮点数与单精度浮点数也很类似）</p>
-<p>该标准定义：浮点数由三个字段组成：符号位（sign）、指数（exponent）和尾数（fraction）</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_gVVuXr.png" alt="image-20220301195235285"></p>
-<p><strong>符号位：</strong>占 1 位，0 代表正数，1 代表负数</p>
-<p><strong>指数：</strong>占 11 位，能表示 2048 个数，即 [0, 2047]，但实际场景下指数的值可以是正数也可以是负数，所以引入了一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exponent_bias">指数偏移基准值</a>（Exponent bias）：1023。举例来说：当指数的二进制值为 1025 时，代表指数的实际值为 2，因为 1023 + 2 = 1025，指数的二进制值为 1020 时，代表指数的实际值为 -3，因为 1023 - 3 = 1020。那么你会觉得指数实际值的范围是 [-1023, +1024]，但实际是 [-1022, +1023]，因为二进制全0、二进制全1，用于表示特殊值了</p>
-<p><strong>尾数：</strong>占 52 位，但可以表示 53 位，因为开头开头第一位的值总为 1，为了节约存储空间，所以省略掉了</p>
-<h3 id="浮点数转为二进制"><a href="#浮点数转为二进制" class="headerlink" title="浮点数转为二进制"></a>浮点数转为二进制</h3><p>以十进制 14.34375 为例，它是如何以二进制存储的？首先分别把整数部分与小数部分的二进制值计算出来：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">         1    4   .       3     4     3     7     5      </span><br><span class="line">      10^1 10^0   .   10^-1 10^-2 10^-3 10^-4 10^-5   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  1   1   1   0   .      0    1    0       1       1        </span><br><span class="line">2^3 2^2 2^1 2^0   .   2^-1 2^-2 2^-3    2^-4    2^-5  </span><br><span class="line"></span><br><span class="line">  8   2   4   0   .      0  0.25   0  0.0625  0.03125        </span><br></pre></td></tr></table></figure>
-
-<p>小数点后面的二进制是如何计算出的？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.34375 * 2 为 0.6875   第 1 位记 0</span><br><span class="line">0.6875 * 2  为 1.375    第 2 位记 1</span><br><span class="line">0.375 * 2   为 0.75     第 3 位记 0</span><br><span class="line">0.75 * 2    为 1.5      第 4 位记 1</span><br><span class="line">0.5 * 2     为 1        第 5 位记 1</span><br><span class="line"></span><br><span class="line">最终没有小数位了，计算结束，结果为 01011</span><br></pre></td></tr></table></figure>
-
-<p>聪明的你肯定在这里发现了：有可能出现无限循环的情况呀，这个后面会讲</p>
-<h4 id="定点数与科学记数法"><a href="#定点数与科学记数法" class="headerlink" title="定点数与科学记数法"></a>定点数与科学记数法</h4><p>现在拿到的值 1110.01011 叫做<strong>定点数</strong>，即小数点是固定位置不能改变的，那么如何拿到浮点数呢？这就要讲下科学计数法了：</p>
-<p>给一个⼗进制数 1230000，可以表示为 1.23 x 10^6 或 12.3 x 10^5 等等，这种⽅式就称为科学记数法。该方法有一种格式叫做规格化，即⼩数点左边有且仅有⼀位非零数字，如 1.23 x 10^6 是规格化的，⽽ 12.3 x 10^5 和 0.123 x 10^7 就不是规格化的</p>
-<h4 id="定点数转浮点数"><a href="#定点数转浮点数" class="headerlink" title="定点数转浮点数"></a>定点数转浮点数</h4><p>1110.01011 可转换为规格化的科学计数法，即 1.11001011 x 2^3，<strong>这里的 3 就是指数，11001011 就是尾数</strong>，不对，尾数前面有个 1 为什么没存呀？</p>
-<p>因为这里使用了规格化的科学计数法，左边有且仅有⼀位非零数字，又因为使用的是二进制数据，第一位还必须是非零，那么就只有一种可能，第一位一定是 1，为了节省存储空间，所以不会存储这个值，这也就是上面说的：「尾数：占 52 位，但可以表示 53 位」</p>
-<h4 id="十进制浮点数-0-1-转换为二进制的值是多少？"><a href="#十进制浮点数-0-1-转换为二进制的值是多少？" class="headerlink" title="十进制浮点数 0.1 转换为二进制的值是多少？"></a>十进制浮点数 0.1 转换为二进制的值是多少？</h4><p>先转换为二进制定点数，整数部分就是0，算一下小数部分</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 * 2 === 0.2  记 0  </span><br><span class="line">0.2 * 2 === 0.4  记 0  </span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   这里开始无限循环了</span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   又继续无限循环</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>定点数为 0.0 0011 0011 0011 … 这里出现了无限循环，但浮点数位数是有限的，不可能存下那么多的值，所以无法用二进制精确表示 0.1，只能用近似值来表示，于是便造成了精度缺失的情况，其实这里你并不用惊讶，因为二进制不能正确表示 0.1 就和十进制不能表示 1/3 一样普通，对于这种情况，我们选择的是表示其近似值，就像十进制中，我们用 0.33 来代表 1/3 一样。</p>
-<p>转换为规格化的科学计数法为：1.1 0011 0011 0011 … * 2^-4</p>
-<p>指数应该为 1019</p>
-<p>符号位：0</p>
-<p>指数：01111111011</p>
-<p>尾数：1001100110011001100110011001100110011001100110011010</p>
-<p>也可以使用 <a target="_blank" rel="noopener" href="https://www.binaryconvert.com/convert_double.html">binaryconvert</a> 工具验证一下，结果是正确的</p>
-<h3 id="二进制转为浮点数"><a href="#二进制转为浮点数" class="headerlink" title="二进制转为浮点数"></a>二进制转为浮点数</h3><p>现在可以反向得出二进制转为浮点数的换算公式了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">十进制 = (-1)^符号位 x (1 + 尾数) x 2^(指数 - 1023)</span><br></pre></td></tr></table></figure>
-
-<h4 id="下面这个二进制转换为十进制浮点数的值是多少？"><a href="#下面这个二进制转换为十进制浮点数的值是多少？" class="headerlink" title="下面这个二进制转换为十进制浮点数的值是多少？"></a>下面这个二进制转换为十进制浮点数的值是多少？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">符号位：0</span><br><span class="line"></span><br><span class="line">指数：10000000010</span><br><span class="line"></span><br><span class="line">尾数：0100110000000000000000000000000000000000000000000000</span><br></pre></td></tr></table></figure>
-
-<p>指数的值是 1026，因为 1023 + 3 = 1026，所以指数是 3</p>
-<p>可得规格化的科学计数法为 1.010011 * 2^3</p>
-<p>可得定点数是 1010.011</p>
-<p>可得十进制值为 10.375</p>
-<h3 id="0-1-toFixed-100"><a href="#0-1-toFixed-100" class="headerlink" title="(0.1).toFixed(100)"></a>(0.1).toFixed(100)</h3><p>至此，其实已经能解释这段代码了：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log((<span class="number">0.1</span>).toFixed(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br></pre></td></tr></table></figure>
-
-<p>浮点数转成二进制，之后再用二进制转为浮点数，结果就是这个值（手算计算量很大，可使用后面介绍的 decimal.js 精确计算）</p>
-<p>虽然你定义的是 0.1 但实际上计算机在二进制存的值是 0.1000000000000000055511151231257827021181583404541015625，可通过 toFixed 方法获取到这个真实值</p>
-<h3 id="特殊数字的由来"><a href="#特殊数字的由来" class="headerlink" title="特殊数字的由来"></a>特殊数字的由来</h3><p>上面说过，指数的二进制全0、二进制全1，用于表示特殊值了，如下：</p>
-<h4 id="正负零"><a href="#正负零" class="headerlink" title="正负零"></a>正负零</h4><p>符号位：0代表正数，1代表负数</p>
-<p>指数：全是0</p>
-<p>尾数：全是0</p>
-<h4 id="正负无穷"><a href="#正负无穷" class="headerlink" title="正负无穷"></a>正负无穷</h4><p>符号位：0代表正数，1代表负数</p>
-<p>指数：全是1</p>
-<p>尾数：全是0</p>
-<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>符号位：0或1都可以，无所谓</p>
-<p>指数：全是1</p>
-<p>尾数：任何非零值</p>
-<p>（typeof NaN === ‘number’ 的原因找到了）</p>
-<h4 id="Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER"><a href="#Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER" class="headerlink" title="Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER"></a>Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER</h4><p>符号位：0 代表正数，1 代表负数</p>
-<p>指数：1023 + 52 = 1075 </p>
-<p>尾数：全是 1</p>
-<p>其实就是 53 个 1，即 2^53  - 1</p>
-<h4 id="Number-MAX-VALUE-Number-MIN-VALUE"><a href="#Number-MAX-VALUE-Number-MIN-VALUE" class="headerlink" title="Number.MAX_VALUE Number.MIN_VALUE"></a>Number.MAX_VALUE Number.MIN_VALUE</h4><p>其实上述的 [-1022, 1023] 只是简单化处理了，如果深究的话，会更复杂（与 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Subnormal_number">Subnormal number</a> 有关），但可以简单理解为能表示的范围是 [-1074, 971]，<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">标准中</a>也有定义，故：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>) * <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">971</span>) === <span class="built_in">Number</span>.MAX_VALUE <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, -<span class="number">1074</span>) === <span class="built_in">Number</span>.MIN_VALUE <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="正确执行浮点数运算的方法"><a href="#正确执行浮点数运算的方法" class="headerlink" title="正确执行浮点数运算的方法"></a>正确执行浮点数运算的方法</h2><h3 id="浮点数奇怪的本质"><a href="#浮点数奇怪的本质" class="headerlink" title="浮点数奇怪的本质"></a>浮点数奇怪的本质</h3><p>个人认为，浮点数奇怪的本质是：不能存储完整准确的二进制表示，但这是合理的，因为有无限循环的情况，是存储不完的</p>
-<p>当遇到存储不完的的时候会怎样？会溢出，溢出分为上溢和下溢，这又是个复杂的问题，本文暂不讨论</p>
-<h3 id="如何正确执行浮点数运算"><a href="#如何正确执行浮点数运算" class="headerlink" title="如何正确执行浮点数运算"></a>如何正确执行浮点数运算</h3><p>所有的数据计算都是准确的，当出现无限循环时，明确给出精度定义，超出精度的值舍弃掉，按照人脑的十进制方法去计算</p>
-<p>缺点：自己实现起来费力并且也没必要，一般都要引入三方库，如 decimal.js</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文我介绍了浮点数的标准，即 IEEE 754 标准，还解释了一些特殊值以及常见误区的原因，最后简单分析了 decimal.js 的源码，希望能让你有所收获</p>
-<p>现在回顾最初的问题，你都知道答案了吗？</p>
-<p>这里使用到了浮点数的加法运算，在做加法前，首先要对齐指数，对齐指数时指数小的值会改为指数大的</p>
-<p>如下是 0.1 与 0.2 的二进制值</p>
-<table>
-<thead>
-<tr>
-<th>value</th>
-<th>s</th>
-<th>e</th>
-<th>d</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0.1</td>
-<td><strong>0</strong></td>
-<td><strong>01111111011</strong><br />1019 -&gt; -4</td>
-<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
-</tr>
-<tr>
-<td>0.2</td>
-<td><strong>0</strong></td>
-<td><strong>01111111100</strong><br />1020 -&gt; -3</td>
-<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
-</tr>
-</tbody></table>
-<p>指数对齐：把指数小的变为大的，即 0.1 的 e 由 -4 变为 -3</p>
-<p>1.1001100110011001100110011001100110011001100110011010 * 2^-4</p>
-<p>0.11001100110011001100110011001100110011001100110011010 * 2^-3</p>
-<p>指数对齐后就是二进制的加法，没有的位置补0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">0.2    1.10011001100110011001100110011001100110011001100110100</span><br><span class="line">0.1    0.11001100110011001100110011001100110011001100110011010</span><br><span class="line">ans   10.0110011001100110011001100110011001100110011001100111</span><br><span class="line"></span><br><span class="line">10.0110011001100110011001100110011001100110011001100111 * 2^-3</span><br><span class="line">1.00110011001100110011001100110011001100110011001100111 * 2^-2</span><br><span class="line"></span><br><span class="line">符号位：0</span><br><span class="line">指数：-2 即 1021 即 1111111101（二进制）</span><br><span class="line">尾数：00110011001100110011001100110011001100110011001100111</span><br><span class="line">尾数超长了，现在是 53 位，应该改为 52 位，丢弃的部分要使用舍入规则</span><br><span class="line">尾数：0011001100110011001100110011001100110011001100110100</span><br><span class="line"></span><br><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br><span class="line">0.010011001100110011001100110011001100110011001100110100 是定点数，那么计算值是</span><br><span class="line"></span><br><span class="line">Decimal.set(&#123; precision: 99 &#125;) // 替换到默认的 20 位精度，改为 99 位精度，因为这里计算的值太长了</span><br><span class="line">new Decimal(&#x27;0b0.010011001100110011001100110011001100110011001100110100&#x27;).equals((0.1+0.2).toFixed(100))</span><br><span class="line">// true</span><br><span class="line"></span><br><span class="line">最终，完美解释了 0.1 + 0.2 的值到底是怎么来的 🎉</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">双精度特殊值示例</a></p>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IEEE_754-1985">IEEE_754-1985 标准</a></p>
-<p>[IEEE 名称解释](<a target="_blank" rel="noopener" href="https://www.ieee.org/about/ieee-history.html#:~:text=Related">https://www.ieee.org/about/ieee-history.html#:~:text=Related</a> links-,Meaning of I-E-E-E,is the full legal name.)</p>
-<p><a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js  JavaScript 中的任意精度运算</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">HOW TO: Adding IEEE-754 Floating Point Numbers</a></p>
-<p>为什么 0.1 + 0.2 不等于 0.3 ？来自：图解系统-小林 coding-v1.0 pdf</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="cl6dk1e2l001j9kp1fsb99gg3" data-title="浮点数与二进制" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-weekly/07" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/03/01/weekly/07/" class="article-date">
-  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="看点"><a href="#看点" class="headerlink" title="看点"></a>看点</h2><ul>
-<li><p>地图的经纬度、瓦片、墨卡托投影介绍与简单实现。</p>
-</li>
-<li><p>普通人的网页配色。</p>
-</li>
-<li><p>一些学习方法：主动接近大佬、围绕工作学、常用 debug、言之有物，不要无病呻吟、多查官方标准。</p>
-</li>
-</ul>
-<h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><h3 id="从零打造一个-Web-地图引擎"><a href="#从零打造一个-Web-地图引擎" class="headerlink" title="从零打造一个 Web 地图引擎"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7054729902871805966">从零打造一个 Web 地图引擎</a></h3><p>本文从零实现了一个栅格地图，栅格地图是由一个个小方块图片组成的，这个小方块叫瓦片，瓦片有固定的编号规则，后端生成了所有的瓦片，前端想要展示地图只要找到对应的瓦片显示出来即可，经纬度通过 web 墨卡托投影后能计算出对应的瓦片编号，之后计算出屏幕要展示的瓦片，以及监听拖动和缩放即可。</p>
-<h3 id="普通人的网页配色方案"><a href="#普通人的网页配色方案" class="headerlink" title="普通人的网页配色方案"></a><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/03/coloring-scheme.html">普通人的网页配色方案</a></h3><p>没有 UI 设计，前端自己开发网页时，使用配色的建议。</p>
-<p><strong>思考</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2008/07/color_theory.html">对于颜色的理解</a>，前端应该具备基本的美感，如：使用好看的颜色、合适的布局、边距使用 8 12 16 px 等等。</p>
-<p>可选的配色：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2010/09/12_colors_used_in_web_design.html">网页设计的 12 种颜色</a>、<a target="_blank" rel="noopener" href="https://materialui.co/flatuicolors">各种国外 ui 的颜色</a>、<a target="_blank" rel="noopener" href="https://mui.com/zh/customization/color/">material ui color</a>、<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.1/customize/color/">bootstrap ui Color</a>、<a target="_blank" rel="noopener" href="https://ant.design/docs/spec/colors-cn">Ant Design 色彩</a>、<a target="_blank" rel="noopener" href="https://semi.design/zh-CN/basic/tokens">设计变量 Semi Design Tokens</a>、<a target="_blank" rel="noopener" href="https://arco.design/docs/spec/style-guideline">arco 设计</a>，以及<a target="_blank" rel="noopener" href="https://getcssscan.com/css-box-shadow-examples">好看的阴影</a>。</p>
-<h3 id="vs-code-调试网页-JS-代码"><a href="#vs-code-调试网页-JS-代码" class="headerlink" title="vs code 调试网页 JS 代码"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTYzMDkzMg==&mid=2247485857&idx=1&sn=329edb0f980b3fdb8e1bb6efda631ba7&chksm=cf00c69af8774f8c8c73e8101aaef52bd8a27d7494aeece1927969ec9a8966b0c3e67d55cbfc&scene=178&cur_album_id=2150425279725469698#rd">vs code 调试网页 JS 代码</a></h3><p>配置<code>.vscode/launch.json</code>文件可在 vs code 中调试网页代码，并且还能查看性能分析。</p>
-<p><strong>思考</strong></p>
-<p>vs code 调试相比于浏览器调试的优势：一些写代码的惯性操作可以直接复用，如：代码搜索、折叠等操作，而不是在浏览器和编辑器之间频繁切换。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="聊聊我遇到的那些贵人"><a href="#聊聊我遇到的那些贵人" class="headerlink" title="聊聊我遇到的那些贵人"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aGk7VmGBM5S2tDNuDGr87w">聊聊我遇到的那些贵人</a></h3><p>主动接近各种大佬，展现出自己的潜力。肯知识付费，这样能获得高质量的知识，算是一种高回报投资了。</p>
-<h3 id="四句话总结我的学习观"><a href="#四句话总结我的学习观" class="headerlink" title="四句话总结我的学习观"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/whI_-E4b7iuVjVlZcfVnoQ">四句话总结我的学习观</a></h3><p>围绕工作学，才能使你对于这方面更加深入，而不是仅停留在 demo 级别。常用 debug。你学习了一些知识，如果没用到实践中的话，那就是没学会，如果不能给别人讲明白的话，那就是没学透彻。</p>
-<h3 id="写文章注意"><a href="#写文章注意" class="headerlink" title="写文章注意"></a><a target="_blank" rel="noopener" href="https://github.com/king-hcj/king-hcj.github.io#%E7%BB%8F%E9%AA%8C%E4%B8%8E%E6%80%9D%E8%80%83">写文章注意</a></h3><p>经验与思考简约，尽量不展示多余内容。</p>
-<p>有时一图抵千言，有时只会拖慢网页加载速度。</p>
-<p>言之有物，不做无痛之呻吟。</p>
-<p>杜绝难理解的长句子，如果不能将其拆分成几个简洁的短句，说明理解的并不清晰。</p>
-<h3 id="多查官方标准文档"><a href="#多查官方标准文档" class="headerlink" title="多查官方标准文档"></a>多查官方标准文档</h3><p>多看好的文档，可以节约你的时间，如 MDN、<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">ECMAScript 2021 标准</a>，最近分享了浮点数相关知识，看标准给了我很大帮助。</p>
-<p>还有 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/">whatwg html 规范</a>、<a target="_blank" rel="noopener" href="https://www.w3.org/Style/CSS/current-work.en.html">css 规范</a>（css规范比html难读一些），可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Kq0inC2lrjrvAaP-0ltQoQ">大漠：我认识的 W3C 规范</a>。</p>
-<p><em>2022-01-23 ~ 2022-02-27（第 7 期）</em></p>
-<p>好歌推荐：<a target="_blank" rel="noopener" href="https://i.y.qq.com/v8/playsong.html?songid=335344888#webchat_redirect">踏雪 等什么君(邓寓君)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/03/01/weekly/07/" data-id="cl6dk1e31002h9kp173ftc0l6" data-title="明远周刊：从零实现栅格地图" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" data-id="clac0ez3i001qeqopht5bebrb" data-title="在 Mac 中像 Windows 一样切换应用" class="article-share-link">分享</a>
       
       
       
@@ -1301,7 +1388,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
     </div>
   </div>
 
@@ -1314,23 +1401,23 @@
       <ul>
         
           <li>
+            <a href="/my-blog/2022/11/10/weekly/10/">明远视角：前端脚手架开发入门</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/">使用 npm link 调试包</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/">JavaScript 的对象与继承</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/">可选链运算符</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-promise/">JavaScript 异步与 Promise</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-regexp/">JavaScript 正则理解</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/symbol/">JavaScript Symbol 解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/10/JavaScript/defineProperty/">defineProperty 详细解读</a>
           </li>
         
       </ul>

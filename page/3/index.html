@@ -77,6 +77,280 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-online-judge/lt504" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/30/online-judge/lt504/" class="article-date">
+  <time class="dt-published" datetime="2021-12-30T12:07:11.000Z" itemprop="datePublished">2021-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/30/online-judge/lt504/">力扣 504 七进制转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/base-7/">题目链接</a></p>
+<p>就是输入一个十进制数，转成七进制数，这个七进制，和我们的周特别相似，一周七天。如怎么把第 9 天转换成按周的天数呢？首先把 9 取余 7，得到 2，之后在把 9 除以 7，并向下取整，得到 1，之后再把 1 取余 7，得到 1，之后再把 1 除以 7，并向下取整，得到 0，这时循环终止，得到了结果，是 12，也就是第一周过后的第二天是第 9 天</p>
+<p>其实进制转换并不高大上，他在我们的生活中很常见，比如时间计算就是进制转换，其实任何时间点都是可以用时间戳来表示的，假设时间戳的基本单位是毫秒，那么先把时间戳取余 1000，就得到了毫秒，之后把时间戳除以 1000，再取余 60，就得到了秒，之后以此类推。这里你还可以发现，还可以使用不同的进制，比如毫秒是 1000 进制，秒就又是 60 进制了</p>
+<p>ts 代码</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToBase7</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isNegative = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        isNegative = <span class="literal">true</span>;</span><br><span class="line">        num = -num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> res: <span class="built_in">string</span>[] = [];</span><br><span class="line">    <span class="keyword">const</span> base = <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">while</span> (num !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> remainder = num % base;</span><br><span class="line">        res.push(remainder + <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">        num = <span class="built_in">Math</span>.floor(num / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (isNegative ? <span class="string">&#x27;-&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + res.reverse().join(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>py 代码（py 中没有三元表达式）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convertToBase7</span>(<span class="params">self, num: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">        isNegative = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> num &lt; <span class="number">0</span>:</span><br><span class="line">            isNegative = <span class="literal">True</span></span><br><span class="line">            num = -num</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        base = <span class="number">7</span></span><br><span class="line">        <span class="keyword">while</span> num != <span class="number">0</span>:</span><br><span class="line">            res += <span class="built_in">str</span>(num % base)</span><br><span class="line">            num = num // base</span><br><span class="line">        <span class="keyword">if</span> isNegative:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;-&#x27;</span>+res[::-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> res[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="clac0ez3a001eeqopd3q53svg" data-title="力扣 504 七进制转换" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-browser/chrome-96" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/28/browser/chrome-96/" class="article-date">
+  <time class="dt-published" datetime="2021-12-28T15:20:18.000Z" itemprop="datePublished">2021-12-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/28/browser/chrome-96/">Chrome 96 更新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>记录一些有趣有用的常用知识</p>
+<p>题外话：Chrome 也是有 bug 的，并且就在我们身边，如果仔细使用，还是能发现的</p>
+<h3 id="Chrome-96"><a href="#Chrome-96" class="headerlink" title="Chrome 96"></a><a target="_blank" rel="noopener" href="https://developer.chrome.com/zh/blog/new-in-devtools-96/#css-overview">Chrome 96</a></h3><p>新增了 css 概览面板，方便优化 css</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_jSSa3y.png" alt="CSS 概览面板"></p>
+<p>查看 dom 元素的属性时，设置过的会首先加粗展示，这样方便调试</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_hDRtBX.png" alt="自有属性加粗并优先排序"></p>
+<p>有 payload 面板，更方便的看请求参数</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_aq4oAR.png" alt="网络面板里面的 payload 边栏"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="clac0ez370017eqop4tv524bl" data-title="Chrome 96 更新" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/27/weekly/02/" class="article-date">
+  <time class="dt-published" datetime="2021-12-27T15:16:26.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/27/weekly/02/">明远周刊（第 2 期）🤩</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>整理汇总一周看到的文章与学到的知识（2021-12-17 ~ 2021-12-23）</p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="面试官问：JS-的继承"><a href="#面试官问：JS-的继承" class="headerlink" title="面试官问：JS 的继承"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903780035592205">面试官问：JS 的继承</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每一个函数都有 prototype 属性，只有在 new + 构造函数的时候，prototype 属性才有用，普通的函数调用，不会用到 prototype 属性</span></span><br><span class="line"><span class="comment">// 每一个对象都有 __proto__ 属性，__proto__ 属性指向当前对象的原型对象，js是基于原型来实现继承</span></span><br><span class="line"><span class="comment">// 函数也是对象（数组、正则都是对象）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用于方便的找到构造函数</span></span><br><span class="line">F.prototype.constructor === F; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这段代码是js能实现继承的关键</span></span><br><span class="line">F.__proto__ === <span class="built_in">Function</span>.prototype; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function 是 Object 的实例（Function 和 Object 都是函数）</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// Object 的原型是 null（规定）</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// f 是 F 的实例，这就代表 f 继承与 F</span></span><br><span class="line">f.__proto__ === F.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// F 是实例a，Function 是实例b，实例a和b的原型都是 Object.prototype</span></span><br><span class="line">F.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>以下是一个 es6 的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">sayHello</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;my name is &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name);</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayAge</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;my age is &#x27;</span> + <span class="built_in">this</span>.age);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> parent = <span class="keyword">new</span> Parent(<span class="string">&#x27;Parent&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> child = <span class="keyword">new</span> Child(<span class="string">&#x27;Child&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;parent: &#x27;</span>, parent); <span class="comment">// parent:  Parent &#123;name: &quot;Parent&quot;&#125;</span></span><br><span class="line"></span><br><span class="line">Parent.sayHello(); <span class="comment">// hello</span></span><br><span class="line">parent.sayName(); <span class="comment">// my name is Parent</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;child: &#x27;</span>, child); <span class="comment">// child:  Child &#123;name: &quot;Child&quot;, age: 18&#125;</span></span><br><span class="line">Child.sayHello(); <span class="comment">// hello</span></span><br><span class="line">child.sayName(); <span class="comment">// my name is Child</span></span><br><span class="line">child.sayAge(); <span class="comment">// my age is 18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Child.prototype.__proto__ === Parent.prototype);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Child.__proto__ === Parent);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1、构造器原型链</span></span><br><span class="line">Child.__proto__ === Parent; <span class="comment">// true</span></span><br><span class="line">Parent.__proto__ === <span class="built_in">Function</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 2、实例原型链</span></span><br><span class="line">child.__proto__ === Child.prototype; <span class="comment">// true</span></span><br><span class="line">Child.prototype.__proto__ === Parent.prototype; <span class="comment">// true</span></span><br><span class="line">Parent.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类中使用的 super，相当于 es5 中使用的 call apply</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Child.__proto__ === Parent</code> 这两个居然相等，不太懂？这是《JavaScript 高级程序设计-第 3 版》 章节 6.3 继承 中的 寄生组合式继承</p>
+<p><code>__proto__</code> 只是一个方便我们测试的属性，在正式项目中，不要使用它，那么改怎么更改 <code>__proto__</code> 的值呢？应该使用 <code>new</code>、<code>Object.create</code>和<code>Object.setPrototypeOf</code></p>
+<p><code>new</code> ：</p>
+<ol>
+<li>创建一个对象 a</li>
+<li>对象 a 的 <code>__proto__</code> 赋值为构造函数的 prototype （在浏览器中<code>[[Prototype]]</code> 就是 <code>__proto__</code>）</li>
+<li>调用构造函数，并且使用对象 a 的上下文（这是构造函数没有返回<code>Object</code>的情况，如果构造函数返回了<code>Object</code>，那么对象 a 就赋值为这个返回的对象）</li>
+</ol>
+<p><code>Object.create()</code> es5 提供的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简版：也正是应用了new会设置__proto__链接的原理。</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.create !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">proto</span>) </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">        F.prototype = proto;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Object.setPrototypeOf</code> es6 提供的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.setPrototypeOf =</span><br><span class="line">    <span class="built_in">Object</span>.setPrototypeOf ||</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">obj, proto</span>) </span>&#123;</span><br><span class="line">        obj.__proto__ = proto;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>node 的 inherits 就是使用 <code>Object.setPrototypeOf</code> 实现的</p>
+<p>util.inherits <a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest-v10.x/api/util.html#util_util_inherits_constructor_superconstructor">用法</a> 以及 <a target="_blank" rel="noopener" href="https://github.com/nodejs/node/blob/v10.24.1/lib/util.js#L274-L288">源码</a></p>
+<p>还可以看下 babel 编译 es6 之后的代码</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>例子还是挺深奥的，但感觉没有讲的很简单，看着有点难懂，只是挂了一些书的链接，但这些书还是不错的，可以看下</p>
+<p>还是不太懂 prototype 和 <code>__proto__</code> 的区别？</p>
+<p>可以了解一下 node 的其他工具函数是怎么写的，比如 promisify ？</p>
+<p>学了近三年前端，原型继承还是不能清晰理解，惭愧呀</p>
+<h3 id="张鑫旭：前端工程师应该为用户体验负责"><a href="#张鑫旭：前端工程师应该为用户体验负责" class="headerlink" title="张鑫旭：前端工程师应该为用户体验负责"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CoqW5x9vMN87U3h5fuEoSw">张鑫旭：前端工程师应该为用户体验负责</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>首先提出了一些常见的体验应该引起重视，如按钮要有按下的反馈、图标点击区域要大、忽视边界异常处理，如：低网速、无数据、脚本出错等、语言错误，使用 div 代替按钮，使用 div 代替链接</p>
+<p>后面分析总结了引起这些问题的原因，以及解决方案</p>
+<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>原因以及解决方案讲的很清晰，需要大量功底，如果让我总结，可能就只是有个模糊的概念，但不能清晰的划分出来</p>
+<p>我也有这种感受，因为我虽然是开发人员，但也是用户，作为用户我会经常吐槽这个产品做的真垃圾，用着真难受，但我在开发的时候也确实不想因为用户体验而多写大量代码，感觉这是吃力不讨好，收益不明显，比较同意等的那个观点（但我认为还要等很久），等到大家功能上都差不了太多的时候，就会在用户体验上卷起来了（在用户体验方面，还是很佩服苹果的）</p>
+<h3 id="JS-的-6-种打断点的方式，你用过几种？"><a href="#JS-的-6-种打断点的方式，你用过几种？" class="headerlink" title="JS 的 6 种打断点的方式，你用过几种？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KttRDmTyO3wgbNXGbEvPlw">JS 的 6 种打断点的方式，你用过几种？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><ol>
+<li>普通断点</li>
+<li>加条件的普通断点</li>
+<li>DOM 断点（当子元素发生变化时触发）</li>
+<li>Url 断点</li>
+<li>event listener 断点（如鼠标点击事件）</li>
+<li>Node 的 error 断点（只有 vscode 可以）</li>
+</ol>
+<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>dom url 和 listener 学到了，但一般在什么情况使用呢？（学到了，并且用了，才是真正的会了）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="clac0ez3m001weqop6h563nk6" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2021/12/27/weekly/01/" class="article-date">
+  <time class="dt-published" datetime="2021-12-27T15:13:20.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2021/12/27/weekly/01/">明远周刊（第 1 期）🤩</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>整理汇总一周看到的文章与学到的知识（2021-12-10 ~ 2021-12-16）</p>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="React-中的-TS-类型过滤原来是这么做的！"><a href="#React-中的-TS-类型过滤原来是这么做的！" class="headerlink" title="React 中的 TS 类型过滤原来是这么做的！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EkcFlwTu6u9gC-8nvU0olQ">React 中的 TS 类型过滤原来是这么做的！</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p>如何理解这段 ts 类型代码？</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FilterConditionally&lt;Source, Condition&gt; = Pick&lt;</span><br><span class="line">    Source,</span><br><span class="line">    &#123;</span><br><span class="line">        [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">    &#125;[keyof Source]</span><br><span class="line">&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>有几个基础知识要知道：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Keys = keyof Example;</span><br><span class="line"><span class="comment">// 等价于 type Keys = &#x27;a&#x27; | &#x27;b&#x27; | &#x27;c&#x27; | &#x27;d&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Keyof 会拿到 key 的字符串</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Keys = <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span> | <span class="string">&#x27;c&#x27;</span> | <span class="string">&#x27;d&#x27;</span>;</span><br><span class="line"><span class="keyword">type</span> Obj = &#123;</span><br><span class="line">    [T <span class="keyword">in</span> Keys]: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Obj 的类型：</span></span><br><span class="line"><span class="comment">// type Obj = &#123;</span></span><br><span class="line"><span class="comment">//     a: string;</span></span><br><span class="line"><span class="comment">//     b: string;</span></span><br><span class="line"><span class="comment">//     c: string;</span></span><br><span class="line"><span class="comment">//     d: string;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>in 可以拿到类型列表中的每一个元素，但根据用法，还必须要声明一个类型 T</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> A &#123;&#125;</span><br><span class="line"><span class="keyword">interface</span> B <span class="keyword">extends</span> A &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = B <span class="keyword">extends</span> A ? <span class="built_in">number</span> : <span class="built_in">string</span>;</span><br><span class="line"><span class="comment">// type C = number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> D = A <span class="keyword">extends</span> B ? <span class="built_in">number</span> : <span class="built_in">string</span>;</span><br><span class="line"><span class="comment">// type D = number</span></span><br></pre></td></tr></table></figure>
+
+<p>还可以使用条件判断来得出类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了泛型，其实泛型就相当于 JS 中的函数一样，你给我参数，我给你返回值，只不过 TS 的返回值是类型而已，这个结论同样也适用于非泛型，因为那种情况就相当于没有传入参数，就直接返回了一个类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">boolean</span>;</span><br><span class="line">    d: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = MarkUnwantedTypesAsNever&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &#123;</span></span><br><span class="line"><span class="comment">//     a: &quot;a&quot;;</span></span><br><span class="line"><span class="comment">//     b: &quot;b&quot;;</span></span><br><span class="line"><span class="comment">//     c: never;</span></span><br><span class="line"><span class="comment">//     d: never;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>根据如上分析，即可理解</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123; <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span> &#125;[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="comment">// type Value = &quot;zero2one&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>索引访问接口</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span>;</span><br><span class="line">    age: <span class="number">23</span>;</span><br><span class="line">&#125;[<span class="string">&#x27;name&#x27;</span> | <span class="string">&#x27;age&#x27;</span>];</span><br><span class="line"><span class="comment">// type Value = &quot;zero2one&quot; | 23</span></span><br></pre></td></tr></table></figure>
+
+<p>访问多个</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span>;</span><br><span class="line">    age: <span class="built_in">never</span>;</span><br><span class="line">&#125;[<span class="string">&#x27;name&#x27;</span> | <span class="string">&#x27;age&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于 type Value = &quot;zero2one&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>never 不能被访问到</p>
+<p>这是可以加上索引访问了</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;[keyof Source];</span><br></pre></td></tr></table></figure>
+
+<p>即可得到</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;[keyof Source];</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = MarkUnwantedTypesAsNever&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &quot;a&quot; | &quot;b&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>最后需要看一下 Pick，这是 ts 内置的</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>作用是筛选出类型 T 中指定的某些属性</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> A &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>;</span><br><span class="line">    b: <span class="number">2</span>;</span><br><span class="line">    c: <span class="number">3</span>;</span><br><span class="line">    d: <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = Pick&lt;A, <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;c&#x27;</span>&gt;;</span><br><span class="line"><span class="comment">// type C = &#123;</span></span><br><span class="line"><span class="comment">//     a: 1;</span></span><br><span class="line"><span class="comment">//     c: 3;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>最终即可实现</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FilterConditionally&lt;Source, Condition&gt; = Pick&lt;</span><br><span class="line">    Source,</span><br><span class="line">    &#123;</span><br><span class="line">        [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">    &#125;[keyof Source]</span><br><span class="line">&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = FilterConditionally&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &#123;</span></span><br><span class="line"><span class="comment">//     a: string;</span></span><br><span class="line"><span class="comment">//     b: string;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h4><p>写的很好，尤其是这些例子设计，循序渐进。看的时候感觉一般，写的挺简单的，但让自己再输出一遍时，才知道不是那么一回事，能写出让读者觉得很简单的文章，还是很难的，需要一定功底。</p>
+<p>这里我在复述时，想自己去优化一下，但发现内容几乎没有什么可以优化的地方了。可以看下作者的其他文章。</p>
+<h3 id="关于小程序的一切，读这一篇就够了～"><a href="#关于小程序的一切，读这一篇就够了～" class="headerlink" title="关于小程序的一切，读这一篇就够了～"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xz_otxPXEnnUxQuC-ASkpg">关于小程序的一切，读这一篇就够了～</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>小程序并不是不需要安装，只是它容量小，下载的速度很快而已。小程序的架构都是基于双线程，分别是 js 执行线程、页面渲染线程，两者的交互需要 jsBridge，使用了发布订阅模式</p>
+<h4 id="感悟-1"><a href="#感悟-1" class="headerlink" title="感悟"></a>感悟</h4><p>发布订阅模式好强呀，好多地方都用到了，比如 DOM 的监听事件、webpack 的 tapable 等等</p>
+<p>本文还展示了些源码，看不懂，其实看的时候可以快速略过的</p>
+<h3 id="从-vue3-和-vite-源码中，我学到了一行代码统一规范团队包管理器的神器"><a href="#从-vue3-和-vite-源码中，我学到了一行代码统一规范团队包管理器的神器" class="headerlink" title="从 vue3 和 vite 源码中，我学到了一行代码统一规范团队包管理器的神器"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Y2MxoZmqtUj-I-jbBK-9Ow">从 vue3 和 vite 源码中，我学到了一行代码统一规范团队包管理器的神器</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>使用 npm 的 preintsall 钩子加 node 的 process 获取命令行的输入，如果不是 pnpm，那么就报错退出 process.exit(1)</p>
+<h4 id="感悟-2"><a href="#感悟-2" class="headerlink" title="感悟"></a>感悟</h4><p>标题有些长，废话有些多，标题说的也模糊，我本来以为是管理三方包版本的文章呢，唉，是我想多了</p>
+<h3 id="Dan-Abramov-接受油管-UP-主的面试挑战，结果差点没写出来居中"><a href="#Dan-Abramov-接受油管-UP-主的面试挑战，结果差点没写出来居中" class="headerlink" title="Dan Abramov 接受油管 UP 主的面试挑战，结果差点没写出来居中"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ilGcZlc5T1iKGVegigwbkg">Dan Abramov 接受油管 UP 主的面试挑战，结果差点没写出来居中</a></h3><h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><p>一些通用问题：自我介绍、let const、redux 使用场景（现在的话，会使用 react-query, relay, apollo 等一些现代的 react 请求状态库）。</p>
+<p>dangerouslySetInnerHTML 这个 API 的使用时机：在服务端返回 html 字符串时，并且能确保这是安全的，那么就使用，如果是不安全的，那么要对 HTML 消毒（santize）</p>
+<p>数据结构的使用（二叉树镜像反转），可以扩展出反转链表啥的。</p>
+<p>找兔子问题</p>
+<h4 id="感悟-3"><a href="#感悟-3" class="headerlink" title="感悟"></a>感悟</h4><p>很有趣的文章，没想到国外的面试和国内的没啥区别。兔子问题还是挺难的，我不会，没有什么思路，可以学习下</p>
+<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>年轻人真的很厉害，现在就有种感觉：学不过他们了，有一些你刚刚学会并使用的东西，并且引以为傲的东西，已经被人家总结在文档中了。</p>
+<p>用什么语言或方法不重要，能解决问题最重要，做事要抓住根本。就像公司并不是所有的人都是研发，还有一大部分的销售，对于公司来讲，赚钱很重要。所以也不要总是沉浸在学习新语言、新知识的自我娱乐中，只要能解决问题，什么语言都可以。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="clac0ez3j001teqop79qq5ajx" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-TypeScript/pkg" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2020/09/13/TypeScript/pkg/" class="article-date">
@@ -212,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2020/09/13/TypeScript/pkg/" data-id="cl6dk1e2k001h9kp174hsei06" data-title="NPM 发布 TS 包" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2020/09/13/TypeScript/pkg/" data-id="clac0ez360014eqop1mcyhh8g" data-title="NPM 发布 TS 包" class="article-share-link">分享</a>
       
       
       
@@ -276,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="cl6dk1e2n001n9kp1edi175p2" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2020/08/02/project/lint/" data-id="clac0ez3f001leqop19yrd0ow" data-title="ESLint 和 Prettier 规范代码" class="article-share-link">分享</a>
       
       
       
@@ -327,7 +601,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
     </div>
   </div>
 
@@ -340,23 +614,23 @@
       <ul>
         
           <li>
+            <a href="/my-blog/2022/11/10/weekly/10/">明远视角：前端脚手架开发入门</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/">使用 npm link 调试包</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/">JavaScript 的对象与继承</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/">可选链运算符</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-promise/">JavaScript 异步与 Promise</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-regexp/">JavaScript 正则理解</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/symbol/">JavaScript Symbol 解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/10/JavaScript/defineProperty/">defineProperty 详细解读</a>
           </li>
         
       </ul>

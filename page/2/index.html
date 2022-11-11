@@ -77,6 +77,435 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekly/09" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/07/03/weekly/09/" class="article-date">
+  <time class="dt-published" datetime="2022-07-03T21:12:15.000Z" itemprop="datePublished">2022-07-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/07/03/weekly/09/">明远周刊：如何学习一门新技术</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>👀 本期看点：</p>
+<ul>
+<li>如何学习一门新技术</li>
+<li>6个学习习惯和方法</li>
+<li>链表题目</li>
+<li>对象方法添加异常</li>
+<li>Prefetch、Preload</li>
+</ul>
+<h2 id="📃-文章"><a href="#📃-文章" class="headerlink" title="📃 文章"></a>📃 文章</h2><p>👉 <a target="_blank" rel="noopener" href="https://www.bmpi.dev/dev/how-to-learn-tech/">如何学习一门技术</a> </p>
+<p>作者以其自身学习 WebRTC 这个新技术为例，讲述了一些学习的方法。</p>
+<ol>
+<li>是否要学习这门技术？<ol>
+<li>从知识体系出发：学习顶层的技术需要掌握一定的底层技术，如果这个底层技术被很多高层技术依赖，那么就值得学习</li>
+<li>从应用前景出发：有市场需求，能赚钱</li>
+</ol>
+</li>
+<li>怎么学？<ol>
+<li><strong>善用搜索，找到对的资料和对的人</strong>。学习本身不是一件复杂的事情，因为它不是做研究（探索未知的东西），只是站在巨人的肩膀上把已经被解决的问题学习一遍。这里的难点在于资料千千万，很容易找到错误的资料，让学习变得很复杂</li>
+<li>主动搜索：多用Google英文搜索，对比选择下要看的资料；多用谷歌图片搜索，图的层次上更容易了解整体架构；多去逛GitHub、YouTube、Twitter等获取开源项目、教学视频、大佬的演讲与动态等；</li>
+<li>技术标准：不必看细节，要更高层次的理解技术特性</li>
+<li>了解技术历史</li>
+<li>做好笔记：搜索而来的资料和自己的总结如果不做整理与记录的话，时间久了就全忘了，最好整理到 <a target="_blank" rel="noopener" href="https://www.bmpi.dev/self/okr-gtd-note-logseq/">Logseq</a> 等这种多个笔记之间有连接关系的软件中，这种链接符合大脑的思考，更方便记忆</li>
+<li>制定学习计划：规划时间消化学习资料</li>
+<li>讲给别人听（写文章也算是一种），这样能使你的知识梳理更全面，还方便你后续整合成文章</li>
+<li>可以在讨论区、社区、issue等寻求帮助</li>
+<li>心里建设：勇敢承认自己不懂，不懂就去学与问，可怕的是不懂却隐藏，会使问题变得更复杂</li>
+</ol>
+</li>
+<li>怎么用？<ol>
+<li>学以致用是学习的最终目的，只有真正去用这个技术，才能真正掌握它，否则花费时间去学习，不用的话很快就忘了</li>
+<li>从一些现有的开源项目中改造，做一个自己的应用（或者从零开始实现应用，但这往往都比较难）</li>
+</ol>
+</li>
+</ol>
+<p>（文章质量很高，作者应该很厉害，可以关注）</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fGYFE3k_P9CiHDJyZUM5IQ">新拾取的 6 个习惯和方法</a></p>
+<ol>
+<li>教给别人是最好的学习方式：可以清空大脑（把资料从大脑转移到文章中），更多的产出文章（好看的简历）</li>
+<li>看的文章多了，自然也有自己的思考，「不要在输入不足的时候强行领悟」（我自己有时想写东西，但有写不出来，可能就是输入不够）</li>
+<li>多解除新技术，多折腾，并愿意为此多花时间，如：别 React 18 出来了，还在用 React 16</li>
+<li>早起工作，要专注（别看无用的消息），先做困难的事情</li>
+<li>思考某些工作是否有十倍效率的解法</li>
+<li>多做本质解，不做或少做现象解（看透本质能举一反三，不要去花很多时间学习三）</li>
+</ol>
+<p>👉 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/2/18/17/">双指针技巧秒杀七道链表题目</a></p>
+<p>通俗讲解几道链表力扣题目，在学习完链表理论知识后，可到这里实践一下，刷题顺序推荐：</p>
+<ol>
+<li>合并两个有序链表</li>
+<li>链表的中间节点</li>
+<li>删除链表的倒数第n个节点</li>
+<li>环形链表 和 环形链表2</li>
+<li>相交链表</li>
+</ol>
+<p>（你可能觉得有些题目很简单，比如「合并两个有序链表」，这不就是把两个链表都遍历一遍，之后存到数组里，再对数组排个序，之后通过排序的数组在生成新的链表就完事了嘛，为啥要像本文一样搞的这么复杂？因为你的方法时间复杂度、空间复杂度更高，排序需要O(nlogn)时间复杂度，存数组又需要O(m+n)空间复杂度，m和n分别代表两个链表的长度，但如果用本文解法的话，就会高明很多，时间复杂度就只是遍历一遍，是O(m+n)，空间复杂度就是两个指针的空间，即O(1)，所以面试官想看到的是这样的回答，而且一般真实场景下，你已经使用了链表数据结构，是没有必要再用数组数据结构存储一遍重复数据的）</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hehUH9HL6unaLWq3LzQxNg">如何优雅地给对象的所有方法添加异常处理</a></p>
+<p>在每个方法中都使用 try catch 来捕获异常未免有些重复与麻烦，本文通过代理模式的思考方式使用 proxy api 给函数统一添加异常处理，还考虑了异步函数的情况（我也写过很多重复的 try catch，为啥就没想到统一处理下呢😥）</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6893681741240909832">使用 Preload&amp;Prefetch 优化前端页面的资源加载</a></p>
+<p>对于前端页面来说，静态资源的加载对页面性能起着至关重要的作用。本文将介绍浏览器提供的两个资源指令 preload/prefetch，它们能够辅助浏览器优化资源加载的顺序和时机，提升页面性能。</p>
+<p>它们都写在link标签上，head标签里，prefetch可以用低优先级预先加载静态资源，列表页能跳转到详情页，详情页有几个固定图片，那么你可以在列表页写上图片的prefetch，那么浏览器在空闲时就能加载这些图片，用户如果跳到了详情页后就能直接使用prefetch的缓存，直接展示图片，而不用再去等待请求时间。</p>
+<p>preload，有as属性（有多种类型可选），通过标签显式声明一个高优先级资源，强制浏览器提前请求资源，同时不阻塞文档正常onload。</p>
+<p>（这些叫做 Resource Hints，还有<a target="_blank" rel="noopener" href="https://juejin.cn/post/6915204591730556935">preconnect 和 dns-prefetch</a>）</p>
+<p>👉 <a target="_blank" rel="noopener" href="https://ainyi.com/51">关于 Vue 不能 watch 数组 和 对象变化的解决方案</a></p>
+<p>展示了vue什么时候不能监听数组与对象的变化，以及解决方案</p>
+<p>（写的简洁清晰，很不错的博客）</p>
+<h2 id="🤔-想法"><a href="#🤔-想法" class="headerlink" title="🤔 想法"></a>🤔 想法</h2><ol>
+<li>「我们应该做一个积极行动的悲观主义者，对未来低期望，但只要是值得的，就坚定去做。」来自：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/03/weekly-issue-200.html">科技爱好者周刊（第 200 期）：低期望，多尝试</a><ol>
+<li>我在写文章的时候，总高期望的以为自己能获得多少阅读量，多少点赞，如果没有达到预期的话，就会有些失望。其实不应该这样，这是有价值并且值得的事情，坚持去做就可以了，并且降低期望。</li>
+</ol>
+</li>
+<li>要和理想中的自己比较，不要和别人比较</li>
+<li>微信读书 记笔记的方式很好，划线原文加上感想，最好还能总结出文章来</li>
+<li>学习东西要记笔记，最好把内容记忆背诵下来，熟练使用旧知识，才能思考出新知识。</li>
+<li>一个高效学习方法：教给别人（和别人交流、写文章、做分享）</li>
+<li>学习更适应时机的内容：比如你最近的工作内容是做性能优化，但你最近在提升自己的操作系统相关知识，那你就可以先暂停这部分的提示，转向性能优化方面的学习，这样也能在团队内做出一些成绩，并且能应用在复杂的实际项目中</li>
+</ol>
+<p><em>2022-03-19 ~ 2022-07-03（第 9 期）</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/07/03/weekly/09/" data-id="clac0ez3v002jeqopeq7qb13s" data-title="明远周刊：如何学习一门新技术" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/08" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/19/weekly/08/" class="article-date">
+  <time class="dt-published" datetime="2022-03-19T21:21:53.000Z" itemprop="datePublished">2022-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/19/weekly/08/">明远周刊：字符在计算机的存储形式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本期看点</p>
+<ul>
+<li>浏览器 observer api</li>
+<li>LRU JS 实现</li>
+<li>字符在计算机的存储形式</li>
+<li>手写 Promise</li>
+<li>queueMicrotask 实现微任务</li>
+<li>前端依赖管理的痛点</li>
+<li>手写 parseInt</li>
+</ul>
+<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="浏览器的-5-种-Observer，你用过几种？"><a href="#浏览器的-5-种-Observer，你用过几种？" class="headerlink" title="浏览器的 5 种 Observer，你用过几种？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-fLZe164aWAaPJ55iZ_m2w">浏览器的 5 种 Observer，你用过几种？</a></h3><p>网页处理用户交互，可添加 click、mousemove 等事件，但有些操作不是由用户直接触发的，那么就要使用 observer api 了。</p>
+<p>IntersectionObserver：</p>
+<p>监听元素和可视区域相交比例。使用场景：埋点数据采集（当前元素是否可见以及可见比例）、图片懒加载。</p>
+<p>MutationObserver：</p>
+<p>监听元素属性的修改、以及子节点的增删改。使用场景：防止用户使用 devTool 去水印。</p>
+<p>ResizeObserver：</p>
+<p>监听大小的改变，当 width、height 被修改时触发。</p>
+<p>PerformanceObserver：</p>
+<p>监听记录 performance 数据的行为，一旦记录了就会触发回调，可在回调里把这些数据进行上报。</p>
+<p>ReportingObserver：</p>
+<p>浏览器遇到过时 api 会打印警告，在一些情况下还会对网页进行干预，此 api 可监听这些动作。</p>
+<h3 id="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"><a href="#蚂蚁金服在线笔试：设计和实现一个LRU缓存机制" class="headerlink" title="蚂蚁金服在线笔试：设计和实现一个LRU缓存机制"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bNMaEXyyPli0OiZpio2kbg">蚂蚁金服在线笔试：设计和实现一个LRU缓存机制</a></h3><p>LRU 是 Least Recently Used 的缩写，是一种常用的页面置换算法，页面置换与CPU、内存、磁盘有关，你可以简单理解为这是一种缓存算法，但有容量限制。</p>
+<p>本文解决了力扣上的 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU缓存</a> 题目。Vue 中也使用了此算法，可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/E0yzNyDApc_XB7r_5ciX_g">LRU 缓存-keep-alive 实现原理</a></p>
+<h3 id="淦，为什么-“𠮷𠮷𠮷”-length-3"><a href="#淦，为什么-“𠮷𠮷𠮷”-length-3" class="headerlink" title="淦，为什么 “𠮷𠮷𠮷” .length !== 3"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7025400771982131236">淦，为什么 “𠮷𠮷𠮷” .length !== 3</a></h3><p>字符串的 length 属性不能完全正确的表示字符串长度，他的深层原因涉及字符编码，推荐看下文中作者关于编码的前两篇文章，这样看本文的时候能便于理解一些。简单讲就是 JavaScript 字符串使用 utf 16 编码，这种编码的产物只可能是2字节或4字节，JavaScript由于历史原因，认为2字节的 length 就是1，所以 ‘💩’ 的占了4个字节，那么他的length就是2，slice, split, substr 等等方法对于 length 的处理也存在同样的问题。为啥 ‘💩’ 就占4个字节了呢？再简单讲就是这个字符使用了Unicode对应表，可在<a target="_blank" rel="noopener" href="https://unicode-table.com/en/">unicode-table</a>中查询对应值，就是这个字符对应了一个数字，数字就可以用二进制表示，因为数字太大了，所以2个字节不够用，就得占4个字节啦。</p>
+<h3 id="深入分析-Promise-实现细节"><a href="#深入分析-Promise-实现细节" class="headerlink" title="深入分析 Promise 实现细节"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6945319439772434469">深入分析 Promise 实现细节</a></h3><p>手写 Promise 应该是现在面试炽手可热的题目了（想当年我也被这个挂过🤫），本文由浅入深介绍了如何手写 Promise，先实现同步版本的，再实现异步，最后在加上 then 以及其他处理，逐步练习，比较有成就感。</p>
+<h3 id="在-JavaScript-中通过-queueMicrotask-使用微任务"><a href="#在-JavaScript-中通过-queueMicrotask-使用微任务" class="headerlink" title="在 JavaScript 中通过 queueMicrotask() 使用微任务"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide">在 JavaScript 中通过 queueMicrotask() 使用微任务</a></h3><p>上篇手写 Promise 使用了 queueMicrotask，我居然都没听过这个函数😑。本文介绍了一些微任务的特性和 queueMicrotask 的示例，你可以理解为它就想 Promise.resolve().then 一样，就是添加一个微任务，但它比 Promise.resolve 要好得多。其中这3点很新奇：</p>
+<ol>
+<li>微任务自身可以产生微任务，并且事件循环会一直处理微任务队列，所以你递归增加微任务的话一定要谨慎，否则可能出现微任务一直执行不完的情况。</li>
+<li>如果可能的话，大多数开发者不应该过多使用微任务。</li>
+<li>使用微任务的典型场景：实在没有其他办法了、创建框架或库时需要使用微任务完成功能。</li>
+</ol>
+<p>（吐槽下，不知道是翻译的原因吗？读着有点难懂🥺）</p>
+<h3 id="关于依赖管理的真相-—-前端包管理器探究"><a href="#关于依赖管理的真相-—-前端包管理器探究" class="headerlink" title="关于依赖管理的真相 — 前端包管理器探究"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/t6RZAKb6mXTfXl7XbpZ_vw">关于依赖管理的真相 — 前端包管理器探究</a></h3><p>关于前端依赖管理，已经有很多不错的文章解释了，但这篇最近的文章给出了准确的分类，丰富了一些细节，如：</p>
+<ol>
+<li>不确定性：不用 lock 的话，你本地安装的 node_modules 和线上重新安装的是可能不同的，那么就会造成你本地开发没有问题，但是线上有问题的情况，你要在新增一个依赖后本地删除 node_modules，再重新安装才能解决，这明显是没必要的，</li>
+<li>当你安装了多个同版本的包在 node_modules 中时，会破坏单例模式以及引起 TS 的 types冲突（这点我真的没想到过）</li>
+<li>Yarn v2 Plug’n’Play 原理，以及劣势：脱离Node现存生态，兼容性不好</li>
+<li>pnpm 的硬链接与符号链接</li>
+<li>cnpm/tnpm 的解决方案（我原以为cnpm就是做了个国内存储呢😂，原理还干了其他的事情）</li>
+<li>Deno 的链接引包</li>
+</ol>
+<h3 id="被字节”装“到了，只要你能看”完“这题目，就算你过？"><a href="#被字节”装“到了，只要你能看”完“这题目，就算你过？" class="headerlink" title="被字节”装“到了，只要你能看”完“这题目，就算你过？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/W6Of2T_xE5Pf2_01FSsjxg">被字节”装“到了，只要你能看”完“这题目，就算你过？</a></h3><p>类似手写 parseInt，文中使用正则实现的，比较简洁（正则的时间复杂度咋算呀？🤔）。</p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><blockquote>
+<p>we will hold your hand and provide enough detail for you to feel comfortable and learn the topics properly.</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/">原文链接</a></p>
+</blockquote>
+<p>好的学习方式应该是有成就感的、开心的、舒服的、由浅入深逐步递进的。</p>
+<p><em>2022-02-27 ~ 2022-03-19（第 8 期）</em></p>
+<p>最近鸽的有点厉害😣，还是尽量每周一篇吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/19/weekly/08/" data-id="clac0ez3t002feqopbswqe4ob" data-title="明远周刊：字符在计算机的存储形式" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-operating-system/float" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/01/operating-system/float/" class="article-date">
+  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/01/operating-system/float/">浮点数与二进制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>浮点数在我们的生活中处处可见，如你在清空购物车时，就需要结算所支付的金额。但是如果你真正在计算机上使用过浮点数计算，就能知道有挺多坑的，本文会介绍下浮点数与二进制相关的知识，希望能解开你心中浮点数的迷惑，主要围绕以下几点展开：</p>
+<ol>
+<li>浮点数的误区，如：0.1 + 0.2 不等于 0.3</li>
+<li>浮点数在计算机的存储方式，即 IEEE 754 标准介绍</li>
+<li>特殊数字的由来，如 NaN、Number.MAX_SAFE_INTEGER 等</li>
+<li>正确执行浮点数运算的方法</li>
+</ol>
+<h2 id="浮点数的误区"><a href="#浮点数的误区" class="headerlink" title="浮点数的误区"></a>浮点数的误区</h2><p>令人困惑的浮点数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">0.1</span> + <span class="number">0.2</span>);</span><br><span class="line"><span class="comment">// 0.30000000000000004</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.1 + 0.2 真的只等于 0.30000000000000004 吗？</span></span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000004</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000003</span>,</span><br><span class="line">    <span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.30000000000000002</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// true true true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// toFixed 函数</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log((<span class="number">0.1</span>).toFixed(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log((<span class="number">2.55</span>).toFixed(<span class="number">1</span>), (<span class="number">1.335</span>).toFixed(<span class="number">2</span>));</span><br><span class="line"><span class="comment">// 2.5 1.33</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span> === <span class="built_in">Number</span>.MAX_SAFE_INTEGER);</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面我将为你解答这些奇怪现象背后的原因</p>
+<h2 id="IEEE-754-标准"><a href="#IEEE-754-标准" class="headerlink" title="IEEE 754 标准"></a>IEEE 754 标准</h2><p>现代计算机中，IEEE 754 标准（IEEE 电气电子工程师学会 Institute of Electrical and Electronics Engineers）是使用最广泛的浮点数标准（JavaScript、C、Java、Python 等等很多编程语言都使用了此标准）</p>
+<p>该标准以发布年份又区分 3 个版本，分别是 IEEE 754-1985、IEEE 754-2008、IEEE 754-2019，在 <a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-terms-and-definitions-number-value">ECMAScript 2021 标准</a> 中可以发现，JavaScript 使用的正是 IEEE 754-2019 标准中的双精度 64 位格式</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_BkoPLT.png" alt="image-20220301195257453"></p>
+<p>该标准定义了五种基本格式，其中最常用的便是单精度 32 位浮点数与双精度 64 位浮点数，下面主要讲解双精度浮点数（因为 JavaScript 中使用的是双精度浮点数，并且双精度浮点数与单精度浮点数也很类似）</p>
+<p>该标准定义：浮点数由三个字段组成：符号位（sign）、指数（exponent）和尾数（fraction）</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-03/01_19:52_gVVuXr.png" alt="image-20220301195235285"></p>
+<p><strong>符号位：</strong>占 1 位，0 代表正数，1 代表负数</p>
+<p><strong>指数：</strong>占 11 位，能表示 2048 个数，即 [0, 2047]，但实际场景下指数的值可以是正数也可以是负数，所以引入了一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Exponent_bias">指数偏移基准值</a>（Exponent bias）：1023。举例来说：当指数的二进制值为 1025 时，代表指数的实际值为 2，因为 1023 + 2 = 1025，指数的二进制值为 1020 时，代表指数的实际值为 -3，因为 1023 - 3 = 1020。那么你会觉得指数实际值的范围是 [-1023, +1024]，但实际是 [-1022, +1023]，因为二进制全0、二进制全1，用于表示特殊值了</p>
+<p><strong>尾数：</strong>占 52 位，但可以表示 53 位，因为开头开头第一位的值总为 1，为了节约存储空间，所以省略掉了</p>
+<h3 id="浮点数转为二进制"><a href="#浮点数转为二进制" class="headerlink" title="浮点数转为二进制"></a>浮点数转为二进制</h3><p>以十进制 14.34375 为例，它是如何以二进制存储的？首先分别把整数部分与小数部分的二进制值计算出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">         1    4   .       3     4     3     7     5      </span><br><span class="line">      10^1 10^0   .   10^-1 10^-2 10^-3 10^-4 10^-5   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  1   1   1   0   .      0    1    0       1       1        </span><br><span class="line">2^3 2^2 2^1 2^0   .   2^-1 2^-2 2^-3    2^-4    2^-5  </span><br><span class="line"></span><br><span class="line">  8   2   4   0   .      0  0.25   0  0.0625  0.03125        </span><br></pre></td></tr></table></figure>
+
+<p>小数点后面的二进制是如何计算出的？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0.34375 * 2 为 0.6875   第 1 位记 0</span><br><span class="line">0.6875 * 2  为 1.375    第 2 位记 1</span><br><span class="line">0.375 * 2   为 0.75     第 3 位记 0</span><br><span class="line">0.75 * 2    为 1.5      第 4 位记 1</span><br><span class="line">0.5 * 2     为 1        第 5 位记 1</span><br><span class="line"></span><br><span class="line">最终没有小数位了，计算结束，结果为 01011</span><br></pre></td></tr></table></figure>
+
+<p>聪明的你肯定在这里发现了：有可能出现无限循环的情况呀，这个后面会讲</p>
+<h4 id="定点数与科学记数法"><a href="#定点数与科学记数法" class="headerlink" title="定点数与科学记数法"></a>定点数与科学记数法</h4><p>现在拿到的值 1110.01011 叫做<strong>定点数</strong>，即小数点是固定位置不能改变的，那么如何拿到浮点数呢？这就要讲下科学计数法了：</p>
+<p>给一个⼗进制数 1230000，可以表示为 1.23 x 10^6 或 12.3 x 10^5 等等，这种⽅式就称为科学记数法。该方法有一种格式叫做规格化，即⼩数点左边有且仅有⼀位非零数字，如 1.23 x 10^6 是规格化的，⽽ 12.3 x 10^5 和 0.123 x 10^7 就不是规格化的</p>
+<h4 id="定点数转浮点数"><a href="#定点数转浮点数" class="headerlink" title="定点数转浮点数"></a>定点数转浮点数</h4><p>1110.01011 可转换为规格化的科学计数法，即 1.11001011 x 2^3，<strong>这里的 3 就是指数，11001011 就是尾数</strong>，不对，尾数前面有个 1 为什么没存呀？</p>
+<p>因为这里使用了规格化的科学计数法，左边有且仅有⼀位非零数字，又因为使用的是二进制数据，第一位还必须是非零，那么就只有一种可能，第一位一定是 1，为了节省存储空间，所以不会存储这个值，这也就是上面说的：「尾数：占 52 位，但可以表示 53 位」</p>
+<h4 id="十进制浮点数-0-1-转换为二进制的值是多少？"><a href="#十进制浮点数-0-1-转换为二进制的值是多少？" class="headerlink" title="十进制浮点数 0.1 转换为二进制的值是多少？"></a>十进制浮点数 0.1 转换为二进制的值是多少？</h4><p>先转换为二进制定点数，整数部分就是0，算一下小数部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">0.1 * 2 === 0.2  记 0  </span><br><span class="line">0.2 * 2 === 0.4  记 0  </span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   这里开始无限循环了</span><br><span class="line">0.4 * 2 === 0.8  记 0  </span><br><span class="line">0.8 * 2 === 1.6  记 1  </span><br><span class="line">0.6 * 2 === 1.2  记 1  </span><br><span class="line">0.2 * 2 === 0.4  记 0   又继续无限循环</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>定点数为 0.0 0011 0011 0011 … 这里出现了无限循环，但浮点数位数是有限的，不可能存下那么多的值，所以无法用二进制精确表示 0.1，只能用近似值来表示，于是便造成了精度缺失的情况，其实这里你并不用惊讶，因为二进制不能正确表示 0.1 就和十进制不能表示 1/3 一样普通，对于这种情况，我们选择的是表示其近似值，就像十进制中，我们用 0.33 来代表 1/3 一样。</p>
+<p>转换为规格化的科学计数法为：1.1 0011 0011 0011 … * 2^-4</p>
+<p>指数应该为 1019</p>
+<p>符号位：0</p>
+<p>指数：01111111011</p>
+<p>尾数：1001100110011001100110011001100110011001100110011010</p>
+<p>也可以使用 <a target="_blank" rel="noopener" href="https://www.binaryconvert.com/convert_double.html">binaryconvert</a> 工具验证一下，结果是正确的</p>
+<h3 id="二进制转为浮点数"><a href="#二进制转为浮点数" class="headerlink" title="二进制转为浮点数"></a>二进制转为浮点数</h3><p>现在可以反向得出二进制转为浮点数的换算公式了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">十进制 = (-1)^符号位 x (1 + 尾数) x 2^(指数 - 1023)</span><br></pre></td></tr></table></figure>
+
+<h4 id="下面这个二进制转换为十进制浮点数的值是多少？"><a href="#下面这个二进制转换为十进制浮点数的值是多少？" class="headerlink" title="下面这个二进制转换为十进制浮点数的值是多少？"></a>下面这个二进制转换为十进制浮点数的值是多少？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">符号位：0</span><br><span class="line"></span><br><span class="line">指数：10000000010</span><br><span class="line"></span><br><span class="line">尾数：0100110000000000000000000000000000000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>指数的值是 1026，因为 1023 + 3 = 1026，所以指数是 3</p>
+<p>可得规格化的科学计数法为 1.010011 * 2^3</p>
+<p>可得定点数是 1010.011</p>
+<p>可得十进制值为 10.375</p>
+<h3 id="0-1-toFixed-100"><a href="#0-1-toFixed-100" class="headerlink" title="(0.1).toFixed(100)"></a>(0.1).toFixed(100)</h3><p>至此，其实已经能解释这段代码了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log((<span class="number">0.1</span>).toFixed(<span class="number">100</span>));</span><br><span class="line"><span class="comment">// 0.1000000000000000055511151231257827021181583404541015625000000000000000000000000000000000000000000000</span></span><br></pre></td></tr></table></figure>
+
+<p>浮点数转成二进制，之后再用二进制转为浮点数，结果就是这个值（手算计算量很大，可使用后面介绍的 decimal.js 精确计算）</p>
+<p>虽然你定义的是 0.1 但实际上计算机在二进制存的值是 0.1000000000000000055511151231257827021181583404541015625，可通过 toFixed 方法获取到这个真实值</p>
+<h3 id="特殊数字的由来"><a href="#特殊数字的由来" class="headerlink" title="特殊数字的由来"></a>特殊数字的由来</h3><p>上面说过，指数的二进制全0、二进制全1，用于表示特殊值了，如下：</p>
+<h4 id="正负零"><a href="#正负零" class="headerlink" title="正负零"></a>正负零</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是0</p>
+<p>尾数：全是0</p>
+<h4 id="正负无穷"><a href="#正负无穷" class="headerlink" title="正负无穷"></a>正负无穷</h4><p>符号位：0代表正数，1代表负数</p>
+<p>指数：全是1</p>
+<p>尾数：全是0</p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>符号位：0或1都可以，无所谓</p>
+<p>指数：全是1</p>
+<p>尾数：任何非零值</p>
+<p>（typeof NaN === ‘number’ 的原因找到了）</p>
+<h4 id="Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER"><a href="#Number-MAX-SAFE-INTEGER-Number-MIN-SAFE-INTEGER" class="headerlink" title="Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER"></a>Number.MAX_SAFE_INTEGER Number.MIN_SAFE_INTEGER</h4><p>符号位：0 代表正数，1 代表负数</p>
+<p>指数：1023 + 52 = 1075 </p>
+<p>尾数：全是 1</p>
+<p>其实就是 53 个 1，即 2^53  - 1</p>
+<h4 id="Number-MAX-VALUE-Number-MIN-VALUE"><a href="#Number-MAX-VALUE-Number-MIN-VALUE" class="headerlink" title="Number.MAX_VALUE Number.MIN_VALUE"></a>Number.MAX_VALUE Number.MIN_VALUE</h4><p>其实上述的 [-1022, 1023] 只是简单化处理了，如果深究的话，会更复杂（与 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Subnormal_number">Subnormal number</a> 有关），但可以简单理解为能表示的范围是 [-1074, 971]，<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">标准中</a>也有定义，故：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span>) * <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">971</span>) === <span class="built_in">Number</span>.MAX_VALUE <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, -<span class="number">1074</span>) === <span class="built_in">Number</span>.MIN_VALUE <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="正确执行浮点数运算的方法"><a href="#正确执行浮点数运算的方法" class="headerlink" title="正确执行浮点数运算的方法"></a>正确执行浮点数运算的方法</h2><h3 id="浮点数奇怪的本质"><a href="#浮点数奇怪的本质" class="headerlink" title="浮点数奇怪的本质"></a>浮点数奇怪的本质</h3><p>个人认为，浮点数奇怪的本质是：不能存储完整准确的二进制表示，但这是合理的，因为有无限循环的情况，是存储不完的</p>
+<p>当遇到存储不完的的时候会怎样？会溢出，溢出分为上溢和下溢，这又是个复杂的问题，本文暂不讨论</p>
+<h3 id="如何正确执行浮点数运算"><a href="#如何正确执行浮点数运算" class="headerlink" title="如何正确执行浮点数运算"></a>如何正确执行浮点数运算</h3><p>所有的数据计算都是准确的，当出现无限循环时，明确给出精度定义，超出精度的值舍弃掉，按照人脑的十进制方法去计算</p>
+<p>缺点：自己实现起来费力并且也没必要，一般都要引入三方库，如 decimal.js</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文我介绍了浮点数的标准，即 IEEE 754 标准，还解释了一些特殊值以及常见误区的原因，最后简单分析了 decimal.js 的源码，希望能让你有所收获</p>
+<p>现在回顾最初的问题，你都知道答案了吗？</p>
+<p>这里使用到了浮点数的加法运算，在做加法前，首先要对齐指数，对齐指数时指数小的值会改为指数大的</p>
+<p>如下是 0.1 与 0.2 的二进制值</p>
+<table>
+<thead>
+<tr>
+<th>value</th>
+<th>s</th>
+<th>e</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.1</td>
+<td><strong>0</strong></td>
+<td><strong>01111111011</strong><br />1019 -&gt; -4</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+<tr>
+<td>0.2</td>
+<td><strong>0</strong></td>
+<td><strong>01111111100</strong><br />1020 -&gt; -3</td>
+<td><strong>1001100110011001100110011001100110011001100110011010</strong></td>
+</tr>
+</tbody></table>
+<p>指数对齐：把指数小的变为大的，即 0.1 的 e 由 -4 变为 -3</p>
+<p>1.1001100110011001100110011001100110011001100110011010 * 2^-4</p>
+<p>0.11001100110011001100110011001100110011001100110011010 * 2^-3</p>
+<p>指数对齐后就是二进制的加法，没有的位置补0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">0.2    1.10011001100110011001100110011001100110011001100110100</span><br><span class="line">0.1    0.11001100110011001100110011001100110011001100110011010</span><br><span class="line">ans   10.0110011001100110011001100110011001100110011001100111</span><br><span class="line"></span><br><span class="line">10.0110011001100110011001100110011001100110011001100111 * 2^-3</span><br><span class="line">1.00110011001100110011001100110011001100110011001100111 * 2^-2</span><br><span class="line"></span><br><span class="line">符号位：0</span><br><span class="line">指数：-2 即 1021 即 1111111101（二进制）</span><br><span class="line">尾数：00110011001100110011001100110011001100110011001100111</span><br><span class="line">尾数超长了，现在是 53 位，应该改为 52 位，丢弃的部分要使用舍入规则</span><br><span class="line">尾数：0011001100110011001100110011001100110011001100110100</span><br><span class="line"></span><br><span class="line">1.0011001100110011001100110011001100110011001100110100 * 2^-2</span><br><span class="line">0.010011001100110011001100110011001100110011001100110100 是定点数，那么计算值是</span><br><span class="line"></span><br><span class="line">Decimal.set(&#123; precision: 99 &#125;) // 替换到默认的 20 位精度，改为 99 位精度，因为这里计算的值太长了</span><br><span class="line">new Decimal(&#x27;0b0.010011001100110011001100110011001100110011001100110100&#x27;).equals((0.1+0.2).toFixed(100))</span><br><span class="line">// true</span><br><span class="line"></span><br><span class="line">最终，完美解释了 0.1 + 0.2 的值到底是怎么来的 🎉</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/js-precision-problem-and-solution.html">JavaScript 中精度问题以及解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">双精度特殊值示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IEEE_754-1985">IEEE_754-1985 标准</a></p>
+<p>[IEEE 名称解释](<a target="_blank" rel="noopener" href="https://www.ieee.org/about/ieee-history.html#:~:text=Related">https://www.ieee.org/about/ieee-history.html#:~:text=Related</a> links-,Meaning of I-E-E-E,is the full legal name.)</p>
+<p><a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">decimal.js  JavaScript 中的任意精度运算</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=mKJiD2ZAlwM">HOW TO: Adding IEEE-754 Floating Point Numbers</a></p>
+<p>为什么 0.1 + 0.2 不等于 0.3 ？来自：图解系统-小林 coding-v1.0 pdf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/01/operating-system/float/" data-id="clac0ez3d001heqopfyde13u5" data-title="浮点数与二进制" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-weekly/07" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/03/01/weekly/07/" class="article-date">
+  <time class="dt-published" datetime="2022-03-01T17:39:23.000Z" itemprop="datePublished">2022-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/03/01/weekly/07/">明远周刊：从零实现栅格地图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="看点"><a href="#看点" class="headerlink" title="看点"></a>看点</h2><ul>
+<li><p>地图的经纬度、瓦片、墨卡托投影介绍与简单实现。</p>
+</li>
+<li><p>普通人的网页配色。</p>
+</li>
+<li><p>一些学习方法：主动接近大佬、围绕工作学、常用 debug、言之有物，不要无病呻吟、多查官方标准。</p>
+</li>
+</ul>
+<h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><h3 id="从零打造一个-Web-地图引擎"><a href="#从零打造一个-Web-地图引擎" class="headerlink" title="从零打造一个 Web 地图引擎"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7054729902871805966">从零打造一个 Web 地图引擎</a></h3><p>本文从零实现了一个栅格地图，栅格地图是由一个个小方块图片组成的，这个小方块叫瓦片，瓦片有固定的编号规则，后端生成了所有的瓦片，前端想要展示地图只要找到对应的瓦片显示出来即可，经纬度通过 web 墨卡托投影后能计算出对应的瓦片编号，之后计算出屏幕要展示的瓦片，以及监听拖动和缩放即可。</p>
+<h3 id="普通人的网页配色方案"><a href="#普通人的网页配色方案" class="headerlink" title="普通人的网页配色方案"></a><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/03/coloring-scheme.html">普通人的网页配色方案</a></h3><p>没有 UI 设计，前端自己开发网页时，使用配色的建议。</p>
+<p><strong>思考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2008/07/color_theory.html">对于颜色的理解</a>，前端应该具备基本的美感，如：使用好看的颜色、合适的布局、边距使用 8 12 16 px 等等。</p>
+<p>可选的配色：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2010/09/12_colors_used_in_web_design.html">网页设计的 12 种颜色</a>、<a target="_blank" rel="noopener" href="https://materialui.co/flatuicolors">各种国外 ui 的颜色</a>、<a target="_blank" rel="noopener" href="https://mui.com/zh/customization/color/">material ui color</a>、<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.1/customize/color/">bootstrap ui Color</a>、<a target="_blank" rel="noopener" href="https://ant.design/docs/spec/colors-cn">Ant Design 色彩</a>、<a target="_blank" rel="noopener" href="https://semi.design/zh-CN/basic/tokens">设计变量 Semi Design Tokens</a>、<a target="_blank" rel="noopener" href="https://arco.design/docs/spec/style-guideline">arco 设计</a>，以及<a target="_blank" rel="noopener" href="https://getcssscan.com/css-box-shadow-examples">好看的阴影</a>。</p>
+<h3 id="vs-code-调试网页-JS-代码"><a href="#vs-code-调试网页-JS-代码" class="headerlink" title="vs code 调试网页 JS 代码"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTYzMDkzMg==&mid=2247485857&idx=1&sn=329edb0f980b3fdb8e1bb6efda631ba7&chksm=cf00c69af8774f8c8c73e8101aaef52bd8a27d7494aeece1927969ec9a8966b0c3e67d55cbfc&scene=178&cur_album_id=2150425279725469698#rd">vs code 调试网页 JS 代码</a></h3><p>配置<code>.vscode/launch.json</code>文件可在 vs code 中调试网页代码，并且还能查看性能分析。</p>
+<p><strong>思考</strong></p>
+<p>vs code 调试相比于浏览器调试的优势：一些写代码的惯性操作可以直接复用，如：代码搜索、折叠等操作，而不是在浏览器和编辑器之间频繁切换。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="聊聊我遇到的那些贵人"><a href="#聊聊我遇到的那些贵人" class="headerlink" title="聊聊我遇到的那些贵人"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aGk7VmGBM5S2tDNuDGr87w">聊聊我遇到的那些贵人</a></h3><p>主动接近各种大佬，展现出自己的潜力。肯知识付费，这样能获得高质量的知识，算是一种高回报投资了。</p>
+<h3 id="四句话总结我的学习观"><a href="#四句话总结我的学习观" class="headerlink" title="四句话总结我的学习观"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/whI_-E4b7iuVjVlZcfVnoQ">四句话总结我的学习观</a></h3><p>围绕工作学，才能使你对于这方面更加深入，而不是仅停留在 demo 级别。常用 debug。你学习了一些知识，如果没用到实践中的话，那就是没学会，如果不能给别人讲明白的话，那就是没学透彻。</p>
+<h3 id="写文章注意"><a href="#写文章注意" class="headerlink" title="写文章注意"></a><a target="_blank" rel="noopener" href="https://github.com/king-hcj/king-hcj.github.io#%E7%BB%8F%E9%AA%8C%E4%B8%8E%E6%80%9D%E8%80%83">写文章注意</a></h3><p>经验与思考简约，尽量不展示多余内容。</p>
+<p>有时一图抵千言，有时只会拖慢网页加载速度。</p>
+<p>言之有物，不做无痛之呻吟。</p>
+<p>杜绝难理解的长句子，如果不能将其拆分成几个简洁的短句，说明理解的并不清晰。</p>
+<h3 id="多查官方标准文档"><a href="#多查官方标准文档" class="headerlink" title="多查官方标准文档"></a>多查官方标准文档</h3><p>多看好的文档，可以节约你的时间，如 MDN、<a target="_blank" rel="noopener" href="https://262.ecma-international.org/12.0/#sec-ecmascript-language-types-number-type">ECMAScript 2021 标准</a>，最近分享了浮点数相关知识，看标准给了我很大帮助。</p>
+<p>还有 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/">whatwg html 规范</a>、<a target="_blank" rel="noopener" href="https://www.w3.org/Style/CSS/current-work.en.html">css 规范</a>（css规范比html难读一些），可参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Kq0inC2lrjrvAaP-0ltQoQ">大漠：我认识的 W3C 规范</a>。</p>
+<p><em>2022-01-23 ~ 2022-02-27（第 7 期）</em></p>
+<p>好歌推荐：<a target="_blank" rel="noopener" href="https://i.y.qq.com/v8/playsong.html?songid=335344888#webchat_redirect">踏雪 等什么君(邓寓君)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/03/01/weekly/07/" data-id="clac0ez3s002ceqopcxhr3pmm" data-title="明远周刊：从零实现栅格地图" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-browser/extension" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2022/02/11/browser/extension/" class="article-date">
@@ -130,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/02/11/browser/extension/" data-id="cl6dk1e2f001a9kp1cts56u4e" data-title="写个浏览器插件吧" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/02/11/browser/extension/" data-id="clac0ez38001beqop70az28x2" data-title="写个浏览器插件吧" class="article-share-link">分享</a>
       
       
       
@@ -249,7 +678,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/01/23/weekly/06/" data-id="cl6dk1e30002e9kp1a44ddfgh" data-title="明远周刊：css动画、svg动画实现线条 loading" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/01/23/weekly/06/" data-id="clac0ez3r0029eqopaeid0dfo" data-title="明远周刊：css动画、svg动画实现线条 loading" class="article-share-link">分享</a>
       
       
       
@@ -345,7 +774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/01/16/weekly/05/" data-id="cl6dk1e2x002a9kp1gk52cx91" data-title="明远周刊：colors.js 与 faker.js 遭开源作者故意破坏" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/01/16/weekly/05/" data-id="clac0ez3p0025eqop34ne3lg5" data-title="明远周刊：colors.js 与 faker.js 遭开源作者故意破坏" class="article-share-link">分享</a>
       
       
       
@@ -482,7 +911,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/01/10/weekly/04/" data-id="cl6dk1e2w00279kp1gcum6lt4" data-title="明远周刊：为什么 0.1 + 0.2 不等于 0.3" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/01/10/weekly/04/" data-id="clac0ez3o0022eqop6wu73y1w" data-title="明远周刊：为什么 0.1 + 0.2 不等于 0.3" class="article-share-link">分享</a>
       
       
       
@@ -559,7 +988,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/01/06/tools/shuang-pin/" data-id="cl6dk1e2o001q9kp152988qm9" data-title="小鹤双拼推荐" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/01/06/tools/shuang-pin/" data-id="clac0ez3g001neqop01blh8uo" data-title="小鹤双拼推荐" class="article-share-link">分享</a>
       
       
       
@@ -639,281 +1068,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="cl6dk1e2u00239kp1estyffab" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-online-judge/lt504" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2021/12/30/online-judge/lt504/" class="article-date">
-  <time class="dt-published" datetime="2021-12-30T12:07:11.000Z" itemprop="datePublished">2021-12-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2021/12/30/online-judge/lt504/">力扣 504 七进制转换</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/base-7/">题目链接</a></p>
-<p>就是输入一个十进制数，转成七进制数，这个七进制，和我们的周特别相似，一周七天。如怎么把第 9 天转换成按周的天数呢？首先把 9 取余 7，得到 2，之后在把 9 除以 7，并向下取整，得到 1，之后再把 1 取余 7，得到 1，之后再把 1 除以 7，并向下取整，得到 0，这时循环终止，得到了结果，是 12，也就是第一周过后的第二天是第 9 天</p>
-<p>其实进制转换并不高大上，他在我们的生活中很常见，比如时间计算就是进制转换，其实任何时间点都是可以用时间戳来表示的，假设时间戳的基本单位是毫秒，那么先把时间戳取余 1000，就得到了毫秒，之后把时间戳除以 1000，再取余 60，就得到了秒，之后以此类推。这里你还可以发现，还可以使用不同的进制，比如毫秒是 1000 进制，秒就又是 60 进制了</p>
-<p>ts 代码</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToBase7</span>(<span class="params">num: <span class="built_in">number</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isNegative = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        isNegative = <span class="literal">true</span>;</span><br><span class="line">        num = -num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> res: <span class="built_in">string</span>[] = [];</span><br><span class="line">    <span class="keyword">const</span> base = <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">while</span> (num !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> remainder = num % base;</span><br><span class="line">        res.push(remainder + <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">        num = <span class="built_in">Math</span>.floor(num / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (isNegative ? <span class="string">&#x27;-&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + res.reverse().join(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>py 代码（py 中没有三元表达式）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convertToBase7</span>(<span class="params">self, num: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">        isNegative = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> num &lt; <span class="number">0</span>:</span><br><span class="line">            isNegative = <span class="literal">True</span></span><br><span class="line">            num = -num</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">        res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        base = <span class="number">7</span></span><br><span class="line">        <span class="keyword">while</span> num != <span class="number">0</span>:</span><br><span class="line">            res += <span class="built_in">str</span>(num % base)</span><br><span class="line">            num = num // base</span><br><span class="line">        <span class="keyword">if</span> isNegative:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;-&#x27;</span>+res[::-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> res[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/30/online-judge/lt504/" data-id="cl6dk1e2g001e9kp155hx0vul" data-title="力扣 504 七进制转换" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-browser/chrome-96" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2021/12/28/browser/chrome-96/" class="article-date">
-  <time class="dt-published" datetime="2021-12-28T15:20:18.000Z" itemprop="datePublished">2021-12-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2021/12/28/browser/chrome-96/">Chrome 96 更新</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>记录一些有趣有用的常用知识</p>
-<p>题外话：Chrome 也是有 bug 的，并且就在我们身边，如果仔细使用，还是能发现的</p>
-<h3 id="Chrome-96"><a href="#Chrome-96" class="headerlink" title="Chrome 96"></a><a target="_blank" rel="noopener" href="https://developer.chrome.com/zh/blog/new-in-devtools-96/#css-overview">Chrome 96</a></h3><p>新增了 css 概览面板，方便优化 css</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_jSSa3y.png" alt="CSS 概览面板"></p>
-<p>查看 dom 元素的属性时，设置过的会首先加粗展示，这样方便调试</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_hDRtBX.png" alt="自有属性加粗并优先排序"></p>
-<p>有 payload 面板，更方便的看请求参数</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2021-12/28_15:09_aq4oAR.png" alt="网络面板里面的 payload 边栏"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/28/browser/chrome-96/" data-id="cl6dk1e2d00179kp14byjbzn8" data-title="Chrome 96 更新" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-weekly/02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2021/12/27/weekly/02/" class="article-date">
-  <time class="dt-published" datetime="2021-12-27T15:16:26.000Z" itemprop="datePublished">2021-12-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2021/12/27/weekly/02/">明远周刊（第 2 期）🤩</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>整理汇总一周看到的文章与学到的知识（2021-12-17 ~ 2021-12-23）</p>
-<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="面试官问：JS-的继承"><a href="#面试官问：JS-的继承" class="headerlink" title="面试官问：JS 的继承"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903780035592205">面试官问：JS 的继承</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每一个函数都有 prototype 属性，只有在 new + 构造函数的时候，prototype 属性才有用，普通的函数调用，不会用到 prototype 属性</span></span><br><span class="line"><span class="comment">// 每一个对象都有 __proto__ 属性，__proto__ 属性指向当前对象的原型对象，js是基于原型来实现继承</span></span><br><span class="line"><span class="comment">// 函数也是对象（数组、正则都是对象）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用于方便的找到构造函数</span></span><br><span class="line">F.prototype.constructor === F; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这段代码是js能实现继承的关键</span></span><br><span class="line">F.__proto__ === <span class="built_in">Function</span>.prototype; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function 是 Object 的实例（Function 和 Object 都是函数）</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// Object 的原型是 null（规定）</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// f 是 F 的实例，这就代表 f 继承与 F</span></span><br><span class="line">f.__proto__ === F.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// F 是实例a，Function 是实例b，实例a和b的原型都是 Object.prototype</span></span><br><span class="line">F.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>以下是一个 es6 的例子</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">sayHello</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;my name is &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name);</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">sayAge</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;my age is &#x27;</span> + <span class="built_in">this</span>.age);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> parent = <span class="keyword">new</span> Parent(<span class="string">&#x27;Parent&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> child = <span class="keyword">new</span> Child(<span class="string">&#x27;Child&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;parent: &#x27;</span>, parent); <span class="comment">// parent:  Parent &#123;name: &quot;Parent&quot;&#125;</span></span><br><span class="line"></span><br><span class="line">Parent.sayHello(); <span class="comment">// hello</span></span><br><span class="line">parent.sayName(); <span class="comment">// my name is Parent</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;child: &#x27;</span>, child); <span class="comment">// child:  Child &#123;name: &quot;Child&quot;, age: 18&#125;</span></span><br><span class="line">Child.sayHello(); <span class="comment">// hello</span></span><br><span class="line">child.sayName(); <span class="comment">// my name is Child</span></span><br><span class="line">child.sayAge(); <span class="comment">// my age is 18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Child.prototype.__proto__ === Parent.prototype);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Child.__proto__ === Parent);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1、构造器原型链</span></span><br><span class="line">Child.__proto__ === Parent; <span class="comment">// true</span></span><br><span class="line">Parent.__proto__ === <span class="built_in">Function</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 2、实例原型链</span></span><br><span class="line">child.__proto__ === Child.prototype; <span class="comment">// true</span></span><br><span class="line">Child.prototype.__proto__ === Parent.prototype; <span class="comment">// true</span></span><br><span class="line">Parent.prototype.__proto__ === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类中使用的 super，相当于 es5 中使用的 call apply</span></span><br></pre></td></tr></table></figure>
-
-<p><code>Child.__proto__ === Parent</code> 这两个居然相等，不太懂？这是《JavaScript 高级程序设计-第 3 版》 章节 6.3 继承 中的 寄生组合式继承</p>
-<p><code>__proto__</code> 只是一个方便我们测试的属性，在正式项目中，不要使用它，那么改怎么更改 <code>__proto__</code> 的值呢？应该使用 <code>new</code>、<code>Object.create</code>和<code>Object.setPrototypeOf</code></p>
-<p><code>new</code> ：</p>
-<ol>
-<li>创建一个对象 a</li>
-<li>对象 a 的 <code>__proto__</code> 赋值为构造函数的 prototype （在浏览器中<code>[[Prototype]]</code> 就是 <code>__proto__</code>）</li>
-<li>调用构造函数，并且使用对象 a 的上下文（这是构造函数没有返回<code>Object</code>的情况，如果构造函数返回了<code>Object</code>，那么对象 a 就赋值为这个返回的对象）</li>
-</ol>
-<p><code>Object.create()</code> es5 提供的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简版：也正是应用了new会设置__proto__链接的原理。</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.create !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">proto</span>) </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">        F.prototype = proto;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Object.setPrototypeOf</code> es6 提供的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.setPrototypeOf =</span><br><span class="line">    <span class="built_in">Object</span>.setPrototypeOf ||</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">obj, proto</span>) </span>&#123;</span><br><span class="line">        obj.__proto__ = proto;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>node 的 inherits 就是使用 <code>Object.setPrototypeOf</code> 实现的</p>
-<p>util.inherits <a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest-v10.x/api/util.html#util_util_inherits_constructor_superconstructor">用法</a> 以及 <a target="_blank" rel="noopener" href="https://github.com/nodejs/node/blob/v10.24.1/lib/util.js#L274-L288">源码</a></p>
-<p>还可以看下 babel 编译 es6 之后的代码</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>例子还是挺深奥的，但感觉没有讲的很简单，看着有点难懂，只是挂了一些书的链接，但这些书还是不错的，可以看下</p>
-<p>还是不太懂 prototype 和 <code>__proto__</code> 的区别？</p>
-<p>可以了解一下 node 的其他工具函数是怎么写的，比如 promisify ？</p>
-<p>学了近三年前端，原型继承还是不能清晰理解，惭愧呀</p>
-<h3 id="张鑫旭：前端工程师应该为用户体验负责"><a href="#张鑫旭：前端工程师应该为用户体验负责" class="headerlink" title="张鑫旭：前端工程师应该为用户体验负责"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CoqW5x9vMN87U3h5fuEoSw">张鑫旭：前端工程师应该为用户体验负责</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>首先提出了一些常见的体验应该引起重视，如按钮要有按下的反馈、图标点击区域要大、忽视边界异常处理，如：低网速、无数据、脚本出错等、语言错误，使用 div 代替按钮，使用 div 代替链接</p>
-<p>后面分析总结了引起这些问题的原因，以及解决方案</p>
-<h4 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h4><p>原因以及解决方案讲的很清晰，需要大量功底，如果让我总结，可能就只是有个模糊的概念，但不能清晰的划分出来</p>
-<p>我也有这种感受，因为我虽然是开发人员，但也是用户，作为用户我会经常吐槽这个产品做的真垃圾，用着真难受，但我在开发的时候也确实不想因为用户体验而多写大量代码，感觉这是吃力不讨好，收益不明显，比较同意等的那个观点（但我认为还要等很久），等到大家功能上都差不了太多的时候，就会在用户体验上卷起来了（在用户体验方面，还是很佩服苹果的）</p>
-<h3 id="JS-的-6-种打断点的方式，你用过几种？"><a href="#JS-的-6-种打断点的方式，你用过几种？" class="headerlink" title="JS 的 6 种打断点的方式，你用过几种？"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KttRDmTyO3wgbNXGbEvPlw">JS 的 6 种打断点的方式，你用过几种？</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><ol>
-<li>普通断点</li>
-<li>加条件的普通断点</li>
-<li>DOM 断点（当子元素发生变化时触发）</li>
-<li>Url 断点</li>
-<li>event listener 断点（如鼠标点击事件）</li>
-<li>Node 的 error 断点（只有 vscode 可以）</li>
-</ol>
-<h4 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h4><p>dom url 和 listener 学到了，但一般在什么情况使用呢？（学到了，并且用了，才是真正的会了）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/02/" data-id="cl6dk1e2t00209kp19n1mfe7i" data-title="明远周刊（第 2 期）🤩" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-weekly/01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2021/12/27/weekly/01/" class="article-date">
-  <time class="dt-published" datetime="2021-12-27T15:13:20.000Z" itemprop="datePublished">2021-12-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2021/12/27/weekly/01/">明远周刊（第 1 期）🤩</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>整理汇总一周看到的文章与学到的知识（2021-12-10 ~ 2021-12-16）</p>
-<h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><h3 id="React-中的-TS-类型过滤原来是这么做的！"><a href="#React-中的-TS-类型过滤原来是这么做的！" class="headerlink" title="React 中的 TS 类型过滤原来是这么做的！"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EkcFlwTu6u9gC-8nvU0olQ">React 中的 TS 类型过滤原来是这么做的！</a></h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p>如何理解这段 ts 类型代码？</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FilterConditionally&lt;Source, Condition&gt; = Pick&lt;</span><br><span class="line">    Source,</span><br><span class="line">    &#123;</span><br><span class="line">        [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">    &#125;[keyof Source]</span><br><span class="line">&gt;;</span><br></pre></td></tr></table></figure>
-
-<p>有几个基础知识要知道：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Keys = keyof Example;</span><br><span class="line"><span class="comment">// 等价于 type Keys = &#x27;a&#x27; | &#x27;b&#x27; | &#x27;c&#x27; | &#x27;d&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>Keyof 会拿到 key 的字符串</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Keys = <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;b&#x27;</span> | <span class="string">&#x27;c&#x27;</span> | <span class="string">&#x27;d&#x27;</span>;</span><br><span class="line"><span class="keyword">type</span> Obj = &#123;</span><br><span class="line">    [T <span class="keyword">in</span> Keys]: <span class="built_in">string</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Obj 的类型：</span></span><br><span class="line"><span class="comment">// type Obj = &#123;</span></span><br><span class="line"><span class="comment">//     a: string;</span></span><br><span class="line"><span class="comment">//     b: string;</span></span><br><span class="line"><span class="comment">//     c: string;</span></span><br><span class="line"><span class="comment">//     d: string;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>in 可以拿到类型列表中的每一个元素，但根据用法，还必须要声明一个类型 T</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> A &#123;&#125;</span><br><span class="line"><span class="keyword">interface</span> B <span class="keyword">extends</span> A &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = B <span class="keyword">extends</span> A ? <span class="built_in">number</span> : <span class="built_in">string</span>;</span><br><span class="line"><span class="comment">// type C = number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> D = A <span class="keyword">extends</span> B ? <span class="built_in">number</span> : <span class="built_in">string</span>;</span><br><span class="line"><span class="comment">// type D = number</span></span><br></pre></td></tr></table></figure>
-
-<p>还可以使用条件判断来得出类型</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这里使用了泛型，其实泛型就相当于 JS 中的函数一样，你给我参数，我给你返回值，只不过 TS 的返回值是类型而已，这个结论同样也适用于非泛型，因为那种情况就相当于没有传入参数，就直接返回了一个类型</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">boolean</span>;</span><br><span class="line">    d: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = MarkUnwantedTypesAsNever&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &#123;</span></span><br><span class="line"><span class="comment">//     a: &quot;a&quot;;</span></span><br><span class="line"><span class="comment">//     b: &quot;b&quot;;</span></span><br><span class="line"><span class="comment">//     c: never;</span></span><br><span class="line"><span class="comment">//     d: never;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>根据如上分析，即可理解</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123; <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span> &#125;[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="comment">// type Value = &quot;zero2one&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>索引访问接口</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span>;</span><br><span class="line">    age: <span class="number">23</span>;</span><br><span class="line">&#125;[<span class="string">&#x27;name&#x27;</span> | <span class="string">&#x27;age&#x27;</span>];</span><br><span class="line"><span class="comment">// type Value = &quot;zero2one&quot; | 23</span></span><br></pre></td></tr></table></figure>
-
-<p>访问多个</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zero2one&#x27;</span>;</span><br><span class="line">    age: <span class="built_in">never</span>;</span><br><span class="line">&#125;[<span class="string">&#x27;name&#x27;</span> | <span class="string">&#x27;age&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于 type Value = &quot;zero2one&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>never 不能被访问到</p>
-<p>这是可以加上索引访问了</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;[keyof Source];</span><br></pre></td></tr></table></figure>
-
-<p>即可得到</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkUnwantedTypesAsNever&lt;Source, Condition&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">&#125;[keyof Source];</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = MarkUnwantedTypesAsNever&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &quot;a&quot; | &quot;b&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>最后需要看一下 Pick，这是 ts 内置的</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>作用是筛选出类型 T 中指定的某些属性</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> A &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>;</span><br><span class="line">    b: <span class="number">2</span>;</span><br><span class="line">    c: <span class="number">3</span>;</span><br><span class="line">    d: <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = Pick&lt;A, <span class="string">&#x27;a&#x27;</span> | <span class="string">&#x27;c&#x27;</span>&gt;;</span><br><span class="line"><span class="comment">// type C = &#123;</span></span><br><span class="line"><span class="comment">//     a: 1;</span></span><br><span class="line"><span class="comment">//     c: 3;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>最终即可实现</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FilterConditionally&lt;Source, Condition&gt; = Pick&lt;</span><br><span class="line">    Source,</span><br><span class="line">    &#123;</span><br><span class="line">        [K <span class="keyword">in</span> keyof Source]: Source[K] <span class="keyword">extends</span> Condition ? K : <span class="built_in">never</span>;</span><br><span class="line">    &#125;[keyof Source]</span><br><span class="line">&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Example &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">string</span>;</span><br><span class="line">    b: <span class="built_in">string</span>;</span><br><span class="line">    c: <span class="built_in">number</span>;</span><br><span class="line">    d: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Foo = FilterConditionally&lt;Example, <span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="comment">// type Foo = &#123;</span></span><br><span class="line"><span class="comment">//     a: string;</span></span><br><span class="line"><span class="comment">//     b: string;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h4><p>写的很好，尤其是这些例子设计，循序渐进。看的时候感觉一般，写的挺简单的，但让自己再输出一遍时，才知道不是那么一回事，能写出让读者觉得很简单的文章，还是很难的，需要一定功底。</p>
-<p>这里我在复述时，想自己去优化一下，但发现内容几乎没有什么可以优化的地方了。可以看下作者的其他文章。</p>
-<h3 id="关于小程序的一切，读这一篇就够了～"><a href="#关于小程序的一切，读这一篇就够了～" class="headerlink" title="关于小程序的一切，读这一篇就够了～"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xz_otxPXEnnUxQuC-ASkpg">关于小程序的一切，读这一篇就够了～</a></h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><p>小程序并不是不需要安装，只是它容量小，下载的速度很快而已。小程序的架构都是基于双线程，分别是 js 执行线程、页面渲染线程，两者的交互需要 jsBridge，使用了发布订阅模式</p>
-<h4 id="感悟-1"><a href="#感悟-1" class="headerlink" title="感悟"></a>感悟</h4><p>发布订阅模式好强呀，好多地方都用到了，比如 DOM 的监听事件、webpack 的 tapable 等等</p>
-<p>本文还展示了些源码，看不懂，其实看的时候可以快速略过的</p>
-<h3 id="从-vue3-和-vite-源码中，我学到了一行代码统一规范团队包管理器的神器"><a href="#从-vue3-和-vite-源码中，我学到了一行代码统一规范团队包管理器的神器" class="headerlink" title="从 vue3 和 vite 源码中，我学到了一行代码统一规范团队包管理器的神器"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Y2MxoZmqtUj-I-jbBK-9Ow">从 vue3 和 vite 源码中，我学到了一行代码统一规范团队包管理器的神器</a></h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><p>使用 npm 的 preintsall 钩子加 node 的 process 获取命令行的输入，如果不是 pnpm，那么就报错退出 process.exit(1)</p>
-<h4 id="感悟-2"><a href="#感悟-2" class="headerlink" title="感悟"></a>感悟</h4><p>标题有些长，废话有些多，标题说的也模糊，我本来以为是管理三方包版本的文章呢，唉，是我想多了</p>
-<h3 id="Dan-Abramov-接受油管-UP-主的面试挑战，结果差点没写出来居中"><a href="#Dan-Abramov-接受油管-UP-主的面试挑战，结果差点没写出来居中" class="headerlink" title="Dan Abramov 接受油管 UP 主的面试挑战，结果差点没写出来居中"></a><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ilGcZlc5T1iKGVegigwbkg">Dan Abramov 接受油管 UP 主的面试挑战，结果差点没写出来居中</a></h3><h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><p>一些通用问题：自我介绍、let const、redux 使用场景（现在的话，会使用 react-query, relay, apollo 等一些现代的 react 请求状态库）。</p>
-<p>dangerouslySetInnerHTML 这个 API 的使用时机：在服务端返回 html 字符串时，并且能确保这是安全的，那么就使用，如果是不安全的，那么要对 HTML 消毒（santize）</p>
-<p>数据结构的使用（二叉树镜像反转），可以扩展出反转链表啥的。</p>
-<p>找兔子问题</p>
-<h4 id="感悟-3"><a href="#感悟-3" class="headerlink" title="感悟"></a>感悟</h4><p>很有趣的文章，没想到国外的面试和国内的没啥区别。兔子问题还是挺难的，我不会，没有什么思路，可以学习下</p>
-<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>年轻人真的很厉害，现在就有种感觉：学不过他们了，有一些你刚刚学会并使用的东西，并且引以为傲的东西，已经被人家总结在文档中了。</p>
-<p>用什么语言或方法不重要，能解决问题最重要，做事要抓住根本。就像公司并不是所有的人都是研发，还有一大部分的销售，对于公司来讲，赚钱很重要。所以也不要总是沉浸在学习新语言、新知识的自我娱乐中，只要能解决问题，什么语言都可以。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2021/12/27/weekly/01/" data-id="cl6dk1e2r001w9kp15s60bns6" data-title="明远周刊（第 1 期）🤩" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2021/12/31/weekly/03/" data-id="clac0ez3n001zeqopdemnhoxr" data-title="明远周刊（第 3 期）🤩" class="article-share-link">分享</a>
       
       
       
@@ -964,7 +1119,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2020/08/">八月 2020</a></li></ul>
     </div>
   </div>
 
@@ -977,23 +1132,23 @@
       <ul>
         
           <li>
+            <a href="/my-blog/2022/11/10/weekly/10/">明远视角：前端脚手架开发入门</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/">使用 npm link 调试包</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/">JavaScript 的对象与继承</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/">可选链运算符</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-promise/">JavaScript 异步与 Promise</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/js-regexp/">JavaScript 正则理解</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/17/JavaScript/symbol/">JavaScript Symbol 解读</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2022/07/10/JavaScript/defineProperty/">defineProperty 详细解读</a>
           </li>
         
       </ul>
