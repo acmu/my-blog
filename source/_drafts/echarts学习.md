@@ -10,7 +10,7 @@
 
 ![image-2022063064910822 PM](https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-06/30_18:49_EDTHFh.png)
 
-这里点击可以看到一些图表的示例，很帅
+点击可以看到一些图表的示例，很帅
 
 
 
@@ -70,27 +70,19 @@
 
 
 
-[术语速查手册](https://echarts.apache.org/zh/cheat-sheet.html) 用图的方式展示各个属性
+[术语速查手册](https://echarts.apache.org/zh/cheat-sheet.html) 用图的方式带你认识各个部分的名称
 
-看完 快速上手，之后直接概念篇就行，当你的页面中有 Tabs 组件时要注意可能图标没了，因为dom被删除了，正确做法是想要展示的时候调用 init，想要销毁的时候调用 dispose
-
-
+看完 快速上手，之后直接概念篇就行，当你的页面中有 Tabs 组件时要注意可能图表没了，因为dom被删除了（这要看你使用的 tabs 的实现方式了），正确做法是想要展示的时候调用 init，想要销毁的时候调用 dispose
 
 
 
-
-
-echarts 实现x轴分组
+## echarts 实现x轴分组
 
 [Echarts 实现不等分双X轴](https://blog.csdn.net/z291493823/article/details/105053565)
 
 [Echarts x轴分组与不规则刻度线](https://www.jianshu.com/p/aff239940c84)
 
-
-
-
-
-
+这其实不太合理，一个简单的替代方案是通过 x 轴刻度线的名称换行实现，相同的内容看起来比较接近，但还是不能合并到一起
 
 
 
@@ -129,19 +121,23 @@ option = {
 
 怎么带有legend？
 
-https://echarts.apache.org/examples/zh/editor.html?c=line-stack
-
-这个更丰富，带有 legend 和 tooltip
+[这个](https://echarts.apache.org/examples/zh/editor.html?c=line-stack)更丰富，带有 legend 和 tooltip
 
 
 
-柱状图初探
-
-https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQCGAHhAM70A0x6L7ACsAjQwtQqhIkwATxDUGbABaMAJsADu9HrAC-xHd3TMAgqzbjtMuQwDGjURWClpXbSvuNCAbXoBZGFyw9AAqAK7UgfQA6tQqkcGKoZEAYuSRAMr2GaHQ9AC6-oaw0qbsFpJW8kEAbozY4VroBsRstBDU5rBe2hKSsNCMALZV9AAsAHQATIDOPrCAHHqAlHaufRiyIwBGjKTLfdSDIMpsZUQr6ABmwDahnfSt5B2Nfc0rbGCMNgDWDIw7ku5v3gAjJMAAycWCgsGwQEAVihAA4oQB2KGAwGogDMIIKkmeJF6kgGwwYExmsEA7YqAedDfiRXu8vkEfkVJHsDowjp0CX0Llcbnd2hxtE1mSR_p4uhjRuCAGxI8EATihMOl4JRMrlsHh0ryIvQlQYm222jx6C56CJIyRU1mVJp6DpnwYuV1sFZh2OZpIPOuCjaDyFuhdYu8kvVCqVKtgatgsvBWp1Af1QUNj2FxAKOgA3EA
+[柱状图初探](https://echarts.apache.org/examples/zh/editor.html?c=bar-simple&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQCGAHhAM70A0x6L7ACsAjQwtQqhIkwATxDUGbABaMAJsADu9HrAC-xHd3TMAgqzbjtMuQwDGjURWClpXbSvuNCAbXoBZGFyw9AAqAK7UgfQA6tQqkcGKoZEAYuSRAMr2GaHQ9AC6-oaw0qbsFpJW8kEAbozY4VroBsRstBDU5rBe2hKSsNCMALZV9AAsAHQATIDOPrCAHHqAlHaufRiyIwBGjKTLfdSDIMpsZUQr6ABmwDahnfSt5B2Nfc0rbGCMNgDWDIw7ku5v3gAjJMAAycWCgsGwQEAVihAA4oQB2KGAwGogDMIIKkmeJF6kgGwwYExmsEA7YqAedDfiRXu8vkEfkVJHsDowjp0CX0Llcbnd2hxtE1mSR_p4uhjRuCAGxI8EATihMOl4JRMrlsHh0ryIvQlQYm222jx6C56CJIyRU1mVJp6DpnwYuV1sFZh2OZpIPOuCjaDyFuhdYu8kvVCqVKtgatgsvBWp1Af1QUNj2FxAKOgA3EA)
 
 
 
+## mtdv
 
+给了很多默认值
+
+columns、rows
+
+做了很多事
+
+series 可自定义
 
 
 

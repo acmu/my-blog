@@ -76,6 +76,22 @@ rebase 更强 可以改好多东西
 
 但这些更改都是要在本地，如果 push 到了远程，就不能改了
 
+
+
+## cherry-pick
+
+https://git-scm.com/docs/git-cherry-pick
+
+```
+git cherry-pick commit_id
+```
+
+这样就只会把这一个 commit_id 的内容变成当前分支的一个commit
+
+
+
+
+
 ## 疑问
 
 冲突到底是怎么产生的？解决冲突时应该注意什么？
