@@ -1,7 +1,7 @@
 ---
 title: 在 Mac 中像 Windows 一样切换应用
 date: 2022-07-05
-tags: 周刊
+tags: 效率工具
 ---
 
 众所周知，Mac 中的 command + tab 可以切换应用，但有时它并不是那么好用

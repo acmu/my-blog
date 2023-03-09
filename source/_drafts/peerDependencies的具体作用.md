@@ -4,3 +4,7 @@ peerDependencies的目的是提示宿主环境去安装满足插件peerDependenc
 
 [链接](https://blog.csdn.net/terrychinaz/article/details/115345694)
 
+
+
+可以写的
+
