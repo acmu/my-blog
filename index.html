@@ -77,6 +77,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaScript/kind-of源码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2022/11/16/JavaScript/kind-of%E6%BA%90%E7%A0%81/" class="article-date">
+  <time class="dt-published" datetime="2022-11-16T23:12:20.000Z" itemprop="datePublished">2022-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2022/11/16/JavaScript/kind-of%E6%BA%90%E7%A0%81/">周下载量超1亿的库是如何判断JS类型的？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近我偶然发现了一个库：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/kind-of">kind-of</a>，他的作用是判断 JS 数据类型，经常被一些基础库所使用，如 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/clone-deep">clone-deep</a> 等，周下载量超 1 亿。</p>
+<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-11/16_18:20_GtoHmO.png" alt="image-2022111662009862 PM"></p>
+<p>如何判断 JS 数据类型也是一道常见面试题，本文就来看看 kind-of 是如何解决的。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">kindOf(<span class="literal">null</span>);</span><br><span class="line"><span class="comment">//=&gt; &#x27;null&#x27;</span></span><br><span class="line"></span><br><span class="line">kindOf(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">//=&gt; &#x27;boolean&#x27;</span></span><br><span class="line"></span><br><span class="line">kindOf(<span class="keyword">new</span> <span class="built_in">WeakMap</span>());</span><br><span class="line"><span class="comment">//=&gt; &#x27;weakmap&#x27;</span></span><br><span class="line"></span><br><span class="line">kindOf(<span class="keyword">new</span> <span class="built_in">Set</span>());</span><br><span class="line"><span class="comment">//=&gt; &#x27;set&#x27;</span></span><br><span class="line"></span><br><span class="line">kindOf(<span class="keyword">new</span> <span class="built_in">Uint8Array</span>());</span><br><span class="line"><span class="comment">//=&gt; &#x27;uint8array&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>传入对应类型数据，调用就会返回对应字符串。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>由于源码简单，我们直接打开 <a target="_blank" rel="noopener" href="https://unpkg.com/kind-of">https://unpkg.com/kind-of</a> 就能看到源码（这里看到的代码和你使用 npm 安装后的代码是一样的）。觉得太长的，可以先略过代码，直接去看下面的分析。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">kindOf</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val === <span class="keyword">void</span> <span class="number">0</span>) <span class="keyword">return</span> <span class="string">&#x27;undefined&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (val === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&#x27;null&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> type = <span class="keyword">typeof</span> val;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">&#x27;boolean&#x27;</span>) <span class="keyword">return</span> <span class="string">&#x27;boolean&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">&#x27;string&#x27;</span>) <span class="keyword">return</span> <span class="string">&#x27;string&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">&#x27;number&#x27;</span>) <span class="keyword">return</span> <span class="string">&#x27;number&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">&#x27;symbol&#x27;</span>) <span class="keyword">return</span> <span class="string">&#x27;symbol&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> isGeneratorFn(val) ? <span class="string">&#x27;generatorfunction&#x27;</span> : <span class="string">&#x27;function&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isArray(val)) <span class="keyword">return</span> <span class="string">&#x27;array&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (isBuffer(val)) <span class="keyword">return</span> <span class="string">&#x27;buffer&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (isArguments(val)) <span class="keyword">return</span> <span class="string">&#x27;arguments&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (isDate(val)) <span class="keyword">return</span> <span class="string">&#x27;date&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (isError(val)) <span class="keyword">return</span> <span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (isRegexp(val)) <span class="keyword">return</span> <span class="string">&#x27;regexp&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (ctorName(val)) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Symbol&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;symbol&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Promise&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;promise&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Set, Map, WeakSet, WeakMap</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;WeakMap&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;weakmap&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;WeakSet&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;weakset&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Map&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;map&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Set&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;set&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 8-bit typed arrays</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Int8Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;int8array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Uint8Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;uint8array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Uint8ClampedArray&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;uint8clampedarray&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 16-bit typed arrays</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Int16Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;int16array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Uint16Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;uint16array&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 32-bit typed arrays</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Int32Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;int32array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Uint32Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;uint32array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Float32Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;float32array&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Float64Array&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;float64array&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isGeneratorObj(val)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;generator&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Non-plain objects</span></span><br><span class="line">    type = toString.call(val);</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;[object Object]&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;object&#x27;</span>;</span><br><span class="line">        <span class="comment">// iterators</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;[object Map Iterator]&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;mapiterator&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;[object Set Iterator]&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;setiterator&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;[object String Iterator]&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;stringiterator&#x27;</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;[object Array Iterator]&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;arrayiterator&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// other</span></span><br><span class="line">    <span class="keyword">return</span> type.slice(<span class="number">8</span>, -<span class="number">1</span>).toLowerCase().replace(<span class="regexp">/\s/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ctorName</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> val.constructor === <span class="string">&#x27;function&#x27;</span> ? val.constructor.name : <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray) <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(val);</span><br><span class="line">    <span class="keyword">return</span> val <span class="keyword">instanceof</span> <span class="built_in">Array</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isError</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        val <span class="keyword">instanceof</span> <span class="built_in">Error</span> ||</span><br><span class="line">        (<span class="keyword">typeof</span> val.message === <span class="string">&#x27;string&#x27;</span> &amp;&amp;</span><br><span class="line">            val.constructor &amp;&amp;</span><br><span class="line">            <span class="keyword">typeof</span> val.constructor.stackTraceLimit === <span class="string">&#x27;number&#x27;</span>)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDate</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val <span class="keyword">instanceof</span> <span class="built_in">Date</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="keyword">typeof</span> val.toDateString === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.getDate === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.setDate === <span class="string">&#x27;function&#x27;</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isRegexp</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val <span class="keyword">instanceof</span> <span class="built_in">RegExp</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="keyword">typeof</span> val.flags === <span class="string">&#x27;string&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.ignoreCase === <span class="string">&#x27;boolean&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.multiline === <span class="string">&#x27;boolean&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.global === <span class="string">&#x27;boolean&#x27;</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isGeneratorFn</span>(<span class="params">name, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ctorName(name) === <span class="string">&#x27;GeneratorFunction&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isGeneratorObj</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="keyword">typeof</span> val.throw === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.return === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> val.next === <span class="string">&#x27;function&#x27;</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArguments</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">            <span class="keyword">typeof</span> val.length === <span class="string">&#x27;number&#x27;</span> &amp;&amp;</span><br><span class="line">            <span class="keyword">typeof</span> val.callee === <span class="string">&#x27;function&#x27;</span></span><br><span class="line">        ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err.message.indexOf(<span class="string">&#x27;callee&#x27;</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If you need to support Safari 5-7 (8-10 yr-old browser),</span></span><br><span class="line"><span class="comment"> * take a look at https://github.com/feross/is-buffer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isBuffer</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (val.constructor &amp;&amp; <span class="keyword">typeof</span> val.constructor.isBuffer === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> val.constructor.isBuffer(val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>注意这是使用了 <code>module.exports</code> 即 CJS 的模式，可在 node 中直接使用，但不能在浏览器中使用。</p>
+<p>入口是 kindOf 函数，大致过程：</p>
+<ol>
+<li>用 <code>===</code> 比较出了 null 和 undefined（用 void 0 表示 undefined 更准确，因为 undefined 是变量，值可以被改变）</li>
+<li>用 <code>typeof</code> 比较出了 boolean、string、number、symbol</li>
+<li>如果 <code>typeof</code> 值是函数<ol>
+<li>判断生成器函数 generatorfunction（通过构造函数名是否为 GeneratorFunction 判断）</li>
+<li>否则是普通函数 function</li>
+</ol>
+</li>
+<li>通过自定义函数判断出 array、buffer、arguments、date、error、regexp 类型<ol>
+<li>array：通过 Array.isArray 和 原型链继承 Array 判断</li>
+<li>buffer：构造函数上的 isBuffer 方法</li>
+<li>arguments：lenth 属性和 callee 方法</li>
+<li>date：原型链继承 Date 或 拥有 toDateString、getDate、setDate 方法</li>
+<li>error：原型链继承 Error 或拥有 message 属性和构造函数上的 stackTraceLimit 属性</li>
+<li>regexp：原型链继承 Error 或拥有特定属性或方法（拥有了特定属性或方法，就判断它为一个类型是不严谨的，但这里也只是兜底逻辑，并且也是符合鸭子类型的思想的）</li>
+</ol>
+</li>
+<li>通过构造函数的命名判断出了 promise、map、set、int8array 等类型</li>
+<li>通过 <code>Object.prototype.toString.call(val)</code> 判断 setiterator 等</li>
+<li>最后兜底逻辑是返回 toString 的类型值</li>
+</ol>
+<p>看下来是比较简单的，主要使用了 4 中方法判断类型：</p>
+<ol>
+<li> <code>===</code></li>
+<li> <code>typeof</code></li>
+<li> 原型链继承 <code>instanceof</code></li>
+<li> 鸭子类型法（只要有这些属性或方法，就是某种类型）</li>
+<li> <code>Object.prototype.toString.call(val)</code></li>
+</ol>
+<p>弄懂了这个库也就对 JS 的类型更深入了，以后判断类型的时候也可以直接使用此库了。</p>
+<p>类似功能的还有 <a target="_blank" rel="noopener" href="https://github.com/CodingFu/typeof">typeof</a> 和 <a target="_blank" rel="noopener" href="https://github.com/ForbesLindesay/type-of">type-of</a> 等，kind-of 相比于他们的优势是类型检测更全面以及性能更好。</p>
+<p>其实我们应该多多去了解这些很常用基础库的使用与原理，这既可以解决通用问题，也可以拓展知识面。比如 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/is-primitive">is-primitive</a>、<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/is-number">is-number</a> 等等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://acmu.github.io/2022/11/16/JavaScript/kind-of%E6%BA%90%E7%A0%81/" data-id="clf0n06s0001gb2of7mii673u" data-title="周下载量超1亿的库是如何判断JS类型的？" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-weekly/10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2022/11/10/weekly/10/" class="article-date">
@@ -156,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/11/10/weekly/10/" data-id="clac0ez3w002meqop4fj424s0" data-title="明远视角：前端脚手架开发入门" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/11/10/weekly/10/" data-id="clf0n06sy003db2of8699dja2" data-title="明远视角：前端脚手架开发入门" class="article-share-link">分享</a>
       
       
       
@@ -232,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/" data-id="clac0ez33000xeqop417yd8mo" data-title="使用 npm link 调试包" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/11/09/JavaScript/%E4%BD%BF%E7%94%A8%20npm%20link%20%E8%B0%83%E8%AF%95%E5%8C%85/" data-id="clf0n06s8001nb2of0xl4auot" data-title="使用 npm link 调试包" class="article-share-link">分享</a>
       
       
       
@@ -468,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/" data-id="clac0ez2v000ieqopepx98r5b" data-title="JavaScript 的对象与继承" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/11/05/JavaScript/JavaScript%20%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%BB%A7%E6%89%BF/" data-id="clf0n06ru0014b2of8dvj0dmm" data-title="JavaScript 的对象与继承" class="article-share-link">分享</a>
       
       
       
@@ -579,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/" data-id="clac0ez350011eqopg3u974hx" data-title="可选链运算符" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/" data-id="clf0n06s9001qb2of6azihv2e" data-title="可选链运算符" class="article-share-link">分享</a>
       
       
       
@@ -724,7 +807,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" data-id="clac0ez2u000geqop38hz72zq" data-title="JavaScript 对象解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/" data-id="clf0n06rt0012b2of9t7n1uno" data-title="JavaScript 对象解读" class="article-share-link">分享</a>
       
       
       
@@ -793,7 +876,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="clac0ez2y000oeqopgk3u3tgf" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-promise/" data-id="clf0n06rx001ab2of20d8hnvy" data-title="JavaScript 异步与 Promise" class="article-share-link">分享</a>
       
       
       
@@ -1049,7 +1132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="clac0ez30000qeqophu987lnq" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/js-regexp/" data-id="clf0n06ry001cb2of3bpe4e8b" data-title="JavaScript 正则理解" class="article-share-link">分享</a>
       
       
       
@@ -1163,7 +1246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="clac0ez32000ueqopgdxaghuy" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/17/JavaScript/symbol/" data-id="clf0n06s1001jb2ofay10dd91" data-title="JavaScript Symbol 解读" class="article-share-link">分享</a>
       
       
       
@@ -1290,58 +1373,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="clac0ez2x000meqop9ngbdqer" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
+      <a data-url="https://acmu.github.io/2022/07/10/JavaScript/defineProperty/" data-id="clf0n06rw0018b2offd0abhtv" data-title="defineProperty 详细解读" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-tools/在 mac 中像 windows 一样切换应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2022-07-05T00:00:00.000Z" itemprop="datePublished">2022-07-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/">在 Mac 中像 Windows 一样切换应用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>众所周知，Mac 中的 command + tab 可以切换应用，但有时它并不是那么好用</p>
-<h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><ol>
-<li>一个应用有多个窗口时，鬼知道它会给你切换到哪个窗口，比如我的 Chrome（比如单独打开调试窗口） 和 vscode（比如多个项目） 经常会开多个窗口，这之间的切换简直像噩梦一样</li>
-<li>也许你会说：一个应用之间切换窗口可以用 command +  ` 呀，是的，但如果你这一个应用的多个窗口在不同桌面的话，这个依然还是不行</li>
-</ol>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>直到有一天我遇到了 <a target="_blank" rel="noopener" href="https://github.com/lwouis/alt-tab-macos">AltTab</a> 这个开源软件，它解决了一个应用的多个窗口在不同桌面的问题，并且在它的展示中，一个应用的不同窗口也会被展示出来</p>
-<p><img src="https://raw.githubusercontent.com/acmu/pictures/master/uPic/2022-07/05_13:33_1XLOui.png" alt="image-2022070513335596 PM"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://acmu.github.io/2022/07/05/tools/%E5%9C%A8%20mac%20%E4%B8%AD%E5%83%8F%20windows%20%E4%B8%80%E6%A0%B7%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8/" data-id="clac0ez3i001qeqopht5bebrb" data-title="在 Mac 中像 Windows 一样切换应用" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/my-blog/tags/%E5%91%A8%E5%88%8A/" rel="tag">周刊</a></li></ul>
 
     </footer>
   </div>
@@ -1379,7 +1415,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/my-blog/tags/JavaScript/" style="font-size: 16.67px;">JavaScript</a> <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 13.33px;">浏览器</a>
+      <a href="/my-blog/tags/JavaScript/" style="font-size: 16.67px;">JavaScript</a> <a href="/my-blog/tags/TS/" style="font-size: 10px;">TS</a> <a href="/my-blog/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/my-blog/tags/%E5%91%A8%E5%88%8A/" style="font-size: 20px;">周刊</a> <a href="/my-blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 10px;">工程化</a> <a href="/my-blog/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 13.33px;">效率工具</a> <a href="/my-blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 13.33px;">浏览器</a>
     </div>
   </div>
 
@@ -1401,6 +1437,10 @@
       <ul>
         
           <li>
+            <a href="/my-blog/2022/11/16/JavaScript/kind-of%E6%BA%90%E7%A0%81/">周下载量超1亿的库是如何判断JS类型的？</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2022/11/10/weekly/10/">明远视角：前端脚手架开发入门</a>
           </li>
         
@@ -1416,10 +1456,6 @@
             <a href="/my-blog/2022/11/04/JavaScript/%E5%8F%AF%E9%80%89%E9%93%BE%E6%93%8D%E4%BD%9C%E7%AC%A6/">可选链运算符</a>
           </li>
         
-          <li>
-            <a href="/my-blog/2022/08/03/JavaScript/JavaScript%20%E5%AF%B9%E8%B1%A1%E8%A7%A3%E8%AF%BB/">JavaScript 对象解读</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1433,7 +1469,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2022 MingYuan<br>
+      &copy; 2023 MingYuan<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
