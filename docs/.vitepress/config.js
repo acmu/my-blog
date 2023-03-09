@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
     title: '📖 明远博客',
     description: 'Just playing around.',
-    base: '/vitepress-starter/',
+    base: '/my-blog/',
     // head: [
     //     [
     //         'script',
