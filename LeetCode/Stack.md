@@ -1,3 +1,5 @@
+
+```js
 // --- DEMO ---
 
 /**
@@ -5,7 +7,6 @@
  * https://leetcode.cn/problems/largest-rectangle-in-histogram/description/
  */
 
-```js
 var largestRectangleArea = function(heights) {
     let stack=new Stack()
     let left=[]
