@@ -370,7 +370,7 @@ class Heap {
      * Implements an iterable on the heap
      * @public
      */
-    [Symbol.iterator]( "Symbol.iterator") {
+    [Symbol.iterator]() {
         let size = this.size();
         return {
             next: () => {
@@ -526,7 +526,7 @@ class MyPriorityQueue {
      * Implements an iterable on the priority queue
      * @public
      */
-    [Symbol.iterator]( "Symbol.iterator") {
+    [Symbol.iterator]() {
         let size = this.size();
         return {
             next: () => {
