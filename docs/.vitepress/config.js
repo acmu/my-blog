@@ -97,6 +97,8 @@ export default defineConfig({
                     { text: 'JavaScript Symbol 解读', link: '/JavaScript/107' },
                     { text: '使用 npm link 调试包', link: '/JavaScript/108' },
                     { text: '可选链运算符', link: '/JavaScript/109' },
+                    { text: 'JS try catch 与 return 的陷阱', link: '/JavaScript/110' },
+                    { text: 'CommonJS require 循环依赖', link: '/JavaScript/111' },
                 ],
             },
         ],

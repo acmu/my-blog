@@ -1,40 +1,6 @@
 
 
-
-
-
-
-
-
-## 2023年03月09日14:16:43
-
-cdn 链接
-
- CDNJS vs. jsDelivr vs. unpkg 
-
-国内：
-
-BootCDN，但只有4000个包
-
-
-
-学习资源：
-
-小林
-
-ladong
-
-
-
-
-
-
-
-
-
-# TypeScript 装饰器，一个强大的功能
-
-
+# TypeScript 装饰器
 
 
 

@@ -1,35 +1,25 @@
 # JS 基础知识
 
-
-
 ## Map 类型 vs Object
 
 Map 的 key 可以很丰富，可以是 number object 等
 
-
-
 ## 数字
-
-
-
-
 
 ## 字符串
 
 ### 正则
-
-
 
 ### `String.prototype.replace()`
 
 **语法：**
 
 ```js
-replace(regexp, newSubstr)
-replace(regexp, replaceFunction)
+replace(regexp, newSubstr);
+replace(regexp, replaceFunction);
 
-replace(substr, newSubstr)
-replace(substr, replaceFunciton)
+replace(substr, newSubstr);
+replace(substr, replaceFunciton);
 ```
 
 **参数：**
@@ -74,15 +64,13 @@ replace(substr, replaceFunciton)
 
 `$n`
 
-n是数字，范围[1, 100]，匹配第几组
+n 是数字，范围[1, 100]，匹配第几组
 
 `$<Name>`
 
 和 n 类似，只不过这里是组名
 
 [正则表达式 命名捕获组](https://developer.aliyun.com/article/683079)
-
-
 
 **使用函数的特殊字符**
 
@@ -104,14 +92,11 @@ string
 
 groups
 
-如果有命名组，那么这里会存放对应的key，value
+如果有命名组，那么这里会存放对应的 key，value
 
-
-
-示例🌰
+示例 🌰
 
 ```js
-
 const str = 'zmy_123_234';
 
 // 直接替换，找到第一个匹配的就替换
@@ -131,37 +116,25 @@ console.log('release-11-2-10'.replace(a, '$<major>,$2,$<version>'));
 
 // 如果有命名捕获组，那么 groups 就不是 undefined
 function replacer(match, p1, p2, p3, offset, string, groups) {
-  // groups: {zmy: '#$*%'}
-  // match: "abc12345#$*%"
-  // offset: 0
-  // p1: "abc"
-  // p2: "12345"
-  // p3: "#$*%"
-  // string: "abc12345#$*%"
-  return [p1, p2, p3].join(' - ');
+    // groups: {zmy: '#$*%'}
+    // match: "abc12345#$*%"
+    // offset: 0
+    // p1: "abc"
+    // p2: "12345"
+    // p3: "#$*%"
+    // string: "abc12345#$*%"
+    return [p1, p2, p3].join(' - ');
 }
 
 let newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)(?<zmy>[^\w]*)/, replacer);
 console.log(newString); // abc - 12345 - #$*%
-
-
 ```
-
-
 
 反向引用是什么？
 
 `replaceAll` 就等于 普通正则加了一个 g 描述符。
 
-
-
-[mdn链接](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-
-
-
-
-
-
+[mdn 链接](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 
 ## 数组
 
@@ -181,15 +154,8 @@ split
 
 splice
 
-
-
 ## 类的原理
 
 继承、面向对象
 
 js 中的类
-
-
-
-
-

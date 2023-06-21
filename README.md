@@ -8,7 +8,8 @@
 |                  | [threejs教程](https://discoverthreejs.com/zh/book/first-steps/animation-loop/) | 3d                                      |
 |                  | [d3js](https://d3js.org/)                                    | 数据驱动模型                            |
 |                  | -                                                            |                                         |
-| **ChatGPT**      | [Chat GPT Demo](https://chat.chatgptdemo.net/)               | [官网](https://chatgptdemo.net/zh-hans) |
+| **ChatGPT**      | [Poe](https://poe.com/Sage)                                  | 极力推荐🔥谷歌账号登陆即可，免费使用GPT3 |
+|                  | [Chat GPT Demo](https://chat.chatgptdemo.net/)               | [官网](https://chatgptdemo.net/zh-hans) |
 |                  | [skype Bing](https://web.skype.com/)                         | outlook邮箱登陆skype                    |
 |                  | [awesome-free-chatgpt](https://github.com/LiLittleCat/awesome-free-chatgpt)、[chatgpt-sites](https://github.com/lzwme/chatgpt-sites)、[hello-ai](https://github.com/xxxily/hello-ai) | 网址集合                                |
 |                  | [可用1](https://free.easychat.work/)、[可用2](https://chat.waixingyun.cn/#/chat/gpt/1002)、[可用3](https://chat.weuseing.com/)、[偶尔可用](https://w0gnp.aitianhu.fun/#/chat/1002) | 从网址集合偶尔获得                      |
@@ -24,10 +25,16 @@
 |                  | [jsdelivr](https://www.jsdelivr.com/package/npm/lodash)      |                                         |
 |                  | [cdnjs](https://cdnjs.com/libraries/lodash.js)               |                                         |
 |                  | [skypack](https://www.skypack.dev/)                          | 支持esm                                 |
+|                  | [BootCDN](https://www.bootcdn.cn/)                           | 国内速度快，但包少                      |
 |                  | -                                                            |                                         |
 | **CSS**          | [tailwindcss](https://tailwindcss.com/)                      |                                         |
 |                  | [headless ui](https://headlessui.com/)                       |                                         |
 |                  | -                                                            |                                         |
+| **产品**         | [Hashnode producthunt](https://www.producthunt.com/products/hashnode-developers-community) |                                         |
+|                  | -                                                            |                                         |
+| **计算机基础**   | [小林图解系统](https://xiaolincoding.com/)                   |                                         |
+|                  | [labuladong算法](https://labuladong.github.io/algo/)         |                                         |
+|                  |                                                              |                                         |
 
 
 
