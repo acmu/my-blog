@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>ChatGPT 生成代码</title>
+        <style>
+            .min-width {
+                display: inline-block;
+                min-width: 250px;
+            }
+            p {
+                margin: 8px;
+            }
+            #input-box {
+                display: inline;
+                width: 400px;
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>小驼峰、大驼峰、短横线连接、下划线连接等格式相互转换</h1>
+        <div>
+            以上代码实现了一个输入框内容转换工具，支持将小驼峰、大驼峰、短横线连接、下划线连接等格式相互转换，并在页面中显示转换结果。用户可以通过输入框输入需要转换的内容，然后点击“获取内容”按钮获取转换结果，或点击“清空内容”按钮清空页面中已有的内容。
+        </div>
+        <div>
+            可输入如下示例：
+            <ol>
+                <li>getInput</li>
+                <li>PersonJon</li>
+                <li>my-variable-name</li>
+                <li>my_favorite_color</li>
+            </ol>
+        </div>
+        <input type="text" id="input-box" onkeydown="handleKeyDown(event)" />
+        <button onclick="getInput()">获取内容(可按Enter)</button>
+        <button onclick="removeAllParagraphs()">清空内容</button>
+
+        <script>
+            function getInput() {
+                var inputBox = document.getElementById('input-box');
+                var inputValue = inputBox.value;
+                removeAllParagraphs();
+
+                var format = getNamingFormat(inputValue);
+
+                addParagraph('输入格式：', format);
+
+                if (format === 'Lower Camel Case') {
+                    addParagraph(
+                        'Upper Camel Case: ',
+                        snakeToUpperCamel(camelToSnake(inputValue))
+                    );
+                    addParagraph(
+                        'Kebab Case: ',
+                        snakeToKebab(camelToSnake(inputValue))
+                    );
+                    addParagraph('Snake Case: ', camelToSnake(inputValue));
+                } else if (format === 'Upper Camel Case') {
+                    addParagraph(
+                        'Lower Camel Case: ',
+                        snakeToLowerCamel(pascalToSnake(inputValue))
+                    );
+                    addParagraph(
+                        'Kebab Case: ',
+                        snakeToKebab(pascalToSnake(inputValue))
+                    );
+                    addParagraph('Snake Case: ', pascalToSnake(inputValue));
+                } else if (format === 'Kebab Case') {
+                    addParagraph(
+                        'Lower Camel Case: ',
+                        snakeToLowerCamel(kebabToSnake(inputValue))
+                    );
+                    addParagraph(
+                        'Upper Camel Case: ',
+                        snakeToUpperCamel(kebabToSnake(inputValue))
+                    );
+                    addParagraph('Snake Case: ', kebabToSnake(inputValue));
+                } else if (format === 'Snake Case') {
+                    addParagraph(
+                        'Lower Camel Case: ',
+                        snakeToLowerCamel(inputValue)
+                    );
+                    addParagraph(
+                        'Upper Camel Case: ',
+                        snakeToUpperCamel(inputValue)
+                    );
+                    addParagraph('Kebab Case: ', snakeToKebab(inputValue));
+                } else {
+                    addParagraph('无法识别的命名格式');
+                }
+            }
+
+            function addParagraph(content1, content2) {
+                var p = document.createElement('p');
+                var p1 = document.createElement('p');
+                var p2 = document.createElement('p');
+                p1.appendChild(document.createTextNode(content1));
+                p2.appendChild(document.createTextNode(content2));
+                p1.classList.add('min-width');
+                p2.classList.add('min-width');
+                p.appendChild(p1);
+                p.appendChild(p2);
+                document.body.appendChild(p);
+            }
+
+            function clearInput() {
+                var inputBox = document.getElementById('input-box');
+                inputBox.value = '';
+            }
+
+            function removeAllParagraphs() {
+                var paragraphs = document.getElementsByTagName('p');
+                for (var i = paragraphs.length - 1; i >= 0; i--) {
+                    paragraphs[i].parentNode.removeChild(paragraphs[i]);
+                }
+            }
+
+            function handleKeyDown(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    getInput();
+                }
+            }
+
+            function getNamingFormat(str) {
+                if (/^[a-z][a-zA-Z]*$/.test(str)) {
+                    return 'Lower Camel Case';
+                } else if (/^[A-Z][a-zA-Z]*$/.test(str)) {
+                    return 'Upper Camel Case';
+                } else if (/^[a-z]+(-[a-z]+)*$/.test(str)) {
+                    return 'Kebab Case';
+                } else if (/^[a-z]+(_[a-z]+)*$/.test(str)) {
+                    return 'Snake Case';
+                } else {
+                    return 'Unknown';
+                }
+            }
+
+            // 将下划线连接格式转换为小驼峰格式
+            function snakeToLowerCamel(str) {
+                return str.replace(/_([a-z])/g, function (match, p1) {
+                    return p1.toUpperCase();
+                });
+            }
+
+            // 将下划线连接格式转换为大驼峰格式
+            function snakeToUpperCamel(str) {
+                return str
+                    .replace(/_([a-z])/g, function (match, p1) {
+                        return p1.toUpperCase();
+                    })
+                    .replace(/^\w/, function (match) {
+                        return match.toUpperCase();
+                    });
+            }
+
+            // 将下划线连接格式转换为短横线连接格式
+            function snakeToKebab(str) {
+                return str.replace(/_/g, '-');
+            }
+
+            // 将小驼峰格式转换为下划线连接格式
+            function camelToSnake(str) {
+                return str.replace(/[A-Z]/g, function (match) {
+                    return '_' + match.toLowerCase();
+                });
+            }
+
+            // 将大驼峰格式转换为下划线连接格式
+            function pascalToSnake(str) {
+                return str
+                    .replace(/([A-Z])/g, function (match, p1) {
+                        return '_' + p1.toLowerCase();
+                    })
+                    .replace(/^_/, '');
+            }
+
+            // 将短横线连接格式转换为下划线连接格式
+            function kebabToSnake(str) {
+                return str.replace(/-/g, '_');
+            }
+        </script>
+    </body>
+</html>

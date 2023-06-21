@@ -12,6 +12,7 @@
 |                  | [skype Bing](https://web.skype.com/)                         | outlook邮箱登陆skype                    |
 |                  | [awesome-free-chatgpt](https://github.com/LiLittleCat/awesome-free-chatgpt)、[chatgpt-sites](https://github.com/lzwme/chatgpt-sites)、[hello-ai](https://github.com/xxxily/hello-ai) | 网址集合                                |
 |                  | [可用1](https://free.easychat.work/)、[可用2](https://chat.waixingyun.cn/#/chat/gpt/1002)、[可用3](https://chat.weuseing.com/)、[偶尔可用](https://w0gnp.aitianhu.fun/#/chat/1002) | 从网址集合偶尔获得                      |
+|                  | [ChatGPT 中文调教指南](https://github.com/PlexPt/awesome-chatgpt-prompts-zh) | 提示词                                  |
 |                  | -                                                            |                                         |
 | **在线代码编辑** | [codepen](https://codepen.io/your-work/)                     |                                         |
 |                  | [codesandbox](https://codesandbox.io/dashboard/recent)       |                                         |
